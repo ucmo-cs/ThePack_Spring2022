@@ -2,6 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+const addNums = (num1, num2) => num1 + num2
+
+function addNums(num1, num2) {
+  return num1 + num2
+}
+
 export default function Home() {
   return (
     <div className={styles.container}>
