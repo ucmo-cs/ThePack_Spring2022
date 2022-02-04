@@ -17,7 +17,7 @@ export default function Home() {
 				</h1>
 
 				<h1>Sean's Message</h1>
-				<p></p>
+				<p>Hello, my name is Sean. Practicing SourceTree with push and pull.</p>
 
 				<h1>Zach's Message</h1>
 				<p></p>
