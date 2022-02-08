@@ -25,6 +25,12 @@ export default function Home() {
 				<h1>Natalia's Message</h1>
 				<p>Did this work??</p>
 
+				<h1>Natalia's Message</h1>
+				<p>Did this work??</p>
+
+				<h1>Jeremiah's Message</h1>
+				<p>Hello World!</p>
+
 				<p className={styles.description}>
 					Get started by editing{' '}
 					<code className={styles.code}>pages/index.js</code>
