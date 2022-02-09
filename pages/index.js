@@ -29,7 +29,7 @@ export default function Home() {
         <p>Did this work??</p>
 
         <h1>Jeremiah's Message</h1>
-        <p>Hello World!</p>
+        <p>Fork test</p>
 
         <p className={styles.description}>
           Get started by editing{' '}
