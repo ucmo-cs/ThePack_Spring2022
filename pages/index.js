@@ -23,7 +23,7 @@ export default function Home() {
         <p>Hello, my name is Sean. Practicing SourceTree with push and pull.</p>
 
         <h1>Zach's Message</h1>
-        <p></p>
+        <p>Did I finally Get it?</p>
 
         <h1>Natalia's Message</h1>
         <p>Did this work??</p>
