@@ -9,6 +9,7 @@
       "error",
       "never"
     ],
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "react/function-component-definition": ["error", { "namedComponents": "function-declaration" }]
   }
 }
