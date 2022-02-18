@@ -9,3 +9,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int        @id @default(autoincrement())
+  userName  String     @unique @db.VarChar(255)
+  email     String     @unique @db.VarChar(255)
+  createdAt DateTime   @default(now())
+  bio       String     @db.Text
+  wuphfs    Wuphf[]
+  Likes     Likes[]
+  Followers Follower[] @relation("follower")
+  Following Follower[] @relation("followee")
+}
+
+model Wuphf {
+  id         Int     @id @default(autoincrement())
+  author     User    @relation(fields: [authorId], references: [id])
+  authorId   Int
+  pictureUrl String  @db.VarChar(255)
+  Likes      Likes[]
+}
+
+model Likes {
+  id      Int   @id @default(autoincrement())
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+  wuphf   Wuphf @relation(fields: [wuphfId], references: [id])
+  wuphfId Int
+}
+
+model Follower {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation("follower", fields: [userId], references: [id])
+  userId     Int
+  follower   User     @relation("followee", fields: [followerId], references: [id])
+  followerId Int
+  createdAt  DateTime @default(now())
+}
