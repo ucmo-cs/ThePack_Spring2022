@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { Avatar } from '../components/Avatar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -12,6 +13,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <Avatar 
+          username='John Doe'
+          profileImageUrl='https://i.pinimg.com/736x/38/93/07/389307d6af5c4be0051b7d3c4f93bf3d.jpg'
+          size='large'
+        />
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

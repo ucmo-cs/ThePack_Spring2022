@@ -1,0 +1,17 @@
+.small {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+.medium {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.large {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
