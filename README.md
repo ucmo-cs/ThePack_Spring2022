@@ -33,6 +33,18 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+# Site Colors
+
+#f4f4f3
+
+#72d0ed
+
+#747378
+
+#7395b0
+
+#202e4a
+
 
 # Prisma Commands
 
