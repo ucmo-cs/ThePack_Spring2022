@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styles from '/styles/Avatar.module.css'
+import Link from 'next/link'
 
 Avatar.propTypes = {
     username: PropTypes.string.isRequired,
@@ -10,18 +11,19 @@ Avatar.propTypes = {
 export function Avatar(props) {
     const { username, profileImageUrl, size } = props
 
-    if(size === 'small') {
-        return (
-            <img src={profileImageUrl} alt={username} className={styles.small} />
-        )
-    } else if(size === 'medium') {
-        return (
-            <img src={profileImageUrl} alt={username} className={styles.medium} />
-        )
+    let className = undefined
+    if (size === 'small') {
+        className = styles.small
+    } else if (size === 'medium') {
+        className = styles.medium
     }
     else {
-        return (
-            <img src={profileImageUrl} alt={username} className={styles.large} />
-        )
+        className = styles.large
     }
+
+    return (
+        <Link href={`/profile/${username}`}>
+            <img src={profileImageUrl} alt={username} title={username} className={className} />
+        </Link>
+    )
 }
