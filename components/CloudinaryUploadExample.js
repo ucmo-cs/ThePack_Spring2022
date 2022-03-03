@@ -2,22 +2,22 @@ import {useState} from 'react'
 import axios from 'axios'
 
 export default function CloudinaryUploadExample() {
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(null)
 
     async function handleSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append(image.name, image);
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append(image.name, image)
         
         const res = await axios.post('/api/imageuploadexample', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
-        });
+        })
     }
 
     function handleFileChange(e) {
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0])
     }
 
     return (

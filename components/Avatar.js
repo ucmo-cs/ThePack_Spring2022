@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import styles from '/styles/Avatar.module.css'
 import Link from 'next/link'
+import Image from 'next/image'
 
 Avatar.propTypes = {
     username: PropTypes.string.isRequired,
@@ -22,8 +23,8 @@ export function Avatar(props) {
     }
 
     return (
-        <Link href={`/profile/${username}`}>
-            <img src={profileImageUrl} alt={username} title={username} className={className} />
+        <Link href={`/profile/${username}`} passHref>
+            <Image src={profileImageUrl} alt={username} title={username} className={className} />
         </Link>
     )
 }

@@ -46,18 +46,7 @@ export default function Home() {
             gravity='face'
             effect='sepia'
           /> */}
-        <CloudinaryContext cloudName='wuphf'>
-          <div>
-            <Video
-              publicId='samples/elephants'
-              width='200'
-              height='200'
-              crop='fill'
-              gravity='face'
-              effect='sepia'
-            />
-          </div>
-        </CloudinaryContext>
+        
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

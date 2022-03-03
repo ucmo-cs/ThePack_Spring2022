@@ -7,6 +7,7 @@ export default function CloudinaryExample() {
         <Image
             src='sample.jpg'
             layout='fill'
+            alt='Sample image'
         />
     )
 }
