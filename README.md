@@ -1,22 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Getting Started
+1. Install the dependencies
+    ```bash
+    npm install
+    ```
 
-## Getting Started
+2. Rename `.env.example` to `.env` and set variables for:
+    1. [Google Client Secret](https://console.developers.google.com/apis/credentials/oauthclient/578044382936-9e25sn8rl63jn2hj20p3te6u4s0qvium.apps.googleusercontent.com?project=wuphf-340818)
+    2. [Cloudinary](https://cloudinary.com/console/c-e4ff7ac8f9bcfcbc03dd0324aec080)
+    3. Database URL
 
-First, run the development server:
+3. Set up the database
+    ```bash
+    npx prisma migrate reset
+    ```
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+4. Run the server
+    ```bash
+    npm run dev
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More
 
@@ -33,23 +36,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Google Console
-[Client ID for Web Application](https://console.developers.google.com/apis/credentials/oauthclient/578044382936-9e25sn8rl63jn2hj20p3te6u4s0qvium.apps.googleusercontent.com?project=wuphf-340818): Client ID, Client Secret
-
-## Cloudinary
-[Account Details](https://cloudinary.com/console/c-e4ff7ac8f9bcfcbc03dd0324aec080): Cloud Name, API Key, API Secret
 # Site Colors
-
-#f4f4f3
-
-#72d0ed
-
-#747378
-
-#7395b0
-
-#202e4a
-
+1. #f4f4f3
+2. #72d0ed
+3. #747378
+4. #7395b0
+5. #202e4a
 
 # Prisma Commands
 
