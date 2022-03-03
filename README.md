@@ -33,8 +33,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-# Google Console
-[Project ID and Secret](https://console.developers.google.com/apis/credentials/oauthclient/578044382936-9e25sn8rl63jn2hj20p3te6u4s0qvium.apps.googleusercontent.com?project=wuphf-340818)
+## Google Console
+[Client ID for Web Application](https://console.developers.google.com/apis/credentials/oauthclient/578044382936-9e25sn8rl63jn2hj20p3te6u4s0qvium.apps.googleusercontent.com?project=wuphf-340818): Client ID, Client Secret
+
+## Cloudinary
+[Account Details](https://cloudinary.com/console/c-e4ff7ac8f9bcfcbc03dd0324aec080): Cloud Name, API Key, API Secret
 # Site Colors
 
 #f4f4f3

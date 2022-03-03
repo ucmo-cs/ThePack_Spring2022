@@ -1,7 +1,9 @@
+const cloudinaryBaseUrl = `https://res.cloudinary.com/wuphf/image/upload/`;
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['res.cloudinary.com'],
+    loader: 'cloudinary',
+    path: cloudinaryBaseUrl,
   },
   compiler: {
     styledComponents: true,

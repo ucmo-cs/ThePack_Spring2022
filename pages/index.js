@@ -1,6 +1,5 @@
-import { CloudinaryContext, Image, Video } from 'cloudinary-react'
 import Head from 'next/head'
-// import Image from 'next/image'
+import Image from 'next/image'
 import { Avatar } from '../components/Avatar'
 import styles from '../styles/Home.module.css'
 import { useSession, signIn, signOut } from 'next-auth/react'
@@ -38,7 +37,7 @@ export default function Home() {
           profileImageUrl="https://i.pinimg.com/736x/38/93/07/389307d6af5c4be0051b7d3c4f93bf3d.jpg"
           size="large"
         />
-          {/* <Image
+        {/* <Image
             cloudName='wuphf'
             publicId='sample'
             width='200'
