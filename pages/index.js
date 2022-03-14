@@ -3,8 +3,17 @@ import Image from 'next/image'
 import { Avatar } from '../components/Avatar'
 import styles from '../styles/Home.module.css'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import WuphfInput from '../components/WuphfInput'
+import Register from './Register'
+import SettingsForm from '../components/SettingsForm'
 
 export default function Home() {
+
+  return (
+
+    <WuphfInput />
+  )
+
   const { data: session } = useSession()
 
   if (session) {

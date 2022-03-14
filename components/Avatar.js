@@ -9,7 +9,7 @@ Avatar.propTypes = {
     size: PropTypes.oneOf(['small', 'medium', 'large']),
 }
 
-export function Avatar(props) {
+function Avatar(props) {
     const { username, profileImageUrl, size } = props
 
     let className = undefined
@@ -28,3 +28,5 @@ export function Avatar(props) {
         </Link>
     )
 }
+
+export default Avatar
