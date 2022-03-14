@@ -39,10 +39,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 #f4f4f3
 
+light blue
 #72d0ed
 
+dark Gray
 #747378
 
+Light gray blue
 #7395b0
 
 #202e4a
