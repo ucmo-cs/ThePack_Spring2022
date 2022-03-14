@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import styled, { css } from "styled-components"
+import Avatar from "./Avatar"
 
 const Button = styled.button`
   background-color: #7395b0;
+  border: none;
   color: white;
-  padding: 4px 24px;
-  border-radius: 90px;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   font-size:20px;
   line-height: 20px;
   text-align: right;
@@ -13,17 +15,25 @@ const Button = styled.button`
 `
 
 const PostBorder = styled.form`
-   border: 5px #7395b0;
+   border: 2px #7395b0;
    border-style: solid;
    border-radius: 15px;
-   width: 1000px;
-   height: 100px;
+   width: 100%;
+   padding: 1.5rem;
 `
 
 const PostTextArea = styled.textarea`
-   rows: 6;
-   cols: 10;
-
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid grey;
+    resize: none;
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 0.5rem;
+`
+const AvatarButtonDiv = styled.div`
+   display: flex;
+   justify-content: space-between;
 `
 
 function WuphfInput() {
@@ -45,9 +55,14 @@ function WuphfInput() {
    return (
       <PostBorder onSubmit={userSubmission}>
          <PostTextArea value={post} onChange={handleChange} placeholder="What's happening?" />
-         <Button type="submit">
-            WUPHF!
-         </Button>
+         <AvatarButtonDiv>
+            <Avatar size="small" username="John" profileImageUrl="https://gfp-2a3tnpzj.stackpathdns.com/wp-content/uploads/2018/06/dog-breeds-of-famous-dogs-1600x1065.jpg" />
+
+
+            <Button type="submit">
+               WUPHF!
+            </Button>
+         </AvatarButtonDiv>
       </PostBorder>
    )
 }
