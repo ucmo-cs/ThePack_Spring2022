@@ -12,7 +12,7 @@ This is not functioning code.
 */
 
 
-const port :'3030';  //I think this is the port we're using.
+const port = '3030';  //I think this is the port we're using.
 
 
 // connect to the db here
@@ -21,47 +21,51 @@ const port :'3030';  //I think this is the port we're using.
 
 //Routes
 //—-----------------------------creates a wuphf---------------------------------------------------
-app.post(‘:user_id/wuphf/:post_id’), (req, res) => {
-	Const user_id  = req.params.user_id; 
-    Const post_id  = req.params.post_id; //I dont know if this needs to be included as it would be auto incremented
-	Const picture_url = req.body.picture_url;
-	Const post_body = req.body.post_body;
+app.post(':user_id/wuphf/:post_id'), (req, res) => {
+	const user_id  = req.params.user_id; 
+    const post_id  = req.params.post_id; //I dont know if this needs to be included as it would be auto incremented
+	const picture_url = req.body.picture_url;
+	const post_body = req.body.post_body;
 
-	Error Handling here
+	//Error Handling here
 
     const wuphf = await prisma.product.create({
         data: {
             id: Number(req.params.post_id),
             user_id: Number(req.params.user_id),
             picture_url: req.body.picture_url,
-            post_body = req.body.post_body,
+            post_body: req.body.post_body,
         },
     });
+    res.json(wuphf);
 }
 
 //—-----------------------------Request Wuphf by id---------------------------------------------------
-app.get(‘users/:user_id/wuphf/:id’), (req,res) => {
+app.get('/wuphf/:id'), (req,res) => {
 	
 	
     const wuphf = await prisma.wuphf.findUnique({
         where: {
-            user_id: Number(request.params.user_id),
-            id: Number(request.params.id)
+            id: Number(request.params.id),
         }
-    })
+    });
+    res.json(wuphf);
+}
 
 //—-----------------------------Request all wuphfs from a user---------------------------------------------------
-app.get('users/:user_id/wuphfs'), (req,res) => {
+app.get('wuphfs/:user_id/'), (req,res) => {
 
     const wuphfs = await prisma.wuphfs.findUnique({
         where: {
             user_id: Number(request.params.user_id),
         }
     });
+    res.json(wuphfs);
 }
 //----------------------------Request all wuphfs------------------------------
-app.get('/wuphfs/), (req,res) => {
+app.get('/wuphfs/'), (req,res) => {
     const wuphfs = await prisma.wuphfs.findmany({});
+    res.json(wuphfs);
 }
 
 
@@ -71,90 +75,99 @@ app.get('/wuphfs/), (req,res) => {
 app.patch('/wuphfs/:id'), (req,res) => {
     const wuphfs = await prisma.wuphfs.update({
         where:{
-            id: (nubmer)request.params.id
-        }
+            id: Number(request.params.id)
+        },
         data:{
             post_body: request.body,
-        }
-    })
+        },
+    });
+    res.json(wuphfs);
 }
 
 
 //—-----------------------------Delete Wuphf---------------------------------------------------
-//Should this also delete all likes and comments?
-
-app.delete('/wuphfs/:id), (req,res) => {
+app.delete('/wuphfs/:id'), (req,res) => {
  const deleted_wuphf = await prisma.wuphf.delete({
         where: {
-            id: Number(request.params.id)
+            id: Number(request.params.id),
         }
+    });
+    res.json(deleted_wuphf);
 }
 
 //—-----------------------------Update users---------------------------------------------------
-app.patch('/users/:id), (req,res) => {
-    const wuphfs = await prisma.users.update({
+app.patch('/users/:id'), (req,res) => {
+    const user = await prisma.users.update({
         where:{
-            id: (nubmer)request.params.id
-        }
+            id: Number(request.params.id)
+        },
         data:{
             username: request.body.username || undefined,  //Undefined means if not parameter is given it will move on.
             bio: request.body.bio || undefined,
             animal: request.body.animal || undefined,
         }
-    })
+    });
+    res.json(user);
 }
 
 //—-----------------------------delete user---------------------------------------------------
-//I don't know if we want to cascade down and delete all of the likes, comments, and posts they made as well.
-app.delete('/users/:id), (req,res) => {
-     const deleted_wuphf = await prisma.users.delete({
+app.delete('/users/:id'), (req,res) => {
+     const deleted_user = await prisma.users.delete({
         where: {
-            id: Number(request.params.id)
+            id: Number(request.params.id),
         }
-        
+    });    
+    res.json(deleted_user);
 }
 //—-----------------------------add like---------------------------------------------------
-app.post(‘/likes/:id’), (req, res) => {
-    Const like_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
-    Const user_id  = req.body.user_id; 
-    Const post_id = req.body.post_id;
+app.post('/likes/:id'), (req, res) => {
+    const like_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
+    const user_id  = req.body.user_id; 
+    const post_id = req.body.post_id;
 
-    const comment = await prisma.likes.create({
-        data:
+    const like = await prisma.likes.create({
+        data: {
             like_id: Number(like_id),
             user_id: Number(user_id),
             post_id: Number(post_id), 
-    })
+        }
+    });
+    res.json(like);
 }
 //—-----------------------------delete like---------------------------------------------------
-app.delete('/likes/:id), (req,res) => {
-     const deleted_wuphf = await prisma.likes.delete({
+app.delete('/likes/:id'), (req,res) => {
+     const deleted_like = await prisma.likes.delete({
         where: {
-            id: Number(request.params.id)
+            id: Number(request.params.id),
         }
+    });
+    res.json(deleted_like);
 }
 //—-----------------------------add comment---------------------------------------------------
-app.post(‘/comment/:id’), (req, res) => {
-    Const comment_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
-    Const user_id  = req.body.user_id; 
-    Const post_id = req.body.post_id;
-    Const comment_body = req.body.comment_body;
-
-        const comment = await prisma.comment.create({
-            data:
-                user_id: Number(user_id),
-                comment_id: Number(comment_id),
-                post_id: Number(post_id),
-                comment_body: comment_body;
-        })
+app.post('/comment/:id'), (req, res) => {
+    const comment_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
+    const user_id  = req.body.user_id; 
+    const post_id = req.body.post_id;
+    const comment_body = req.body.comment_body;
+    const comment = await prisma.comment.create({
+        data: {
+            user_id: Number(user_id),
+            comment_id: Number(comment_id),
+            post_id: Number(post_id),
+            comment_body: comment_body,
+        }
+    });
+    res.json(comment);
 }
 //—-----------------------------delete comment---------------------------------------------------
 
-app.delete('/comments/:id), (req,res) => {
-     const deleted_wuphf = await prisma.comments.delete({
+app.delete('/comments/:id'), (req,res) => {
+     const deleted_comment = await prisma.comments.delete({
         where: {
-            id: Number(request.params.id)
+            id: Number(request.params.id),
         }
+    });
+    res.json(deleted_comment);
 }
 //-----------------------------------------------------------------------------------------------
 
