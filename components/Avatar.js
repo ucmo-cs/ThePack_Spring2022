@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import styles from '/styles/Avatar.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import styled from 'styled-components'
 
 Avatar.propTypes = {
     username: PropTypes.string.isRequired,
@@ -9,22 +9,25 @@ Avatar.propTypes = {
     size: PropTypes.oneOf(['small', 'medium', 'large']),
 }
 
+const StyledImage = styled(Image)`
+    border-radius: 50%;
+`
+
 function Avatar(props) {
     const { username, profileImageUrl, size } = props
-
-    let className = undefined
+    let width = 0
     if (size === 'small') {
-        className = styles.small
+        width = 30
     } else if (size === 'medium') {
-        className = styles.medium
+        width = 50
+    } else if (size === 'large') {
+        width = 70
     }
-    else {
-        className = styles.large
-    }
+    let height = width
 
     return (
         <Link href={`/profile/${username}`} passHref>
-            <Image src={profileImageUrl} alt={username} title={username} className={className} />
+            <StyledImage width={width} height={height} src={profileImageUrl} alt={username} title={username} />
         </Link>
     )
 }
