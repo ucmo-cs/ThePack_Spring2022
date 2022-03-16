@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import styled, { css } from "styled-components"
-import Avatar from "./Avatar"
+import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
+import Avatar from './Avatar'
 
 const Button = styled.button`
   background-color: #7395b0;
@@ -37,18 +37,18 @@ const AvatarButtonDiv = styled.div`
 `
 
 function WuphfInput() {
-   const [post, setPost] = useState("")
+   const [post, setPost] = useState('')
 
    function handleChange(event) {
       setPost(event.target.value)
    }
 
    function userSubmission(event) {
-      event.preventDefault();
+      event.preventDefault()
       if (post.length > 0)
          alert(`The text entered was: ${post} `)
       else {
-         alert(`Enter a post to submit.`)
+         alert('Enter a post to submit.')
       }
    }
 
