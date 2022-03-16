@@ -56,9 +56,7 @@ function WuphfInput() {
       <PostBorder onSubmit={userSubmission}>
          <PostTextArea value={post} onChange={handleChange} placeholder="What's happening?" />
          <AvatarButtonDiv>
-            <Avatar size="small" username="John" profileImageUrl="https://gfp-2a3tnpzj.stackpathdns.com/wp-content/uploads/2018/06/dog-breeds-of-famous-dogs-1600x1065.jpg" />
-
-
+            <Avatar size="small" username="John" profileImageUrl="sample.jpg" />
             <Button type="submit">
                WUPHF!
             </Button>
