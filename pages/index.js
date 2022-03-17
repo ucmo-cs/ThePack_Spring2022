@@ -4,14 +4,29 @@ import { Avatar } from '../components/Avatar'
 import styles from '../styles/Home.module.css'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import WuphfInput from '../components/WuphfInput'
+import ViewWuphfs from '../components/ViewWuphfs'
+import ViewWuphf from '../components/ViewWuphf'
+import tempPosts from './tempPosts'
 import Register from './Register'
 import SettingsForm from '../components/SettingsForm'
 
 export default function Home() {
 
   return (
-
+    <>
     <WuphfInput />
+
+    <ViewWuphf 
+      username="John Doe"
+      avatar="sample.jpg"
+      post="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla."
+    />
+
+    <ViewWuphfs posts={tempPosts} />
+
+ 
+
+    </>
   )
 
   const { data: session } = useSession()

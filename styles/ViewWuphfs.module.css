@@ -1,0 +1,39 @@
+
+
+.container{
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+}
+.postborder:not(:last-child){
+    border-bottom: 2px solid rgb(196, 196, 196);
+}
+
+.containers{
+    border:2px solid rgb(196, 196, 196);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.username{
+    position:relative;
+    font-weight: bold;
+    margin-left:20px;
+    bottom: 35px;
+
+}
+.avatar{
+    position: relative;
+    top:35px;
+    padding-right: 10px;
+    
+}
+
+.post{
+    padding-top: 5px;
+    margin-left:70px;
+    /* width:600px; */
+} 
