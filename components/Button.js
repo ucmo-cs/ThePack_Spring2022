@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 import PropTypes from 'prop-types'
 
-SelectInput.propTypes = {
+Button.propTypes = {
 	variant: PropTypes.string.isRequired,
 }
 
@@ -14,7 +14,6 @@ export default Button
 
 const StyledButton = styled.button`
 	padding: 0.5em 1em;
-	/* background-color: ${(props) => handleBGType(props.variant)}; */
 	background-color: ${({ variant, theme }) => handleBGType(variant, theme)};
 	color: ${({ variant, theme }) => handleColorType(variant, theme)};
 	border: none;
@@ -22,6 +21,7 @@ const StyledButton = styled.button`
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
 	font-size: inherit;
 	cursor: pointer;
+	transition: all 0.2s ease 0s;
 	&:hover {
 		background-color: ${({ variant, theme }) =>
 			darken(0.1, handleBGType(variant, theme))};

@@ -28,6 +28,7 @@ const Wrapper = styled.div`
 		display: block;
 		outline: none;
 		margin: 0.5em 0;
+		margin-bottom: 1em;
 		padding: 0.5em;
 		border-radius: 4px;
 		width: 100%;

@@ -30,6 +30,7 @@ const Wrapper = styled.div`
 		border-radius: 0.25em;
 		padding: 0.5em;
 		margin: 0.5em 0;
+		margin-bottom: 1em;
 		cursor: pointer;
 		line-height: 1.1;
 		width: 100%;
