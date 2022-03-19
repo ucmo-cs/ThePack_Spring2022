@@ -3,7 +3,7 @@ import SettingsForm from '../components/SettingsForm'
 import styled from 'styled-components'
 import Avatar from '../components/Avatar'
 
-export default function register() {
+export default function Register() {
 	return (
 		<Wrapper>
 			<div className='avatarContainer'>
