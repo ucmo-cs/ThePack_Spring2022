@@ -6,7 +6,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import WuphfInput from '../components/WuphfInput'
 import ViewWuphfs from '../components/ViewWuphfs'
 import ViewWuphf from '../components/ViewWuphf'
-import tempPosts from './tempPosts'
+import tempPosts from '../assets/tempPosts'
 
 export default function Home() {
 	return (
