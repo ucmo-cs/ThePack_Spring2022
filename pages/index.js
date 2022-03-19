@@ -7,8 +7,6 @@ import WuphfInput from '../components/WuphfInput'
 import ViewWuphfs from '../components/ViewWuphfs'
 import ViewWuphf from '../components/ViewWuphf'
 import tempPosts from './tempPosts'
-import Register from './register'
-import SettingsForm from '../components/SettingsForm'
 
 export default function Home() {
 	return (
