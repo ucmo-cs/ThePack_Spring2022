@@ -8,7 +8,7 @@ import ViewWuphfs from '../components/ViewWuphfs'
 import ViewWuphf from '../components/ViewWuphf'
 import tempPosts from '../assets/tempPosts'
 
-export default function Home() {
+export default function home() {
 	return (
 		<>
 			<WuphfInput />
