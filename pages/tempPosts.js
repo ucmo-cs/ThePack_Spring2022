@@ -1,4 +1,4 @@
-export default [
+const tempPosts = [
 	{
 		id: '1',
 		username: 'Joe Smith',
@@ -37,3 +37,5 @@ export default [
 		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
 	},
 ]
+
+export default tempPosts
