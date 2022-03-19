@@ -2,6 +2,7 @@ import React from 'react'
 import SettingsForm from '../components/SettingsForm'
 import styled from 'styled-components'
 import Avatar from '../components/Avatar'
+import breakpoint from '../styles/breakpoint'
 
 export default function Register() {
 	return (
@@ -19,12 +20,17 @@ export default function Register() {
 }
 
 const Wrapper = styled.div`
-	display: grid;
-	grid-template-columns: 50% 50%;
+	margin: 0 1rem;
+
+	@media ${breakpoint.up.sm} {
+		display: grid;
+		grid-template-columns: 50% 50%;
+	}
 
 	.avatarContainer {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		padding: 1rem;
 	}
 `
