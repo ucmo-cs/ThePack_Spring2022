@@ -7,10 +7,12 @@ import WuphfInput from '../components/WuphfInput'
 import ViewWuphfs from '../components/ViewWuphfs'
 import ViewWuphf from '../components/ViewWuphf'
 import tempPosts from '../assets/tempPosts'
+import NavigationBar from '../components/NavigationsBar'
 
 export default function Home() {
 	return (
 		<>
+    <NavigationBar />
 			<WuphfInput />
 
 			<ViewWuphf
