@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `
-
 const theme = {
 	colors: {
 		header: 'orange',
