@@ -13,13 +13,13 @@ function Button({ children, ...props }) {
 export default Button
 
 const StyledButton = styled.button`
+	font-size: 1em;
 	padding: 0.5em 1em;
 	background-color: ${({ variant, theme }) => handleBGType(variant, theme)};
 	color: ${({ variant, theme }) => handleColorType(variant, theme)};
 	border: none;
 	border-radius: 25px;
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
-	font-size: inherit;
 	cursor: pointer;
 	transition: all 0.2s ease 0s;
 	&:hover {

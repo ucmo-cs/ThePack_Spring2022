@@ -2,14 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import FormInput from './forms/FormInput'
 import SelectInput from './forms/SelectInput'
+import TextArea from './forms/TextArea'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from './Button'
 import * as yup from 'yup'
 
 const schema = yup.object({
-	username: yup.string().min(4, 'Min length is 4').required('Required'),
+	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
 	animal: yup.string().required('Required'),
+	message: yup.string().required('Required'),
 })
 
 function SettingsForm() {
@@ -23,16 +25,20 @@ function SettingsForm() {
 		resolver: yupResolver(schema),
 	})
 
-	const onSubmit = ({ username, animal }) => {
-		alert(`username: ${username}, animal: ${animal}`)
+	const onSubmit = ({ username, animal, message }) => {
+		alert(`username: ${username}, animal: ${animal}, message: ${message}`)
 	}
 
 	return (
 		<SettingBorder>
 			<WuphfTitle>WUPHF</WuphfTitle>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<h3>username: {watch('username')}</h3>
-				<h3>animal: {watch('animal')}</h3>
+				<Watchs>
+					<Watch>username: {watch('username')}</Watch>
+					<Watch>animal: {watch('animal')}</Watch>
+					<Watch>message: {watch('message')}</Watch>
+				</Watchs>
+
 				<FormInput
 					id='username'
 					label='Username'
@@ -52,6 +58,14 @@ function SettingsForm() {
 					<option value='panda'>Panda</option>
 				</SelectInput>
 
+				<TextArea
+					id='message'
+					label='Test Message'
+					register={register}
+					error={errors.message}
+					rows='3'
+				/>
+
 				<Button variant='primary' type='submit' disabled={isSubmitting}>
 					Submit
 				</Button>
@@ -60,16 +74,29 @@ function SettingsForm() {
 	)
 }
 
+const Watchs = styled.div`
+	margin-bottom: 1rem;
+`
+
+const Watch = styled.h3`
+	margin-bottom: 0.3rem;
+	font-size: 1.18rem;
+	font-weight: 600;
+	line-height: 1.5rem;
+`
+
 const SettingBorder = styled.div`
 	border: 1px solid #adadad;
 	border-radius: 15px;
 	padding: 1.5em;
-	margins: 10px;
+	/* margin: 10px; */
 `
 
 const WuphfTitle = styled.h1`
-	margin: auto;
+	margin-bottom: 1rem;
 	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
 `
 
 export default SettingsForm
