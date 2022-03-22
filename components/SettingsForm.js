@@ -79,24 +79,25 @@ const Watchs = styled.div`
 `
 
 const Watch = styled.h3`
-	margin-bottom: 0.3rem;
+	margin-bottom: 0.3em;
 	font-size: 1.18rem;
 	font-weight: 600;
-	line-height: 1.5rem;
+	line-height: 1.5em;
 `
 
 const SettingBorder = styled.div`
 	border: 1px solid #adadad;
 	border-radius: 15px;
-	padding: 1.5em;
+	padding: 1.5rem;
 	/* margin: 10px; */
 `
 
 const WuphfTitle = styled.h1`
 	margin-bottom: 1rem;
 	text-align: center;
-	font-size: 2rem;
+	/* font-size: 2rem; */
 	font-weight: 700;
+	font-size: 2rem;
 `
 
 export default SettingsForm

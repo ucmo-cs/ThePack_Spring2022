@@ -13,8 +13,8 @@ function Button({ children, ...props }) {
 export default Button
 
 const StyledButton = styled.button`
-	font-size: 1em;
-	padding: 0.5em 1em;
+	font-size: inherit;
+	padding: 0.5rem 1rem;
 	background-color: ${({ variant, theme }) => handleBGType(variant, theme)};
 	color: ${({ variant, theme }) => handleColorType(variant, theme)};
 	border: none;

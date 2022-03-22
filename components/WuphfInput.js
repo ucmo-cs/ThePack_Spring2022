@@ -25,7 +25,7 @@ const PostBorder = styled.form`
 
 const PostTextArea = styled.textarea`
 	font-family: inherit;
-	font-size: 16px;
+	font-size: inherit;
 	border: none;
 	border-bottom: 1px solid #aaa;
 	resize: none;

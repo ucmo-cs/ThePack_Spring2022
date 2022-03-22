@@ -25,8 +25,8 @@ const Wrapper = styled.div`
 		font-size: inherit;
 		display: block;
 		outline: none;
-		margin-top: 0.5em;
-		padding: 0.5em;
+		margin-top: 0.5rem;
+		padding: 0.5rem;
 		border-radius: 4px;
 		width: 100%;
 		border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 		}
 	}
 
-	margin-bottom: 1em;
+	margin-bottom: 1rem;
 `
 
 export default FormInput

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 	html {
 		font-family: "Open Sans", sans-serif;
-		font-size: 16px;
+		font-size: 1rem;
 	}
 `
 const theme = {

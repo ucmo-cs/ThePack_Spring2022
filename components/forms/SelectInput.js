@@ -24,15 +24,15 @@ const Wrapper = styled.div`
 		appearance: none;
 		background-color: #fff;
 		border: 1px solid #aaa;
-		border-radius: 0.25em;
-		padding: 0.5em;
-		margin-top: 0.5em;
+		border-radius: 0.25rem;
+		padding: 0.5rem;
+		margin-top: 0.5rem;
 		cursor: pointer;
 		width: 100%;
 		outline: none;
 	}
 
-	margin-bottom: 1em;
+	margin-bottom: 1rem;
 `
 
 export default SelectInput
