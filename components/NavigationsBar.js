@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 import { useState, useRef } from 'react'
+import FormInput from './forms/FormInput'
+import { useForm } from 'react-hook-form'
 
 const NavWrapper = styled.div`
     width: 100%;
@@ -10,7 +12,7 @@ const NavWrapper = styled.div`
 `
 
 const StyledNav = styled.nav`
-    height: 45px;
+    height: 50px;
     max-width: 700px;
     width: 100%;
     @media (max-width: 768px) {
@@ -19,7 +21,7 @@ const StyledNav = styled.nav`
         height: 100vh;
         position: sticky;
         width: 100%;
-        height: ${props => props.expanded ? '100vh' : '45px'};
+        height: ${props => props.expanded ? '100vh' : '50px'};
         z-index: 1;
         display: flex;
         flex-direction: column;
@@ -40,6 +42,20 @@ const TopWrapper = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
+    }
+`
+
+const Search = styled.div`
+    width: 100%;
+    margin-left: 40px;
+
+    div {
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+        height: 0;
     }
 `
 
@@ -111,8 +127,8 @@ const Hamburger = styled.div`
         border-radius: 5px;
         flex-direction: column;
         transition: 0.7s ease-in-out;
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         position: relative;
         cursor: pointer;
         &:hover {
@@ -133,16 +149,16 @@ const HamburgerLine = styled.div`
         left: 4.5px;
 
         :nth-child(1) {
-            top: 11px;
-            ${props => props.expanded && css`transform: rotate(45deg); top: 21.5px;`};
+            top: 12px;
+            ${props => props.expanded && css`transform: rotate(45deg); top: 24px;`};
         }
         :nth-child(2) {
-            top: 22px;
+            top: 24px;
             opacity: ${props => (props.expanded ? '0' : '1')};
         }
         :nth-child(3) {
-            top: 33px;
-            ${props => props.expanded && css`transform: rotate(-225deg); top: 21.5px;`};
+            top: 36px;
+            ${props => props.expanded && css`transform: rotate(-225deg); top: 24px;`};
         }
     } 
 `
@@ -150,6 +166,14 @@ const HamburgerLine = styled.div`
 export default function NavigationBar() {
     const [expanded, setExpanded] = useState(false)
     const myRef = useRef(null)
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isSubmitting},
+        watch
+    } = useForm({
+        mode: 'onTouched',
+    })
 
     function toggleExpanded(e) {
         if (!expanded) {
@@ -173,6 +197,14 @@ export default function NavigationBar() {
                     <DesktopLogoWrapper>
                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path fill="#828282" d="M9 23h-6v-10l8.991-8.005 9.009 8.005v10h-6v-3c0-1.654-1.355-3.021-3.009-3.021-1.655 0-2.991 1.367-2.991 3.021v3zm2.252-11.015c.094-.002 1.385-.002 1.477 0 1.17.016 1.264-.998 2.259-.998.643 0 .995.524.999.999.005.474-.28.825-.622.995.327.177.619.527.622 1.002.003.475-.347.999-.999.999-.995 0-1.089-1.015-2.259-.998h-1.477c-1.17-.017-1.264.998-2.259.998-.652 0-1.002-.524-.999-.999.003-.475.295-.825.622-1.002-.342-.17-.627-.521-.622-.995.004-.475.356-.999.999-.999.995 0 1.089 1.014 2.259.998zm.748-10.985l12 10.632-1.328 1.493-10.672-9.481-10.672 9.481-1.328-1.481 12-10.644z" /></svg>
                     </DesktopLogoWrapper>
+                    <Search>
+                        <FormInput
+                            id='search'
+                            label=''
+                            register={register}
+                            error={errors.search}
+                        />
+                    </Search>
                     <StyledUl expanded={expanded}>
                         <StyledLi expanded={expanded}>
                             <Link href='/'>
