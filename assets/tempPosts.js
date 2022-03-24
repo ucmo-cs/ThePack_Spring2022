@@ -36,6 +36,91 @@ const tempPosts = [
 		avatar: 'sample.jpg',
 		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
 	},
+	{
+		id: '7',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '8',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '9',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '10',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '11',
+		username: 'Joe Smith',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '12',
+		username: 'Mary Brown',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '13',
+		username: 'David Johnson',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+
+	{
+		id: '14',
+		username: 'Sara Lee',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '15',
+		username: 'Jessica Jones',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '16',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '17',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '18',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '19',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
+	{
+		id: '20',
+		username: 'Robert Williams',
+		avatar: 'sample.jpg',
+		post: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.',
+	},
 ]
 
 export default tempPosts
