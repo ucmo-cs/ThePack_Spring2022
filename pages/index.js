@@ -7,10 +7,16 @@ import WuphfInput from '../components/WuphfInput'
 import ViewWuphfs from '../components/ViewWuphfs'
 import ViewWuphf from '../components/ViewWuphf'
 import tempPosts from '../assets/tempPosts'
+import Profile from './Profile'
 
 export default function Home() {
 	return (
 		<>
+			<Profile 
+				username="John Doe"
+				joinDate="3 weeks ago"
+			/>
+			
 			<WuphfInput />
 
 			<ViewWuphf

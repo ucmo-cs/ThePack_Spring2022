@@ -1,0 +1,49 @@
+.topcontainer{
+    position: relative;
+}
+.banner{
+    background-color: #7395b0;
+    height:200px;
+    border-radius: 20px;
+}
+.avatar{
+    position:absolute;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+.header{
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding:10px;
+}
+.text{
+    margin-right: auto;
+}
+.username{
+    font-weight: bold;
+    font-size: 1.50rem;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.joined{
+    font-size: 0.75rem;
+}
+.buttons{
+    margin-left: auto;
+}
+.bio{
+    padding:10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.nav{
+    font-weight: bolder;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+}
