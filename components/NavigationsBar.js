@@ -4,15 +4,13 @@ import { useState, useRef } from 'react'
 import FormInput from './forms/FormInput'
 import { useForm } from 'react-hook-form'
 
-const avatar = <img src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dog_nau7in.svg' width={40} height={40} />
-
 export default function NavigationBar() {
     const [expanded, setExpanded] = useState(false)
     const myRef = useRef(null)
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting},
+        formState: { errors, isSubmitting },
         watch
     } = useForm({
         mode: 'onTouched',
@@ -28,18 +26,10 @@ export default function NavigationBar() {
     return (
         <NavWrapper>
             <StyledNav expanded={expanded} ref={myRef}>
-                <TopWrapper>
-                    {avatar}
-                    <Hamburger expanded={expanded} onClick={toggleExpanded}>
-                        <HamburgerLine expanded={expanded} />
-                        <HamburgerLine expanded={expanded} />
-                        <HamburgerLine expanded={expanded} />
-                    </Hamburger>
-                </TopWrapper>
-                <DesktopLinksListWrapper>
-                    <DesktopLogoWrapper>
-                        {avatar}
-                    </DesktopLogoWrapper>
+                <NavigationFirstHalf>
+                    <Link href='/' passHref>
+                        <img src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dog_nau7in.svg' width={40} height={40} />
+                    </Link>
                     <Search>
                         <FormInput
                             id='search'
@@ -48,24 +38,29 @@ export default function NavigationBar() {
                             error={errors.search}
                         />
                     </Search>
-                    <StyledUl expanded={expanded}>
-                        <StyledLi expanded={expanded}>
-                            <Link href='/' passHref>
-                                <StyledA>Home</StyledA>
-                            </Link>
-                        </StyledLi>
-                        <StyledLi expanded={expanded}>
-                            <Link href='/profile' passHref>
-                                <StyledA>Profile</StyledA>
-                            </Link>
-                        </StyledLi>
-                        <StyledLi expanded={expanded}>
-                            <Link href='/settings' passHref>
-                                <StyledA>Account Settings</StyledA>
-                            </Link>
-                        </StyledLi>
-                    </StyledUl>
-                </DesktopLinksListWrapper>
+                    <Hamburger expanded={expanded} onClick={toggleExpanded}>
+                        <HamburgerLine expanded={expanded} />
+                        <HamburgerLine expanded={expanded} />
+                        <HamburgerLine expanded={expanded} />
+                    </Hamburger>
+                </NavigationFirstHalf>
+                <StyledUl expanded={expanded}>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/' passHref>
+                            <StyledA>Home</StyledA>
+                        </Link>
+                    </StyledLi>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/profile' passHref>
+                            <StyledA>Profile</StyledA>
+                        </Link>
+                    </StyledLi>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/settings' passHref>
+                            <StyledA>Account Settings</StyledA>
+                        </Link>
+                    </StyledLi>
+                </StyledUl>
             </StyledNav>
         </NavWrapper>
     )
@@ -79,6 +74,7 @@ const NavWrapper = styled.div`
 `
 
 const StyledNav = styled.nav`
+    display: flex;
     height: 50px;
     max-width: 700px;
     width: 100%;
@@ -97,32 +93,19 @@ const StyledNav = styled.nav`
     }
 `
 
-const TopWrapper = styled.div`
-    display: none;
-    justify-content: space-between;
-    flex-direction: column;
+const NavigationFirstHalf = styled.div`
+    display: flex;
     width: 100%;
-    margin: 0;
-    padding: 0 10px;
-
-    @media (max-width: 768px) {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+    padding: 0 20px;
+    align-items: center;
 `
 
 const Search = styled.div`
     width: 100%;
-    margin-left: 40px;
+    margin: 0 40px;
 
     div {
         margin: 0;
-    }
-
-    @media (max-width: 768px) {
-        display: none;
-        height: 0;
     }
 `
 
@@ -142,22 +125,6 @@ const StyledUl = styled.ul`
         flex-direction: column;
         height: ${props => props.expanded ? '100%' : '0px'};
     }
-`
-
-const DesktopLogoWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    background-color: #E5E5E5;
-    @media (max-width: 768px) {
-        display: none;
-    }
-`
-
-const DesktopLinksListWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
 `
 
 const StyledLi = styled.li`
