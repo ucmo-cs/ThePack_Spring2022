@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import styled, { css} from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useState, useRef } from 'react'
 
 const StyledNav = styled.nav`
+    height: 45px;
     @media (max-width: 768px) {
         top: 0;
         transition: 0.5s ease-in-out;
@@ -10,7 +11,7 @@ const StyledNav = styled.nav`
         position: sticky;
         background-color: #E5E5E5;
         width: 100%;
-        height: ${props => props.expanded ? '100vh' : '30px'};
+        height: ${props => props.expanded ? '100vh' : '45px'};
         z-index: 1;
         display: flex;
         flex-direction: column;
@@ -20,10 +21,18 @@ const StyledNav = styled.nav`
 `
 
 const TopWrapper = styled.div`
-    display: flex;
+    display: none;
     justify-content: space-between;
+    flex-direction: column;
     width: 100%;
     margin: 0;
+    padding: 0 10px;
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 `
 
 const StyledUl = styled.ul`
@@ -44,12 +53,29 @@ const StyledUl = styled.ul`
     }
 `
 
+const DesktopLogoWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    background-color: #E5E5E5;
+    @media (max-width: 768px) {
+        display: none;
+    }
+`
+
+const DesktopLinksListWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+`
+
 const StyledLi = styled.li`
     text-decoration: none;
     &:hover {
         background-color: #72d0ed;
         color: #202e4a;
     }
+    padding: 0 10px;
 
     @media (max-width: 768px) {
         transition: 0.7s ease-in-out;
@@ -61,6 +87,14 @@ const StyledLi = styled.li`
         justify-content: center;
     }
 `
+
+const StyledA = styled.a`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 const Hamburger = styled.div`
     display: none;
     @media (max-width: 768px) {
@@ -69,8 +103,8 @@ const Hamburger = styled.div`
         border-radius: 5px;
         flex-direction: column;
         transition: 0.7s ease-in-out;
-        width: 30px;
-        height: 30px;
+        width: 45px;
+        height: 45px;
         position: relative;
         cursor: pointer;
         &:hover {
@@ -91,16 +125,16 @@ const HamburgerLine = styled.div`
         left: 4.5px;
 
         :nth-child(1) {
-            top: 6px;
-            ${props => props.expanded && css`transform: rotate(45deg); top: 14px;`};
+            top: 11px;
+            ${props => props.expanded && css`transform: rotate(45deg); top: 21.5px;`};
         }
         :nth-child(2) {
-            top: 14px;
+            top: 22px;
             opacity: ${props => (props.expanded ? '0' : '1')};
         }
         :nth-child(3) {
-            top: 22px;
-            ${props => props.expanded && css`transform: rotate(-225deg); top: 14px;`};
+            top: 33px;
+            ${props => props.expanded && css`transform: rotate(-225deg); top: 21.5px;`};
         }
     } 
 `
@@ -110,7 +144,7 @@ export default function NavigationBar() {
     const myRef = useRef(null)
 
     function toggleExpanded(e) {
-        if(!expanded) {
+        if (!expanded) {
             myRef.current.scrollIntoView()
         }
         setExpanded(!expanded)
@@ -119,30 +153,35 @@ export default function NavigationBar() {
     return (
         <StyledNav expanded={expanded} ref={myRef}>
             <TopWrapper>
-                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path fill="#828282" d="M9 23h-6v-10l8.991-8.005 9.009 8.005v10h-6v-3c0-1.654-1.355-3.021-3.009-3.021-1.655 0-2.991 1.367-2.991 3.021v3zm2.252-11.015c.094-.002 1.385-.002 1.477 0 1.17.016 1.264-.998 2.259-.998.643 0 .995.524.999.999.005.474-.28.825-.622.995.327.177.619.527.622 1.002.003.475-.347.999-.999.999-.995 0-1.089-1.015-2.259-.998h-1.477c-1.17-.017-1.264.998-2.259.998-.652 0-1.002-.524-.999-.999.003-.475.295-.825.622-1.002-.342-.17-.627-.521-.622-.995.004-.475.356-.999.999-.999.995 0 1.089 1.014 2.259.998zm.748-10.985l12 10.632-1.328 1.493-10.672-9.481-10.672 9.481-1.328-1.481 12-10.644z"/></svg>
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path fill="#828282" d="M9 23h-6v-10l8.991-8.005 9.009 8.005v10h-6v-3c0-1.654-1.355-3.021-3.009-3.021-1.655 0-2.991 1.367-2.991 3.021v3zm2.252-11.015c.094-.002 1.385-.002 1.477 0 1.17.016 1.264-.998 2.259-.998.643 0 .995.524.999.999.005.474-.28.825-.622.995.327.177.619.527.622 1.002.003.475-.347.999-.999.999-.995 0-1.089-1.015-2.259-.998h-1.477c-1.17-.017-1.264.998-2.259.998-.652 0-1.002-.524-.999-.999.003-.475.295-.825.622-1.002-.342-.17-.627-.521-.622-.995.004-.475.356-.999.999-.999.995 0 1.089 1.014 2.259.998zm.748-10.985l12 10.632-1.328 1.493-10.672-9.481-10.672 9.481-1.328-1.481 12-10.644z" /></svg>
                 <Hamburger expanded={expanded} onClick={toggleExpanded}>
                     <HamburgerLine expanded={expanded} />
                     <HamburgerLine expanded={expanded} />
                     <HamburgerLine expanded={expanded} />
                 </Hamburger>
             </TopWrapper>
-            <StyledUl expanded={expanded}>
-                <StyledLi expanded={expanded}>
-                    <Link href='/'>
-                        <a>Home</a>
-                    </Link>
-                </StyledLi>
-                <StyledLi expanded={expanded}>
-                    <Link href='/profile'>
-                        <a>Profile</a>
-                    </Link>
-                </StyledLi>
-                <StyledLi expanded={expanded}>
-                    <Link href='/settings'>
-                        <a>Account Settings</a>
-                    </Link>
-                </StyledLi>
-            </StyledUl>
+            <DesktopLinksListWrapper>
+                <DesktopLogoWrapper>
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path fill="#828282" d="M9 23h-6v-10l8.991-8.005 9.009 8.005v10h-6v-3c0-1.654-1.355-3.021-3.009-3.021-1.655 0-2.991 1.367-2.991 3.021v3zm2.252-11.015c.094-.002 1.385-.002 1.477 0 1.17.016 1.264-.998 2.259-.998.643 0 .995.524.999.999.005.474-.28.825-.622.995.327.177.619.527.622 1.002.003.475-.347.999-.999.999-.995 0-1.089-1.015-2.259-.998h-1.477c-1.17-.017-1.264.998-2.259.998-.652 0-1.002-.524-.999-.999.003-.475.295-.825.622-1.002-.342-.17-.627-.521-.622-.995.004-.475.356-.999.999-.999.995 0 1.089 1.014 2.259.998zm.748-10.985l12 10.632-1.328 1.493-10.672-9.481-10.672 9.481-1.328-1.481 12-10.644z" /></svg>
+                </DesktopLogoWrapper>
+                <StyledUl expanded={expanded}>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/'>
+                            <StyledA>Home</StyledA>
+                        </Link>
+                    </StyledLi>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/profile'>
+                            <StyledA>Profile</StyledA>
+                        </Link>
+                    </StyledLi>
+                    <StyledLi expanded={expanded}>
+                        <Link href='/settings'>
+                            <StyledA>Account Settings</StyledA>
+                        </Link>
+                    </StyledLi>
+                </StyledUl>
+            </DesktopLinksListWrapper>
         </StyledNav>
     )
 }
