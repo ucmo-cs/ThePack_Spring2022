@@ -32,21 +32,21 @@ function profilePage(props){
                     </div>
             
                     <div className={styles.buttons}>
-                        <Button
-                            variant= "primary"
-                        />
-                        <Button
-                            variant= "primary"
-                        />
-                        <Button
-                            variant= "primary"
-                        />
+                        <Button variant= 'primary'>
+                            ...
+                        </Button>
+                        <Button variant= 'primary'>
+                            ...
+                        </Button>
+                        <Button variant= 'primary'>
+                            Follow
+                        </Button>
                     </div>
                 </div>
 
                 {/* //replace below with user input Biography in settings page */}
                 <div className={styles.bio} >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.
+                    {props.bio}
                 </div>
             </div>
             <ViewWuphfs posts={tempPosts} />

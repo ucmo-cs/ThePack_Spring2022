@@ -15,6 +15,7 @@ export default function Home() {
 			<Profile 
 				username="John Doe"
 				joinDate="3 weeks ago"
+				bio='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.'
 			/>
 			
 			<WuphfInput />
