@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from '../../components/Avatar'
-import Wuphf from '../../components/Wuphf'
+import Wuphfs from '../../components/Wuphfs'
 import Button from '../../components/Button'
 import tempPosts from '../../assets/tempPosts'
 import styled from 'styled-components'
