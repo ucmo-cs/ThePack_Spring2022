@@ -6,6 +6,7 @@ import Welcome from '../components/Welcome'
 import Container from '../components/styledComponents/Container'
 
 export default function Home() {
+
 	const { data: session } = useSession()
 
 	if (session) {

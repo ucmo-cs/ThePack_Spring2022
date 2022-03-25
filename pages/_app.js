@@ -24,6 +24,10 @@ const theme = {
 			bg: '#227DE5',
 			text: '#fff',
 		},
+		secondary: {
+			bg: '#202e4a',
+			text: '#f4f4f3'
+		}
 	},
 }
 
