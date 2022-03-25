@@ -36,7 +36,7 @@ function SettingsForm(props) {
         />
         <SelectInput register={props.register} id="animal" label="Your Animal">
           {
-            props.animals.map(animal => <option value={animal.label}>{animal.label}</option>)
+            props.animals.map(animal => <option value={animal.label} key={`select-option-${animal.label}`}>{animal.label}</option>)
           }
         </SelectInput>
 
