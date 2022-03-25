@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import propTypes from 'prop-types';
+import propTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar'
 import FormInput from '../components/forms/FormInput'
 import Button from '../components/Button'
-import Avatar from '../components/Avatar';
+import Avatar from '../components/Avatar'
 import { set, useForm } from 'react-hook-form'
-import SelectInput from '../components/forms/SelectInput';
-import TextArea from '../components/forms/TextArea';
+import SelectInput from '../components/forms/SelectInput'
+import TextArea from '../components/forms/TextArea'
 
 AccountSettings.propTypes = {
    //Use another import
