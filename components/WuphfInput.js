@@ -26,7 +26,7 @@ function WuphfInput() {
         placeholder="What's happening?"
       />
       <AvatarButtonDiv>
-        <Avatar size="small" username="John" profileImageUrl="sample.jpg" />
+        <Avatar size="medium" username="John" profileImageUrl="sample.jpg" />
         <Button type="submit" variant="primary">
           WUPHF!
         </Button>
