@@ -3,19 +3,22 @@ import SettingsForm from '../components/SettingsForm'
 import styled from 'styled-components'
 import Avatar from '../components/Avatar'
 import breakpoint from '../styles/breakpoint'
+import Container from '../components/styledComponents/Container'
 
 export default function Register() {
 	return (
-		<Wrapper>
-			<div className='avatarContainer'>
-				<Avatar
-					username='Joe Smith'
-					profileImageUrl='sample.jpg'
-					size='large'
-				/>
-			</div>
-			<SettingsForm />
-		</Wrapper>
+		<Container>
+			<Wrapper>
+				<div className='avatarContainer'>
+					<Avatar
+						username='Joe Smith'
+						profileImageUrl='sample.jpg'
+						size='large'
+					/>
+				</div>
+				<SettingsForm />
+			</Wrapper>
+		</Container>
 	)
 }
 

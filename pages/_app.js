@@ -1,4 +1,3 @@
-import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Layout from '../components/Layout'
@@ -16,29 +15,29 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 const theme = {
-  colors: {
-    header: 'orange',
-    footer: 'cyan',
-  },
-  button: {
-    primary: {
-      bg: '#227DE5',
-      text: '#fff',
-    },
-  },
+	colors: {
+		header: 'orange',
+		footer: 'cyan',
+	},
+	button: {
+		primary: {
+			bg: '#227DE5',
+			text: '#fff',
+		},
+	},
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  return (
-    <SessionProvider session={session}>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-    </SessionProvider>
-  )
+	return (
+		<SessionProvider session={session}>
+			<GlobalStyle />
+			<ThemeProvider theme={theme}>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</ThemeProvider>
+		</SessionProvider>
+	)
 }
 
 export default MyApp
