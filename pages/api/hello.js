@@ -23,7 +23,7 @@
 
 import { getSession } from 'next-auth/react'
 
-export default async (req, res) => {
+const prisma = async (req, res) => {
   const session = await getSession({ req })
   if (session) {
     // Signed in
@@ -34,3 +34,5 @@ export default async (req, res) => {
   }
   res.end()
 }
+
+export default prisma
