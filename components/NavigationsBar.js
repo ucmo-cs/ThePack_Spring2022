@@ -124,6 +124,7 @@ const Search = styled.div`
 const StyledUl = styled.ul`
 	display: flex;
 	width: 100%;
+    height: 100%;
 	justify-content: end;
 	list-style: none;
 	background-color: #e5e5e5;
@@ -159,6 +160,8 @@ const StyledLi = styled.li`
 `
 
 const StyledA = styled.a`
+    color: #202e4a;
+    text-decoration: none;
 	height: 100%;
 	width: 100%;
 	display: flex;
