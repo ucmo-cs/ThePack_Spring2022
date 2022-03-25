@@ -9,7 +9,7 @@ function Wuphf(props) {
 				<Avatar
 					username={props.username}
 					profileImageUrl={props.avatar}
-					size='medium'
+					size='large'
 				/>
 			</AvatarWrapper>
 			<PostWrapper>
@@ -39,6 +39,7 @@ const AvatarWrapper = styled.div`
 
 const PostWrapper = styled.div`
 	padding: 1rem;
+	padding-left: 0;
 `
 
 const Username = styled.h3`

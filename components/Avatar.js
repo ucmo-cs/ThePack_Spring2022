@@ -21,7 +21,7 @@ function Avatar(props) {
 	} else if (size === 'medium') {
 		width = 50
 	} else if (size === 'large') {
-		width = 70
+		width = 150
 	}
 	let height = width
 
