@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { useState, useRef } from 'react'
 import FormInput from './forms/FormInput'
 import { useForm } from 'react-hook-form'
+import SearchIcon from './icons/SearchIcon'
 
 export default function NavigationBar(props) {
 	const [expanded, setExpanded] = useState(false)
@@ -35,12 +36,13 @@ export default function NavigationBar(props) {
 						/>
 					</Link>
 					<Search>
-						<FormInput
+						<StyledFormInput
 							id='search'
 							label=''
 							register={register}
 							error={errors.search}
 						/>
+						<SearchIcon />
 					</Search>
 					<Hamburger expanded={expanded} onClick={toggleExpanded}>
 						<HamburgerLine expanded={expanded} />
@@ -77,24 +79,27 @@ const StyledImg = styled.img`
 const NavWrapper = styled.div`
 	width: 100%;
 	background-color: #e5e5e5;
-	display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
 	justify-content: center;
 	height: 53px;
 	z-index: 1;
 `
 
 const StyledNav = styled.nav`
-	display: flex;
-	/* background-color: blue; */
+	display: grid;
+	grid-template-columns: auto auto;
 	align-items: center;
+	grid-gap: 10px;
 	max-width: 700px;
 	width: 100%;
 	@media (max-width: 768px) {
+		grid-gap: 0;
 		top: 0;
 		transition: 0.5s ease-in-out;
 		height: 100vh;
 		position: sticky;
-		width: 100%;
+		width: 100vw;
 		height: ${(props) => (props.expanded ? '100vh' : '50px')};
 		z-index: 1;
 		display: flex;
@@ -105,16 +110,24 @@ const StyledNav = styled.nav`
 `
 
 const NavigationFirstHalf = styled.div`
-	/* background-color: green; */
-	display: flex;
+	display: grid;
+    grid-auto-flow: column;
 	width: 100%;
-	padding: 0 20px;
 	align-items: center;
+	grid-column-gap: 10px;
+
+	@media (max-width: 768px) {
+		justify-content: center;
+	}
 `
 
 const Search = styled.div`
 	width: 100%;
-	margin: 0 40px;
+	margin: 0;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+	gap: 10px;
 
 	div {
 		margin: 0;
@@ -220,4 +233,9 @@ const HamburgerLine = styled.div`
 				`};
 		}
 	}
+`
+
+const StyledFormInput = styled(FormInput)`
+	width: 100%;
+	padding: 0 10px;
 `
