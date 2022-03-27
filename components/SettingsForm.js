@@ -2,74 +2,76 @@ import React from 'react'
 import styled from 'styled-components'
 import FormInput from './forms/FormInput'
 import SelectInput from './forms/SelectInput'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import TextArea from './forms/TextArea'
 import Button from './Button'
 import * as yup from 'yup'
+import Title from './styledComponents/Title'
 
 const schema = yup.object({
-	username: yup.string().min(4, 'Min length is 4').required('Required'),
-	animal: yup.string().required('Required'),
+  username: yup.string().min(4, 'Minimum length is 4').required('Required'),
+  animal: yup.string().required('Required'),
+  message: yup.string().required('Required'),
 })
 
-function SettingsForm() {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		watch,
-	} = useForm({
-		mode: 'onTouched',
-		resolver: yupResolver(schema),
-	})
+function SettingsForm(props) {
+  const onSubmit = ({ username, animal, message }) => {
+    alert(`username: ${username}, animal: ${animal}, message: ${message}`)
+  }
 
-	const onSubmit = ({ username, animal }) => {
-		alert(`username: ${username}, animal: ${animal}`)
-	}
+  return (
+    <SettingBorder>
+      <Title>WUPHF</Title>
+      <form onSubmit={props.handleSubmit(onSubmit)}>
+        <Watchs>
+          <Watch>username: {props.watch('username')}</Watch>
+          <Watch>animal: {props.watch('animal')}</Watch>
+          <Watch>message: {props.watch('message')}</Watch>
+        </Watchs>
 
-	return (
-		<SettingBorder>
-			<WuphfTitle>WUPHF</WuphfTitle>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<h3>username: {watch('username')}</h3>
-				<h3>animal: {watch('animal')}</h3>
-				<FormInput
-					id='username'
-					label='Username'
-					register={register}
-					error={errors.username}
-				/>
-				<SelectInput register={register} id='animal' label='Your Animal'>
-					<option value='dog'>Dog</option>
-					<option value='cat'>Cat</option>
-					<option value='bird'>Bird</option>
-					<option value='hamster'>Hamster</option>
-					<option value='owl'>Owl</option>
-					<option value='monkey'>Monkey</option>
-					<option value='tanuki'>Tanuki</option>
-					<option value='pig'>Pig</option>
-					<option value='bunny'>Bunny</option>
-					<option value='panda'>Panda</option>
-				</SelectInput>
+        <FormInput
+          id="username"
+          label="Username"
+          register={props.register}
+          error={props.errors.username}
+        />
+        <SelectInput register={props.register} id="animal" label="Your Animal">
+          {
+            props.animals.map(animal => <option value={animal.label} key={`select-option-${animal.label}`}>{animal.label}</option>)
+          }
+        </SelectInput>
 
-				<Button variant='primary' type='submit' disabled={isSubmitting}>
-					Submit
-				</Button>
-			</form>
-		</SettingBorder>
-	)
+        <TextArea
+          id="message"
+          label="Test Message"
+          register={props.register}
+          error={props.errors.message}
+          rows="3"
+        />
+
+        <Button variant="primary" type="submit" disabled={props.isSubmitting}>
+          Submit
+        </Button>
+      </form>
+    </SettingBorder>
+  )
 }
 
-const SettingBorder = styled.div`
-	border: 1px solid #adadad;
-	border-radius: 15px;
-	padding: 1.5em;
-	margins: 10px;
+const Watchs = styled.div`
+  margin-bottom: 1rem;
 `
 
-const WuphfTitle = styled.h1`
-	margin: auto;
-	text-align: center;
+const Watch = styled.h3`
+  margin-bottom: 0.3em;
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.5em;
+`
+
+const SettingBorder = styled.div`
+  border: 1px solid #adadad;
+  border-radius: 15px;
+  padding: 1.5rem;
+  /* margin: 10px; */
 `
 
 export default SettingsForm

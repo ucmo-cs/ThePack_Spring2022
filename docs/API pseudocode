@@ -22,10 +22,6 @@ const port = '3030';  //I think this is the port we're using.
 //Routes
 //—-----------------------------creates a wuphf---------------------------------------------------
 app.post(':user_id/wuphf/:post_id'), (req, res) => {
-	const user_id  = req.params.user_id; 
-    const post_id  = req.params.post_id; //I dont know if this needs to be included as it would be auto incremented
-	const picture_url = req.body.picture_url;
-	const post_body = req.body.post_body;
 
 	//Error Handling here
 
@@ -33,7 +29,7 @@ app.post(':user_id/wuphf/:post_id'), (req, res) => {
         data: {
             id: Number(req.params.post_id),
             user_id: Number(req.params.user_id),
-            picture_url: req.body.picture_url,
+            picture_url: req.body.picture_url || undefined,
             post_body: req.body.post_body,
         },
     });
@@ -121,15 +117,12 @@ app.delete('/users/:id'), (req,res) => {
 }
 //—-----------------------------add like---------------------------------------------------
 app.post('/likes/:id'), (req, res) => {
-    const like_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
-    const user_id  = req.body.user_id; 
-    const post_id = req.body.post_id;
 
     const like = await prisma.likes.create({
         data: {
-            like_id: Number(like_id),
-            user_id: Number(user_id),
-            post_id: Number(post_id), 
+            like_id: Number(req.params.id),
+            user_id: Number(req.body.user_id),
+            post_id: Number(req.body.post_id), 
         }
     });
     res.json(like);
@@ -145,16 +138,13 @@ app.delete('/likes/:id'), (req,res) => {
 }
 //—-----------------------------add comment---------------------------------------------------
 app.post('/comment/:id'), (req, res) => {
-    const comment_id  = req.params.id; //I dont know if this needs to be included as it would be auto incremented
-    const user_id  = req.body.user_id; 
-    const post_id = req.body.post_id;
-    const comment_body = req.body.comment_body;
+  
     const comment = await prisma.comment.create({
         data: {
-            user_id: Number(user_id),
-            comment_id: Number(comment_id),
-            post_id: Number(post_id),
-            comment_body: comment_body,
+            user_id: Number(req.body.user_id),
+            comment_id: Number(req.params.id),
+            post_id: Number(req.body.post_id),
+            comment_body: req.body.comment_body,
         }
     });
     res.json(comment);

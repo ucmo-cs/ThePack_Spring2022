@@ -1,16 +1,19 @@
-import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Layout from '../components/Layout'
+import reset from 'styled-reset'
+import breakpoint from '../styles/breakpoint'
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+	${reset}
+	* {
+		box-sizing: border-box;
+	}
+	html {
+		font-family: "Open Sans", sans-serif;
+		font-size: 1rem;
+	}
 `
-
 const theme = {
 	colors: {
 		header: 'orange',
@@ -26,7 +29,11 @@ button: {
 		bg: '#227DE5',
 			text: '#fff',
 		},
-},
+		secondary: {
+			bg: '#202e4a',
+			text: '#f4f4f3'
+		}
+	},
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {

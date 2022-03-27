@@ -4,25 +4,27 @@ import PropTypes from 'prop-types'
 import Error from './Error'
 import Label from './Label'
 
-FormInput.propTypes = {
+TextArea.propTypes = {
 	register: PropTypes.func.isRequired,
 	id: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 }
 
-function FormInput({ register, error, label, id, ...props }) {
+function TextArea({ register, error, label, id, ...props }) {
 	return (
 		<Wrapper error={error}>
 			<Label htmlFor={id}>{label}</Label>
-			<input {...register(id)} {...props} />
+			<textarea {...register(id)} {...props} />
 			<Error>{error?.message}</Error>
 		</Wrapper>
 	)
 }
 
 const Wrapper = styled.div`
-	input {
+	textarea {
 		font-size: inherit;
+		font-family: inherit;
+		resize: none;
 		display: block;
 		outline: none;
 		margin-top: 0.5rem;
@@ -33,9 +35,10 @@ const Wrapper = styled.div`
 		&:focus {
 			outline: none;
 		}
+		height: 100%;
 	}
 
 	margin-bottom: 1rem;
 `
 
-export default FormInput
+export default TextArea
