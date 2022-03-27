@@ -15,13 +15,18 @@ const theme = {
 	colors: {
 		header: 'orange',
 		footer: 'cyan',
+		white: '#f4f4f3',
+		lightBlue: '#72d0ed',
+		grey: '#747378',
+		darkBlue: '#7395b0',
+		darkestBlue:'#202e4a'
 	},
-	button: {
-		primary: {
-			bg: '#227DE5',
+button: {
+	primary: {
+		bg: '#227DE5',
 			text: '#fff',
 		},
-	},
+},
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
