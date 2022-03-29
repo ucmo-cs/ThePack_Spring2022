@@ -4,12 +4,14 @@ import { useState, useRef } from 'react'
 import FormInput from './forms/FormInput'
 import { useForm } from 'react-hook-form'
 import SearchIcon from './icons/SearchIcon'
+import { useSearch } from '../hooks/useSearch'
 
 export default function NavigationBar(props) {
+	const { query, register, clearQuery, result: searchResult } = useSearch()
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
 	const {
-		register,
+		// register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		watch,
@@ -40,9 +42,12 @@ export default function NavigationBar(props) {
 							id='search'
 							label=''
 							register={register}
-							error={errors.search}
+							error={query}
 						/>
 						<SearchIcon />
+						<SearchResultUl>
+							{ searchResult.map(result => <SearchResultLi>{result.username}</SearchResultLi>) }
+						</SearchResultUl>
 					</Search>
 					<Hamburger expanded={expanded} onClick={toggleExpanded}>
 						<HamburgerLine expanded={expanded} />
@@ -238,4 +243,14 @@ const HamburgerLine = styled.div`
 const StyledFormInput = styled(FormInput)`
 	width: 100%;
 	padding: 0 10px;
+`
+
+const SearchResultUl = styled.ul`
+	height: 500px;
+	outline: 1px solid black;
+	width: 400px;
+`
+
+const SearchResultLi = styled.li`
+
 `
