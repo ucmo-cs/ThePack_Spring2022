@@ -79,8 +79,8 @@ const StyledImg = styled.img`
 const NavWrapper = styled.div`
 	width: 100%;
 	background-color: #e5e5e5;
-    display: grid;
-    grid-template-columns: auto auto;
+	display: grid;
+	grid-template-columns: auto auto;
 	justify-content: center;
 	height: 53px;
 	z-index: 1;
@@ -111,7 +111,7 @@ const StyledNav = styled.nav`
 
 const NavigationFirstHalf = styled.div`
 	display: grid;
-    grid-auto-flow: column;
+	grid-auto-flow: column;
 	width: 100%;
 	align-items: center;
 	grid-column-gap: 10px;
@@ -125,8 +125,8 @@ const Search = styled.div`
 	width: 100%;
 	margin: 0;
 	display: flex;
-    align-items: center;
-    justify-content: space-between;
+	align-items: center;
+	justify-content: space-between;
 	gap: 10px;
 
 	div {
@@ -137,7 +137,7 @@ const Search = styled.div`
 const StyledUl = styled.ul`
 	display: flex;
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	justify-content: end;
 	list-style: none;
 	background-color: #e5e5e5;
@@ -173,8 +173,8 @@ const StyledLi = styled.li`
 `
 
 const StyledA = styled.a`
-    color: #202e4a;
-    text-decoration: none;
+	color: #202e4a;
+	text-decoration: none;
 	height: 100%;
 	width: 100%;
 	display: flex;

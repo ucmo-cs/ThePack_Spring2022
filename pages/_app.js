@@ -2,7 +2,9 @@ import { SessionProvider } from 'next-auth/react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Layout from '../components/Layout'
 import reset from 'styled-reset'
-import breakpoint from '../styles/breakpoint'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
@@ -22,17 +24,17 @@ const theme = {
 		lightBlue: '#72d0ed',
 		grey: '#747378',
 		darkBlue: '#7395b0',
-		darkestBlue:'#202e4a'
+		darkestBlue: '#202e4a',
 	},
-button: {
-	primary: {
-		bg: '#227DE5',
+	button: {
+		primary: {
+			bg: '#227DE5',
 			text: '#fff',
 		},
 		secondary: {
 			bg: '#202e4a',
-			text: '#f4f4f3'
-		}
+			text: '#f4f4f3',
+		},
 	},
 }
 

@@ -24,11 +24,11 @@ const StyledButton = styled.button`
 	transition: all 0.2s ease 0s;
 	&:hover {
 		background-color: ${({ variant, theme }) =>
-		darken(0.1, handleBGType(variant, theme))};
+			darken(0.1, handleBGType(variant, theme))};
 	}
 	&:active {
 		background-color: ${({ variant, theme }) =>
-		darken(0.2, handleBGType(variant, theme))};
+			darken(0.2, handleBGType(variant, theme))};
 	}
 	&:disabled {
 		background-color: gray;
@@ -43,7 +43,6 @@ const handleBGType = (variant, theme) => {
 			return theme?.button.secondary.bg
 		default:
 			return '#fff'
-
 	}
 }
 

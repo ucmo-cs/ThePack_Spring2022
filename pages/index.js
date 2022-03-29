@@ -4,12 +4,14 @@ import Paragraph from '../components/styledComponents/Paragraph'
 import Timeline from '../components/Timeline'
 import Welcome from '../components/Welcome'
 import Container from '../components/styledComponents/Container'
+import Loading from '../components/Loading'
 
 export default function Home() {
+	const { data: session, status } = useSession()
 
-	const { data: session } = useSession()
+	if (status == 'loading') return <Loading />
 
-	if (session) {
+	if (status == 'authenticated') {
 		return (
 			<Container>
 				<h1>Welcome to Wuphf!</h1>
@@ -22,7 +24,7 @@ export default function Home() {
 				<Timeline />
 			</Container>
 		)
-	} else {
+	} else if (status == 'unauthenticated') {
 		return (
 			<>
 				<Welcome />
