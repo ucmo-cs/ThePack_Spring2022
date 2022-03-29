@@ -3,22 +3,13 @@ import styled, { css } from 'styled-components'
 import { useState, useRef } from 'react'
 import FormSearchInput from './forms/FormSearchInput'
 import { useForm } from 'react-hook-form'
-import SearchIcon from './icons/SearchIcon'
 import { useSearch } from '../hooks/useSearch'
 import Avatar from './Avatar'
 
 export default function NavigationBar(props) {
-	const { query, register, clearQuery, result: searchResult } = useSearch()
+	const { query, register, result: searchResult, isEmpty } = useSearch()
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
-	const {
-		// register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		watch,
-	} = useForm({
-		mode: 'onTouched',
-	})
 
 	function toggleExpanded(e) {
 		if (!expanded) {
@@ -46,18 +37,19 @@ export default function NavigationBar(props) {
 								register={register}
 								error={query}
 							/>
-							{/* <SearchIcon /> */}
 						</SearchQuery>
-						<SearchResultUl>
+						<SearchResultUl isEmpty={isEmpty}>
 							{searchResult.map(entry => (
-								<SearchResultLi>
-									<Avatar 
-										username={entry.username}
-										profileImageUrl={entry.avatar}
-										size='small'
-									/>
-									<div>{entry.username}</div>
-								</SearchResultLi>
+								<Link href={`/profile/${entry.username}`} key={`search-result-${entry.username}`} passHref>
+									<SearchResultLi>
+										<Avatar
+											username={entry.username}
+											profileImageUrl={entry.avatar}
+											size='small'
+										/>
+										<div>{entry.username}</div>
+									</SearchResultLi>
+								</Link>
 							))}
 						</SearchResultUl>
 					</Search>
@@ -273,7 +265,7 @@ const Search = styled.div`
 const SearchResultUl = styled.ul`
 	position: absolute;
 	top: 44px;
-	height: auto;
+	height: ${(props) => (props.isEmpty ? '0' : 'auto')}
 	width: 249px;
 	background-color: #f4f4f3;
 	border-radius: 0 0 4px 4px;

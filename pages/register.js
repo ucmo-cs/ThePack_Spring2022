@@ -70,7 +70,6 @@ export default function Register() {
 					break
 				}
 			}
-			console.log(newAnimal)
 			setSelectedAnimal(newAnimal)
 		})
 		return () => subscription.unsubscribe()
