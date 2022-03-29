@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { getSession } from 'next-auth/react'
 import propTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import Sidebar from '../components/Sidebar'
 import FormInput from '../components/forms/FormInput'
 import Button from '../components/Button'
 import Avatar from '../components/Avatar'
-import { set, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import SelectInput from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
 
@@ -84,6 +85,23 @@ function AccountSettings(props) {
          </SbarMainspace>
       </AccSetLayout>
    )
+}
+
+export async function getServerSideProps(context) {
+   const session = await getSession(context)
+
+   if (!session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      }
+    }
+  
+    return {
+      props: { session }
+    }
 }
 
 const UsernameTxtStyling = styled.div`
