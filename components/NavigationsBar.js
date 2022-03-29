@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 import { useState, useRef } from 'react'
-import FormInput from './forms/FormInput'
+import FormSearchInput from './forms/FormSearchInput'
 import { useForm } from 'react-hook-form'
 import SearchIcon from './icons/SearchIcon'
 import { useSearch } from '../hooks/useSearch'
+import Avatar from './Avatar'
 
 export default function NavigationBar(props) {
 	const { query, register, clearQuery, result: searchResult } = useSearch()
@@ -38,15 +39,26 @@ export default function NavigationBar(props) {
 						/>
 					</Link>
 					<Search>
-						<StyledFormInput
-							id='search'
-							label=''
-							register={register}
-							error={query}
-						/>
-						<SearchIcon />
+						<SearchQuery>
+							<StyledFormInput
+								id='search'
+								label=''
+								register={register}
+								error={query}
+							/>
+							{/* <SearchIcon /> */}
+						</SearchQuery>
 						<SearchResultUl>
-							{ searchResult.map(result => <SearchResultLi>{result.username}</SearchResultLi>) }
+							{searchResult.map(entry => (
+								<SearchResultLi>
+									<Avatar 
+										username={entry.username}
+										profileImageUrl={entry.avatar}
+										size='small'
+									/>
+									<div>{entry.username}</div>
+								</SearchResultLi>
+							))}
 						</SearchResultUl>
 					</Search>
 					<Hamburger expanded={expanded} onClick={toggleExpanded}>
@@ -126,7 +138,7 @@ const NavigationFirstHalf = styled.div`
 	}
 `
 
-const Search = styled.div`
+const SearchQuery = styled.div`
 	width: 100%;
 	margin: 0;
 	display: flex;
@@ -218,8 +230,8 @@ const HamburgerLine = styled.div`
 		:nth-child(1) {
 			top: 10px;
 			${(props) =>
-				props.expanded &&
-				css`
+		props.expanded &&
+		css`
 					transform: rotate(45deg);
 					top: 24px;
 				`};
@@ -231,8 +243,8 @@ const HamburgerLine = styled.div`
 		:nth-child(3) {
 			top: 34px;
 			${(props) =>
-				props.expanded &&
-				css`
+		props.expanded &&
+		css`
 					transform: rotate(-225deg);
 					top: 24px;
 				`};
@@ -240,17 +252,44 @@ const HamburgerLine = styled.div`
 	}
 `
 
-const StyledFormInput = styled(FormInput)`
+const StyledFormInput = styled(FormSearchInput)`
 	width: 100%;
 	padding: 0 10px;
 `
 
+const Search = styled.div`
+	width: 100%;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	div {
+		margin: 0;
+	}
+`
+
 const SearchResultUl = styled.ul`
-	height: 500px;
-	outline: 1px solid black;
-	width: 400px;
+	position: absolute;
+	top: 44px;
+	height: auto;
+	width: 249px;
+	background-color: #f4f4f3;
+	border-radius: 0 0 4px 4px;
+	border: 1px solid #aaa
 `
 
 const SearchResultLi = styled.li`
+	cursor: pointer;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
 
+	&:hover {
+		background-color: #72d0ed;
+		color: #202e4a;
+	}
 `

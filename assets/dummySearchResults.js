@@ -1,27 +1,27 @@
 export const dummySearchResults = [
     {
         id: 1,
-        uesrname: "johndoe",
+        username: 'johndoe',
         avatar: 'animal_svgs/bunny_tgvcdh.svg'
     },
     {
         id: 2,
-        uesrname: "marybrown",
+        username: 'marybrown',
         avatar: 'animal_svgs/cat_hizjv6.svg'
     },
     {
         id: 3,
-        uesrname: "davidjohnson",
+        username: 'davidjohnson',
         avatar: 'animal_svgs/owl_xnejqi.svg'
     },
     {
         id: 4,
-        uesrname: "sarahlee",
+        username: 'sarahlee',
         avatar: 'animal_svgs/monkey_ywewbg.svg'
     },
     {
         id: 5,
-        uesrname: "jessicajones",
+        username: 'jessicajones',
         avatar: 'animal_svgs/bunny_tgvcdh.svg'
     },
 ]
