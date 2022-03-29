@@ -4,7 +4,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import Paragraph from './styledComponents/Paragraph'
 
-const Loading = () => {
+function Loading() {
 	return (
 		<Container>
 			<IconWrapper>

@@ -4,19 +4,21 @@ import styled from 'styled-components'
 
 function Wuphf(props) {
 	return (
-		<Container>
-			<AvatarWrapper>
-				<Avatar
-					username={props.username}
-					profileImageUrl={props.avatar}
-					size='large'
-				/>
-			</AvatarWrapper>
-			<PostWrapper>
-				<Username as='h3'>{props.username}</Username>
-				<Post as='p'>{props.post}</Post>
-			</PostWrapper>
-		</Container>
+		<PostBorder>
+			<Container>
+				<AvatarWrapper>
+					<Avatar
+						username={props.username}
+						profileImageUrl={props.avatar}
+						size='large'
+					/>
+				</AvatarWrapper>
+				<PostWrapper>
+					<Username as='h3'>{props.username}</Username>
+					<Post as='p'>{props.post}</Post>
+				</PostWrapper>
+			</Container>
+		</PostBorder>
 	)
 }
 
@@ -50,6 +52,12 @@ const Username = styled.h3`
 const Post = styled.p`
 	padding-top: 5px;
 	line-height: 1.25em;
+`
+
+const PostBorder = styled.div`
+	&:not(:last-child) {
+		border-bottom: 2px solid rgb(196, 196, 196);
+	}
 `
 
 export default Wuphf

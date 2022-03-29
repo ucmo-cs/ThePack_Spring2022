@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from 'next/image'
 import styled from 'styled-components'
+import React from 'react'
 
 Avatar.propTypes = {
 	username: PropTypes.string.isRequired,
@@ -12,6 +13,22 @@ Avatar.propTypes = {
 const StyledImage = styled(Image)`
 	border-radius: 50%;
 `
+
+const MyImage = React.forwardRef(
+	({ width, height, src, alt, title, href }, ref) => {
+		return (
+			<StyledImage
+				width={width}
+				height={height}
+				src={src}
+				alt={alt}
+				title={title}
+				href={href}
+			/>
+		)
+	}
+)
+MyImage.displayName = 'MyImage'
 
 function Avatar(props) {
 	const { username, profileImageUrl, size } = props
@@ -26,15 +43,17 @@ function Avatar(props) {
 	let height = width
 
 	return (
-		<Link href={`/profile/${username}`} passHref>
-			<StyledImage
-				width={width}
-				height={height}
-				src={profileImageUrl}
-				alt={username}
-				title={username}
-			/>
-		</Link>
+		<>
+			<Link href={`/profile/${username}`} passHref>
+				<MyImage
+					width={width}
+					height={height}
+					src={profileImageUrl}
+					alt={username}
+					title={username}
+				/>
+			</Link>
+		</>
 	)
 }
 

@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import RoundButton from '../../components/RoundButton'
 
-function profilePage(props) {
+function UserPage(props) {
 	const router = useRouter()
 	const { id } = router.query
 	const [user, setUser] = useState()
@@ -133,4 +133,4 @@ const Bio = styled.div`
 	line-height: 1.25em;
 `
 
-export default profilePage
+export default UserPage
