@@ -1,14 +1,15 @@
 import React from 'react'
+import { useSession } from 'next-auth/react'
 import styled from 'styled-components'
 import NavigationBar from './NavigationsBar'
 
 function Layout({ children }) {
+	const { status } = useSession()
+
 	return (
 		<Wrapper>
-			{/* <header className='header'>This is a header</header> */}
-			<NavigationBar />
+			{ status === 'authenticated' && <NavigationBar /> }
 			{children}
-			{/* <footer className='footer'>This is a footer</footer> */}
 		</Wrapper>
 	)
 }
