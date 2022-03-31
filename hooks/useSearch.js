@@ -5,27 +5,38 @@ import { useForm } from 'react-hook-form'
 
 export function useSearch() {
     const [result, setResult] = useState([])
-    const { register, formState: { errors }, handleSubmit, watch } = useForm()
-    const [isEmpty, setIsEmpty] = useState(true)
+    const { 
+        register, 
+        formState: { errors }, 
+        handleSubmit, 
+        watch,
+        setValue
+    } = useForm()
+    const [isHidden, setIsHidden] = useState(true)
 
     useEffect(() => {
         const subscription = watch(value => {
             // TODO: replace with actual API call
             if(value.search === '') {
                 setResult([])
-                setIsEmpty(true)
+                setIsHidden(true)
+                setValue('search', '')
 
             } else {
-                setIsEmpty(false)
+                setIsHidden(false)
                 handleSubmit(setResult(mockAPICall()))
             }
             
 		})
 		return () => subscription.unsubscribe()
     }, [watch])
+    
+    function hide() {
+        setIsHidden(true)
+    }
 
     return {
-        query: errors.search, register, result, isEmpty
+        query: errors.search, register, result, isHidden, hide
     }
 }
 

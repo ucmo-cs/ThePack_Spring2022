@@ -1,13 +1,29 @@
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import FormSearchInput from './forms/FormSearchInput'
-import { useForm } from 'react-hook-form'
 import { useSearch } from '../hooks/useSearch'
 import Avatar from './Avatar'
+import NavigationLink from './NavigationLink'
+
+const navigationLinksList = [
+	{
+		label: 'Home',
+		href: '',
+	},
+	{
+		label: 'Profile',
+		// TODO: Replace with session user
+		href: 'user/johndoe'
+	},
+	{
+		label: 'Settings',
+		href: 'settings'
+	}
+]
 
 export default function NavigationBar(props) {
-	const { query, register, result: searchResult, isEmpty } = useSearch()
+	const { query, register, result: searchResult, isHidden: isEmpty, hide: hideSearch } = useSearch()
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
 
@@ -15,8 +31,13 @@ export default function NavigationBar(props) {
 		if (!expanded) {
 			myRef.current.scrollIntoView()
 		}
+		hideSearch()
 		setExpanded(!expanded)
 	}
+
+	useEffect(() => {
+		setExpanded(false)
+	}, [])
 
 	return (
 		<NavWrapper>
@@ -36,6 +57,7 @@ export default function NavigationBar(props) {
 								label=''
 								register={register}
 								error={query}
+								isEmpty={isEmpty}
 							/>
 						</SearchQuery>
 						<SearchResultUl isEmpty={isEmpty}>
@@ -60,21 +82,13 @@ export default function NavigationBar(props) {
 					</Hamburger>
 				</NavigationFirstHalf>
 				<StyledUl expanded={expanded}>
-					<StyledLi expanded={expanded}>
-						<Link href='/' passHref>
-							<StyledA>Home</StyledA>
-						</Link>
-					</StyledLi>
-					<StyledLi expanded={expanded}>
-						<Link href='/user/johndoe' passHref>
-							<StyledA>Profile</StyledA>
-						</Link>
-					</StyledLi>
-					<StyledLi expanded={expanded}>
-						<Link href='/settings' passHref>
-							<StyledA>Account Settings</StyledA>
-						</Link>
-					</StyledLi>
+					{navigationLinksList.map(link => (
+						<NavigationLink 
+							{...link}
+							isShown={expanded}
+							onClick={() => setExpanded(false)}
+						/>
+					))}
 				</StyledUl>
 			</StyledNav>
 		</NavWrapper>
@@ -162,34 +176,6 @@ const StyledUl = styled.ul`
 	}
 `
 
-const StyledLi = styled.li`
-	text-decoration: none;
-	&:hover {
-		background-color: #72d0ed;
-		color: #202e4a;
-	}
-	padding: 0 10px;
-
-	@media (max-width: 768px) {
-		transition: 0.7s ease-in-out;
-		height: ${(props) => (props.expanded ? '33%' : '0px')};
-		width: 100%;
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-`
-
-const StyledA = styled.a`
-	color: #202e4a;
-	text-decoration: none;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`
 const Hamburger = styled.div`
 	display: none;
 	@media (max-width: 768px) {
@@ -264,8 +250,9 @@ const Search = styled.div`
 
 const SearchResultUl = styled.ul`
 	position: absolute;
-	top: 44px;
-	height: ${(props) => (props.isEmpty ? '0' : 'auto')}
+	top: 48px;
+	height: auto;
+	display: ${(props) => (props.isEmpty ? 'none;' : 'block;')}
 	width: 249px;
 	background-color: #f4f4f3;
 	border-radius: 0 0 4px 4px;

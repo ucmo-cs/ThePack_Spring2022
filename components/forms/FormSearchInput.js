@@ -12,9 +12,9 @@ FormSearchInput.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function FormSearchInput({ register, error, label, id, ...props }) {
+function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
 	return (
-		<Wrapper error={error}>
+		<Wrapper error={error} isEmpty={isEmpty}>
 			<Label htmlFor={id}>{label}</Label>
 			<input {...register(id)} {...props} />
 			<FontAwesomeIcon icon={faMagnifyingGlass} color='#747378' />
@@ -27,8 +27,8 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	background-color: white;
-	border-radius: 4px 4px 0 0;
-	border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
+	border-radius: ${props => (props.isEmpty ? '4px;' : '4px 4px 0 0;')}
+	border: ${props => (props.error ? '1px solid red' : '1px solid #aaa')};
 	padding: 0 10px;
 
 	input {
