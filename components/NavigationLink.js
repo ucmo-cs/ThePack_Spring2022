@@ -10,12 +10,12 @@ NavigationLink.prototype = {
 }
 
 export default function NavigationLink(props) {
-    const { href, onClick, isShown } = props
+    const { href, label, onClick, isShown } = props
 
     return (
         <StyledLi expanded={isShown}>
             <Link href={href} onClick={onClick} passHref>
-                <StyledA>{onClick}</StyledA>
+                <StyledA>{label}</StyledA>
             </Link>
         </StyledLi>
     )
@@ -31,12 +31,14 @@ const StyledLi = styled.li`
 
 	@media (max-width: 768px) {
 		transition: 0.7s ease-in-out;
-		height: ${(props) => (props.expanded ? '33%' : '0px')};
+		height: ${(props) => (props.expanded ? '33%;' : '0px;')};
 		width: 100%;
 		text-align: center;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding: 0;
+		margin: 0;
 	}
 `
 

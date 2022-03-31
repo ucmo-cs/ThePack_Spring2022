@@ -9,16 +9,16 @@ import NavigationLink from './NavigationLink'
 const navigationLinksList = [
 	{
 		label: 'Home',
-		href: '',
+		href: '/',
 	},
 	{
 		label: 'Profile',
 		// TODO: Replace with session user
-		href: 'user/johndoe'
+		href: '/user/johndoe'
 	},
 	{
 		label: 'Settings',
-		href: 'settings'
+		href: '/settings'
 	}
 ]
 
@@ -117,16 +117,14 @@ const StyledNav = styled.nav`
 	max-width: 700px;
 	width: 100%;
 	@media (max-width: 768px) {
+		grid-template-columns: auto;
+		max-width: none;
 		grid-gap: 0;
 		top: 0;
 		transition: 0.5s ease-in-out;
-		height: 100vh;
-		position: sticky;
+		height: 53px;
 		width: 100vw;
-		height: ${(props) => (props.expanded ? '100vh' : '50px')};
 		z-index: 1;
-		display: flex;
-		flex-direction: column;
 		align-items: end;
 		margin: 0;
 	}
@@ -168,11 +166,12 @@ const StyledUl = styled.ul`
 	padding: 0;
 	margin: 0;
 	@media (max-width: 768px) {
-		overflow: hidden;
+		width: 100vw;
+		overflow-y: hidden;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		height: ${(props) => (props.expanded ? '100%' : '0px')};
+		height: ${(props) => (props.expanded ? '100vh' : '0px')};
 	}
 `
 
