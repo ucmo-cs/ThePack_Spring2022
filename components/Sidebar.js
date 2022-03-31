@@ -3,6 +3,57 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faUser } from '@fortawesome/free-solid-svg-icons'
 
+export default function Sidebar() {
+   const Profilesublist = [
+      {
+         displayName: 'Avatar',
+         target: 'avatar'
+      },
+      {
+         displayName: 'Username',
+         target: 'username'
+      },
+      {
+         displayName: 'Biography',
+         target: 'biography'
+      }
+   ]
+   const Accountsublist = [
+      {
+         displayName: 'Linked Accounts',
+         target: 'linked_account'
+      },
+      {
+         displayName: 'Delete Account',
+         target: 'delete_account'
+      }
+   ]
+   return (
+      <SSidebar>
+         <Icon>
+            <FontAwesomeIcon icon={faUser} color='#202e4a' size='2x' />
+            <HeaderText>Profile</HeaderText>
+         </Icon>
+         <SStylefixing>
+            {Profilesublist.map((entry) => <SidebarList brand={entry} key={`profilesublist-${entry.target}`} />)}
+         </SStylefixing>
+         <Icon>
+            <FontAwesomeIcon icon={faGear} color='#202e4a' size='2x' />
+            <HeaderText>Account</HeaderText>
+         </Icon>
+         <SStylefixing>
+            {Accountsublist.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
+         </SStylefixing>
+      </SSidebar>
+   )
+}
+
+function SidebarList(props) {
+   return <Styledli>
+      <AtagStyle href={`#${props.brand.target}`} > {props.brand.displayName}</AtagStyle>
+   </Styledli>
+}
+
 const SSidebar = styled.div`
    padding: 10px;
    width: 100%;
@@ -30,7 +81,7 @@ const Styledli = styled.li`
    margin-bottom: 0.8rem;
    color: #202e4a;
 `
-const Iconprofilespace = styled.div`
+const Icon = styled.div`
    display: flex;
    flex-direction: row;
    justify-content: flex-start;
@@ -38,13 +89,7 @@ const Iconprofilespace = styled.div`
    text-align: center;
    gap: 8px;
 `
-const IconAcctspace = styled.div`
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-start;
-   align-items: center;
-   gap: 8px;
-`
+
 const SStylefixing = styled.ul`
    margin-top: 3px;
    margin-bottom: 10px
@@ -54,54 +99,3 @@ const AtagStyle = styled.a`
    color: #202e4a;
 
 `
-function SidebarList(props) {
-   return <Styledli>
-      <AtagStyle href={`#${props.brand.target}`} > {props.brand.displayName}</AtagStyle>
-   </Styledli>
-}
-function Sidebar() {
-   const Profilesublist = [
-      {
-         displayName: 'Avatar',
-         target: 'avatar'
-      },
-      {
-         displayName: 'Username',
-         target: 'username'
-      },
-      {
-         displayName: 'Biography',
-         target: 'biography'
-      }
-   ]
-   const Accountsublist = [
-      {
-         displayName: 'Linked Accounts',
-         target: 'linked_account'
-      },
-      {
-         displayName: 'Delete Account',
-         target: 'delete_account'
-      }
-   ]
-   return (
-      <SSidebar>
-         <Iconprofilespace>
-            <FontAwesomeIcon icon={faUser} color='#202e4a' size='2x' />
-            <HeaderText> Profile </HeaderText>
-         </Iconprofilespace>
-         <SStylefixing>
-            {Profilesublist.map((entry) => <SidebarList brand={entry}
-               key={`profilesublist-${entry.target}`} />)}
-         </SStylefixing>
-         <IconAcctspace>
-         <FontAwesomeIcon icon={faGear} color='#202e4a' size='2x' />
-            <HeaderText> Account </HeaderText>
-         </IconAcctspace>
-         <SStylefixing>
-            {Accountsublist.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
-         </SStylefixing>
-      </SSidebar>
-   )
-}
-export default Sidebar
