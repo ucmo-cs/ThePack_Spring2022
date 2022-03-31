@@ -76,6 +76,7 @@ model Wuphf {
   pictureUrl String    @db.VarChar(255)
   postBody   String    @db.VarChar(255)
   Likes      Likes[]
+  Comments   Comments[]
 }
 
 model Likes {
@@ -86,11 +87,18 @@ model Likes {
   wuphfId Int
 }
 
+model Comments {
+  id          Int @id @default(autoincrement())
+  wuphf       Wuphf @relation(fields: [postsId], references: [id])
+  postsId     Int
+  commentBody String
+}
+
 model Follower {
-  id         Int       @id @default(autoincrement())
   user       WuphfUser @relation("follower", fields: [userId], references: [userName])
-  userId     String
+  userId     String    
   follower   WuphfUser @relation("followee", fields: [followerId], references: [userName])
-  followerId String
+  followerId String    
   createdAt  DateTime  @default(now())
+  @@unique([userId, followerId])
 }

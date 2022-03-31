@@ -1,15 +1,12 @@
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 
 export default async function handler(req, res) {
   //Error Handling here
   if (req.method === 'GET') {
-    const wuphf = await prisma.Wuphf.findMany({
-      where: {
-        userId: req.body.userName,
-      },
-    })
-    console.log('Wuphf', JSON.stringify(wuphf, null, 2))
-    res.json(wuphf)
+    const wuphfs = await prisma.Wuphf.findMany()
+    console.log('All Wuphfs', JSON.stringify(wuphfs, null, 2))
+
+    res.json(wuphfs)
   } else if (req.method === 'POST') {
     const wuphf = await prisma.Wuphf.create({
       data: {
