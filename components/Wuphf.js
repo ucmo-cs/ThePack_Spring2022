@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis, faPenToSquare, faTrashCan, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faPenToSquare, faTrashCan, faCheck, faCediSign, faBan } from '@fortawesome/free-solid-svg-icons'
 import TextareaAutosize from 'react-textarea-autosize'
+import Button from './Button'
 
 function Wuphf(props) {
 	const [editMenuShown, setEditMenuShown] = useState(false)
@@ -22,7 +23,7 @@ function Wuphf(props) {
 	}
 
 	function handleEdit(e) {
-		if(editable) {
+		if (editable) {
 			setPostContent(e.target.value)
 		}
 	}
@@ -31,6 +32,12 @@ function Wuphf(props) {
 		e.preventDefault()
 		setEditMenuShown(false)
 		alert('TODO: Add delete API call.')
+	}
+
+	function handleSave(e) {
+		e.preventDefault()
+		setEditable(false)
+		alert('TODO: Add update API call.')
 	}
 
 	return (
@@ -47,12 +54,16 @@ function Wuphf(props) {
 					<TweetHeader>
 						<Username as='h3'>{props.username}</Username>
 						<EditCorner>
-							<EditButton onClick={toggleEditMenuShown} icon={faEllipsis} color='#747378' />
+							<StyledEditButton icon={faEllipsis} onClick={toggleEditMenuShown} color='#747378' shown={editMenuShown} />
 							<EditMenu shown={editMenuShown}>
-								<EditMenuItem onClick={toggleEditable} >
+								{!editable && <EditMenuItem onClick={toggleEditable}>
 									<FontAwesomeIcon icon={faPenToSquare} />
 									<span>Edit</span>
-								</EditMenuItem>
+								</EditMenuItem>}
+								{editable && <EditMenuItem onClick={toggleEditable}>
+									<FontAwesomeIcon icon={faBan} />
+									<span>Cancel</span>
+								</EditMenuItem>}
 								<EditMenuItem onClick={handleDelete}>
 									<FontAwesomeIcon icon={faTrashCan} />
 									<span>Delete</span>
@@ -60,7 +71,13 @@ function Wuphf(props) {
 							</EditMenu>
 						</EditCorner>
 					</TweetHeader>
-					<Post value={postContent} onChange={handleEdit} editable={editable} />
+					<SecondRow>
+						<Post value={postContent} onChange={handleEdit} editable={editable} />
+						<SaveButton shown={editable} variant='secondary' onClick={handleSave}>
+							<span>Save changes</span>
+							<FontAwesomeIcon icon={faCheck} />
+						</SaveButton>
+					</SecondRow>
 				</PostWrapper>
 			</Container>
 		</PostBorder>
@@ -84,8 +101,12 @@ const EditCorner = styled.div`
 	align-items: end;
 `
 
-const EditButton = styled(FontAwesomeIcon)`
+const StyledEditButton = styled(FontAwesomeIcon)`
+	padding: 5px;
+	border-radius: 50%;
+	background-color: ${props => (props.shown ? '#72d0ed' : 'auto')};
 	&:hover {
+		background-color: #72d0ed;
 		color: #202e4a;
 	}
 `
@@ -93,13 +114,13 @@ const EditButton = styled(FontAwesomeIcon)`
 const EditMenu = styled.ul`
 	background-color: #72d0ed;
 	position: absolute;
-	margin-top: revert;
+	margin-top: 25px;
 	border-radius: 10px;
-	height: ${(props) => (props.shown ? 'auto' : '0px')};
-	display: ${(props) => (props.shown ? 'block' : 'none')};
+	height: ${props => (props.shown ? 'auto' : '0px')};
+	display: ${props => (props.shown ? 'block' : 'none')};
 	`
-	
-	const EditMenuItem = styled.li`
+
+const EditMenuItem = styled.li`
 	padding: 5px 10px;
 	display: flex;
 	gap: 5px;
@@ -107,11 +128,11 @@ const EditMenu = styled.ul`
 
 	
 	:first-of-type {
-		border-radius: 5px 5px 0 0;
+		border-radius: 10px 10px 0 0;
 	}
 
 	:last-of-type {
-		border-radius: 0 0 5px 5px;
+		border-radius: 0 0 10px 10px;
 	}
 
 	&:hover {
@@ -127,7 +148,7 @@ const AvatarWrapper = styled.div`
 		width: 50px;
 		height: 50px;
 	}
-	margin: auto;
+	margin: 0 auto;
 `
 
 const PostWrapper = styled.div`
@@ -141,10 +162,11 @@ const Username = styled.h3`
 `
 
 const Post = styled(TextareaAutosize)`
-	padding-top: 5px;
+	padding: 5px;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
-	border: none;
+	border: ${props => (props.editable ? '1px solid #202e4a' : 'none')};
+	border-radius: 10px;
 	cursor: ${props => (props.editable ? 'text' : 'default')};
 	resize: none;
 	width: 100%;
@@ -157,6 +179,20 @@ const PostBorder = styled.div`
 	&:not(:last-child) {
 		border-bottom: 2px solid rgb(196, 196, 196);
 	}
+`
+
+const SaveButton = styled(Button)`
+	display: ${props => (props.shown ? 'flex' : 'none')};
+	justify-content: flex-end;
+	gap: 10px;
+	width: max-content;
+`
+
+const SecondRow = styled.div`
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	gap: 5px;
 `
 
 export default Wuphf
