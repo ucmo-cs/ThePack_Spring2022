@@ -84,6 +84,7 @@ export default function NavigationBar(props) {
 				<StyledUl expanded={expanded}>
 					{navigationLinksList.map(link => (
 						<NavigationLink 
+							key={`navigation-link-${link.href}`}
 							{...link}
 							isShown={expanded}
 							onClick={() => setExpanded(false)}
