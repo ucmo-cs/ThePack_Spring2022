@@ -108,17 +108,15 @@ const UsernameTxtStyling = styled.div`
    display: flex;
 `
 const SbarMainspace = styled.div`
-   margin-left: 330px;
 `
 const TextBtnSpace = styled.div`
    display: flex;
    gap: 30px;
 `
 const AccSetLayout = styled.div`
-   width: max-content;
    display: flex;
    flex-direction: row;
-   justify-content: space-evenly;
+   grid-gap: 30px;
 `
 const Subheading = styled.div`
    margin-top: 2rem;
@@ -143,7 +141,7 @@ const BtnTxtspace = styled.div`
 `
 const EditBtnWrapper = styled.div`
    font-size: 1.3rem;
-   margin: 4rem 8rem;
+   margin: 10px;
 `
 const DABtnWrapper = styled.div`
    font-size: 1.3rem;
