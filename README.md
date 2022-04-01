@@ -101,3 +101,15 @@ The id is an incremented number, i.e. 1, 2, 3...
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 Get the wuphf with the given id. | ERROR | Update a wuphf with the given id. | Delete a wuphf with the given id.
+
+## /wuphfs/[...id]/comments
+
+GET | POST | PATCH | DELETE
+--- | --- | --- | ---
+Get all comments of a specific post. | Create new comment on a specific post. | ERROR | ERROR
+
+## /wuphfs/[...id]/comments/[...id]
+
+GET | POST | PATCH | DELETE
+--- | --- | --- | ---
+Get a specific comment on a specific post. | ERROR | ERROR (maybe add later) | ERROR (maybe add later)

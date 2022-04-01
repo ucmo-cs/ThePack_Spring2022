@@ -67,6 +67,7 @@ model WuphfUser {
   Likes      Likes[]
   Followers  Follower[] @relation("follower")
   Following  Follower[] @relation("followee")
+  Comments   Comments[]
 }
 
 model Wuphf {
@@ -91,7 +92,10 @@ model Comments {
   id          Int @id @default(autoincrement())
   wuphf       Wuphf @relation(fields: [postsId], references: [id])
   postsId     Int
+  user        WuphfUser? @relation(fields: [userId], references: [userName])
+  userId      String?
   commentBody String
+  @@unique([id, postsId])
 }
 
 model Follower {
