@@ -84,7 +84,7 @@ model Likes {
   userId  String
   wuphf   Wuphf     @relation(fields: [wuphfId], references: [id])
   wuphfId Int
-  @@unique([user, wuphf])
+  @@unique([userId, wuphfId])
 }
 
 model Comments {
