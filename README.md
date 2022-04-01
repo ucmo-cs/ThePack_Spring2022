@@ -67,3 +67,37 @@ Download and install the following software to run the application locally:
    - `npx prisma migrate dev `: Runs the latest migration.
    - `npx prisma migrate reset`: Resets the local database.
    - `npx prisma db seed`: Seed the database with dummy data.
+
+# API Manual
+
+## /user
+
+GET | POST | PUT | DELETE
+--- | --- | --- | ---
+Get the current session's user data. | Create a new user with given data. | Update a user with the given email. | Delete a user with the given email.
+
+## /user/[...id]
+The id is the username of the user. Example: /user/johndoe
+
+GET | POST | PUT | DELETE
+--- | --- | --- | ---
+Get the data for the user with the given id. | ERROR | ERROR | ERROR
+
+## /user/[...id]/follow
+
+GET | POST | PUT | DELETE
+--- | --- | --- | ---
+ERROR | The current session's user will follow the user with the given id. | ERROR | The current session's user will unfollow the user with the given id.
+
+## /wuphf
+
+GET | POST | PUT | DELETE
+--- | --- | --- | ---
+Get all wuphfs by all users. | Create a new post with the given data. | ERROR | ERROR
+
+## /wuphf/[...id]
+The id is an incremented number, i.e. 1, 2, 3...
+
+GET | POST | PUT | DELETE
+--- | --- | --- | ---
+Get the wuphf with the given id. | ERROR | Update a wuphf with the given id. | Delete a wuphf with the given id.
