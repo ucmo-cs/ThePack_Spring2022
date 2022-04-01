@@ -23,7 +23,7 @@ function UserPage(props) {
 
 	useEffect(() => {
 		const getUser = async () => {
-			const { data } = await axios.get(`../api/user/${id}`)
+			const { data } = await axios.get(`../api/users/${id}`)
 			setUser(data)
 			setLoading(false)
 		}

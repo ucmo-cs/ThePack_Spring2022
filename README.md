@@ -70,32 +70,32 @@ Download and install the following software to run the application locally:
 
 # API Manual
 
-## /user
+## /users
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 Get the current session's user data. | Create a new user with given data. | Update a user with the given email. | Delete a user with the given email.
 
-## /user/[...id]
+## /users/[...id]
 The id is the username of the user. Example: /user/johndoe
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 Get the data for the user with the given id. | ERROR | ERROR | ERROR
 
-## /user/[...id]/follow
+## /users/[...id]/follow
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 ERROR | The current session's user will follow the user with the given id. | ERROR | The current session's user will unfollow the user with the given id.
 
-## /wuphf
+## /wuphfs
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 Get all wuphfs by all users. | Create a new post with the given data. | ERROR | ERROR
 
-## /wuphf/[...id]
+## /wuphfs/[...id]
 The id is an incremented number, i.e. 1, 2, 3...
 
 GET | POST | PATCH | DELETE
