@@ -80,11 +80,11 @@ model Wuphf {
 }
 
 model Likes {
-  id      Int       @id @default(autoincrement())
   user    WuphfUser @relation(fields: [userId], references: [userName])
   userId  String
   wuphf   Wuphf     @relation(fields: [wuphfId], references: [id])
   wuphfId Int
+  @@unique([user, wuphf])
 }
 
 model Comments {
