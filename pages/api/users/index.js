@@ -20,6 +20,8 @@ export default async function handler(req, res) {
 				res.status(500).json({ error })
 				throw error
 			}
+
+			// #error - the specified user does not exist
 		} else if (req.method === 'POST') {
 			try {
 				const user = await prisma.WuphfUser.create({

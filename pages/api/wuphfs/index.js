@@ -13,6 +13,9 @@ export default async function handler(req, res) {
 			res.status(500).json({ error })
 			throw error
 		}
+
+		// #error - there are no wuphfs!
+		// should sort by date
 	} else if (req.method === 'POST') {
 		try {
 			const wuphf = await prisma.Wuphf.create({

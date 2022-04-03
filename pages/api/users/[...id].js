@@ -18,6 +18,8 @@ export default async function handler(req, res) {
 				res.status(500).json({ error })
 				throw error
 			}
+
+			// #error - there are no wuphfs!
 		} else {
 			try {
 				const user = await prisma.WuphfUser.findUnique({
@@ -35,6 +37,8 @@ export default async function handler(req, res) {
 				res.status(500).json({ error })
 				throw error
 			}
+
+			// #error - the specified user does not exist
 		}
 	} else if (req.method === 'POST') {
 		if (id[1] == 'follow') {

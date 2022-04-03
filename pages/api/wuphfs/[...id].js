@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 					res.status(500).json({ error })
 					throw error
 				}
+
+				// #error - there are no comments!
 			} else {
 				// /wuphs/1/comments/1
 				// get all of the comments for the post
@@ -40,6 +42,8 @@ export default async function handler(req, res) {
 					res.status(500).json({ error })
 					throw error
 				}
+
+				// #error - the specified comment does not exist
 			}
 		} else {
 			try {
@@ -55,6 +59,8 @@ export default async function handler(req, res) {
 				res.status(500).json({ error })
 				throw error
 			}
+
+			// #error - the specified wuphf does not exist
 		}
 	} else if (req.method === 'POST') {
 		if (id[1] == 'comments') {
