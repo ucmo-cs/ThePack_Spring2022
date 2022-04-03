@@ -1,74 +1,121 @@
-import prisma from '../../../lib/prisma'
+import { prisma, Prisma } from '../../../lib/prisma'
 
 export default async function handler(req, res) {
-  const { id } = req.query
+	const { id } = req.query
 
-  if (req.method === 'GET') {
-    if (id[1] == 'comments') {
-      if (id[2] != null) {
-        // get all of the comments for the post
-        const comment = await prisma.Comments.findUnique({
-          where: {
-            id_postsId: {
-              id: Number(id[2]),
-              postsId: Number(id[0]),
-            },
-          },
-        })
+	if (req.method === 'GET') {
+		if (id[1] == 'comments') {
+			// /wuphs/1/comments
+			if (id[2] == null) {
+				// get all of the comments for the post
+				try {
+					const comments = await prisma.Comments.findMany({
+						where: {
+							postsId: Number(id[0]),
+						},
+					})
 
-        res.json(comment)
-      } else {
-        // get all of the comments for the post
-        const comments = await prisma.Comments.findMany({
-          where: {
-            postsId: Number(id[0]),
-          },
-        })
+					res.json(comments)
+				} catch (error) {
+					console.error(error)
+					res.status(500).json({ error })
+					throw error
+				}
+			} else {
+				// /wuphs/1/comments/1
+				// get all of the comments for the post
+				try {
+					const comment = await prisma.Comments.findUnique({
+						where: {
+							id_postsId: {
+								id: Number(id[2]),
+								postsId: Number(id[0]),
+							},
+						},
+					})
 
-        res.json(comments)
-      }
-    } else {
-      const wuphf = await prisma.Wuphf.findUnique({
-        where: {
-          id: Number(id[0]),
-        },
-      })
+					res.json(comment)
+				} catch (error) {
+					console.error(error)
+					res.status(500).json({ error })
+					throw error
+				}
+			}
+		} else {
+			try {
+				const wuphf = await prisma.Wuphf.findUnique({
+					where: {
+						id: Number(id[0]),
+					},
+				})
 
-      res.json(wuphf)
-    }
-  } else if (req.method === 'POST') {
-    if (id[1] == 'comments') {
-      // make a new comment
+				res.json(wuphf)
+			} catch (error) {
+				console.error(error)
+				res.status(500).json({ error })
+				throw error
+			}
+		}
+	} else if (req.method === 'POST') {
+		if (id[1] == 'comments') {
+			// /wuphs/1/comments
+			// make a new comment
+			try {
+				const comment = await prisma.Comments.create({
+					data: {
+						postsId: Number(id[0]),
+						commentBody: req.body.commentBody,
+						userId: 'johndoe',
+					},
+				})
 
-      const comment = await prisma.Comments.create({
-        data: {
-          postsId: Number(id[0]),
-          commentBody: req.body.commentBody,
-          userId: 'johndoe',
-        },
-      })
+				res.json(comment)
+			} catch (error) {
+				console.error(error)
+				res.status(500).json({ error })
+				throw error
+			}
 
-      res.json(comment)
-    }
-  } else if (req.method === 'PATCH') {
-    const wuphf = await prisma.Wuphf.update({
-      where: {
-        id: Number(id[0]),
-      },
-      data: {
-        postBody: req.body.postBody,
-        pictureUrl: req.body.pictureUrl || undefined,
-      },
-    })
+			// #validation - invalid input
+		}
+	} else if (req.method === 'PATCH') {
+		try {
+			const wuphf = await prisma.Wuphf.update({
+				where: {
+					id: Number(id[0]),
+				},
+				data: {
+					postBody: req.body.postBody,
+					pictureUrl: req.body.pictureUrl || undefined,
+				},
+			})
 
-    res.json(wuphf)
-  } else if (req.method === 'DELETE') {
-    const wuphf = await prisma.Wuphf.delete({
-      where: {
-        id: Number(id[0]),
-      },
-    })
+			res.json(wuphf)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
 
-    res.json(wuphf)
-  }
+		// #error - the specified wuphf does not exist
+		// #authorization - who is allowed to do this?
+		// #validation - invalid input
+	} else if (req.method === 'DELETE') {
+		try {
+			const wuphf = await prisma.Wuphf.delete({
+				where: {
+					id: Number(id[0]),
+				},
+			})
+
+			res.json(wuphf)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
+
+		// #error - the specified wuphf does not exist
+		// #authorization - who is allowed to do this?
+	}
 }
