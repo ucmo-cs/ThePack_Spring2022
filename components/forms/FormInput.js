@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 		}
 	}
 
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 `
 
 export default FormInput

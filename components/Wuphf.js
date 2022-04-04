@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis, faPenToSquare, faTrashCan, faCheck, faCediSign, faBan } from '@fortawesome/free-solid-svg-icons'
+import {
+	faEllipsis,
+	faPenToSquare,
+	faTrashCan,
+	faCheck,
+	faCediSign,
+	faBan,
+} from '@fortawesome/free-solid-svg-icons'
 import TextareaAutosize from 'react-textarea-autosize'
 import Button from './Button'
 
@@ -54,16 +61,25 @@ function Wuphf(props) {
 					<TweetHeader>
 						<Username as='h3'>{props.username}</Username>
 						<EditCorner>
-							<StyledEditButton icon={faEllipsis} onClick={toggleEditMenuShown} color='#747378' shown={editMenuShown} />
+							<StyledEditButton
+								icon={faEllipsis}
+								onClick={toggleEditMenuShown}
+								color='#747378'
+								shown={editMenuShown}
+							/>
 							<EditMenu shown={editMenuShown}>
-								{!editable && <EditMenuItem onClick={toggleEditable}>
-									<FontAwesomeIcon icon={faPenToSquare} />
-									<span>Edit</span>
-								</EditMenuItem>}
-								{editable && <EditMenuItem onClick={toggleEditable}>
-									<FontAwesomeIcon icon={faBan} />
-									<span>Cancel</span>
-								</EditMenuItem>}
+								{!editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faPenToSquare} />
+										<span>Edit</span>
+									</EditMenuItem>
+								)}
+								{editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faBan} />
+										<span>Cancel</span>
+									</EditMenuItem>
+								)}
 								<EditMenuItem onClick={handleDelete}>
 									<FontAwesomeIcon icon={faTrashCan} />
 									<span>Delete</span>
@@ -72,8 +88,16 @@ function Wuphf(props) {
 						</EditCorner>
 					</TweetHeader>
 					<SecondRow>
-						<Post value={postContent} onChange={handleEdit} editable={editable} />
-						<SaveButton shown={editable} variant='secondary' onClick={handleSave}>
+						<Post
+							value={postContent}
+							onChange={handleEdit}
+							editable={editable}
+						/>
+						<SaveButton
+							shown={editable}
+							variant='secondary'
+							onClick={handleSave}
+						>
 							<span>Save changes</span>
 							<FontAwesomeIcon icon={faCheck} />
 						</SaveButton>
@@ -104,7 +128,7 @@ const EditCorner = styled.div`
 const StyledEditButton = styled(FontAwesomeIcon)`
 	padding: 5px;
 	border-radius: 50%;
-	background-color: ${props => (props.shown ? '#72d0ed' : 'auto')};
+	background-color: ${(props) => (props.shown ? '#72d0ed' : 'auto')};
 	&:hover {
 		background-color: #72d0ed;
 		color: #202e4a;
@@ -116,9 +140,9 @@ const EditMenu = styled.ul`
 	position: absolute;
 	margin-top: 25px;
 	border-radius: 10px;
-	height: ${props => (props.shown ? 'auto' : '0px')};
-	display: ${props => (props.shown ? 'block' : 'none')};
-	`
+	height: ${(props) => (props.shown ? 'auto' : '0px')};
+	display: ${(props) => (props.shown ? 'block' : 'none')};
+`
 
 const EditMenuItem = styled.li`
 	padding: 5px 10px;
@@ -126,7 +150,6 @@ const EditMenuItem = styled.li`
 	gap: 5px;
 	cursor: pointer;
 
-	
 	:first-of-type {
 		border-radius: 10px 10px 0 0;
 	}
@@ -162,27 +185,29 @@ const Username = styled.h3`
 `
 
 const Post = styled(TextareaAutosize)`
+	font-family: inherit;
+	font-size: inherit;
 	padding: 5px;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
-	border: ${props => (props.editable ? '1px solid #202e4a' : 'none')};
+	border: ${(props) => (props.editable ? '1px solid #202e4a' : 'none')};
 	border-radius: 10px;
-	cursor: ${props => (props.editable ? 'text' : 'default')};
+	cursor: ${(props) => (props.editable ? 'text' : 'default')};
 	resize: none;
 	width: 100%;
 	height: 100%;
-    box-shadow: none;
-    outline: none;
+	box-shadow: none;
+	outline: none;
 `
 
 const PostBorder = styled.div`
 	&:not(:last-child) {
-		border-bottom: 2px solid rgb(196, 196, 196);
+		border-bottom: 1.5px solid #ccc;
 	}
 `
 
 const SaveButton = styled(Button)`
-	display: ${props => (props.shown ? 'flex' : 'none')};
+	display: ${(props) => (props.shown ? 'flex' : 'none')};
 	justify-content: flex-end;
 	gap: 10px;
 	width: max-content;

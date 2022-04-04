@@ -44,7 +44,7 @@ function Avatar(props) {
 
 	return (
 		<>
-			<Link href={`/profile/${username}`} passHref>
+			<Link href={`/user/${username}`} passHref>
 				<MyImage
 					width={width}
 					height={height}

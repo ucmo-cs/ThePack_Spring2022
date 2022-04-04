@@ -27,18 +27,19 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	background-color: white;
-	border-radius: ${props => (props.isEmpty ? '4px;' : '4px 4px 0 0;')}
-	border: ${props => (props.error ? '1px solid red' : '1px solid #aaa')};
+	border-radius: 25px;
+	border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
 	padding: 0 10px;
 
 	input {
 		font-size: inherit;
 		display: block;
+		background-color: white;
 		outline: none;
-		margin-top: 0.5rem;
 		padding: 0.5rem;
 		border: none;
 		width: 100%;
+		border-radius: 25px;
 		&:focus {
 			outline: none;
 		}
@@ -50,7 +51,7 @@ const Wrapper = styled.div`
 		}
 	}
 
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 `
 
 export default FormSearchInput

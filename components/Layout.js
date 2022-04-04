@@ -8,7 +8,7 @@ function Layout({ children }) {
 
 	return (
 		<Wrapper>
-			{ status === 'authenticated' && <NavigationBar /> }
+			{status === 'authenticated' && <NavigationBar />}
 			{children}
 		</Wrapper>
 	)
