@@ -152,7 +152,7 @@ const MobileLinks = styled.ul`
 	z-index: 2;
 	overflow: hidden;
 	height: ${(props) => (props.expanded ? '100vh' : '0px')};
-	@media (min-width: 768px) {
+	@media (min-width: 769px) {
 		height: 0px;
 	}
 `
@@ -173,7 +173,7 @@ const Hamburger = styled.div`
 	z-index: 2;
 	transition: 0.5s ease-in-out;
 	display: ${(props) => (props.expanded ? 'flex' : 'none')};
-	position: absolute !important;
+	position: fixed !important;
 	top: 9px;
 	right: 1rem;
 	background-color: #e5e5e5;
