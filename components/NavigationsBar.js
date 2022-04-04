@@ -173,7 +173,8 @@ const Hamburger = styled.div`
 	z-index: 2;
 	transition: 0.5s ease-in-out;
 	display: ${(props) => (props.expanded ? 'flex' : 'none')};
-	position: fixed !important;
+	position: ${(props) =>
+		props.expanded ? 'fixed !important' : 'absolute !important'};
 	top: 9px;
 	right: 1rem;
 	background-color: #e5e5e5;
