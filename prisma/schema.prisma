@@ -76,6 +76,7 @@ model Wuphf {
   userId     String
   pictureUrl String    @db.VarChar(255)
   postBody   String    @db.VarChar(255)
+  createdAt  DateTime   @default(now())
   Likes      Likes[]
   Comments   Comments[]
 }
