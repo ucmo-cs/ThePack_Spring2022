@@ -58,7 +58,7 @@ model VerificationToken {
 }
 
 model WuphfUser {
-  user       User       @relation(fields: [email], references: [email])
+  user       User       @relation(fields: [email], references: [email], onDelete: Cascade)
   email      String     
   userName   String     @unique @db.VarChar(255)
   createdAt  DateTime   @default(now())
@@ -72,7 +72,7 @@ model WuphfUser {
 
 model Wuphf {
   id         Int       @id @default(autoincrement())
-  user       WuphfUser @relation(fields: [userId], references: [userName])
+  user       WuphfUser @relation(fields: [userId], references: [userName], onDelete: Cascade)
   userId     String
   pictureUrl String    @db.VarChar(255)
   postBody   String    @db.VarChar(255)
@@ -82,27 +82,27 @@ model Wuphf {
 }
 
 model Likes {
-  user    WuphfUser @relation(fields: [userId], references: [userName])
+  user    WuphfUser @relation(fields: [userId], references: [userName], onDelete: Cascade)
   userId  String
-  wuphf   Wuphf     @relation(fields: [wuphfId], references: [id])
+  wuphf   Wuphf     @relation(fields: [wuphfId], references: [id], onDelete: Cascade)
   wuphfId Int
   @@unique([userId, wuphfId])
 }
 
 model Comments {
   id          Int @id @default(autoincrement())
-  wuphf       Wuphf @relation(fields: [postsId], references: [id])
+  wuphf       Wuphf @relation(fields: [postsId], references: [id], onDelete: Cascade)
   postsId     Int
-  user        WuphfUser? @relation(fields: [userId], references: [userName])
+  user        WuphfUser? @relation(fields: [userId], references: [userName], onDelete: Cascade)
   userId      String?
   commentBody String
   @@unique([id, postsId])
 }
 
 model Follower {
-  user       WuphfUser @relation("follower", fields: [userId], references: [userName])
+  user       WuphfUser @relation("follower", fields: [userId], references: [userName], onDelete: Cascade)
   userId     String    
-  follower   WuphfUser @relation("followee", fields: [followerId], references: [userName])
+  follower   WuphfUser @relation("followee", fields: [followerId], references: [userName], onDelete: Cascade)
   followerId String    
   createdAt  DateTime  @default(now())
   @@unique([userId, followerId])

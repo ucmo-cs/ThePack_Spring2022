@@ -70,46 +70,57 @@ Download and install the following software to run the application locally:
 
 # API Manual
 
+## /me
+
+GET | POST | PATCH | DELETE
+--- | --- | --- | ---
+Get the currently logged in user from session. | ERROR | (N/A) Update the currently logged in user from session. | (N/A) Delete the currently logged in user from session.
+
 ## /users
+GET | POST | PATCH | DELETE
+--- | --- | --- | ---
+Get all users. | Create a new user with the given data. | ERROR | ERROR
+
+## /users/[uid]
+The uid is the username of the user. Example: /user/johndoe
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get the current session's user data. | Create a new user with given data. | Update a user with the given email. | Delete a user with the given email.
+Get a user with the given uid. | ERROR | Update a user with the given uid. | Delete a user with the given uid.
 
-## /users/[...id]
-The id is the username of the user. Example: /user/johndoe
-
+## /users/[uid]/wuphfs
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get the data for the user with the given id. | ERROR | ERROR | ERROR
+Get all Wuphfs by the given user. | ERROR | ERROR | (N/A) Delete all wuphfs by the given user.
 
-## /users/[...id]/follow
-
+## /users/[uid]/following
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-ERROR | The current session's user will follow the user with the given id. | ERROR | The current session's user will unfollow the user with the given id.
+(N/A) Get the users the user with the uid is following. | The current session's user will follow the user with the given [uid]. | ERROR | The current session's user will unfollow the user with the given [uid].
+
+## /users/[uid]/followers
+GET | POST | PATCH | DELETE
+--- | --- | --- | ---
+(N/A) Get the followers of the user with the uid. | ERROR | ERROR | ERROR
 
 ## /wuphfs
-
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
 Get all wuphfs by all users. | Create a new post with the given data. | ERROR | ERROR
 
-## /wuphfs/[...id]
-The id is an incremented number, i.e. 1, 2, 3...
+## /wuphfs/[wid]
+The wid is an incremented number, i.e. 1, 2, 3...
 
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get the wuphf with the given id. | ERROR | Update a wuphf with the given id. | Delete a wuphf with the given id.
+Get the wuphf with the given wid. | ERROR | Update a wuphf with the given wid. | Delete a wuphf with the given wid.
 
-## /wuphfs/[...id]/comments
-
+## /wuphfs/[wid]/comments
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get all comments of a specific post. | Create new comment on a specific post. | ERROR | ERROR
+Get all comments of a specific post. | Create a new comment on a specific post. | ERROR | ERROR
 
-## /wuphfs/[...id]/comments/[...id]
-
+## /wuphfs/[wid]/comments/[cid]
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get a specific comment on a specific post. | ERROR | ERROR (maybe add later) | ERROR (maybe add later)
+Get a specific comment on a specific post. | ERROR | (N/A) Update a specific comment on a specific post. | (N/A) Delete a specific comment on a specific post.

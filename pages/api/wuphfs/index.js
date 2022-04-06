@@ -1,43 +1,45 @@
 import { prisma, Prisma } from '../../../lib/prisma'
 
 export default async function handler(req, res) {
-  //Error Handling here
-  if (req.method === 'GET') {
-    try {
-      const wuphfs = await prisma.Wuphf.findMany({
-        orderBy: {
-          createdAt: 'desc',
-        },
-      })
-      console.log('All Wuphfs', JSON.stringify(wuphfs, null, 2))
+	//Error Handling here
 
-      if (wuphfs.length === 0) {
-        return res.status(404).json({ error: 'No Wuphfs found' })
-      }
+	// /wuphfs
+	if (req.method === 'GET') {
+		try {
+			const wuphfs = await prisma.Wuphf.findMany({
+				orderBy: {
+					createdAt: 'desc',
+				},
+			})
+			console.log('All Wuphfs', JSON.stringify(wuphfs, null, 2))
 
-      res.json(wuphfs)
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error })
-      throw error
-    }
-  } else if (req.method === 'POST') {
-    try {
-      const wuphf = await prisma.Wuphf.create({
-        data: {
-          userId: req.body.userName,
-          pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
-          postBody: req.body.postBody,
-        },
-      })
+			if (wuphfs.length === 0) {
+				return res.status(404).json({ error: 'No Wuphfs found' })
+			}
 
-      res.json(wuphf)
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error })
-      throw error
-    }
+			res.json(wuphfs)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
+	} else if (req.method === 'POST') {
+		try {
+			const wuphf = await prisma.Wuphf.create({
+				data: {
+					userId: req.body.userName,
+					pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+					postBody: req.body.postBody,
+				},
+			})
 
-    // #validation - invalid input
-  }
+			res.json(wuphf)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
+
+		// #validation - invalid input
+	}
 }
