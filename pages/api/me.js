@@ -23,6 +23,21 @@ export default async function handler(req, res) {
 
 			// #error - the specified user does not exist
 		}
+		if (req.method === 'DELETE'){
+			try { 
+				const user = await prisma.user.delete({
+					where: {
+						email: session.user.email,
+					},
+				})
+
+				res.json(user)
+			} catch (error) {
+				console.error(error)
+				res.status(500).json({ error })
+				throw error
+			}
+		}
 	} else {
 		res.status(401).json({ msg: 'User not authenticated' })
 	}
