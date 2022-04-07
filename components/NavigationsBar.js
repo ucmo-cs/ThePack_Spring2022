@@ -247,6 +247,7 @@ const SearchResultUl = styled.ul`
 	background-color: #f4f4f3;
 	border-radius: 0 0 4px 4px;
 	border: 1px solid #aaa;
+	width: 250px;
 `
 
 const SearchResultLi = styled.li`

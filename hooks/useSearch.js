@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { dummySearchResults } from '../assets/dummySearchResults'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 export function useSearch() {
 	const [result, setResult] = useState([])
@@ -14,16 +15,28 @@ export function useSearch() {
 	} = useForm()
 	const [isHidden, setIsHidden] = useState(true)
 
-	useEffect(() => {
-		const subscription = watch((value) => {
-			// TODO: replace with actual API call
+	useEffect(async () => {
+		const subscription = watch(async (value) => {
 			if (value.search === '') {
 				setResult([])
 				setIsHidden(true)
-				// setValue('search', '') // causing error
 			} else {
 				setIsHidden(false)
-				handleSubmit(setResult(mockAPICall()))
+				const users = (await axios.get('/api/search', {
+					params: {
+						userName: value.search,
+					}
+				})).data.slice(0, 10).map(user => {
+					return {
+						username: user.userName, 
+						avatar: user.avatar
+					}
+				})
+
+				handleSubmit(setResult(users))
+				if(users.length === 0) {
+					setIsHidden(true)
+				}
 			}
 		})
 		return () => subscription.unsubscribe()
