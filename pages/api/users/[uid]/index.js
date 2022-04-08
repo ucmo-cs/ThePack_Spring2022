@@ -2,83 +2,85 @@ import { prisma, Prisma } from '../../../../lib/prisma'
 import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
-	const session = await getSession({ req })
-	const { uid } = req.query
+  const session = await getSession({ req })
+  const { uid } = req.query
 
-	// /users/[uid]
-	if (req.method === 'GET') {
-		try {
-			const user = await prisma.WuphfUser.findUnique({
-				where: {
-					userName: uid,
-				},
-				include: {
-					wuphfs: true,
-				},
-			})
+  // /users/[uid]
+  if (req.method === 'GET') {
+    try {
+      const user = await prisma.WuphfUser.findUnique({
+        where: {
+          userName: uid,
+        },
+        include: {
+          wuphfs: true,
+        },
+      })
 
-			if (!user) {
-				return res.status(404).json({ msg: 'No user found' })
-			}
+      if (!user) {
+        return res
+          .status(404)
+          .json({ msg: `No WuphfUser found with the username ${uid}` })
+      }
 
-			res.json(user)
-		} catch (error) {
-			console.error(error)
-			res.status(500).json({ error })
-			throw error
-		}
-	} else if (req.method === 'PATCH') {
-		try {
-			const user = await prisma.WuphfUser.update({
-				where: {
-					userName: uid,
-				},
-				data: {
-					userName: req.body.userName || undefined,
-					bio: req.body.bio || undefined,
-				},
-			})
+      res.json(user)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error })
+      throw error
+    }
+  } else if (req.method === 'PATCH') {
+    try {
+      const user = await prisma.WuphfUser.update({
+        where: {
+          userName: uid,
+        },
+        data: {
+          userName: req.body.userName || undefined,
+          bio: req.body.bio || undefined,
+        },
+      })
 
-			if (!user) {
-				return res.status(404).json({ msg: 'No user found' })
-			}
+      if (!user) {
+        return res.status(404).json({ msg: 'No WuphfUser found' })
+      }
 
-			res.json(user)
-		} catch (error) {
-			console.error(error)
-			res.status(500).json({ error })
-			throw error
-		}
+      res.json(user)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error })
+      throw error
+    }
 
-		// #authorization - who is allowed to do this?
-		// #validation - invalid input
-	} else if (req.method === 'DELETE') {
-		const wuphfUser = await prisma.WuphfUser.findUnique({
-			where: {
-				userName: uid,
-			},
-		})
+    // #authorization - who is allowed to do this?
+    // #validation - invalid input
+  } else if (req.method === 'DELETE') {
+    const wuphfUser = await prisma.WuphfUser.findUnique({
+      where: {
+        userName: uid,
+      },
+    })
 
-		if (!wuphfUser) {
-			return res.status(404).json({ msg: 'No user found' })
-		}
+    if (!wuphfUser) {
+      return res.status(404).json({ msg: 'No WuphfUser found' })
+    }
 
-		const { email } = wuphfUser
+    const { email } = wuphfUser
 
-		try {
-			const user = await prisma.User.delete({
-				where: {
-					email: email,
-				},
-			})
+    try {
+      const user = await prisma.User.delete({
+        where: {
+          email: email,
+        },
+      })
 
-			res.json(user)
-		} catch (error) {
-			console.error(error)
-			res.status(500).json({ error })
-			throw error
-		}
+      res.json(user)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error })
+      throw error
+    }
 
-		// #authorization - who is allowed to do this?
-	}
+    // #authorization - who is allowed to do this?
+  }
 }

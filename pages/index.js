@@ -7,18 +7,18 @@ import withAuth from '../components/withAuth'
 import Title from '../components/styledComponents/Title'
 
 function Home({ session }) {
-	return (
-		<Container>
-			<h1>Welcome to Wuphf!</h1>
-			<Paragraph>
-				Signed in as {session.user.email} <br />
-				<Button variant='primary' onClick={() => signOut()}>
-					Sign out
-				</Button>
-			</Paragraph>
-			<Timeline />
-		</Container>
-	)
+  return (
+    <Container>
+      <h1>Welcome to Wuphf!</h1>
+      <Paragraph>
+        Signed in as {session.user.email} <br />
+        <Button variant="primary" onClick={() => signOut()}>
+          Sign out
+        </Button>
+      </Paragraph>
+      <Timeline />
+    </Container>
+  )
 }
 
 export default withAuth(Home)

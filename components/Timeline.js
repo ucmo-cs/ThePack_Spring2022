@@ -4,25 +4,56 @@ import WuphfInput from '../components/WuphfInput'
 import tempPosts from '../assets/tempPosts'
 import Link from 'next/link'
 import Paragraph from './styledComponents/Paragraph'
+import { useState, useEffect } from 'react'
+import Error from './Error'
+import Loading from './Loading'
+import axios from 'axios'
+import styled from 'styled-components'
 
 function Timeline() {
-	return (
-		<>
-			<Paragraph>
-				<Link href='/register'>CLICK: Username/Animal Selection Page</Link>
-			</Paragraph>
+  const [wuphfs, setWuphfs] = useState()
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState()
 
-			<WuphfInput />
+  useEffect(() => {
+    const getWuphfs = async () => {
+      const res = await axios.get('../api/wuphfs').catch((err) => {
+        setError({ data: err.response.data, status: err.response.status })
+      })
+      setWuphfs(res?.data)
+      setLoading(false)
+    }
 
-			<Wuphf
-				username='John Doe'
-				avatar='sample.jpg'
-				post='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere vitae enim risus consectetur sed at vitae lectus. Amet purus massa accumsan in. Facilisis nec aliquet ac nulla. Odio et eros, pretium lacus, nulla.'
-			/>
+    getWuphfs()
+  }, [])
 
-			<Wuphfs posts={tempPosts} />
-		</>
-	)
+  if (loading) return <Loading />
+  if (error) return <Error error={error} />
+
+  return (
+    <Wrapper>
+      <Paragraph>
+        <Link href="/register">CLICK: Username/Animal Selection Page</Link>
+      </Paragraph>
+
+      <InputAndWuphfs>
+        <WuphfInput />
+        <Wuphfs wuphfs={wuphfs} />
+      </InputAndWuphfs>
+    </Wrapper>
+  )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
+const InputAndWuphfs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
 
 export default Timeline

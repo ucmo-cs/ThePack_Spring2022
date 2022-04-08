@@ -17,38 +17,38 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 const theme = {
-	colors: {
-		header: 'orange',
-		footer: 'cyan',
-		white: '#f4f4f3',
-		lightBlue: '#72d0ed',
-		grey: '#747378',
-		darkBlue: '#7395b0',
-		darkestBlue: '#202e4a',
-	},
-	button: {
-		primary: {
-			bg: '#227DE5',
-			text: '#fff',
-		},
-		secondary: {
-			bg: '#202e4a',
-			text: '#f4f4f3',
-		},
-	},
+  colors: {
+    header: 'orange',
+    footer: 'cyan',
+    white: '#f4f4f3',
+    lightBlue: '#72d0ed',
+    grey: '#747378',
+    darkBlue: '#7395b0',
+    darkestBlue: '#202e4a',
+  },
+  button: {
+    primary: {
+      bg: '#227DE5',
+      text: '#fff',
+    },
+    secondary: {
+      bg: '#202e4a',
+      text: '#f4f4f3',
+    },
+  },
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-	return (
-		<SessionProvider session={session}>
-			<GlobalStyle />
-			<ThemeProvider theme={theme}>
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
-			</ThemeProvider>
-		</SessionProvider>
-	)
+  return (
+    <SessionProvider session={session}>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </SessionProvider>
+  )
 }
 
 export default MyApp
