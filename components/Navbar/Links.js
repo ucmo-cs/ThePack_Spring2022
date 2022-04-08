@@ -3,25 +3,9 @@ import { useState, useEffect } from 'react'
 import Loading from '../Loading'
 import withAuth from '../withAuth'
 
-function Links({ component: Component, session, ...props }) {
-  const [user, setUser] = useState()
-  const [loading, setLoading] = useState()
-  const [error, setError] = useState()
-
-  async function getWuphfUser() {
-    const res = await axios.get('/api/me').catch((err) => {
-      setError({ data: err.response.data, status: err.response.status })
-    })
-    setUser(res?.data)
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getWuphfUser()
-  }, [session])
-
-  if (loading) return <Loading />
-  if (error) console.error(error)
+function Links({ component: Component, user, ...props }) {
+  // if (loading) return <Loading />
+  // if (error) console.error(error)
 
   const links = [
     {

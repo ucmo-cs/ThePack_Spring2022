@@ -7,6 +7,8 @@ import Avatar from './Avatar'
 import NavigationLink from './Navbar/DesktopLink'
 import MobileLink from './Navbar/MobileLink'
 import Links from './Navbar/Links'
+import withAuth from './withAuth'
+import axios from 'axios'
 
 function NavigationBar(props) {
   const {
@@ -18,6 +20,9 @@ function NavigationBar(props) {
   } = useSearch()
   const [expanded, setExpanded] = useState(false)
   const myRef = useRef(null)
+  const [user, setUser] = useState()
+  const [loading, setLoading] = useState()
+  const [error, setError] = useState()
 
   function toggleExpanded(e) {
     if (!expanded) {
@@ -29,6 +34,18 @@ function NavigationBar(props) {
 
   useEffect(() => {
     setExpanded(false)
+  }, [])
+
+  async function getWuphfUser() {
+    const res = await axios.get('/api/me').catch((err) => {
+      setError({ data: err.response.data, status: err.response.status })
+    })
+    setUser(res?.data)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getWuphfUser()
   }, [])
 
   return (
@@ -77,7 +94,7 @@ function NavigationBar(props) {
               component={NavigationLink}
               isShown={expanded}
               onClick={() => setExpanded(false)}
-              session={props.session && props.session}
+              user={user}
             />
           </DesktopLinks>
           <MobileLinks as="ul" expanded={expanded}>
@@ -85,7 +102,7 @@ function NavigationBar(props) {
               component={MobileLink}
               isShown={expanded}
               onClick={() => setExpanded(false)}
-              session={props.session && props.session}
+              user={user}
             />
           </MobileLinks>
           <Hamburger expanded={expanded} onClick={toggleExpanded}>
@@ -99,7 +116,7 @@ function NavigationBar(props) {
   )
 }
 
-export default NavigationBar
+export default withAuth(NavigationBar)
 
 const StyledImg = styled.img`
   cursor: pointer;
