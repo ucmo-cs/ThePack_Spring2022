@@ -1,10 +1,61 @@
 import { prisma, Prisma } from '../../../../lib/prisma'
+import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
+  const session = await getSession({ req })
   const { uid } = req.query
 
-  // /users/[uid]/follow
-  if (req.method === 'POST') {
+  // /users/[uid]/following
+  if (req.method === 'GET') {
+    if (session) {
+      const wuphfUser = await prisma.WuphfUser.findUnique({
+        where: {
+          email: session.user.email,
+          // email: 'cpg55850@ucmo.edu',
+        },
+      })
+
+      if (!wuphfUser) {
+        return res.status(404).json({
+          msg: `No WuphfUser found with the email ${session.user.email}`,
+        })
+      }
+
+      try {
+        const users = await Prisma.Follower.FindMany({
+          where: {
+            followerId: wuphfUser.userName,
+          },
+          select: {
+            userId,
+          },
+        })
+
+        res.json(users)
+      } catch (error) {
+        console.error(error)
+        res.status(500).json({ error })
+        throw error
+      }
+    } else {
+      try {
+        const users = await prisma.Follower.findMany({
+          where: {
+            followerId: req.body.followerId,
+          },
+          select: {
+            userId: true,
+          },
+        })
+
+        res.json(users)
+      } catch (error) {
+        console.error(error)
+        res.status(500).json({ error })
+        throw error
+      }
+    }
+  } else if (req.method === 'POST') {
     // uid who we're following - /api/user/charles/follow
     // session.user.email
     // then find user with that email
