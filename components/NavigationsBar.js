@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 import styled, { css } from 'styled-components'
 import { useState, useRef, useEffect } from 'react'
 import FormSearchInput from './forms/FormSearchInput'
@@ -9,6 +10,7 @@ import MobileLink from './Navbar/MobileLink'
 import Links from './Navbar/Links'
 import withAuth from './withAuth'
 import axios from 'axios'
+import Button from './Button'
 
 function NavigationBar(props) {
   const {
@@ -47,6 +49,10 @@ function NavigationBar(props) {
   useEffect(() => {
     getWuphfUser()
   }, [])
+
+  function handleSignout() {
+    signOut()
+  }
 
   return (
     <Shadow>
@@ -96,6 +102,9 @@ function NavigationBar(props) {
               onClick={() => setExpanded(false)}
               user={user}
             />
+            <ButtonWrapper>
+              <Button style={{width: '95px'}} variant='secondary' onClick={handleSignout}>Sign Out</Button>
+            </ButtonWrapper>
           </DesktopLinks>
           <MobileLinks as="ul" expanded={expanded}>
             <Links
@@ -105,6 +114,7 @@ function NavigationBar(props) {
               user={user}
             />
           </MobileLinks>
+          <MobileSignOutButton expanded={expanded} variant='secondary' onClick={handleSignout}>Sign Out</MobileSignOutButton>
           <Hamburger expanded={expanded} onClick={toggleExpanded}>
             <HamburgerLine expanded={expanded} />
             <HamburgerLine expanded={expanded} />
@@ -184,6 +194,19 @@ const DesktopLinks = styled.ul`
   }
 `
 
+const MobileSignOutButton = styled(Button)`
+display: none;
+z-index: 2;
+top: 9px;
+left: 1rem;
+position: ${(props) => props.expanded ? 'fixed !important' : 'absolute !important'};
+transition: opacity 0.5s ease-in;
+@media (max-width: 768px) {
+    display: flex;
+    opacity:  ${(props) => props.expanded ? '1' : '0'};
+  }
+`
+
 const Hamburger = styled.div`
   z-index: 2;
   transition: 0.5s ease-in-out;
@@ -223,8 +246,8 @@ const HamburgerLine = styled.div`
   :nth-child(1) {
     top: 25%;
     ${(props) =>
-      props.expanded &&
-      css`
+    props.expanded &&
+    css`
         transform: rotate(45deg);
         top: 50%;
       `};
@@ -236,8 +259,8 @@ const HamburgerLine = styled.div`
   :nth-child(3) {
     top: 75%;
     ${(props) =>
-      props.expanded &&
-      css`
+    props.expanded &&
+    css`
         transform: rotate(-225deg);
         top: 50%;
       `};
@@ -277,4 +300,11 @@ const SearchResultLi = styled.li`
     background-color: #72d0ed;
     color: #202e4a;
   }
+`
+
+const ButtonWrapper = styled.div`
+  max-height: 100%;
+  display: flex;
+  justify-items: center;
+  padding: 10px 0;
 `
