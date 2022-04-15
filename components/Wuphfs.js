@@ -9,13 +9,13 @@ Wuphfs.propTypes = {
 }
 
 function Wuphfs({ wuphfs }) {
-  if (wuphfs?.length === 0) {
+  if (wuphfs.length === 0) {
     return <Title>There are no Wuphfs to display.</Title>
   }
 
   return (
     <Wrapper>
-      {wuphfs?.map((wuphf) => (
+      {wuphfs.map((wuphf) => (
         <Wuphf key={wuphf.id} {...wuphf} />
       ))}
     </Wrapper>

@@ -9,23 +9,35 @@ import Error from './Error'
 import Loading from './Loading'
 import axios from 'axios'
 import styled from 'styled-components'
+import Button from './Button'
 
 function Timeline() {
-  const [wuphfs, setWuphfs] = useState()
+  const [wuphfs, setWuphfs] = useState(null)
+  const [cursor, setCursor] = useState(null)
+  const [maxResults, setMaxResults] = useState(2)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState()
 
-  useEffect(() => {
-    const getWuphfs = async () => {
-      const res = await axios.get('../api/wuphfs').catch((err) => {
+  const getWuphfs = async () => {
+    const res = await axios
+      .get(`../api/timeline?&maxResults=${maxResults}&cursor=${cursor}`)
+      .catch((err) => {
         setError({ data: err.response.data, status: err.response.status })
       })
-      setWuphfs(res?.data)
-      setLoading(false)
-    }
+    const newWuphfs =
+      wuphfs !== null ? [...wuphfs, ...res?.data.timeline] : res?.data.timeline
+    setWuphfs(newWuphfs)
+    setCursor(res?.data.cursor)
+    setLoading(false)
+  }
 
+  useEffect(() => {
     getWuphfs()
   }, [])
+
+  function handleClick() {
+    getWuphfs()
+  }
 
   if (loading) return <Loading />
   if (error) return <Error error={error} />
@@ -38,7 +50,11 @@ function Timeline() {
 
       <InputAndWuphfs>
         <WuphfInput />
+        {/* {JSON.stringify(wuphfs, null, 2)} */}
         <Wuphfs wuphfs={wuphfs} />
+        <Button variant="primary" onClick={handleClick}>
+          Load more
+        </Button>
       </InputAndWuphfs>
     </Wrapper>
   )

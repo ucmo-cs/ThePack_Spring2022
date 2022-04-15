@@ -12,7 +12,7 @@ function Home({ session }) {
       <Paragraph>
         Signed in as {session.user.email} <br />
       </Paragraph>
-      <Timeline />
+      <Timeline session={session} />
     </Container>
   )
 }
