@@ -6,6 +6,12 @@ import TextArea from './forms/TextArea'
 import Button from './Button'
 import * as yup from 'yup'
 import Title from './styledComponents/Title'
+import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import { useState } from 'react'
+import Loading from './Loading'
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
@@ -14,19 +20,44 @@ const schema = yup.object({
 })
 
 function SettingsForm(props) {
+	const { data: session } = useSession()
+	const router = useRouter()
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState()
+
 	const onSubmit = ({ username, animal, message }) => {
-		alert(`username: ${username}, animal: ${animal}, message: ${message}`)
+		// alert(`username: ${username}, animal: ${animal}, message: ${message}`)
+		registerUser()
 	}
+
+	function registerUser() {
+		setLoading(true)
+		axios
+			.post('/api/users', {
+				email: session.user.email,
+				userName: props.watch('username'),
+				bio: props.watch('bio'),
+			})
+			.then(() => {
+				router.push('/')
+			})
+			.catch((err) => {
+				setError(err)
+				setLoading(false)
+			})
+	}
+
+	if (loading) return <Loading />
 
 	return (
 		<SettingBorder>
 			<Title>WUPHF</Title>
 			<form onSubmit={props.handleSubmit(onSubmit)}>
-				{/* <Watchs>
-          <Watch>username: {props.watch('username')}</Watch>
-          <Watch>animal: {props.watch('animal')}</Watch>
-          <Watch>message: {props.watch('message')}</Watch>
-        </Watchs> */}
+				<Watchs>
+					<Watch>username: {props.watch('username')}</Watch>
+					<Watch>animal: {props.watch('animal')}</Watch>
+					<Watch>message: {props.watch('message')}</Watch>
+				</Watchs>
 
 				<FormInput
 					id='username'
@@ -43,10 +74,10 @@ function SettingsForm(props) {
 				</SelectInput>
 
 				<TextArea
-					id='message'
-					label='Test Message'
+					id='bio'
+					label='Biography'
 					register={props.register}
-					error={props.errors.message}
+					error={props.errors.bio}
 					rows='3'
 				/>
 
@@ -54,6 +85,7 @@ function SettingsForm(props) {
 					Submit
 				</Button>
 			</form>
+			{<p>{error && JSON.stringify(error, null, 2)}</p>}
 		</SettingBorder>
 	)
 }
