@@ -7,7 +7,6 @@ import Container from '../components/styledComponents/Container'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useSession } from 'next-auth/react'
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
@@ -47,8 +46,6 @@ const animals = [
 ]
 
 function RegistrationForm({ setWuphfUser }) {
-	const { status } = useSession()
-
 	// TODO: Replace with an actual database response for all animal types
 	const [selectedAnimal, setSelectedAnimal] = useState(animals[0])
 	const {
@@ -56,7 +53,6 @@ function RegistrationForm({ setWuphfUser }) {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		watch,
-		getValues,
 	} = useForm({
 		mode: 'onTouched',
 		resolver: yupResolver(schema),
@@ -66,7 +62,7 @@ function RegistrationForm({ setWuphfUser }) {
 	})
 
 	useEffect(() => {
-		const subscription = watch((value, { name, type }) => {
+		const subscription = watch((value) => {
 			let newAnimal = value
 			for (let i = 0; i < animals.length; i++) {
 				if (animals[i].label.toUpperCase() === watch('animal').toUpperCase()) {

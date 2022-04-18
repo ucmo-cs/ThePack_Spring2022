@@ -4,30 +4,20 @@ import FormInput from './forms/FormInput'
 import SelectInput from './forms/SelectInput'
 import TextArea from './forms/TextArea'
 import Button from './Button'
-import * as yup from 'yup'
 import Title from './styledComponents/Title'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useState } from 'react'
 import Loading from './Loading'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
 
-const schema = yup.object({
-	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
-	animal: yup.string().required('Required'),
-	message: yup.string().required('Required'),
-})
-
 function SettingsForm(props) {
 	const { data: session } = useSession()
-	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
 	const { setWuphfUser } = useWuphfUser()
 
-	const onSubmit = ({ username, animal, message }) => {
-		// alert(`username: ${username}, animal: ${animal}, message: ${message}`)
+	const onSubmit = () => {
 		registerUser()
 	}
 

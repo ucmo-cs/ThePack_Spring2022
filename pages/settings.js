@@ -23,15 +23,10 @@ AccountSettings.propTypes = {
    delete_accounts: propTypes.string.isRequired,
 }
 
-function AccountSettings(props) {
-   const { avatar, username, biography, linked_accounts, delete_accounts } =
-      props
-
+function AccountSettings() {
    const {
       register,
-      handleSubmit,
-      formState: { errors, isSubmitting },
-      watch,
+      formState: { errors },
    } = useForm({
       mode: 'onTouched',
    })

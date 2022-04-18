@@ -8,10 +8,10 @@ import Avatar from './Avatar'
 import NavigationLink from './Navbar/DesktopLink'
 import MobileLink from './Navbar/MobileLink'
 import Links from './Navbar/Links'
-import axios from 'axios'
 import Button from './Button'
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 
-function NavigationBar(props) {
+function NavigationBar() {
   const {
     query,
     register,
@@ -21,11 +21,9 @@ function NavigationBar(props) {
   } = useSearch()
   const [expanded, setExpanded] = useState(false)
   const myRef = useRef(null)
-  const [user, setUser] = useState()
-  const [loading, setLoading] = useState()
-  const [error, setError] = useState()
+  const { wuphfUser } = useWuphfUser()
 
-  function toggleExpanded(e) {
+  function toggleExpanded() {
     if (!expanded) {
       myRef.current.scrollIntoView()
     }
@@ -35,18 +33,6 @@ function NavigationBar(props) {
 
   useEffect(() => {
     setExpanded(false)
-  }, [])
-
-  async function getWuphfUser() {
-    const res = await axios.get('/api/me').catch((err) => {
-      setError({ data: err.response.data, status: err.response.status })
-    })
-    setUser(res?.data)
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getWuphfUser()
   }, [])
 
   function handleSignout() {
@@ -99,7 +85,7 @@ function NavigationBar(props) {
               component={NavigationLink}
               isShown={expanded}
               onClick={() => setExpanded(false)}
-              user={user}
+              user={wuphfUser}
             />
             <ButtonWrapper>
               <Button style={{width: '95px'}} variant='secondary' onClick={handleSignout}>Sign Out</Button>
@@ -110,7 +96,7 @@ function NavigationBar(props) {
               component={MobileLink}
               isShown={expanded}
               onClick={() => setExpanded(false)}
-              user={user}
+              user={wuphfUser}
             />
           </MobileLinks>
           <MobileSignOutButton expanded={expanded} variant='secondary' onClick={handleSignout}>Sign Out</MobileSignOutButton>

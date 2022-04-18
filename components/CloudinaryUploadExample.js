@@ -9,7 +9,7 @@ export default function CloudinaryUploadExample() {
         const formData = new FormData()
         formData.append(image.name, image)
         
-        const res = await axios.post('/api/imageuploadexample', formData, {
+        await axios.post('/api/imageuploadexample', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

@@ -12,7 +12,7 @@ import Button from './Button'
 function Timeline() {
   const [wuphfs, setWuphfs] = useState(null)
   const [cursor, setCursor] = useState(null)
-  const [maxResults, setMaxResults] = useState(2)
+  const [maxResults] = useState(2)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState()
 

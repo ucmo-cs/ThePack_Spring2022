@@ -13,7 +13,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons'
 import RoundButton from '../../components/RoundButton'
 import Error from '../../components/Error'
 
-function UserPage(props) {
+function UserPage() {
   const router = useRouter()
   const { id } = router.query
   const [user, setUser] = useState()
@@ -81,16 +81,6 @@ function UserPage(props) {
     </Container>
   )
 }
-
-const Nav = styled.nav`
-  font-weight: bolder;
-  font-size: larger;
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-`
 
 const TopContainer = styled.div`
   position: relative;

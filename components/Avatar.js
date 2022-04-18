@@ -15,7 +15,7 @@ const StyledImage = styled(Image)`
 `
 
 const MyImage = React.forwardRef(
-	({ width, height, src, alt, title, href }, ref) => {
+	({ width, height, src, alt, title, href }) => {
 		return (
 			<StyledImage
 				width={width}

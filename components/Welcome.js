@@ -71,12 +71,6 @@ const LogoWrapper = styled.div`
   }
 `
 
-const Logo = styled.div`
-  background-color: white;
-  height: 400px;
-  width: 400px;
-`
-
 const MessageWrapper = styled.div`
   display: flex;
   justify-content: center;

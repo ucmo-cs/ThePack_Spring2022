@@ -5,12 +5,7 @@ import { useWuphfUser } from '../hooks/WuphfUserContext'
 import axios from 'axios'
 
 function Layout({ children }) {
-	// const [wuphfUser, setWuphfUser] = useState()
-	// const [loading, setLoading] = useState(true)
-	// const [error, setError] = useState()
-	const { wuphfUserLoading, setWuphfUserLoading } = useWuphfUser()
-	const { wuphfUserError, setWuphfUserError } = useWuphfUser()
-	const { wuphfUser, setWuphfUser } = useWuphfUser()
+	const { setWuphfUserError, wuphfUser, setWuphfUser } = useWuphfUser()
 
 	async function getUser() {
 		const res = await axios.get('/api/me').catch((err) => {

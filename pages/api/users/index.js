@@ -1,9 +1,6 @@
 import { prisma, Prisma } from '../../../lib/prisma'
-import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
-  const session = await getSession({ req })
-
   // /users
   if (req.method === 'GET') {
     try {
