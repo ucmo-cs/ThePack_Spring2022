@@ -10,11 +10,11 @@ TextArea.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function TextArea({ register, error, label, id, ...props }) {
+function TextArea({ register, error, label, id, enabled=true, ...props }) {
 	return (
 		<Wrapper error={error}>
 			<Label htmlFor={id}>{label}</Label>
-			<textarea {...register(id)} {...props} />
+			<textarea disabled={!enabled} {...register(id)} {...props} />
 			<Error>{error?.message}</Error>
 		</Wrapper>
 	)

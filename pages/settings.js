@@ -36,7 +36,7 @@ function AccountSettings(props) {
       mode: 'onTouched',
    })
 
-   const [edit, setEdit] = useState(false)
+   const [editEnabled, setEditEnabled] = useState(false)
 
    return (
       <Container>
@@ -46,14 +46,14 @@ function AccountSettings(props) {
                <BtnTxtspace>
                   <HeaderText>Profile Settings</HeaderText>
                   <EditBtnWrapper>
-                     <Button variant='secondary' onClick={() => setEdit(!edit)}>
-                        {edit ? 'Save' : 'Edit'}
+                     <Button variant='secondary' onClick={() => setEditEnabled(!editEnabled)}>
+                        {editEnabled ? 'Save' : 'Edit'}
                      </Button>
                   </EditBtnWrapper>
                </BtnTxtspace>
                <Subheading id='avatar'>Avatar:</Subheading>
                <TextBtnSpace>
-                  <SelectInput register={register} id='1' label=''>
+                  <SelectInput register={register} id='avatar' label='' enabled={editEnabled}>
                      <option value='option-1'>Option 1</option>
                      <option value='option-2'>Option 2</option>
                      <option value='option-3'>Option 3</option>
@@ -67,10 +67,11 @@ function AccountSettings(props) {
                      label=''
                      register={register}
                      error={errors.username}
+                     enabled={editEnabled}
                   />
                </UsernameTxtStyling>
                <Subheading id='biography'>Biography:</Subheading>
-               <TextArea register={register} id='biography_textarea' label='' />
+               <TextArea register={register} id='biography_textarea' label='' enabled={editEnabled} />
 
                <HeaderText>Account Settings</HeaderText>
 
@@ -86,12 +87,12 @@ function AccountSettings(props) {
                </DABtnWrapper>
                <HeaderText>Visual Settings</HeaderText>
                <Subheading id='site_theme'>Site Theme:</Subheading>
-               <SelectInput register={register} id='site_theme' label=''>
+               <SelectInput register={register} id='site_theme' label='' enabled={editEnabled}>
                   <option value='light'>Light</option>
                   <option value='dark'>Dark</option>
                </SelectInput>
                <Subheading id='text_size'>Text Size:</Subheading>
-               <SelectInput register={register} id='font_size' label=''>
+               <SelectInput register={register} id='font_size' label='' enabled={editEnabled}>
                   <option value='small'>Small</option>
                   <option value='medium'>Medium</option>
                   <option value='large'>Large</option>

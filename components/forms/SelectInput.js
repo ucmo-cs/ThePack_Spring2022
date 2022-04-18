@@ -9,11 +9,11 @@ SelectInput.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function SelectInput({ register, id, label, children }) {
+function SelectInput({ register, id, label, children, enabled = true }) {
 	return (
 		<Wrapper>
 			<Label htmlFor={id}>{label}</Label>
-			<select {...register(id)}>{children}</select>
+			<select {...register(id)} disabled={!enabled}>{children}</select>
 		</Wrapper>
 	)
 }
