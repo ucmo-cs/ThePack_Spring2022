@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
@@ -41,38 +42,16 @@ const theme = {
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-	const [wuphfUser, setWuphfUser] = useState()
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState()
-
-	async function getUser() {
-		const res = await axios.get('/api/me').catch((err) => {
-			setError({ data: err.response.data, status: err.response.status })
-		})
-
-		if (res) {
-			console.log(res.data)
-			setWuphfUser(res.data)
-			setLoading(false)
-		}
-	}
-
-	useEffect(() => {
-		getUser()
-	}, [])
-
 	return (
 		<SessionProvider session={session}>
-			<GlobalStyle />
-			<ThemeProvider theme={theme}>
-				{wuphfUser ? (
+			<WuphfUserContextProvider>
+				<GlobalStyle />
+				<ThemeProvider theme={theme}>
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
-				) : (
-					<Component {...pageProps} />
-				)}
-			</ThemeProvider>
+				</ThemeProvider>
+			</WuphfUserContextProvider>
 		</SessionProvider>
 	)
 }

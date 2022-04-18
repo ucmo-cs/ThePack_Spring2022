@@ -9,7 +9,6 @@ import Avatar from '../components/Avatar'
 import { useForm } from 'react-hook-form'
 import SelectInput from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
-import { withAuth } from '../components/withAuth'
 
 AccountSettings.propTypes = {
 	//Use another import
@@ -125,7 +124,7 @@ export async function getServerSideProps(context) {
 	}
 }
 
-export default withAuth(AccountSettings)
+export default AccountSettings
 
 const UsernameTxtStyling = styled.div`
 	display: flex;

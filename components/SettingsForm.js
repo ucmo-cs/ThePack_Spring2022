@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useState } from 'react'
 import Loading from './Loading'
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
@@ -20,11 +21,11 @@ const schema = yup.object({
 })
 
 function SettingsForm(props) {
-	const { setWuphfUser } = props
 	const { data: session } = useSession()
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
+	const { setWuphfUser } = useWuphfUser()
 
 	const onSubmit = ({ username, animal, message }) => {
 		// alert(`username: ${username}, animal: ${animal}, message: ${message}`)

@@ -5,37 +5,20 @@ import Welcome from './Welcome'
 import RegistrationForm from './RegistrationForm'
 import Error from './Error'
 import axios from 'axios'
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 function withAuth(Component) {
 	function Auth(props) {
 		const { data: session, status } = useSession()
-		const [wuphfUser, setWuphfUser] = useState()
-		const [loading, setLoading] = useState(true)
-		const [error, setError] = useState()
-
-		async function getUser() {
-			const res = await axios.get('/api/me').catch((err) => {
-				setError({ data: err.response.data, status: err.response.status })
-			})
-
-			if (res) {
-				console.log(res.data)
-				setWuphfUser(res.data)
-				setLoading(false)
-				setError(undefined)
-			}
-		}
-
-		useEffect(() => {
-			getUser()
-		}, [wuphfUser])
+		const { wuphfUser } = useWuphfUser()
+		const { wuphfUserError } = useWuphfUser()
 
 		if (status == 'loading') return <Loading />
-		switch (error?.status) {
+		switch (wuphfUserError?.status) {
 			case 401: // Google user not authenticated
 				return <Welcome />
 			case 404: // No WuphfUser with the Google user's email
-				return <RegistrationForm setWuphfUser={setWuphfUser} />
+				return <RegistrationForm />
 		}
 
 		if (session) {
