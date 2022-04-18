@@ -47,9 +47,9 @@ const animals = [
 	},
 ]
 
-function RegistrationForm() {
+function RegistrationForm({ setWuphfUser }) {
 	const { status } = useSession()
-	
+
 	// TODO: Replace with an actual database response for all animal types
 	const [selectedAnimal, setSelectedAnimal] = useState(animals[0])
 	const {
@@ -99,6 +99,7 @@ function RegistrationForm() {
 					watch={watch}
 					isSubmitting={isSubmitting}
 					register={register}
+					setWuphfUser={setWuphfUser}
 				/>
 			</Wrapper>
 		</Container>

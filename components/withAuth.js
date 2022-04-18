@@ -1,52 +1,55 @@
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import Loading from './Loading'
 import Welcome from './Welcome'
-import axios from 'axios'
-import { useState } from 'react'
 import RegistrationForm from './RegistrationForm'
+import Error from './Error'
+import axios from 'axios'
 
 function withAuth(Component) {
 	function Auth(props) {
 		const { data: session, status } = useSession()
-		const [wuphfUserStatus, setWuphfUserStatus] = useState('loading')
-		const [wuphfUser, setWuphfUser] = useState(null)
+		const [wuphfUser, setWuphfUser] = useState()
+		const [loading, setLoading] = useState(true)
+		const [error, setError] = useState()
 
 		async function getUser() {
-			try {
-				const user = (await axios.get('/api/me')).data
-				setWuphfUserStatus('authenticated')
-				setWuphfUser(user)
-			} catch {
-				setWuphfUserStatus('not found')
+			const res = await axios.get('/api/me').catch((err) => {
+				setError({ data: err.response.data, status: err.response.status })
+			})
+
+			if (res) {
+				console.log(res.data)
+				setWuphfUser(res.data)
+				setLoading(false)
+				setError(undefined)
 			}
 		}
-		getUser()
 
-		/*
-		status (S) = "loading" (A) | "authenticated" (B) | "unauthenticated" (C)
-		wuphfStatus (W) = "loading" (A) | "authenticated" (B) | "not found" (C)
+		useEffect(() => {
+			getUser()
+		}, [wuphfUser])
 
-		S | W
-		A   A - <Loading />
-		A   B - <Loading />
-		A   C - <Loading />
-		B   A - <Loading />
-		B   B - <Component />
-		B   C - <Registration />
-		C   A - <Loading />
-		C   B - Impossible?
-		C   C - <Welcome />
-		*/
-		if (status === 'loading' || wuphfUserStatus === 'loading') {
-			return <Loading />
-		} else if (status === 'authenticated' && wuphfUserStatus === 'authenticated') {
-			return <Component {...props} session={session} status={status} wuphfUser={wuphfUser} />
-		} else if(status === 'authenticated' && wuphfUserStatus === 'not found') {
-			return <RegistrationForm />
-		} else if(status === 'unauthenticated' && wuphfUserStatus === 'not found') {
-			return <Welcome />
+		if (status == 'loading') return <Loading />
+		switch (error?.status) {
+			case 401: // Google user not authenticated
+				return <Welcome />
+			case 404: // No WuphfUser with the Google user's email
+				return <RegistrationForm setWuphfUser={setWuphfUser} />
 		}
+
+		if (session) {
+			return (
+				<Component
+					{...props}
+					session={session}
+					wuphfUser={wuphfUser}
+					status={status}
+				/>
+			)
+		}
+
+		return <Welcome />
 	}
 
 	if (Component.getInitialProps) {
@@ -57,3 +60,51 @@ function withAuth(Component) {
 }
 
 export default withAuth
+
+// import { useSession } from 'next-auth/react'
+// import { useRouter } from 'next/router'
+// import Loading from './Loading'
+// import Welcome from './Welcome'
+// import axios from 'axios'
+// import { useState } from 'react'
+// import RegistrationForm from './RegistrationForm'
+
+// function withAuth(Component) {
+// 	function Auth(props) {
+// 		const { data: session, status } = useSession()
+// 		// const [wuphfUserStatus, setWuphfUserStatus] = useState('loading')
+// 		const [wuphfUser, setWuphfUser] = useState(null)
+// 		const [wuphfUserError, setWuphfUserError] = useState()
+// 		const [wuphfUserLoading, setWuphfUserLoading] = useState(true)
+
+// 		async function getUser() {
+// 			try {
+// 				const user = (await axios.get('/api/me')).data
+// 				setWuphfUser(user)
+// 				setWuphfUserLoading(false)
+// 			} catch {
+// 				setError({ data: err.response.data, status: err.response.status })
+// 			}
+// 		}
+// 		// getUser()
+// 		return <Component />
+
+// 		if (status === 'loading' || wuphfUserLoading) {
+// 			return <Loading />
+// 		}
+
+// 		if (status === 'unauthenticated') {
+// 			return <Welcome />
+// 		}
+
+// 		if (wuphfUserError) return <Error error={error} />
+
+// 		if (Component.getInitialProps) {
+// 			Auth.getInitialProps = Component.getInitialProps
+// 		}
+
+// 		return Auth
+// 	}
+// }
+
+// export default withAuth

@@ -20,6 +20,7 @@ const schema = yup.object({
 })
 
 function SettingsForm(props) {
+	const { setWuphfUser } = props
 	const { data: session } = useSession()
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
@@ -38,8 +39,9 @@ function SettingsForm(props) {
 				userName: props.watch('username'),
 				bio: props.watch('bio'),
 			})
-			.then(() => {
-				router.push('/')
+			.then((res) => {
+				setLoading(false)
+				setWuphfUser(res.data)
 			})
 			.catch((err) => {
 				setError(err)
