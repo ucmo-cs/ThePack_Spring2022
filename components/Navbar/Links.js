@@ -1,6 +1,3 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import Loading from '../Loading'
 
 function Links({ component: Component, user, ...props }) {
   // if (loading) return <Loading />

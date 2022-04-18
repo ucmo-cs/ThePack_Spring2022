@@ -1,5 +1,6 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": ["unused-imports"],
   "rules": {
     "quotes": [
       "error",
@@ -10,6 +11,12 @@
       "never"
     ],
     "react/no-unescaped-entities": "off",
-    "react/function-component-definition": ["error", { "namedComponents": "function-declaration" }]
+    "react/function-component-definition": ["error", { "namedComponents": "function-declaration" }],
+    "no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ]
   }
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import SettingsForm from '../components/SettingsForm'
 import styled from 'styled-components'
 import Avatar from '../components/Avatar'

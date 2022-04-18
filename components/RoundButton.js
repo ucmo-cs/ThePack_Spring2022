@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
 import PropTypes from 'prop-types'
 import Button from './Button'
 

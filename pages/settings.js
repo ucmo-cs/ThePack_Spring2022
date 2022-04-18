@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { getSession } from 'next-auth/react'
 import propTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Sidebar from '../components/Sidebar'
 import FormInput from '../components/forms/FormInput'
 import Button from '../components/Button'

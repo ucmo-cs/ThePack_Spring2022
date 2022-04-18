@@ -1,7 +1,5 @@
-import Wuphf from '../components/Wuphf'
 import Wuphfs from '../components/Wuphfs'
 import WuphfInput from '../components/WuphfInput'
-import tempPosts from '../assets/tempPosts'
 import Link from 'next/link'
 import Paragraph from './styledComponents/Paragraph'
 import { useState, useEffect } from 'react'

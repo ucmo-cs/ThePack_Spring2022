@@ -7,7 +7,6 @@ import {
 	faPenToSquare,
 	faTrashCan,
 	faCheck,
-	faCediSign,
 	faBan,
 } from '@fortawesome/free-solid-svg-icons'
 import TextareaAutosize from 'react-textarea-autosize'

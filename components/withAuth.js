@@ -1,10 +1,7 @@
 import { useSession } from 'next-auth/react'
-import { useState, useEffect } from 'react'
 import Loading from './Loading'
 import Welcome from './Welcome'
 import RegistrationForm from './RegistrationForm'
-import Error from './Error'
-import axios from 'axios'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 function withAuth(Component) {

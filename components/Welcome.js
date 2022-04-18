@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Button from './Button'
 import Title from './styledComponents/Title'
 import Paragraph from './styledComponents/Paragraph'
-import Image from 'next/image'
 import breakpoint from '../styles/breakpoint'
 
 function Welcome() {
