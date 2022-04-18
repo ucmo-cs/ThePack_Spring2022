@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Loading from '../Loading'
-import withAuth from '../withAuth'
 
 function Links({ component: Component, user, ...props }) {
   // if (loading) return <Loading />
@@ -30,4 +29,4 @@ function Links({ component: Component, user, ...props }) {
   ))
 }
 
-export default withAuth(Links)
+export default Links

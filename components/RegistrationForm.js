@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import SettingsForm from '../components/SettingsForm'
 import styled from 'styled-components'
 import Avatar from '../components/Avatar'
@@ -7,7 +8,7 @@ import Container from '../components/styledComponents/Container'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import withAuth from '../components/withAuth'
+import { useSession } from 'next-auth/react'
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
@@ -46,7 +47,9 @@ const animals = [
 	},
 ]
 
-function Register() {
+function RegistrationForm() {
+	const { status } = useSession()
+	
 	// TODO: Replace with an actual database response for all animal types
 	const [selectedAnimal, setSelectedAnimal] = useState(animals[0])
 	const {
@@ -102,7 +105,7 @@ function Register() {
 	)
 }
 
-export default withAuth(Register)
+export default RegistrationForm
 
 const Wrapper = styled.div`
 	margin: 0 1rem;

@@ -8,7 +8,6 @@ import Avatar from './Avatar'
 import NavigationLink from './Navbar/DesktopLink'
 import MobileLink from './Navbar/MobileLink'
 import Links from './Navbar/Links'
-import withAuth from './withAuth'
 import axios from 'axios'
 import Button from './Button'
 
@@ -126,7 +125,7 @@ function NavigationBar(props) {
   )
 }
 
-export default withAuth(NavigationBar)
+export default NavigationBar
 
 const StyledImg = styled.img`
   cursor: pointer;
