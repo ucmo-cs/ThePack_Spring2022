@@ -9,6 +9,7 @@ import Avatar from '../components/Avatar'
 import { useForm } from 'react-hook-form'
 import SelectInput from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
+import withAuth from '../components/withAuth'
 
 AccountSettings.propTypes = {
 	//Use another import
@@ -107,64 +108,47 @@ function AccountSettings(props) {
 	)
 }
 
-export async function getServerSideProps(context) {
-	const session = await getSession(context)
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false,
-			},
-		}
-	}
-
-	return {
-		props: { session },
-	}
-}
-
-export default AccountSettings
+export default withAuth(AccountSettings)
 
 const UsernameTxtStyling = styled.div`
-	display: flex;
+display: flex;
 `
 const SbarMainspace = styled.div``
 const TextBtnSpace = styled.div`
-	display: flex;
-	gap: 30px;
+display: flex;
+gap: 30px;
 `
 const AccSetLayout = styled.div`
-	display: flex;
-	flex-direction: row;
-	grid-gap: 30px;
+display: flex;
+flex-direction: row;
+grid-gap: 30px;
 `
 const Subheading = styled.div`
-	margin-top: 2rem;
-	margin-bottom: 1rem;
-	color: black;
-	font-weight: bold;
-	font-size: 1rem;
+margin-top: 2rem;
+margin-bottom: 1rem;
+color: black;
+font-weight: bold;
+font-size: 1rem;
 `
 const HeaderText = styled.div`
-	font-size: 3rem;
-	font-weight: bold;
-	border: none;
-	text-align: left;
-	margin-top: 3rem;
-	color: #202e4a;
-	width: 100%;
+font-size: 3rem;
+font-weight: bold;
+border: none;
+text-align: left;
+margin-top: 3rem;
+color: #202e4a;
+width: 100%;
 `
 const BtnTxtspace = styled.div`
-	margin-left: 0em;
-	display: flex;
-	flex-direction: row;
+margin-left: 0em;
+display: flex;
+flex-direction: row;
 `
 const EditBtnWrapper = styled.div`
-	font-size: 1.3rem;
-	margin: 10px;
+font-size: 1.3rem;
+margin: 10px;
 `
 const DABtnWrapper = styled.div`
-	font-size: 1.3rem;
-	margin-top: 1rem;
+font-size: 1.3rem;
+margin-top: 1rem;
 `
