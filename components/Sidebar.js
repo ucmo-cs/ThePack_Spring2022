@@ -1,33 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faPaintRoller, faUser } from '@fortawesome/free-solid-svg-icons'
+import { profileConfigurationItems, accountConfigurationItems, visualsConfigurationItems } from '../assets/settingsPageConfigurations'
 
 export default function Sidebar() {
-   const Profilesublist = [
-      {
-         displayName: 'Avatar',
-         target: 'avatar'
-      },
-      {
-         displayName: 'Username',
-         target: 'username'
-      },
-      {
-         displayName: 'Biography',
-         target: 'biography'
-      }
-   ]
-   const Accountsublist = [
-      {
-         displayName: 'Linked Accounts',
-         target: 'linked_account'
-      },
-      {
-         displayName: 'Delete Account',
-         target: 'delete_account'
-      }
-   ]
    return (
       <SSidebar>
          <Icon>
@@ -35,14 +12,21 @@ export default function Sidebar() {
             <HeaderText>Profile</HeaderText>
          </Icon>
          <SStylefixing>
-            {Profilesublist.map((entry) => <SidebarList brand={entry} key={`profilesublist-${entry.target}`} />)}
+            {profileConfigurationItems.map((entry) => <SidebarList brand={entry} key={`profilesublist-${entry.target}`} />)}
          </SStylefixing>
          <Icon>
             <FontAwesomeIcon icon={faGear} color='#202e4a' size='2x' />
             <HeaderText>Account</HeaderText>
          </Icon>
          <SStylefixing>
-            {Accountsublist.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
+            {accountConfigurationItems.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
+         </SStylefixing>
+         <Icon>
+            <FontAwesomeIcon icon={faPaintRoller} color='#202e4a' size='2x' />
+            <HeaderText>Visuals</HeaderText>
+         </Icon>
+         <SStylefixing>
+            {visualsConfigurationItems.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
          </SStylefixing>
       </SSidebar>
    )
