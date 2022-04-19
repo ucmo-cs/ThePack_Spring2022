@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
 import Sidebar from '../components/Sidebar'
@@ -6,11 +6,14 @@ import FormInput from '../components/forms/FormInput'
 import Button from '../components/Button'
 import Avatar from '../components/Avatar'
 import { useForm } from 'react-hook-form'
-import SelectInput from '../components/forms/SelectInput'
+import SelectInput, { Wrapper } from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
 import withAuth from '../components/withAuth'
 import Container from '../components/styledComponents/Container'
 import GoogleLogo from '../components/GoogleLogo'
+import { lightTheme } from '../assets/themes/lightTheme'
+import { lavaTheme } from '../assets/themes/lavaTheme'
+import { useTheme } from 'styled-components'
 
 AccountSettings.propTypes = {
    //Use another import
@@ -23,7 +26,7 @@ AccountSettings.propTypes = {
    delete_accounts: propTypes.string.isRequired,
 }
 
-function AccountSettings() {
+function AccountSettings(props) {
    const {
       register,
       formState: { errors },
@@ -32,6 +35,37 @@ function AccountSettings() {
    })
 
    const [editEnabled, setEditEnabled] = useState(false)
+   const theme = useTheme()
+   const [selectedTheme, setSelectedTheme] = useState(theme)
+   const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
+
+   useEffect(() => {
+      if(theme === lightTheme) {
+         setSelectedThemeValue('light')
+      }  else if(theme === lavaTheme) { 
+         setSelectedThemeValue('lava')
+      }
+   }, [])
+
+   function handleThemeChange(e) {
+      e.preventDefault()
+      const newTheme = e.target.value
+      if(newTheme === 'light') {
+         setSelectedTheme(lightTheme)
+         setSelectedThemeValue('light')
+      } else  if(newTheme === 'lava') {
+         setSelectedTheme(lavaTheme)
+         setSelectedThemeValue('lava')
+      }
+   }
+
+   function handleEditButtonClick(e) {
+      e.preventDefault()
+      if(editEnabled) {
+         props.setTheme(selectedTheme)
+      }
+      setEditEnabled(!editEnabled)
+   }
 
    return (
       <Container>
@@ -41,7 +75,7 @@ function AccountSettings() {
                <BtnTxtspace>
                   <HeaderText>Profile Settings</HeaderText>
                   <EditBtnWrapper>
-                     <Button variant='secondary' onClick={() => setEditEnabled(!editEnabled)}>
+                     <Button variant='secondary' onClick={handleEditButtonClick}>
                         {editEnabled ? 'Save' : 'Edit'}
                      </Button>
                   </EditBtnWrapper>
@@ -82,10 +116,12 @@ function AccountSettings() {
                </DABtnWrapper>
                <HeaderText>Visual Settings</HeaderText>
                <Subheading id='site_theme'>Site Theme:</Subheading>
-               <SelectInput register={register} id='site_theme' label='' enabled={editEnabled}>
-                  <option value='light'>Light</option>
-                  <option value='dark'>Dark</option>
-               </SelectInput>
+               <Wrapper>
+                  <select id='site_theme' onChange={handleThemeChange} disabled={!editEnabled} value={selectedThemeValue}>
+                     <option value='light'>Light</option>
+                     <option value='lava'>Lava</option>
+                  </select>
+               </Wrapper>
                <Subheading id='text_size'>Text Size:</Subheading>
                <SelectInput register={register} id='font_size' label='' enabled={editEnabled}>
                   <option value='small'>Small</option>
