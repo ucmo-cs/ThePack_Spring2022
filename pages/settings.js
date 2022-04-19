@@ -52,8 +52,10 @@ function AccountSettings(props) {
       const newTheme = e.target.value
       if(newTheme === 'light') {
          setSelectedTheme(lightTheme)
+         setSelectedThemeValue('light')
       } else  if(newTheme === 'lava') {
          setSelectedTheme(lavaTheme)
+         setSelectedThemeValue('lava')
       }
    }
 
