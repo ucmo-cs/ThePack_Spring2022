@@ -14,6 +14,7 @@ Avatar.propTypes = {
 
 const StyledImage = styled(Image)`
 	border-radius: 50%;
+	border: 1px solid ${props => props.theme.colors.lightGrey};
 `
 
 const MyImage = React.forwardRef(

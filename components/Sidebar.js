@@ -44,7 +44,7 @@ function SidebarList(props) {
 }
 
 const SSidebar = styled.div`
-   padding: 10px;
+   padding: 20px;
    width: 100%;
    max-width: 250px;
    background: ${props => props.theme.colors.lightBlue};

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import axios from 'axios'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
@@ -14,9 +15,9 @@ import SelectInput, { Wrapper } from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
 import GoogleLogo from '../components/GoogleLogo'
 import Sidebar from '../components/Sidebar'
-import Container from '../components/styledComponents/Container'
 import Paragraph from '../components/styledComponents/Paragraph'
 import withAuth from '../components/withAuth'
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 
 AccountSettings.propTypes = {
@@ -34,6 +35,8 @@ function AccountSettings(props) {
    const {
       register,
       formState: { errors },
+      setValue,
+      getValues
    } = useForm({
       mode: 'onTouched',
    })
@@ -42,13 +45,19 @@ function AccountSettings(props) {
    const theme = useTheme()
    const [selectedTheme, setSelectedTheme] = useState(theme)
    const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
+   const { wuphfUser } = useWuphfUser()
 
    useEffect(() => {
-      if(theme === lightTheme) {
+      // TODO: Set avatar to user's avatar, this is not in the database yet
+      setValue('avatar', 'option-1')
+      setValue('username', wuphfUser?.userName)
+      setValue('biography_textarea', wuphfUser?.bio)
+
+      if (theme === lightTheme) {
          setSelectedThemeValue('light')
-      }  else if(theme === lavaTheme) { 
+      } else if (theme === lavaTheme) {
          setSelectedThemeValue('lava')
-      } else if(theme === 'dark') {
+      } else if (theme === 'dark') {
          setSelectedThemeValue('dark')
       }
    }, [])
@@ -56,10 +65,10 @@ function AccountSettings(props) {
    function handleThemeChange(e) {
       e.preventDefault()
       const newTheme = e.target.value
-      if(newTheme === 'light') {
+      if (newTheme === 'light') {
          setSelectedTheme(lightTheme)
          setSelectedThemeValue('light')
-      } else  if(newTheme === 'lava') {
+      } else if (newTheme === 'lava') {
          setSelectedTheme(lavaTheme)
          setSelectedThemeValue('lava')
       } else if (newTheme === 'dark') {
@@ -68,27 +77,31 @@ function AccountSettings(props) {
       }
    }
 
-   function handleEditButtonClick(e) {
+   async function handleEditButtonClick(e) {
       e.preventDefault()
-      if(editEnabled) {
+      if (editEnabled) {
          props.setTheme(selectedTheme)
+         await axios.patch(`/api/users/${wuphfUser.userName}`, {
+            userName: getValues('username'),
+            bio: getValues('biography_textarea'),
+         })
       }
       setEditEnabled(!editEnabled)
    }
 
    return (
-      <Container>
-         <AccSetLayout>
-            <Sidebar />
+      <AccSetLayout>
+         <Sidebar />
+         <MainContent>
             <div>
-               <BtnTxtspace>
+               <ProfileSettingsWrapper>
                   <HeaderText>Profile Settings</HeaderText>
                   <EditBtnWrapper>
                      <Button variant='secondary' onClick={handleEditButtonClick}>
                         {editEnabled ? 'Save' : 'Edit'}
                      </Button>
                   </EditBtnWrapper>
-               </BtnTxtspace>
+               </ProfileSettingsWrapper>
                <Subheading id='avatar'>Avatar:</Subheading>
                <TextBtnSpace>
                   <SelectInput register={register} id='avatar' label='' enabled={editEnabled}>
@@ -98,18 +111,18 @@ function AccountSettings(props) {
                   </SelectInput>
                   <Avatar size='small' username='John' profileImageUrl='sample.jpg' />
                </TextBtnSpace>
-               <Subheading id='username'> Username: </Subheading>
-               <UsernameTxtStyling>
-                  <FormInput
-                     id='username'
-                     label=''
-                     register={register}
-                     error={errors.username}
-                     enabled={editEnabled}
-                  />
-               </UsernameTxtStyling>
+               <Subheading id='username'>Username:</Subheading>
+               <FormInput
+                  id='username'
+                  label=''
+                  register={register}
+                  error={errors.username}
+                  enabled={editEnabled}
+               />
                <Subheading id='biography'>Biography:</Subheading>
                <TextArea register={register} id='biography_textarea' label='' enabled={editEnabled} />
+            </div>
+            <div>
 
                <HeaderText>Account Settings</HeaderText>
 
@@ -123,6 +136,8 @@ function AccountSettings(props) {
                <DABtnWrapper>
                   <Button variant='secondary'>Delete Account</Button>
                </DABtnWrapper>
+            </div>
+            <div>
                <HeaderText>Visual Settings</HeaderText>
                <Subheading id='site_theme'>Site Theme:</Subheading>
                <Wrapper>
@@ -139,15 +154,17 @@ function AccountSettings(props) {
                   <option value='large'>Large</option>
                </SelectInput>
             </div>
-         </AccSetLayout>
-      </Container>
+         </MainContent>
+      </AccSetLayout>
    )
 }
 
 export default withAuth(AccountSettings)
 
-const UsernameTxtStyling = styled.div`
-display: flex;
+const MainContent = styled.div`
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
 `
 const TextBtnSpace = styled.div`
 display: flex;
@@ -157,6 +174,8 @@ const AccSetLayout = styled.div`
 display: flex;
 flex-direction: row;
 grid-gap: 30px;
+max-width: 686px;
+margin: 0 auto;
 `
 const Subheading = styled.div`
 margin-top: 2rem;
@@ -170,18 +189,17 @@ font-size: 2rem;
 font-weight: bold;
 border: none;
 text-align: left;
-margin-top: 3rem;
 color: ${props => props.theme.colors.darkestBlue};
 width: 100%;
 `
-const BtnTxtspace = styled.div`
+const ProfileSettingsWrapper = styled.div`
 margin-left: 0em;
 display: flex;
 flex-direction: row;
+padding: 20px 0 0 0;
 `
 const EditBtnWrapper = styled.div`
 font-size: 1.3rem;
-margin: 10px;
 `
 const DABtnWrapper = styled.div`
 font-size: 1.3rem;

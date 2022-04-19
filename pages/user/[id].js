@@ -53,30 +53,26 @@ function UserPage() {
     <Container>
       <TopContainer>
         <Banner />
-
         <Header>
           <Text>
             <Username as="h1">{user?.userName}</Username>
             <Joined as="h3">Joined {moment(user?.createdAt).fromNow()}</Joined>
           </Text>
-
           <AvatarWrapper>
             <Avatar
               username="John Doe"
-              profileImageUrl="sample.jpg"
+              profileImageUrl={'animal_svgs/dog_nau7in.svg'}
               size="large"
+              border="shown"
             />
           </AvatarWrapper>
-
           <Buttons>
-            {/* <Button variant='primary'>...</Button> */}
             <RoundButton variant="primary">
               <FontAwesomeIcon icon={faBell} />
             </RoundButton>
             <Button variant="primary">Follow</Button>
           </Buttons>
         </Header>
-
         <Bio>{user?.bio}</Bio>
       </TopContainer>
       <Wuphfs wuphfs={wuphfs && wuphfs} />
