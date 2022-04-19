@@ -70,7 +70,6 @@ function Wuphf(props) {
 								<StyledEditButton
 									icon={faEllipsis}
 									onClick={toggleEditMenuShown}
-									color='#747378'
 									$shown={editMenuShown}
 								/>
 								<EditMenu $shown={editMenuShown}>
@@ -139,15 +138,16 @@ const EditCorner = styled.div`
 const StyledEditButton = styled(FontAwesomeIcon)`
 	padding: 5px;
 	border-radius: 50%;
-	background-color: ${(props) => (props.$shown ? '#72d0ed' : 'auto')};
+	coolor: ${props => props.theme.colors.lightGrey};
+	background-color: ${(props) => (props.$shown ? props.theme.colors.lightBlue : 'auto')};
 	&:hover {
-		background-color: #72d0ed;
-		color: #202e4a;
+		background-color: ${props => props.theme.colors.lightBlue};
+		color: ${props => props.theme.colors.darkestBlue};
 	}
 `
 
 const EditMenu = styled.ul`
-	background-color: #72d0ed;
+	background-color: ${props => props.theme.colors.lightBlue};
 	position: absolute;
 	margin-top: 25px;
 	border-radius: 10px;
@@ -170,8 +170,8 @@ const EditMenuItem = styled.li`
 	}
 
 	&:hover {
-		color: #f4f4f3;
-		background-color: #7395b0;
+		color: ${props => props.theme.colors.white};
+		background-color: ${props => props.theme.colors.darkBlue};
 	}
 `
 
@@ -205,7 +205,7 @@ const Post = styled(TextareaAutosize)`
 	padding: 5px;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
-	border: ${(props) => (props.$editable ? '1px solid #202e4a' : 'none')};
+	border: ${(props) => (props.$editable ? `1px solid ${props.theme.colors.darkestBlue}` : 'none')};
 	border-radius: 10px;
 	cursor: ${(props) => (props.$editable ? 'text' : 'default')};
 	resize: none;

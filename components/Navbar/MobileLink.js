@@ -35,8 +35,8 @@ const StyledLi = styled.li`
   width: 100%;
 
   &:hover {
-    background-color: #72d0ed;
-    color: #202e4a;
+    background-color: ${props => props.theme.colors.lightBlue};
+    color: ${props => props.theme.colors.darkestBlue};
     cursor: pointer;
   }
 
@@ -48,7 +48,7 @@ const StyledLi = styled.li`
 `
 
 const StyledA = styled.a`
-  color: #202e4a;
+  color: ${props => props.theme.colors.darkestBlue};
   display: flex;
   justify-content: center;
   align-items: center;

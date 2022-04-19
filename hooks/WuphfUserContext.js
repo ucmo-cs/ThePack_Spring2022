@@ -27,11 +27,6 @@ const WuphfUserContextProvider = ({ children }) => {
 		getUser()
 	}, [])
 
-	// const updateUser = (user) => {
-	// 	setWuphfUser(user)
-	// 	setWuphfUserError(undefined)
-	// }
-
 	useEffect(() => {
 		if (wuphfUser !== undefined) {
 			setWuphfUserError(undefined)

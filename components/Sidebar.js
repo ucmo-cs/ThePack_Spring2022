@@ -3,26 +3,29 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faPaintRoller, faUser } from '@fortawesome/free-solid-svg-icons'
 import { profileConfigurationItems, accountConfigurationItems, visualsConfigurationItems } from '../assets/settingsPageConfigurations'
+import { useTheme } from 'styled-components'
 
 export default function Sidebar() {
+   const theme = useTheme()
+
    return (
       <SSidebar>
          <Icon>
-            <FontAwesomeIcon icon={faUser} color='#202e4a' size='2x' />
+            <FontAwesomeIcon icon={faUser} color={theme.colors.darkestBlue} size='2x' />
             <HeaderText>Profile</HeaderText>
          </Icon>
          <SStylefixing>
             {profileConfigurationItems.map((entry) => <SidebarList brand={entry} key={`profilesublist-${entry.target}`} />)}
          </SStylefixing>
          <Icon>
-            <FontAwesomeIcon icon={faGear} color='#202e4a' size='2x' />
+            <FontAwesomeIcon icon={faGear} color={theme.colors.darkestBlue} size='2x' />
             <HeaderText>Account</HeaderText>
          </Icon>
          <SStylefixing>
             {accountConfigurationItems.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
          </SStylefixing>
          <Icon>
-            <FontAwesomeIcon icon={faPaintRoller} color='#202e4a' size='2x' />
+            <FontAwesomeIcon icon={faPaintRoller} color={theme.colors.darkestBlue} size='2x' />
             <HeaderText>Visuals</HeaderText>
          </Icon>
          <SStylefixing>
@@ -42,7 +45,7 @@ const SSidebar = styled.div`
    padding: 10px;
    width: 100%;
    max-width: 250px;
-   background: #72d0ed;
+   background: ${props => props.theme.colors.lightBlue};
    height: 100vh;
    justify-content: flex-start;
    position: sticky;
@@ -54,7 +57,7 @@ const HeaderText = styled.text`
    font-weight: bold;   
    border: none;
    text-align: left;
-   color: #202e4a;
+   color: ${props => props.theme.colors.darkestBlue};
 `
 const Styledli = styled.li`
    list-style-type: none;
@@ -63,7 +66,7 @@ const Styledli = styled.li`
    border: none;
    margin-left: 3.5rem;
    margin-bottom: 0.8rem;
-   color: #202e4a;
+   color: ${props => props.theme.colors.darkestBlue};
 `
 const Icon = styled.div`
    display: flex;
@@ -80,6 +83,6 @@ const SStylefixing = styled.ul`
 `
 const AtagStyle = styled.a`
    text-decoration: none;
-   color: #202e4a;
+   color: ${props => props.theme.colors.darkestBlue};
 
 `

@@ -1,0 +1,21 @@
+export const lavaTheme = {
+	colors: {
+		header: 'orange',
+		footer: 'cyan',
+		white: '#483C33',
+		lightBlue: '#CF121F',
+		grey: '#FFD228',
+		darkBlue: '#F83A0C',
+		darkestBlue: '#FFD228',
+	},
+	button: {
+		primary: {
+			bg: '#227DE5',
+			text: '#fff',
+		},
+		secondary: {
+			bg: '#202e4a',
+			text: '#f4f4f3',
+		},
+	},
+}

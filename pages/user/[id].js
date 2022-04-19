@@ -87,7 +87,7 @@ const TopContainer = styled.div`
 `
 
 const Banner = styled.div`
-  background-color: #7395b0;
+  background-color: ${props => props.theme.colors.darkBlue};
   height: 200px;
   border-radius: 20px;
 `

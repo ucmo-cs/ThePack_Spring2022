@@ -5,6 +5,7 @@ import Error from './Error'
 import Label from './Label'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useTheme } from 'styled-components'
 
 FormSearchInput.propTypes = {
 	register: PropTypes.func.isRequired,
@@ -13,11 +14,13 @@ FormSearchInput.propTypes = {
 }
 
 function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
+	const theme=useTheme()
+
 	return (
 		<Wrapper error={error} isEmpty={isEmpty}>
 			<Label htmlFor={id}>{label}</Label>
 			<input {...register(id)} {...props} />
-			<FontAwesomeIcon icon={faMagnifyingGlass} color='#747378' />
+			<FontAwesomeIcon icon={faMagnifyingGlass} color={theme.colors.lightGrey} />
 			<Error>{error?.message}</Error>
 		</Wrapper>
 	)

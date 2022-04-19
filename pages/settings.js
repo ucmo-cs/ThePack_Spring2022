@@ -125,7 +125,7 @@ font-weight: bold;
 border: none;
 text-align: left;
 margin-top: 3rem;
-color: #202e4a;
+color: ${props => props.theme.colors.darkestBlue};
 width: 100%;
 `
 const BtnTxtspace = styled.div`

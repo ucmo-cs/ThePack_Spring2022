@@ -214,7 +214,7 @@ const Hamburger = styled.div`
   }
 
   &:hover {
-    color: #202e4a;
+    color: ${props => props.theme.colors.darkestBlue};
     justify-content: center;
   }
 `
@@ -267,7 +267,7 @@ const SearchResultUl = styled.ul`
   top: 48px;
   height: auto;
   display: ${(props) => (props.isEmpty ? 'none;' : 'block;')};
-  background-color: #f4f4f3;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 0 0 4px 4px;
   border: 1px solid #aaa;
   width: 250px;
@@ -282,8 +282,8 @@ const SearchResultLi = styled.li`
   padding: 10px;
 
   &:hover {
-    background-color: #72d0ed;
-    color: #202e4a;
+    background-color: ${props => props.theme.colors.lightBlue};
+    color:  ${props => props.theme.colors.darkestBlue};
   }
 `
 

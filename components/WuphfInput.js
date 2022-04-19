@@ -35,20 +35,8 @@ function WuphfInput() {
 	)
 }
 
-// const Button = styled.button`
-//   background-color: #7395b0;
-//   border: none;
-//   color: white;
-//   padding: 0.5rem 1rem;
-//   border-radius: 25px;
-//   font-size:20px;
-//   line-height: 20px;
-//   text-align: right;
-//   font-weight: 600;
-// `
-
 const PostBorder = styled.form`
-	border: 1.5px #7395b0;
+	border: 1.5px ${props => props.theme.colors.darkBlue};
 	border-style: solid;
 	border-radius: 15px;
 	width: 100%;
