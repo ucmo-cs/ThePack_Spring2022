@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
-import { useWuphfUser } from '../hooks/WuphfUserContext'
-import Avatar from './Avatar'
-import Button from './Button'
+import { useWuphfUser } from '../../hooks/WuphfUserContext'
+import Avatar from '../general/Avatar'
+import Button from '../general/Button'
 
 function WuphfInput({ onSubmit }) {
 	const [post, setPost] = useState('')
@@ -17,14 +17,17 @@ function WuphfInput({ onSubmit }) {
 
 	async function handleSubmit(event) {
 		event.preventDefault()
-		axios.post('/api/wuphfs', {
-			userName: wuphfUser.userName,
-			pictureUrl: 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png',
-			postBody: post,
-		}).then((res) => {
-			onSubmit(res.data)
-			setPost('')
-		})
+		axios
+			.post('/api/wuphfs', {
+				userName: wuphfUser.userName,
+				pictureUrl:
+					'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png',
+				postBody: post,
+			})
+			.then((res) => {
+				onSubmit(res.data)
+				setPost('')
+			})
 	}
 
 	return (
@@ -45,7 +48,7 @@ function WuphfInput({ onSubmit }) {
 }
 
 const PostBorder = styled.form`
-	border: 1.5px ${props => props.theme.colors.darkBlue};
+	border: 1.5px ${(props) => props.theme.colors.darkBlue};
 	border-style: solid;
 	border-radius: 15px;
 	width: 100%;

@@ -12,9 +12,8 @@ import Link from 'next/link'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
-import Avatar from './Avatar'
-import Button from './Button'
-
+import Avatar from '../general/Avatar'
+import Button from '../general/Button'
 
 function Wuphf(props) {
 	const { lastWuphfElementRef } = props

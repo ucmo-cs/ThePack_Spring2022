@@ -7,13 +7,13 @@ import moment from 'moment'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import Avatar from '../../components/Avatar'
-import Button from '../../components/Button'
-import Error from '../../components/Error'
-import Loading from '../../components/Loading'
-import RoundButton from '../../components/RoundButton'
+import Avatar from '../../components/general/Avatar'
+import Button from '../../components/general/Button'
+import RoundButton from '../../components/general/RoundButton'
+import Error from '../../components/layout/Error'
+import Loading from '../../components/layout/Loading'
 import Container from '../../components/styledComponents/Container'
-import Wuphfs from '../../components/Wuphfs'
+import Wuphfs from '../../components/wuphfs/Wuphfs'
 
 function UserPage() {
   const router = useRouter()
@@ -81,51 +81,51 @@ function UserPage() {
 }
 
 const TopContainer = styled.div`
-  position: relative;
+	position: relative;
 `
 
 const Banner = styled.div`
-  background-color: ${props => props.theme.colors.darkBlue};
-  height: 200px;
-  border-radius: 20px;
+	background-color: ${(props) => props.theme.colors.darkBlue};
+	height: 200px;
+	border-radius: 20px;
 `
 const AvatarWrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `
 const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	padding: 10px;
 `
 
 const Text = styled.div``
 
 const Username = styled.h1`
-  font-weight: bold;
-  font-size: 1.5rem;
-  padding-bottom: 15px;
-  padding-top: 15px;
+	font-weight: bold;
+	font-size: 1.5rem;
+	padding-bottom: 15px;
+	padding-top: 15px;
 `
 
 const Joined = styled.h3`
-  font-size: 0.75rem;
+	font-size: 0.75rem;
 `
 
 const Buttons = styled.div`
-  /* padding-top: 5px; */
-  display: flex;
-  gap: 0.5rem;
+	/* padding-top: 5px; */
+	display: flex;
+	gap: 0.5rem;
 `
 
 const Bio = styled.div`
-  padding: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  line-height: 1.25em;
+	padding: 10px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	line-height: 1.25em;
 `
 
 export default UserPage

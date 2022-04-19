@@ -2,7 +2,8 @@ export const lightTheme = {
 	colors: {
 		header: 'orange',
 		footer: 'cyan',
-		white: '#f4f4f3',
+		// white: '#f4f4f3',
+		white: '#fff',
 		lightBlue: '#72d0ed',
 		grey: '#747378',
 		darkBlue: '#7395b0',
