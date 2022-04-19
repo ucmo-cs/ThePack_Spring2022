@@ -1,27 +1,34 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 
 import styled from 'styled-components'
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 import Avatar from './Avatar'
 import Button from './Button'
 
-function WuphfInput() {
+function WuphfInput({ onSubmit }) {
 	const [post, setPost] = useState('')
+	const { wuphfUser } = useWuphfUser()
 
 	function handleChange(event) {
 		setPost(event.target.value)
 	}
 
-	function userSubmission(event) {
+	async function handleSubmit(event) {
 		event.preventDefault()
-		if (post.length > 0) alert(`The text entered was: ${post} `)
-		else {
-			alert('Enter a post to submit.')
-		}
+		axios.post('/api/wuphfs', {
+			userName: wuphfUser.userName,
+			pictureUrl: 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png',
+			postBody: post,
+		}).then((res) => {
+			onSubmit(res.data)
+			setPost('')
+		})
 	}
 
 	return (
-		<PostBorder onSubmit={userSubmission}>
+		<PostBorder onSubmit={handleSubmit}>
 			<PostTextArea
 				value={post}
 				onChange={handleChange}
