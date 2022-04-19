@@ -279,6 +279,7 @@ const StyledFormInput = styled(FormSearchInput)`
 const Search = styled.div`
 	display: flex;
 	align-items: center;
+	z-index: 2;
 `
 
 const SearchResultUl = styled.ul`
