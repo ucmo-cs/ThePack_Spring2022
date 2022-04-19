@@ -43,7 +43,6 @@ function AccountSettings(props) {
 
    const [editEnabled, setEditEnabled] = useState(false)
    const theme = useTheme()
-   const [selectedTheme, setSelectedTheme] = useState(theme)
    const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
    const { wuphfUser } = useWuphfUser()
 
@@ -66,21 +65,20 @@ function AccountSettings(props) {
       e.preventDefault()
       const newTheme = e.target.value
       if (newTheme === 'light') {
-         setSelectedTheme(lightTheme)
          setSelectedThemeValue('light')
+         props.setTheme(lightTheme)
       } else if (newTheme === 'lava') {
-         setSelectedTheme(lavaTheme)
          setSelectedThemeValue('lava')
+         props.setTheme(lavaTheme)
       } else if (newTheme === 'dark') {
-         setSelectedTheme(darkTheme)
          setSelectedThemeValue('dark')
+         props.setTheme(darkTheme)
       }
    }
 
    async function handleEditButtonClick(e) {
       e.preventDefault()
       if (editEnabled) {
-         props.setTheme(selectedTheme)
          await axios.patch(`/api/users/${wuphfUser.userName}`, {
             userName: getValues('username'),
             bio: getValues('biography_textarea'),
@@ -141,14 +139,14 @@ function AccountSettings(props) {
                <HeaderText>Visual Settings</HeaderText>
                <Subheading id='site_theme'>Site Theme:</Subheading>
                <Wrapper>
-                  <select id='site_theme' onChange={handleThemeChange} disabled={!editEnabled} value={selectedThemeValue}>
+                  <select id='site_theme' onChange={handleThemeChange} value={selectedThemeValue}>
                      <option value='light'>Light</option>
                      <option value='lava'>Lava</option>
                      <option value='dark'>Dark</option>
                   </select>
                </Wrapper>
                <Subheading id='text_size'>Text Size:</Subheading>
-               <SelectInput register={register} id='font_size' label='' enabled={editEnabled}>
+               <SelectInput register={register} id='font_size' label=''>
                   <option value='small'>Small</option>
                   <option value='medium'>Medium</option>
                   <option value='large'>Large</option>
