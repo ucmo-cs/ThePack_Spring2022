@@ -50,6 +50,7 @@ const PostBorder = styled.form`
 	border-radius: 15px;
 	width: 100%;
 	padding: 1.5rem;
+	background-color: ${props => props.theme.colors.wuphfInputBackground};
 `
 
 const PostTextArea = styled.textarea`
@@ -62,6 +63,7 @@ const PostTextArea = styled.textarea`
 	width: 100%;
 	height: 4rem;
 	margin-bottom: 0.5rem;
+	background-color: transparent;
 `
 const AvatarButtonDiv = styled.div`
 	display: flex;
@@ -69,5 +71,4 @@ const AvatarButtonDiv = styled.div`
 	align-items: center;
 `
 
-// export default WuphfInput
 export default WuphfInput

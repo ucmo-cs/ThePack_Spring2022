@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import axios from 'axios'
-import Link from 'next/link'
 import styled from 'styled-components'
 
 import WuphfInput from '../components/WuphfInput'
 import Wuphfs from '../components/Wuphfs'
 import Error from './Error'
-import Paragraph from './styledComponents/Paragraph'
 
 function Timeline() {
 	const [wuphfs, setWuphfs] = useState(null)
@@ -79,10 +77,6 @@ function Timeline() {
 
 	return (
 		<Wrapper>
-			<Paragraph>
-				<Link href='/register'>CLICK: Username/Animal Selection Page</Link>
-			</Paragraph>
-
 			<InputAndWuphfs>
 				<WuphfInput onSubmit={addWuphf} />
 				{/* {JSON.stringify(wuphfs, null, 2)} */}
