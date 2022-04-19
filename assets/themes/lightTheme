@@ -8,6 +8,7 @@ export const lightTheme = {
 		grey: '#747378',
 		darkBlue: '#7395b0',
 		darkestBlue: '#202e4a',
+		wuphfInputBackground: '#e3f6fb',
 	},
 	button: {
 		primary: {

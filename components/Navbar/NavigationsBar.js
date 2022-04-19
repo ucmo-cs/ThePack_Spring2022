@@ -6,9 +6,9 @@ import styled, { css } from 'styled-components'
 
 import { useSearch } from '../../hooks/useSearch'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
-import FormSearchInput from '../forms/FormSearchInput'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
+import FormSearchInput from '../forms/FormSearchInput'
 import NavigationLink from './DesktopLink'
 import Links from './Links'
 import MobileLink from './MobileLink'
@@ -82,38 +82,42 @@ function NavigationBar() {
 						</Search>
 					</LogoAndSearch>
 
-					<DesktopLinks as='ul' expanded={expanded}>
-						<Links
-							component={NavigationLink}
-							isShown={expanded}
-							onClick={() => setExpanded(false)}
-							user={wuphfUser}
-						/>
-						<ButtonWrapper>
-							<Button
-								style={{ width: '95px' }}
+					{wuphfUser && (
+						<>
+							<DesktopLinks as='ul' expanded={expanded}>
+								<Links
+									component={NavigationLink}
+									isShown={expanded}
+									onClick={() => setExpanded(false)}
+									user={wuphfUser}
+								/>
+								<ButtonWrapper>
+									<Button
+										style={{ width: '95px' }}
+										variant='secondary'
+										onClick={handleSignout}
+									>
+										Sign Out
+									</Button>
+								</ButtonWrapper>
+							</DesktopLinks>
+							<MobileLinks as='ul' expanded={expanded}>
+								<Links
+									component={MobileLink}
+									isShown={expanded}
+									onClick={() => setExpanded(false)}
+									user={wuphfUser}
+								/>
+							</MobileLinks>
+							<MobileSignOutButton
+								expanded={expanded}
 								variant='secondary'
 								onClick={handleSignout}
 							>
 								Sign Out
-							</Button>
-						</ButtonWrapper>
-					</DesktopLinks>
-					<MobileLinks as='ul' expanded={expanded}>
-						<Links
-							component={MobileLink}
-							isShown={expanded}
-							onClick={() => setExpanded(false)}
-							user={wuphfUser}
-						/>
-					</MobileLinks>
-					<MobileSignOutButton
-						expanded={expanded}
-						variant='secondary'
-						onClick={handleSignout}
-					>
-						Sign Out
-					</MobileSignOutButton>
+							</MobileSignOutButton>
+						</>
+					)}
 					<Hamburger expanded={expanded} onClick={toggleExpanded}>
 						<HamburgerLine expanded={expanded} />
 						<HamburgerLine expanded={expanded} />

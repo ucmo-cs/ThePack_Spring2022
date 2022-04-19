@@ -30,7 +30,7 @@ function Layout({ children }) {
 
 	return (
 		<Wrapper>
-			{wuphfUser && <NavigationBar />}
+			{<NavigationBar />}
 			{children}
 		</Wrapper>
 	)
