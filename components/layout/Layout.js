@@ -3,8 +3,8 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
-import { useWuphfUser } from '../hooks/WuphfUserContext'
-import NavigationBar from './NavigationsBar'
+import { useWuphfUser } from '../../hooks/WuphfUserContext'
+import NavigationBar from '../Navbar/NavigationsBar'
 
 function Layout({ children }) {
 	const { setWuphfUserError, wuphfUser, setWuphfUser } = useWuphfUser()

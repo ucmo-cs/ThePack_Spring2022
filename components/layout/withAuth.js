@@ -1,9 +1,9 @@
 import { useSession } from 'next-auth/react'
 
-import { useWuphfUser } from '../hooks/WuphfUserContext'
+import { useWuphfUser } from '../../hooks/WuphfUserContext'
+import Welcome from '../home/Welcome'
+import RegistrationForm from '../registration/RegistrationForm'
 import Loading from './Loading'
-import RegistrationForm from './RegistrationForm'
-import Welcome from './Welcome'
 
 function withAuth(Component) {
 	function Auth(props) {

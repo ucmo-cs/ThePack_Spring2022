@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import axios from 'axios'
-import Link from 'next/link'
 import styled from 'styled-components'
 
-import WuphfInput from '../components/WuphfInput'
-import Wuphfs from '../components/Wuphfs'
-import Error from './Error'
-import Paragraph from './styledComponents/Paragraph'
+import Error from '../layout/Error'
+import WuphfInput from '../timeline/WuphfInput'
+import Wuphfs from '../wuphfs/Wuphfs'
 
 function Timeline() {
 	const [wuphfs, setWuphfs] = useState(null)
@@ -20,12 +18,12 @@ function Timeline() {
 	const getWuphfs = async () => {
 		setLoading(true)
 		const res = await axios
-		.get(`../api/timeline?&maxResults=${maxResults}&cursor=${cursor}`)
-		.catch((err) => {
-			setError({ data: err.response.data, status: err.response.status })
-			setLoading(false)
-		})
-		
+			.get(`../api/timeline?&maxResults=${maxResults}&cursor=${cursor}`)
+			.catch((err) => {
+				setError({ data: err.response.data, status: err.response.status })
+				setLoading(false)
+			})
+
 		if (res) {
 			if (cursor == res.data.cursor) {
 				setHasMore(false)
@@ -33,7 +31,7 @@ function Timeline() {
 			setCursor(res.data.cursor)
 			// console.log('res?.data.cursor', res.data.cursor)
 			const newWuphfs =
-			wuphfs !== null ? [...wuphfs, ...res.data.timeline] : res.data.timeline
+				wuphfs !== null ? [...wuphfs, ...res.data.timeline] : res.data.timeline
 			setWuphfs(newWuphfs)
 			setLoading(false)
 		}
@@ -70,7 +68,7 @@ function Timeline() {
 	}
 
 	function addWuphf(wuphf) {
-		wuphf._count = {Comments: 0, Likes: 0}
+		wuphf._count = { Comments: 0, Likes: 0 }
 		setWuphfs([...wuphfs, wuphf])
 	}
 
@@ -79,9 +77,9 @@ function Timeline() {
 
 	return (
 		<Wrapper>
-			<Paragraph>
+			{/* <Paragraph>
 				<Link href='/register'>CLICK: Username/Animal Selection Page</Link>
-			</Paragraph>
+			</Paragraph> */}
 
 			<InputAndWuphfs>
 				<WuphfInput onSubmit={addWuphf} />

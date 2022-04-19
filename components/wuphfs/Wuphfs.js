@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Title from './styledComponents/Title'
+import Title from '../styledComponents/Title'
 import Wuphf from './Wuphf'
 
 Wuphfs.propTypes = {
