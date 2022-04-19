@@ -15,8 +15,8 @@ import TextArea from '../components/forms/TextArea'
 import GoogleLogo from '../components/GoogleLogo'
 import Sidebar from '../components/Sidebar'
 import Container from '../components/styledComponents/Container'
-import withAuth from '../components/withAuth'
 import Paragraph from '../components/styledComponents/Paragraph'
+import withAuth from '../components/withAuth'
 
 
 AccountSettings.propTypes = {
