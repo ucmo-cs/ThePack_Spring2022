@@ -44,6 +44,8 @@ const Wrapper = styled.div`
 	.footer {
 		background-color: ${({ theme }) => theme.colors.footer};
 	}
+
+	background-color: ${({ theme }) => theme.colors.white};
 `
 
 export default Layout

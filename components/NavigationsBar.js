@@ -135,7 +135,7 @@ const NavWrapper = styled.div`
 const StyledNav = styled.nav`
   display: flex;
   height: 57px;
-  background-color: inherit;
+  background-color: ${({ theme }) => theme.colors.white};
   align-items: center;
   justify-content: space-between;
   z-index: inherit;

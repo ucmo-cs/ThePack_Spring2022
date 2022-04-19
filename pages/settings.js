@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
 
+import { darkTheme } from '../assets/themes/darkTheme'
 import { lavaTheme } from '../assets/themes/lavaTheme'
 import { lightTheme } from '../assets/themes/lightTheme'
 import Avatar from '../components/Avatar'
@@ -15,6 +16,7 @@ import GoogleLogo from '../components/GoogleLogo'
 import Sidebar from '../components/Sidebar'
 import Container from '../components/styledComponents/Container'
 import withAuth from '../components/withAuth'
+import Paragraph from '../components/styledComponents/Paragraph'
 
 
 AccountSettings.propTypes = {
@@ -46,6 +48,8 @@ function AccountSettings(props) {
          setSelectedThemeValue('light')
       }  else if(theme === lavaTheme) { 
          setSelectedThemeValue('lava')
+      } else if(theme === 'dark') {
+         setSelectedThemeValue('dark')
       }
    }, [])
 
@@ -58,6 +62,9 @@ function AccountSettings(props) {
       } else  if(newTheme === 'lava') {
          setSelectedTheme(lavaTheme)
          setSelectedThemeValue('lava')
+      } else if (newTheme === 'dark') {
+         setSelectedTheme(darkTheme)
+         setSelectedThemeValue('dark')
       }
    }
 
@@ -109,10 +116,10 @@ function AccountSettings(props) {
                <Subheading id='linked_account'>Linked Accounts:</Subheading>
                <GoogleLogo />
                <Subheading id='delete_account'>Delete Account:</Subheading>
-               <p>
+               <Paragraph>
                   Permanently remove all account data, Wuphs, and likes. This cannot be
                   undone.
-               </p>
+               </Paragraph>
                <DABtnWrapper>
                   <Button variant='secondary'>Delete Account</Button>
                </DABtnWrapper>
@@ -122,6 +129,7 @@ function AccountSettings(props) {
                   <select id='site_theme' onChange={handleThemeChange} disabled={!editEnabled} value={selectedThemeValue}>
                      <option value='light'>Light</option>
                      <option value='lava'>Lava</option>
+                     <option value='dark'>Dark</option>
                   </select>
                </Wrapper>
                <Subheading id='text_size'>Text Size:</Subheading>
@@ -153,7 +161,7 @@ grid-gap: 30px;
 const Subheading = styled.div`
 margin-top: 2rem;
 margin-bottom: 1rem;
-color: black;
+color: ${props => props.theme.colors.darkestBlue};;
 font-weight: bold;
 font-size: 1rem;
 `

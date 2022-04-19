@@ -1,0 +1,21 @@
+export const darkTheme = {
+	colors: {
+		header: '#2b2b0a',
+		footer: 'cyan',
+		white: '#202020',
+		lightBlue: '#202020',
+		grey: '#FFD228',
+		darkBlue: '#F83A0C',
+		darkestBlue: '#Adad1c',
+	},
+	button: {
+		primary: {
+			bg: '#fff',
+			text: '#227DE5',
+		},
+		secondary: {
+			bg: '#f4f4f3',
+			text: '#202e4a',
+		},
+	},
+}

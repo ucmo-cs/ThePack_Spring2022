@@ -6,5 +6,6 @@ const Title = styled.h1`
   /* font-size: 2rem; */
   font-weight: 700;
   font-size: 1.5rem;
+  color: ${props => props.theme.colors.darkestBlue};
 `
 export default Title
