@@ -1,9 +1,9 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 
+import axios from 'axios'
 import styled from 'styled-components'
-import { useWuphfUser } from '../hooks/WuphfUserContext'
 
+import { useWuphfUser } from '../hooks/WuphfUserContext'
 import Avatar from './Avatar'
 import Button from './Button'
 
