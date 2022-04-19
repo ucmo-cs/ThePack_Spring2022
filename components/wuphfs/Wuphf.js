@@ -5,9 +5,12 @@ import {
 	faCheck,
 	faEllipsis,
 	faPenToSquare,
+	faThumbsUp,
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
@@ -22,6 +25,8 @@ function Wuphf(props) {
 	const [editable, setEditable] = useState(false)
 	const [postContent, setPostContent] = useState(props.postBody)
 
+	const [userLikePost, setUserLikePost] = useState(true)
+	const { data: session } = useSession()
 	function toggleEditMenuShown(e) {
 		e.preventDefault()
 		setEditMenuShown(!editMenuShown)
@@ -54,6 +59,34 @@ function Wuphf(props) {
 	function handleChild(e) {
 		// prevent a click on textbox from triggering link on parent
 		e.stopPropagation()
+	}
+	async function handleLike() {
+		let res
+		if (userLikePost) {
+			res = await axios.post(`/api/wuphfs/${props.id}/likes`, {
+				userId: session.user.email,
+				wuphfId: props.id
+			})
+		}
+		else {
+			res = await axios.delete(`/api/wuphfs/${props.id}/likes`, {
+				userId: session.user.email,
+				wuphfId: props.id
+			})
+		}
+
+		Promise.all([res]).then(async () => {
+			const wuphfLikeData = (await axios.get(`/api/wuphfs/${props.id}/likes`)).data
+			let likePost = false
+			wuphfLikeData.forEach(e => {
+				if (e.userId === session.user.email) {
+					likePost = true
+				}
+				setUserLikePost(likePost)
+			})
+
+			console.log(wuphfLikeData)
+		})
 	}
 
 	return (
@@ -112,15 +145,22 @@ function Wuphf(props) {
 								<FontAwesomeIcon icon={faCheck} />
 							</SaveButton>
 						</SecondRow>
-						<p>
-							{props._count?.Likes} | {props._count?.Comments}
-						</p>
+						<div>
+							<FontAwesomeIcon icon={faThumbsUp} onClick={handleLike} color={userLikePost ? 'green' : 'gray'} />
+							<LikeCount>
+								{props._count?.Likes}
+							</LikeCount>
+						</div>
 					</PostWrapper>
 				</Container>
 			</Link>
 		</PostBorder>
 	)
 }
+
+const LikeCount = styled.span`
+	padding-left: 10px;
+ `
 
 const Container = styled.div`
 	display: grid;
