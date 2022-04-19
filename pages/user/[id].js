@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import Avatar from '../../components/Avatar'
-import Wuphfs from '../../components/Wuphfs'
-import Button from '../../components/Button'
-import styled from 'styled-components'
+
+import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import moment from 'moment'
-import Loading from '../../components/Loading'
-import Container from '../../components/styledComponents/Container'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
-import RoundButton from '../../components/RoundButton'
+import { useRouter } from 'next/router'
+import styled from 'styled-components'
+
+import Avatar from '../../components/Avatar'
+import Button from '../../components/Button'
 import Error from '../../components/Error'
+import Loading from '../../components/Loading'
+import RoundButton from '../../components/RoundButton'
+import Container from '../../components/styledComponents/Container'
+import Wuphfs from '../../components/Wuphfs'
 
 function UserPage() {
   const router = useRouter()

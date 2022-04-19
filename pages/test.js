@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useSession } from 'next-auth/react'
+
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 
 export default function Test() {
 	const [data, setData] = useState()

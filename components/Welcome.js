@@ -1,9 +1,10 @@
 import { signIn } from 'next-auth/react'
 import styled from 'styled-components'
-import Button from './Button'
-import Title from './styledComponents/Title'
-import Paragraph from './styledComponents/Paragraph'
+
 import breakpoint from '../styles/breakpoint'
+import Button from './Button'
+import Paragraph from './styledComponents/Paragraph'
+import Title from './styledComponents/Title'
 
 function Welcome() {
   return (

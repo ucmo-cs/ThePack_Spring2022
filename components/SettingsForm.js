@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import styled from 'styled-components'
+
+import { useWuphfUser } from '../hooks/WuphfUserContext'
+import Button from './Button'
 import FormInput from './forms/FormInput'
 import SelectInput from './forms/SelectInput'
 import TextArea from './forms/TextArea'
-import Button from './Button'
-import Title from './styledComponents/Title'
-import { useSession } from 'next-auth/react'
-import axios from 'axios'
-import { useState } from 'react'
 import Loading from './Loading'
-import { useWuphfUser } from '../hooks/WuphfUserContext'
+import Title from './styledComponents/Title'
 
 function SettingsForm(props) {
 	const { data: session } = useSession()

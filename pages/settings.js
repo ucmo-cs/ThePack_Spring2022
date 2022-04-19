@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import propTypes from 'prop-types'
-import styled from 'styled-components'
-import Sidebar from '../components/Sidebar'
-import FormInput from '../components/forms/FormInput'
-import Button from '../components/Button'
-import Avatar from '../components/Avatar'
 import { useForm } from 'react-hook-form'
+import styled, { useTheme } from 'styled-components'
+
+import { lavaTheme } from '../assets/themes/lavaTheme'
+import { lightTheme } from '../assets/themes/lightTheme'
+import Avatar from '../components/Avatar'
+import Button from '../components/Button'
+import FormInput from '../components/forms/FormInput'
 import SelectInput, { Wrapper } from '../components/forms/SelectInput'
 import TextArea from '../components/forms/TextArea'
-import withAuth from '../components/withAuth'
-import Container from '../components/styledComponents/Container'
 import GoogleLogo from '../components/GoogleLogo'
-import { lightTheme } from '../assets/themes/lightTheme'
-import { lavaTheme } from '../assets/themes/lavaTheme'
-import { useTheme } from 'styled-components'
+import Sidebar from '../components/Sidebar'
+import Container from '../components/styledComponents/Container'
+import withAuth from '../components/withAuth'
+
 
 AccountSettings.propTypes = {
    //Use another import

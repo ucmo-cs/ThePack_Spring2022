@@ -1,11 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
+import styled, { useTheme } from 'styled-components'
+
 import Error from './Error'
 import Label from './Label'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { useTheme } from 'styled-components'
+
+
 
 FormSearchInput.propTypes = {
 	register: PropTypes.func.isRequired,

@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types'
-import Link from 'next/link'
-import Image from 'next/image'
-import styled from 'styled-components'
 import React from 'react'
+
+import Image from 'next/image'
+import Link from 'next/link'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 
 Avatar.propTypes = {
 	username: PropTypes.string.isRequired,

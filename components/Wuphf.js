@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import Avatar from './Avatar'
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import {
+	faBan,
+	faCheck,
 	faEllipsis,
 	faPenToSquare,
 	faTrashCan,
-	faCheck,
-	faBan,
 } from '@fortawesome/free-solid-svg-icons'
-import TextareaAutosize from 'react-textarea-autosize'
-import Button from './Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import TextareaAutosize from 'react-textarea-autosize'
+import styled from 'styled-components'
+
+import Avatar from './Avatar'
+import Button from './Button'
+
 
 function Wuphf(props) {
 	const { lastWuphfElementRef } = props

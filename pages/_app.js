@@ -1,13 +1,16 @@
-import { SessionProvider } from 'next-auth/react'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import Layout from '../components/Layout'
-import reset from 'styled-reset'
+import { useState } from 'react'
+
 import { config } from '@fortawesome/fontawesome-svg-core'
+import { SessionProvider } from 'next-auth/react'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import reset from 'styled-reset'
+
+import { lightTheme } from '../assets/themes/lightTheme'
+import Layout from '../components/Layout'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
-import { lightTheme } from '../assets/themes/lightTheme'
-import { useState } from 'react'
+
 
 const GlobalStyle = createGlobalStyle`
 	${reset}

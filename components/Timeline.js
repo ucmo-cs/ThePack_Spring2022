@@ -1,11 +1,13 @@
-import Wuphfs from '../components/Wuphfs'
-import WuphfInput from '../components/WuphfInput'
-import Link from 'next/link'
-import Paragraph from './styledComponents/Paragraph'
-import { useState, useEffect, useRef, useCallback } from 'react'
-import Error from './Error'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
 import axios from 'axios'
+import Link from 'next/link'
 import styled from 'styled-components'
+
+import WuphfInput from '../components/WuphfInput'
+import Wuphfs from '../components/Wuphfs'
+import Error from './Error'
+import Paragraph from './styledComponents/Paragraph'
 
 function Timeline() {
 	const [wuphfs, setWuphfs] = useState(null)

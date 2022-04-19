@@ -1,15 +1,18 @@
-import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+
 import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 import styled, { css } from 'styled-components'
-import { useState, useRef, useEffect } from 'react'
-import FormSearchInput from './forms/FormSearchInput'
+
+
 import { useSearch } from '../hooks/useSearch'
-import Avatar from './Avatar'
-import NavigationLink from './Navbar/DesktopLink'
-import MobileLink from './Navbar/MobileLink'
-import Links from './Navbar/Links'
-import Button from './Button'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
+import Avatar from './Avatar'
+import Button from './Button'
+import FormSearchInput from './forms/FormSearchInput'
+import NavigationLink from './Navbar/DesktopLink'
+import Links from './Navbar/Links'
+import MobileLink from './Navbar/MobileLink'
 
 function NavigationBar() {
   const {

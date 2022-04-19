@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import SettingsForm from '../components/SettingsForm'
-import styled from 'styled-components'
-import Avatar from '../components/Avatar'
-import breakpoint from '../styles/breakpoint'
-import Container from '../components/styledComponents/Container'
-import { useForm } from 'react-hook-form'
+import React, { useEffect, useState } from 'react'
+
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
 import * as yup from 'yup'
+
+import Avatar from '../components/Avatar'
+import SettingsForm from '../components/SettingsForm'
+import Container from '../components/styledComponents/Container'
+import breakpoint from '../styles/breakpoint'
+
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),

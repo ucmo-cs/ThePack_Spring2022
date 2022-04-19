@@ -1,5 +1,6 @@
-import { prisma, Prisma } from '../../../../lib/prisma'
 import { getSession } from 'next-auth/react'
+
+import { Prisma, prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
   const session = await getSession({ req })

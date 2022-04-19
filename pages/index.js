@@ -1,6 +1,6 @@
+import Container from '../components/styledComponents/Container'
 import Paragraph from '../components/styledComponents/Paragraph'
 import Timeline from '../components/Timeline'
-import Container from '../components/styledComponents/Container'
 import withAuth from '../components/withAuth'
 
 function Home({ session }) {
