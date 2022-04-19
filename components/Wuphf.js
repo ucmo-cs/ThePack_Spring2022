@@ -14,6 +14,8 @@ import Button from './Button'
 import Link from 'next/link'
 
 function Wuphf(props) {
+	const { lastWuphfElementRef } = props
+
 	const [editMenuShown, setEditMenuShown] = useState(false)
 	const [editable, setEditable] = useState(false)
 	const [postContent, setPostContent] = useState(props.postBody)
@@ -53,7 +55,7 @@ function Wuphf(props) {
 	}
 
 	return (
-		<PostBorder>
+		<PostBorder ref={lastWuphfElementRef}>
 			<Link href={`/user/${props?.userId}`} passHref>
 				<Container>
 					<AvatarWrapper>
@@ -138,16 +140,17 @@ const EditCorner = styled.div`
 const StyledEditButton = styled(FontAwesomeIcon)`
 	padding: 5px;
 	border-radius: 50%;
-	coolor: ${props => props.theme.colors.lightGrey};
-	background-color: ${(props) => (props.$shown ? props.theme.colors.lightBlue : 'auto')};
+	color: ${(props) => props.theme.colors.lightGrey};
+	background-color: ${(props) =>
+		props.$shown ? props.theme.colors.lightBlue : 'auto'};
 	&:hover {
-		background-color: ${props => props.theme.colors.lightBlue};
-		color: ${props => props.theme.colors.darkestBlue};
+		background-color: ${(props) => props.theme.colors.lightBlue};
+		color: ${(props) => props.theme.colors.darkestBlue};
 	}
 `
 
 const EditMenu = styled.ul`
-	background-color: ${props => props.theme.colors.lightBlue};
+	background-color: ${(props) => props.theme.colors.lightBlue};
 	position: absolute;
 	margin-top: 25px;
 	border-radius: 10px;
@@ -170,8 +173,8 @@ const EditMenuItem = styled.li`
 	}
 
 	&:hover {
-		color: ${props => props.theme.colors.white};
-		background-color: ${props => props.theme.colors.darkBlue};
+		color: ${(props) => props.theme.colors.white};
+		background-color: ${(props) => props.theme.colors.darkBlue};
 	}
 `
 
@@ -205,7 +208,8 @@ const Post = styled(TextareaAutosize)`
 	padding: 5px;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
-	border: ${(props) => (props.$editable ? `1px solid ${props.theme.colors.darkestBlue}` : 'none')};
+	border: ${(props) =>
+		props.$editable ? `1px solid ${props.theme.colors.darkestBlue}` : 'none'};
 	border-radius: 10px;
 	cursor: ${(props) => (props.$editable ? 'text' : 'default')};
 	resize: none;
