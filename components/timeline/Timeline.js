@@ -10,7 +10,7 @@ import Wuphfs from '../wuphfs/Wuphfs'
 function Timeline() {
 	const [wuphfs, setWuphfs] = useState(null)
 	const [cursor, setCursor] = useState(null)
-	const [maxResults] = useState(2)
+	const [maxResults] = useState(5)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
 	const [hasMore, setHasMore] = useState(true)
