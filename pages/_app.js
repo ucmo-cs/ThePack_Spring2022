@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
 import { lightTheme } from '../assets/themes/lightTheme'
+import { useState } from 'react'
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
@@ -20,13 +21,16 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+	// TODO: Eventually this data will be fetched from the server
+	const [theme, setTheme] = useState(lightTheme)
+
 	return (
 		<SessionProvider session={session}>
 			<WuphfUserContextProvider>
 				<GlobalStyle />
-				<ThemeProvider theme={lightTheme}>
+				<ThemeProvider theme={theme}>
 					<Layout>
-						<Component {...pageProps} />
+						<Component {...pageProps} setTheme={setTheme} />
 					</Layout>
 				</ThemeProvider>
 			</WuphfUserContextProvider>

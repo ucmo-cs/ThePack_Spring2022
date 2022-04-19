@@ -18,7 +18,7 @@ function SelectInput({ register, id, label, children, enabled = true }) {
 	)
 }
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
 	select {
 		font-size: inherit;
 		appearance: none;
