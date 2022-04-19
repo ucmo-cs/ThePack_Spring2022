@@ -9,7 +9,7 @@ Wuphfs.propTypes = {
 }
 
 function Wuphfs({ wuphfs }) {
-  if (wuphfs.length === 0) {
+  if (wuphfs === undefined || wuphfs.length === 0) {
     return <Title>There are no Wuphfs to display.</Title>
   }
 
