@@ -1,3 +1,5 @@
+import { getSession } from 'next-auth/react'
+
 import { Prisma, prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
@@ -31,10 +33,18 @@ export default async function handler(req, res) {
 			throw error
 		}
 	} else if (req.method === 'PATCH') {
+		const session = await getSession({ req })
+		const user = await prisma.WuphfUser.findUnique({
+			where: {
+				email: session.user.email
+			},
+		})
+
 		try {
-			const wuphf = await prisma.Wuphf.update({
+			const wuphf = await prisma.Wuphf.updateMany({
 				where: {
 					id: Number(wid),
+					userId: user.userName
 				},
 				data: {
 					postBody: req.body.postBody,
