@@ -10,6 +10,7 @@ import Layout from '../components/layout/Layout'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
+import { AvatarContextProvider } from '../hooks/useAvatar'
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
@@ -29,12 +30,14 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 	return (
 		<SessionProvider session={session}>
 			<WuphfUserContextProvider>
+				<AvatarContextProvider>
 				<GlobalStyle />
 				<ThemeProvider theme={theme}>
 					<Layout>
 						<Component {...pageProps} setTheme={setTheme} />
 					</Layout>
 				</ThemeProvider>
+				</AvatarContextProvider>
 			</WuphfUserContextProvider>
 		</SessionProvider>
 	)
