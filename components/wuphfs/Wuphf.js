@@ -50,7 +50,10 @@ function Wuphf(props) {
 	function handleDelete(e) {
 		e.preventDefault()
 		setEditMenuShown(false)
-		alert('TODO: Add delete API call.')
+		axios.delete(`/api/wuphfs/${props.id}`).then(() => {
+			console.log(props)
+			props.onDelete()?.onDelete()
+		})
 	}
 
 	function handleSave(e) {

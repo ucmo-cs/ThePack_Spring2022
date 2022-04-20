@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -10,7 +10,14 @@ Wuphfs.propTypes = {
 	wuphfs: PropTypes.array.isRequired,
 }
 
-function Wuphfs({ wuphfs, lastWuphfElementRef }) {
+function Wuphfs(props) {
+	const { lastWuphfElementRef } = props
+	const [wuphfs, setWuphs] = useState(props.wuphfs)
+
+	function handleDeleteWuphf(index) {
+		setWuphs(wuphfs.filter((wuphf, i) => i !== index))
+	}
+
 	if (!wuphfs || wuphfs.length === 0) {
 		return <Title>There are no Wuphfs to display.</Title>
 	}
@@ -24,6 +31,7 @@ function Wuphfs({ wuphfs, lastWuphfElementRef }) {
 							<Wuphf
 								lastWuphfElementRef={lastWuphfElementRef}
 								key={wuphf.id}
+								onDelete={() => handleDeleteWuphf(index)}
 								{...wuphf}
 							/>
 							{/* <p>last element {`${lastWuphfElementRef}`}</p> */}
