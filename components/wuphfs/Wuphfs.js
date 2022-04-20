@@ -11,12 +11,7 @@ Wuphfs.propTypes = {
 }
 
 function Wuphfs(props) {
-	const { lastWuphfElementRef } = props
-	const [wuphfs, setWuphs] = useState(props.wuphfs)
-
-	function handleDeleteWuphf(index) {
-		setWuphs(wuphfs.filter((wuphf, i) => i !== index))
-	}
+	const { wuphfs, lastWuphfElementRef } = props
 
 	if (!wuphfs || wuphfs.length === 0) {
 		return <Title>There are no Wuphfs to display.</Title>
@@ -31,7 +26,7 @@ function Wuphfs(props) {
 							<Wuphf
 								lastWuphfElementRef={lastWuphfElementRef}
 								key={wuphf.id}
-								onDelete={() => handleDeleteWuphf(index)}
+								// onDelete={() => handleDeleteWuphf(index)}
 								{...wuphf}
 							/>
 							{/* <p>last element {`${lastWuphfElementRef}`}</p> */}

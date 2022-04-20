@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
+import moment from 'moment'
 import { useSession } from 'next-auth/react'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
@@ -52,7 +53,7 @@ function Wuphf(props) {
 		setEditMenuShown(false)
 		axios.delete(`/api/wuphfs/${props.id}`).then(() => {
 			console.log(props)
-			props.onDelete()?.onDelete()
+			// props.onDelete()?.onDelete()
 		})
 	}
 
@@ -92,6 +93,37 @@ function Wuphf(props) {
 		}
 	}
 
+	function formatTime(createdAt) {
+		moment.locale('en', {
+			relativeTime: {
+				future: 'in %s',
+				past: '%s ago',
+				s: '1s',
+				ss: '%ss',
+				m: '1m',
+				mm: '%dm',
+				h: '1h',
+				hh: '%dh',
+				d: '1d',
+				dd: '%dd',
+				M: '1m',
+				MM: '%dM',
+				y: '1y',
+				yy: '%dY',
+			},
+		})
+		const currentTime = moment()
+		const wuphfTime = moment(createdAt)
+
+		const timeDiff = currentTime.diff(wuphfTime, 'h')
+
+		if (timeDiff < 24) {
+			return moment(createdAt).fromNow().replace(' ago', '')
+		} else {
+			return moment(createdAt).format('MMM Do')
+		}
+	}
+
 	return (
 		<PostBorder ref={lastWuphfElementRef}>
 			<Container>
@@ -104,7 +136,12 @@ function Wuphf(props) {
 				</AvatarWrapper>
 				<PostWrapper>
 					<TweetHeader>
-						<Username as='h3'>{props.userId}</Username>
+						<UsernameAndTime>
+							<Username as='h3'>{props.userId}</Username>
+							<Dot>·</Dot>
+							{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
+							<Time>{formatTime(props?.createdAt)}</Time>
+						</UsernameAndTime>
 						{wuphfUser.userName === props.userId && (
 							<EditCorner>
 								<StyledEditButton
@@ -176,6 +213,7 @@ const Container = styled.div`
 const TweetHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 `
 
 const EditCorner = styled.div`
@@ -240,6 +278,15 @@ const PostWrapper = styled.div`
 	padding-left: 0;
 `
 
+const UsernameAndTime = styled.div`
+	display: flex;
+	gap: 0.25rem;
+`
+
+const Dot = styled.span``
+
+const Time = styled.span``
+
 const Username = styled.h3`
 	position: relative;
 	font-weight: bold;
@@ -252,7 +299,7 @@ const Username = styled.h3`
 const Post = styled(TextareaAutosize)`
 	font-family: inherit;
 	font-size: inherit;
-	padding: 5px;
+	padding: 5px 0;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
 	border: ${(props) =>
