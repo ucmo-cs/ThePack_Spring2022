@@ -142,33 +142,33 @@ function Wuphf(props) {
 							{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
 							<Time>{formatTime(props?.createdAt)}</Time>
 						</UsernameAndTime>
-						{/* {wuphfUser.userName === props.userId && ( */}
-						<EditCorner>
-							<StyledEditButton
-								icon={faEllipsis}
-								onClick={toggleEditMenuShown}
-								$shown={editMenuShown}
-							/>
-							<EditMenu $shown={editMenuShown}>
-								{!editable && (
-									<EditMenuItem onClick={toggleEditable}>
-										<FontAwesomeIcon icon={faPenToSquare} />
-										<span>Edit</span>
+						{wuphfUser.userName === props.userId && (
+							<EditCorner>
+								<StyledEditButton
+									icon={faEllipsis}
+									onClick={toggleEditMenuShown}
+									$shown={editMenuShown}
+								/>
+								<EditMenu $shown={editMenuShown}>
+									{!editable && (
+										<EditMenuItem onClick={toggleEditable}>
+											<FontAwesomeIcon icon={faPenToSquare} />
+											<span>Edit</span>
+										</EditMenuItem>
+									)}
+									{editable && (
+										<EditMenuItem onClick={toggleEditable}>
+											<FontAwesomeIcon icon={faBan} />
+											<span>Cancel</span>
+										</EditMenuItem>
+									)}
+									<EditMenuItem onClick={handleDelete}>
+										<FontAwesomeIcon icon={faTrashCan} />
+										<span>Delete</span>
 									</EditMenuItem>
-								)}
-								{editable && (
-									<EditMenuItem onClick={toggleEditable}>
-										<FontAwesomeIcon icon={faBan} />
-										<span>Cancel</span>
-									</EditMenuItem>
-								)}
-								<EditMenuItem onClick={handleDelete}>
-									<FontAwesomeIcon icon={faTrashCan} />
-									<span>Delete</span>
-								</EditMenuItem>
-							</EditMenu>
-						</EditCorner>
-						{/* )} */}
+								</EditMenu>
+							</EditCorner>
+						)}
 					</TweetHeader>
 					<SecondRow>
 						<Post
