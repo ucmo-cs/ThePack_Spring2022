@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
-import { signOut } from 'next-auth/react'
 
 import { darkTheme } from '../assets/themes/darkTheme'
 import { lavaTheme } from '../assets/themes/lavaTheme'
@@ -19,7 +20,7 @@ import GoogleLogo from '../components/other/GoogleLogo'
 import Sidebar from '../components/settings/Sidebar'
 import Paragraph from '../components/styledComponents/Paragraph'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
-import { useRouter } from 'next/router'
+
 
 
 AccountSettings.propTypes = {
