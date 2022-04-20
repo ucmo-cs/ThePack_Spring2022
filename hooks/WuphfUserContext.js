@@ -16,8 +16,12 @@ const WuphfUserContextProvider = ({ children }) => {
 		})
 
 		if (res) {
-			console.log(res.data)
-			setWuphfUser(res.data)
+			const newWuphfUser = {
+				...res.data,
+				// TODO: Remove once this is in the database
+				avatar: { url: 'animal_svgs/dog_nau7in.svg' }
+			}
+			setWuphfUser(newWuphfUser)
 			setWuphfUserLoading(false)
 			setWuphfUserError(undefined)
 		}

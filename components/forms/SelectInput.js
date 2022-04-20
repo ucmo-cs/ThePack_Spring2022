@@ -11,14 +11,12 @@ SelectInput.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function SelectInput({ register, id, label, children, enabled = true }) {
-	return (
-		<Wrapper>
-			<Label htmlFor={id}>{label}</Label>
-			<select {...register(id)} disabled={!enabled}>{children}</select>
-		</Wrapper>
-	)
-}
+const SelectInput = React.forwardRef(({ register, id, label, children, onChange, onBlur, name, enabled = true }, ref) => (
+	<Wrapper>
+		<Label htmlFor={id}>{label}</Label>
+		<select onChange={onChange} {...register(id)} disabled={!enabled}>{children}</select>
+	</Wrapper>
+))
 
 export const Wrapper = styled.div`
 	select {

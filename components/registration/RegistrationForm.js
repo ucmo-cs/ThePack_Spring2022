@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import * as yup from 'yup'
 
+import { useAvatars } from '../../hooks/useAvatar'
 import breakpoint from '../../styles/breakpoint'
 import Avatar from '../general/Avatar'
 import SettingsForm from '../settings/SettingsForm'
 import Container from '../styledComponents/Container'
-import { useAvatars } from '../../hooks/useAvatar'
 
 const schema = yup.object({
 	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
