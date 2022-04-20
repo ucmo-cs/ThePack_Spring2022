@@ -94,31 +94,31 @@ function Wuphf(props) {
 	}
 
 	function formatTime(createdAt) {
-		moment.locale('en', {
-			relativeTime: {
-				future: 'in %s',
-				past: '%s ago',
-				s: '1s',
-				ss: '%ss',
-				m: '1m',
-				mm: '%dm',
-				h: '1h',
-				hh: '%dh',
-				d: '1d',
-				dd: '%dd',
-				M: '1m',
-				MM: '%dM',
-				y: '1y',
-				yy: '%dY',
-			},
-		})
+		// moment.locale('en', {
+		// 	relativeTime: {
+		// 		future: 'in %s',
+		// 		past: '%s ago',
+		// 		s: 'seconds ago',
+		// 		ss: '%ss',
+		// 		m: 'minutes ago',
+		// 		mm: '%dm',
+		// 		h: 'hours ago',
+		// 		hh: '%dh',
+		// 		d: 'days ago',
+		// 		dd: '%dd',
+		// 		M: 'months ago',
+		// 		MM: '%dM',
+		// 		y: 'years ago',
+		// 		yy: '%dY',
+		// 	},
+		// })
 		const currentTime = moment()
 		const wuphfTime = moment(createdAt)
 
 		const timeDiff = currentTime.diff(wuphfTime, 'h')
 
 		if (timeDiff < 24) {
-			return moment(createdAt).fromNow().replace(' ago', '')
+			return moment(createdAt).fromNow()
 		} else {
 			return moment(createdAt).format('MMM Do')
 		}
@@ -142,33 +142,33 @@ function Wuphf(props) {
 							{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
 							<Time>{formatTime(props?.createdAt)}</Time>
 						</UsernameAndTime>
-						{wuphfUser.userName === props.userId && (
-							<EditCorner>
-								<StyledEditButton
-									icon={faEllipsis}
-									onClick={toggleEditMenuShown}
-									$shown={editMenuShown}
-								/>
-								<EditMenu $shown={editMenuShown}>
-									{!editable && (
-										<EditMenuItem onClick={toggleEditable}>
-											<FontAwesomeIcon icon={faPenToSquare} />
-											<span>Edit</span>
-										</EditMenuItem>
-									)}
-									{editable && (
-										<EditMenuItem onClick={toggleEditable}>
-											<FontAwesomeIcon icon={faBan} />
-											<span>Cancel</span>
-										</EditMenuItem>
-									)}
-									<EditMenuItem onClick={handleDelete}>
-										<FontAwesomeIcon icon={faTrashCan} />
-										<span>Delete</span>
+						{/* {wuphfUser.userName === props.userId && ( */}
+						<EditCorner>
+							<StyledEditButton
+								icon={faEllipsis}
+								onClick={toggleEditMenuShown}
+								$shown={editMenuShown}
+							/>
+							<EditMenu $shown={editMenuShown}>
+								{!editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faPenToSquare} />
+										<span>Edit</span>
 									</EditMenuItem>
-								</EditMenu>
-							</EditCorner>
-						)}
+								)}
+								{editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faBan} />
+										<span>Cancel</span>
+									</EditMenuItem>
+								)}
+								<EditMenuItem onClick={handleDelete}>
+									<FontAwesomeIcon icon={faTrashCan} />
+									<span>Delete</span>
+								</EditMenuItem>
+							</EditMenu>
+						</EditCorner>
+						{/* )} */}
 					</TweetHeader>
 					<SecondRow>
 						<Post

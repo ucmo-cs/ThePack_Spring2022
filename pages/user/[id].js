@@ -13,36 +13,52 @@ import RoundButton from '../../components/general/RoundButton'
 import Error from '../../components/layout/Error'
 import Loading from '../../components/layout/Loading'
 import Container from '../../components/styledComponents/Container'
-import Wuphfs from '../../components/wuphfs/Wuphfs'
+import WuphfsFeed from '../../components/wuphfs/WuphfsFeed'
 
 function UserPage() {
 	const router = useRouter()
 	const { id } = router.query
 	const [user, setUser] = useState()
-	const [wuphfs, setWuphfs] = useState()
+	const [wuphfs, setWuphfs] = useState(null)
 	const [userLoading, setUserLoading] = useState(true)
 	const [wuphfsLoading, setWuphfsLoading] = useState(true)
 	const [userError, setUserError] = useState()
 	const [followingError, setFollowingError] = useState()
 	const [wuphfsError, setWuphfsError] = useState()
+	const [cursor, setCursor] = useState(null)
+	const [hasMore, setHasMore] = useState(true)
+
+	const getWuphfs = async () => {
+		setWuphfsLoading(true)
+		const res = await axios.get(`/api/users/${id}/wuphfs`).catch((err) => {
+			setWuphfsError({ data: err.response.data, status: err.response.status })
+			setWuphfsLoading(false)
+		})
+
+		if (res) {
+			// TODO: Add pagination to /users/[id]/wuphfs endpoint
+			// if (cursor == res.data.cursor) {
+			// 	setHasMore(false)
+			// }
+			// setCursor(res.data.cursor)
+			// console.log('res?.data.cursor', res.data.cursor)
+			console.log('res.daata', res.data)
+			const newWuphfs = wuphfs !== null ? [...wuphfs, ...res.data] : res.data
+			setWuphfs(newWuphfs)
+			setWuphfsLoading(false)
+			console.log(newWuphfs)
+		}
+	}
+
+	async function getUser() {
+		const res = await axios.get(`/api/users/${id}`).catch((err) => {
+			setUserError({ data: err.response.data, status: err.response.status })
+		})
+		setUser(res?.data)
+		setUserLoading(false)
+	}
 
 	useEffect(() => {
-		async function getUser() {
-			const res = await axios.get(`/api/users/${id}`).catch((err) => {
-				setUserError({ data: err.response.data, status: err.response.status })
-			})
-			setUser(res?.data)
-			setUserLoading(false)
-		}
-
-		async function getWuphfs() {
-			const res = await axios.get(`/api/users/${id}/wuphfs`).catch((err) => {
-				setWuphfsError({ data: err.response.data, status: err.response.status })
-			})
-			setWuphfs(res?.data)
-			setWuphfsLoading(false)
-		}
-
 		if (id) {
 			getUser()
 			getWuphfs()
@@ -104,7 +120,13 @@ function UserPage() {
 				</TopContainer>
 			)}
 
-			{wuphfsLoading ? <Loading /> : <Wuphfs wuphfs={wuphfs && wuphfs} />}
+			{/* {wuphfsLoading ? <Loading /> : <Wuphfs wuphfs={wuphfs && wuphfs} />} */}
+			<WuphfsFeed
+				wuphfs={wuphfs}
+				loading={wuphfsLoading}
+				hasMore={hasMore}
+				getWuphfs={getWuphfs}
+			/>
 		</Container>
 	)
 }

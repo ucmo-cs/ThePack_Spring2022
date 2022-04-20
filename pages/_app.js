@@ -9,8 +9,8 @@ import { lightTheme } from '../assets/themes/lightTheme'
 import Layout from '../components/layout/Layout'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
-import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
 import { AvatarContextProvider } from '../hooks/useAvatar'
+import { WuphfUserContextProvider } from '../hooks/WuphfUserContext'
 
 const GlobalStyle = createGlobalStyle`
 	${reset}

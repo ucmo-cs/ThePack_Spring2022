@@ -7,7 +7,7 @@ import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
 
-function WuphfInput({ onSubmit }) {
+function WuphfInput({ onSubmit, addWuphf }) {
 	const [post, setPost] = useState('')
 	const { wuphfUser } = useWuphfUser()
 
@@ -25,7 +25,9 @@ function WuphfInput({ onSubmit }) {
 				postBody: post,
 			})
 			.then((res) => {
-				onSubmit(res.data)
+				console.log(res.data)
+				addWuphf(res.data)
+				// onSubmit(res.data)
 				setPost('')
 			})
 	}
@@ -53,7 +55,7 @@ const PostBorder = styled.form`
 	border-radius: 15px;
 	width: 100%;
 	padding: 1.5rem;
-	background-color: ${props => props.theme.colors.wuphfInputBackground};
+	background-color: ${(props) => props.theme.colors.wuphfInputBackground};
 `
 
 const PostTextArea = styled.textarea`
