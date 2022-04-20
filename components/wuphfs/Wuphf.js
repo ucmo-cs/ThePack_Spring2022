@@ -11,7 +11,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
-import Link from 'next/link'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
@@ -26,6 +25,8 @@ function Wuphf(props) {
 	const [postContent, setPostContent] = useState(props.postBody)
 
 	const [userLikePost, setUserLikePost] = useState(props.userLikePost)
+	const [likeCount, setLikeCount] = useState(props._count?.Likes)
+
 	const { data: session } = useSession()
 	function toggleEditMenuShown(e) {
 		e.preventDefault()
@@ -61,99 +62,87 @@ function Wuphf(props) {
 		e.stopPropagation()
 	}
 	async function handleLike() {
-		let res
 		if (!userLikePost) {
-			res = await axios.post(`/api/wuphfs/${props.id}/likes`, {
+			axios.post(`/api/wuphfs/${props.id}/likes`, {
 				userId: session.user.email,
 				wuphfId: props.id
+			}).then(() => {
+				setUserLikePost(true)
+				setLikeCount(likeCount + 1)
 			})
 		}
 		else {
-			res = await axios.delete(`/api/wuphfs/${props.id}/likes`, {
+			await axios.delete(`/api/wuphfs/${props.id}/likes`, {
 				userId: session.user.email,
 				wuphfId: props.id
+			}).then(() => {
+				setUserLikePost(false)
+				setLikeCount(likeCount - 1)
 			})
 		}
-
-		Promise.all([res]).then(async () => {
-			const wuphfLikeData = (await axios.get(`/api/wuphfs/${props.id}/likes`)).data
-			let likePost = false
-			wuphfLikeData.forEach(e => {
-				if (e.userId === session.user.email) {
-					likePost = true
-				}
-				setUserLikePost(likePost)
-			})
-
-			console.log(wuphfLikeData)
-		})
 	}
 
 	return (
 		<PostBorder ref={lastWuphfElementRef}>
-			<Link href={`/user/${props?.userId}`} passHref>
-				<Container>
-					<AvatarWrapper>
-						<Avatar
-							username={props.userId}
-							profileImageUrl='animal_svgs/cat_hizjv6.svg'
-							size='large'
-						/>
-					</AvatarWrapper>
-					<PostWrapper>
-						<TweetHeader>
-							<Username as='h3'>{props.userId}</Username>
-							<EditCorner>
-								<StyledEditButton
-									icon={faEllipsis}
-									onClick={toggleEditMenuShown}
-									$shown={editMenuShown}
-								/>
-								<EditMenu $shown={editMenuShown}>
-									{!editable && (
-										<EditMenuItem onClick={toggleEditable}>
-											<FontAwesomeIcon icon={faPenToSquare} />
-											<span>Edit</span>
-										</EditMenuItem>
-									)}
-									{editable && (
-										<EditMenuItem onClick={toggleEditable}>
-											<FontAwesomeIcon icon={faBan} />
-											<span>Cancel</span>
-										</EditMenuItem>
-									)}
-									<EditMenuItem onClick={handleDelete}>
-										<FontAwesomeIcon icon={faTrashCan} />
-										<span>Delete</span>
-									</EditMenuItem>
-								</EditMenu>
-							</EditCorner>
-						</TweetHeader>
-						<SecondRow>
-							<Post
-								value={postContent}
-								onChange={handleEdit}
-								$editable={editable}
-								onClick={handleChild}
+			<Container>
+				<AvatarWrapper>
+					<Avatar
+						username={props.userId}
+						profileImageUrl='animal_svgs/cat_hizjv6.svg'
+						size='large'
+					/>
+				</AvatarWrapper>
+				<PostWrapper>
+					<TweetHeader>
+						<Username as='h3'>{props.userId}</Username>
+						<EditCorner>
+							<StyledEditButton
+								icon={faEllipsis}
+								onClick={toggleEditMenuShown}
+								$shown={editMenuShown}
 							/>
-							<SaveButton
-								$shown={editable}
-								variant='secondary'
-								onClick={handleSave}
-							>
-								<span>Save changes</span>
-								<FontAwesomeIcon icon={faCheck} />
-							</SaveButton>
-						</SecondRow>
-						<div>
-							<FontAwesomeIcon icon={faThumbsUp} onClick={handleLike} color={userLikePost ? 'green' : 'gray'} />
-							<LikeCount>
-								{props._count?.Likes}
-							</LikeCount>
-						</div>
-					</PostWrapper>
-				</Container>
-			</Link>
+							<EditMenu $shown={editMenuShown}>
+								{!editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faPenToSquare} />
+										<span>Edit</span>
+									</EditMenuItem>
+								)}
+								{editable && (
+									<EditMenuItem onClick={toggleEditable}>
+										<FontAwesomeIcon icon={faBan} />
+										<span>Cancel</span>
+									</EditMenuItem>
+								)}
+								<EditMenuItem onClick={handleDelete}>
+									<FontAwesomeIcon icon={faTrashCan} />
+									<span>Delete</span>
+								</EditMenuItem>
+							</EditMenu>
+						</EditCorner>
+					</TweetHeader>
+					<SecondRow>
+						<Post
+							value={postContent}
+							onChange={handleEdit}
+							$editable={editable}
+							onClick={handleChild}
+						/>
+						<SaveButton
+							$shown={editable}
+							variant='secondary'
+							onClick={handleSave}
+						>
+							<span>Save changes</span>
+							<FontAwesomeIcon icon={faCheck} />
+						</SaveButton>
+					</SecondRow>
+					<div>
+						<FontAwesomeIcon icon={faThumbsUp} onClick={handleLike} color={userLikePost ? 'green' : 'gray'} />
+						<LikeCount>{likeCount}</LikeCount>
+					</div>
+				</PostWrapper>
+			</Container>
 		</PostBorder>
 	)
 }
