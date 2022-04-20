@@ -4,6 +4,7 @@ import axios from 'axios'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
+import { signOut } from 'next-auth/react'
 
 import { darkTheme } from '../assets/themes/darkTheme'
 import { lavaTheme } from '../assets/themes/lavaTheme'
@@ -18,6 +19,7 @@ import GoogleLogo from '../components/other/GoogleLogo'
 import Sidebar from '../components/settings/Sidebar'
 import Paragraph from '../components/styledComponents/Paragraph'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
+import { useRouter } from 'next/router'
 
 
 AccountSettings.propTypes = {
@@ -44,7 +46,8 @@ function AccountSettings(props) {
    const [editEnabled, setEditEnabled] = useState(false)
    const theme = useTheme()
    const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
-   const { wuphfUser } = useWuphfUser()
+   const { wuphfUser, setWuphfUser } = useWuphfUser()
+   const router = useRouter()
 
    useEffect(() => {
       // TODO: Set avatar to user's avatar, this is not in the database yet
@@ -87,6 +90,11 @@ function AccountSettings(props) {
       setEditEnabled(!editEnabled)
    }
 
+   async function handleDeleteButtonClick(e) {
+      e.preventDefault()
+      await axios.delete(`/api/users/${wuphfUser.userName}`).then(() => signOut())
+   }
+
    return (
       <AccSetLayout>
          <Sidebar />
@@ -121,9 +129,7 @@ function AccountSettings(props) {
                <TextArea register={register} id='biography_textarea' label='' enabled={editEnabled} />
             </div>
             <div>
-
                <HeaderText>Account Settings</HeaderText>
-
                <Subheading id='linked_account'>Linked Accounts:</Subheading>
                <GoogleLogo />
                <Subheading id='delete_account'>Delete Account:</Subheading>
@@ -132,7 +138,7 @@ function AccountSettings(props) {
                   undone.
                </Paragraph>
                <DABtnWrapper>
-                  <Button variant='secondary'>Delete Account</Button>
+                  <Button variant='secondary' onClick={handleDeleteButtonClick}>Delete Account</Button>
                </DABtnWrapper>
             </div>
             <div>
