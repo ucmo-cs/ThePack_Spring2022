@@ -8,6 +8,7 @@ import {
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import moment from 'moment'
 import Link from 'next/link'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
@@ -56,6 +57,37 @@ function Wuphf(props) {
 		e.stopPropagation()
 	}
 
+	function formatTime(createdAt) {
+		moment.locale('en', {
+			relativeTime: {
+				future: 'in %s',
+				past: '%s ago',
+				s: 'seconds',
+				ss: '%ss',
+				m: 'a minute',
+				mm: '%dm',
+				h: 'an hour',
+				hh: '%dh',
+				d: 'a day',
+				dd: '%dd',
+				M: 'a month',
+				MM: '%dM',
+				y: 'a year',
+				yy: '%dY',
+			},
+		})
+		const currentTime = moment()
+		const wuphfTime = moment(createdAt)
+
+		const timeDiff = currentTime.diff(wuphfTime, 'h')
+
+		if (timeDiff < 24) {
+			return moment(createdAt).fromNow().replace(' ago', '')
+		} else {
+			return moment(createdAt).format('MMM Do')
+		}
+	}
+
 	return (
 		<PostBorder ref={lastWuphfElementRef}>
 			<Link href={`/user/${props?.userId}`} passHref>
@@ -69,7 +101,13 @@ function Wuphf(props) {
 					</AvatarWrapper>
 					<PostWrapper>
 						<TweetHeader>
-							<Username as='h3'>{props.userId}</Username>
+							<UsernameAndTime>
+								<Username as='h3'>{props.userId}</Username>
+								<Dot>·</Dot>
+								{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
+								<Time>{formatTime(props?.createdAt)}</Time>
+							</UsernameAndTime>
+
 							<EditCorner>
 								<StyledEditButton
 									icon={faEllipsis}
@@ -131,6 +169,7 @@ const Container = styled.div`
 const TweetHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 `
 
 const EditCorner = styled.div`
@@ -195,6 +234,15 @@ const PostWrapper = styled.div`
 	padding-left: 0;
 `
 
+const UsernameAndTime = styled.div`
+	display: flex;
+	gap: 0.25rem;
+`
+
+const Dot = styled.span``
+
+const Time = styled.span``
+
 const Username = styled.h3`
 	position: relative;
 	font-weight: bold;
@@ -207,7 +255,8 @@ const Username = styled.h3`
 const Post = styled(TextareaAutosize)`
 	font-family: inherit;
 	font-size: inherit;
-	padding: 5px;
+	/* padding: 5px; */
+	padding: 5px 0;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
 	border: ${(props) =>
