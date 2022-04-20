@@ -41,7 +41,7 @@ function Wuphfs(props) {
 }
 
 const Wrapper = styled.div`
-	border: 1.5px solid #ccc;
+	border: 1.5px solid ${(props) => props.theme.colors.border};
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	border-bottom-left-radius: 20px;

@@ -15,7 +15,9 @@ function SelectInput({ register, id, label, children, enabled = true }) {
 	return (
 		<Wrapper>
 			<Label htmlFor={id}>{label}</Label>
-			<select {...register(id)} disabled={!enabled}>{children}</select>
+			<select {...register(id)} disabled={!enabled}>
+				{children}
+			</select>
 		</Wrapper>
 	)
 }
@@ -24,8 +26,9 @@ export const Wrapper = styled.div`
 	select {
 		font-size: inherit;
 		appearance: none;
-		background-color: #fff;
-		border: 1px solid #aaa;
+		color: inherit;
+		background-color: inherit;
+		border: ${({ theme }) => `1px solid ${theme.colors.border}`};
 		border-radius: 0.25rem;
 		padding: 0.5rem;
 		margin-top: 0.5rem;

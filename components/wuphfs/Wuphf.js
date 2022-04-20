@@ -18,6 +18,7 @@ import styled from 'styled-components'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
+import { lighten } from 'polished'
 
 function Wuphf(props) {
 	const { lastWuphfElementRef } = props
@@ -283,9 +284,13 @@ const UsernameAndTime = styled.div`
 	gap: 0.25rem;
 `
 
-const Dot = styled.span``
+const Dot = styled.span`
+	color: ${({ theme }) => theme.colors.subtext};
+`
 
-const Time = styled.span``
+const Time = styled.span`
+	color: ${({ theme }) => theme.colors.subtext};
+`
 
 const Username = styled.h3`
 	position: relative;
@@ -299,6 +304,7 @@ const Username = styled.h3`
 const Post = styled(TextareaAutosize)`
 	font-family: inherit;
 	font-size: inherit;
+	color: inherit;
 	padding: 5px 0;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
@@ -325,11 +331,11 @@ const PostBorder = styled.div`
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1.5px solid #ccc;
+		border-bottom: 1.5px solid ${(props) => props.theme.colors.border};
 	}
 
 	&:hover {
-		background-color: #f7f7f7;
+		background-color: ${(props) => props.theme.colors.highlight};
 	}
 
 	cursor: pointer;
