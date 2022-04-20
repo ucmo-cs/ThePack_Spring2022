@@ -17,7 +17,6 @@ export default async function handler(req, res) {
         wuphfUser = await prisma.WuphfUser.findUnique({
           where: {
             email: session.user.email,
-            // email: 'cpg55850@ucmo.edu',
           },
         })
 
@@ -58,7 +57,7 @@ export default async function handler(req, res) {
       // console.log(req.query.cursor)
       // console.log(!isNaN(req.query.cursor))
 
-      const timeline = await prisma.Wuphf.findMany({
+      const timeline = await (await prisma.Wuphf.findMany({
         take: Number(req.query.maxResults),
         skip: !isNaN(req.query.cursor) ? 1 : 0,
         ...(!isNaN(req.query.cursor) && {
@@ -71,6 +70,7 @@ export default async function handler(req, res) {
           createdAt: 'desc',
         },
         include: {
+          Likes: true,
           _count: {
             select: {
               Likes: true,
@@ -78,6 +78,13 @@ export default async function handler(req, res) {
             },
           },
         },
+      })).map(wuphf => {
+        const userLikePost = wuphf.Likes.some(like => like.userId === wuphfUser.userName)
+        delete wuphf.Likes
+        return {
+          ...wuphf,
+          userLikePost
+        }
       })
 
       const lastWuphfInResults = timeline[timeline.length - 1]

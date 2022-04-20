@@ -5,14 +5,16 @@ import {
 	faCheck,
 	faEllipsis,
 	faPenToSquare,
+	faThumbsUp,
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import moment from 'moment'
-import Link from 'next/link'
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
+import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
 
@@ -23,6 +25,11 @@ function Wuphf(props) {
 	const [editable, setEditable] = useState(false)
 	const [postContent, setPostContent] = useState(props.postBody)
 
+	const [userLikePost, setUserLikePost] = useState(props.userLikePost)
+	const [likeCount, setLikeCount] = useState(props._count?.Likes)
+	const { wuphfUser } = useWuphfUser()
+
+	const { data: session } = useSession()
 	function toggleEditMenuShown(e) {
 		e.preventDefault()
 		setEditMenuShown(!editMenuShown)
@@ -43,71 +50,62 @@ function Wuphf(props) {
 	function handleDelete(e) {
 		e.preventDefault()
 		setEditMenuShown(false)
-		alert('TODO: Add delete API call.')
+		axios.delete(`/api/wuphfs/${props.id}`).then(() => {
+			console.log(props)
+			props.onDelete()?.onDelete()
+		})
 	}
 
 	function handleSave(e) {
 		e.preventDefault()
 		setEditable(false)
-		alert('TODO: Add update API call.')
+		axios.patch(`/api/wuphfs/${props.id}`, {
+			postBody: postContent,
+		})
 	}
 
 	function handleChild(e) {
 		// prevent a click on textbox from triggering link on parent
 		e.stopPropagation()
 	}
-
-	function formatTime(createdAt) {
-		moment.locale('en', {
-			relativeTime: {
-				future: 'in %s',
-				past: '%s ago',
-				s: 'seconds',
-				ss: '%ss',
-				m: 'a minute',
-				mm: '%dm',
-				h: 'an hour',
-				hh: '%dh',
-				d: 'a day',
-				dd: '%dd',
-				M: 'a month',
-				MM: '%dM',
-				y: 'a year',
-				yy: '%dY',
-			},
-		})
-		const currentTime = moment()
-		const wuphfTime = moment(createdAt)
-
-		const timeDiff = currentTime.diff(wuphfTime, 'h')
-
-		if (timeDiff < 24) {
-			return moment(createdAt).fromNow().replace(' ago', '')
+	async function handleLike() {
+		if (!userLikePost) {
+			axios
+				.post(`/ api / wuphfs / ${props.id} /likes`, {
+					userId: session.user.email,
+					wuphfId: props.id,
+				})
+				.then(() => {
+					setUserLikePost(true)
+					setLikeCount(likeCount + 1)
+				})
 		} else {
-			return moment(createdAt).format('MMM Do')
+			await axios
+				.delete(`/api/wuphfs/${props.id}/likes`, {
+					userId: session.user.email,
+					wuphfId: props.id,
+				})
+				.then(() => {
+					setUserLikePost(false)
+					setLikeCount(likeCount - 1)
+				})
 		}
 	}
 
 	return (
 		<PostBorder ref={lastWuphfElementRef}>
-			<Link href={`/user/${props?.userId}`} passHref>
-				<Container>
-					<AvatarWrapper>
-						<Avatar
-							username={props.userId}
-							profileImageUrl='animal_svgs/cat_hizjv6.svg'
-							size='large'
-						/>
-					</AvatarWrapper>
-					<PostWrapper>
-						<TweetHeader>
-							<UsernameAndTime>
-								<Username as='h3'>{props.userId}</Username>
-								<Dot>·</Dot>
-								{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
-								<Time>{formatTime(props?.createdAt)}</Time>
-							</UsernameAndTime>
-
+			<Container>
+				<AvatarWrapper>
+					<Avatar
+						username={props.userId}
+						profileImageUrl='animal_svgs/cat_hizjv6.svg'
+						size='large'
+					/>
+				</AvatarWrapper>
+				<PostWrapper>
+					<TweetHeader>
+						<Username as='h3'>{props.userId}</Username>
+						{wuphfUser.userName === props.userId && (
 							<EditCorner>
 								<StyledEditButton
 									icon={faEllipsis}
@@ -133,32 +131,41 @@ function Wuphf(props) {
 									</EditMenuItem>
 								</EditMenu>
 							</EditCorner>
-						</TweetHeader>
-						<SecondRow>
-							<Post
-								value={postContent}
-								onChange={handleEdit}
-								$editable={editable}
-								onClick={handleChild}
-							/>
-							<SaveButton
-								$shown={editable}
-								variant='secondary'
-								onClick={handleSave}
-							>
-								<span>Save changes</span>
-								<FontAwesomeIcon icon={faCheck} />
-							</SaveButton>
-						</SecondRow>
-						<p>
-							{props._count?.Likes} | {props._count?.Comments}
-						</p>
-					</PostWrapper>
-				</Container>
-			</Link>
+						)}
+					</TweetHeader>
+					<SecondRow>
+						<Post
+							value={postContent}
+							onChange={handleEdit}
+							$editable={editable}
+							onClick={handleChild}
+						/>
+						<SaveButton
+							$shown={editable}
+							variant='secondary'
+							onClick={handleSave}
+						>
+							<span>Save changes</span>
+							<FontAwesomeIcon icon={faCheck} />
+						</SaveButton>
+					</SecondRow>
+					<div>
+						<FontAwesomeIcon
+							icon={faThumbsUp}
+							onClick={handleLike}
+							color={userLikePost ? 'green' : 'gray'}
+						/>
+						<LikeCount>{likeCount}</LikeCount>
+					</div>
+				</PostWrapper>
+			</Container>
 		</PostBorder>
 	)
 }
+
+const LikeCount = styled.span`
+	padding-left: 10px;
+`
 
 const Container = styled.div`
 	display: grid;
@@ -169,7 +176,6 @@ const Container = styled.div`
 const TweetHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 `
 
 const EditCorner = styled.div`
@@ -234,15 +240,6 @@ const PostWrapper = styled.div`
 	padding-left: 0;
 `
 
-const UsernameAndTime = styled.div`
-	display: flex;
-	gap: 0.25rem;
-`
-
-const Dot = styled.span``
-
-const Time = styled.span``
-
 const Username = styled.h3`
 	position: relative;
 	font-weight: bold;
@@ -255,8 +252,7 @@ const Username = styled.h3`
 const Post = styled(TextareaAutosize)`
 	font-family: inherit;
 	font-size: inherit;
-	/* padding: 5px; */
-	padding: 5px 0;
+	padding: 5px;
 	line-height: 1.25em;
 	background: rgba(0, 0, 0, 0);
 	border: ${(props) =>
