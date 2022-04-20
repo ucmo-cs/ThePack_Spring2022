@@ -1,3 +1,7 @@
+import { lighten, desaturate } from 'polished'
+
+const bodyColor = '#15202B'
+
 export const darkTheme = {
 	colors: {
 		header: '#2b2b0a',
@@ -7,15 +11,25 @@ export const darkTheme = {
 		grey: '#FFD228',
 		darkBlue: '#F83A0C',
 		darkestBlue: '#Adad1c',
+
+		//
+
+		primary: '#1F9BEF',
+		body: bodyColor,
+		border: lighten(0.2, desaturate(0.1, bodyColor)),
+		highlight: lighten(0.05, desaturate(0.1, bodyColor)),
+		text: '#fff',
+		subtext: lighten(0.5, desaturate(0.5, bodyColor)),
+		like: '#03B97C',
 	},
 	button: {
 		primary: {
-			bg: '#fff',
-			text: '#227DE5',
+			bg: '#1F9BEF',
+			text: '#fff',
 		},
 		secondary: {
-			bg: '#f4f4f3',
-			text: '#202e4a',
+			bg: '#243546',
+			text: '#fff',
 		},
 	},
 }

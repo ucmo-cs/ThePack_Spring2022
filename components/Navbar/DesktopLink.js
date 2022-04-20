@@ -29,19 +29,18 @@ const StyledLi = styled.li`
 	text-decoration: none;
 	display: flex;
 
-	background-color: inherit;
+	background-color: ${({ theme }) => theme.colors.body};
 	padding: 0 0.5rem;
 	width: 100%;
 
 	&:hover {
-		background-color: ${props => props.theme.colors.lightBlue};
-		color: ${props => props.theme.colors.darkestBlue};
+		background-color: ${({ theme }) => theme.colors.highlight};
 		cursor: pointer;
 	}
 `
 
 const StyledA = styled.a`
-	color: ${props => props.theme.colors.darkestBlue};
+	color: ${({ theme }) => theme.colors.text};
 	text-decoration: none;
 	display: flex;
 	height: 100%;

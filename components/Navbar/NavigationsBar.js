@@ -136,13 +136,14 @@ const StyledImg = styled.img`
 `
 
 const Shadow = styled.div`
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); */
+	border-bottom: 1.5px solid ${({ theme }) => theme.colors.border};
 `
 
 const NavWrapper = styled.div`
 	max-width: 700px;
 	margin: auto;
-	background-color: white;
+	background-color: ${({ theme }) => theme.colors.body};
 	display: block;
 	z-index: 2;
 `
@@ -150,7 +151,7 @@ const NavWrapper = styled.div`
 const StyledNav = styled.nav`
 	display: flex;
 	height: 57px;
-	background-color: ${({ theme }) => theme.colors.white};
+	background-color: ${({ theme }) => theme.colors.body};
 	align-items: center;
 	justify-content: space-between;
 	z-index: inherit;

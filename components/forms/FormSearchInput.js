@@ -8,8 +8,6 @@ import styled, { useTheme } from 'styled-components'
 import Error from './Error'
 import Label from './Label'
 
-
-
 FormSearchInput.propTypes = {
 	register: PropTypes.func.isRequired,
 	id: PropTypes.string.isRequired,
@@ -17,13 +15,16 @@ FormSearchInput.propTypes = {
 }
 
 function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
-	const theme=useTheme()
+	const theme = useTheme()
 
 	return (
 		<Wrapper error={error} isEmpty={isEmpty}>
 			<Label htmlFor={id}>{label}</Label>
 			<input {...register(id)} {...props} />
-			<FontAwesomeIcon icon={faMagnifyingGlass} color={theme.colors.lightGrey} />
+			<FontAwesomeIcon
+				icon={faMagnifyingGlass}
+				color={theme.colors.lightGrey}
+			/>
 			<Error>{error?.message}</Error>
 		</Wrapper>
 	)
@@ -32,15 +33,18 @@ function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
 const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
-	background-color: white;
+	background-color: ${({ theme }) => theme.colors.body};
 	border-radius: 25px;
-	border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
+	border: ${(props) =>
+		props.error
+			? '1.5px solid red'
+			: `1.5px solid ${props.theme.colors.border}`};
 	padding: 0 10px;
 
 	input {
 		font-size: inherit;
 		display: block;
-		background-color: white;
+		background-color: ${({ theme }) => theme.colors.body};
 		outline: none;
 		padding: 0.5rem;
 		border: none;

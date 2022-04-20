@@ -1,94 +1,121 @@
 import React from 'react'
 
-import { faGear, faPaintRoller, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+	faGear,
+	faPaintRoller,
+	faUser,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled, { useTheme } from 'styled-components'
 
-import { accountConfigurationItems, profileConfigurationItems, visualsConfigurationItems } from '../../assets/settingsPageConfigurations'
+import {
+	accountConfigurationItems,
+	profileConfigurationItems,
+	visualsConfigurationItems,
+} from '../../assets/settingsPageConfigurations'
 
 export default function Sidebar() {
-   const theme = useTheme()
+	const theme = useTheme()
 
-   return (
-      <SSidebar>
-         <Icon>
-            <FontAwesomeIcon icon={faUser} color={theme.colors.darkestBlue} size='2x' />
-            <HeaderText>Profile</HeaderText>
-         </Icon>
-         <SStylefixing>
-            {profileConfigurationItems.map((entry) => <SidebarList brand={entry} key={`profilesublist-${entry.target}`} />)}
-         </SStylefixing>
-         <Icon>
-            <FontAwesomeIcon icon={faGear} color={theme.colors.darkestBlue} size='2x' />
-            <HeaderText>Account</HeaderText>
-         </Icon>
-         <SStylefixing>
-            {accountConfigurationItems.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
-         </SStylefixing>
-         <Icon>
-            <FontAwesomeIcon icon={faPaintRoller} color={theme.colors.darkestBlue} size='2x' />
-            <HeaderText>Visuals</HeaderText>
-         </Icon>
-         <SStylefixing>
-            {visualsConfigurationItems.map((acctentry) => <SidebarList brand={acctentry} key={`acctlist-${acctentry.target}`} />)}
-         </SStylefixing>
-      </SSidebar>
-   )
+	return (
+		<Wrapper>
+			<Group>
+				<Topic>
+					<FontAwesomeIcon icon={faUser} />
+					<HeaderText>Profile</HeaderText>
+				</Topic>
+				<SubTopics>
+					{profileConfigurationItems.map((subtopic) => (
+						<SubTopic>
+							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
+						</SubTopic>
+					))}
+				</SubTopics>
+			</Group>
+
+			<Group>
+				<Topic>
+					<FontAwesomeIcon icon={faGear} />
+					<HeaderText>Account</HeaderText>
+				</Topic>
+				<SubTopics>
+					{accountConfigurationItems.map((subtopic) => (
+						<SubTopic>
+							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
+						</SubTopic>
+					))}
+				</SubTopics>
+			</Group>
+
+			<Group>
+				<Topic>
+					<FontAwesomeIcon icon={faPaintRoller} />
+					<HeaderText>Visuals</HeaderText>
+				</Topic>
+				<SubTopics>
+					{visualsConfigurationItems.map((subtopic) => (
+						<SubTopic>
+							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
+						</SubTopic>
+					))}
+				</SubTopics>
+			</Group>
+		</Wrapper>
+	)
 }
 
-function SidebarList(props) {
-   return <Styledli>
-      <AtagStyle href={`#${props.brand.target}`} > {props.brand.displayName}</AtagStyle>
-   </Styledli>
-}
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 20px;
+	width: 250px;
+	margin-left: -250px;
+	position: sticky;
+	top: 0;
+	left: 0;
+	border-right: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
 
-const SSidebar = styled.div`
-   padding: 20px;
-   width: 100%;
-   width: 250px;
-   margin-left: -250px;
-   background: ${props => props.theme.colors.lightBlue};
-   height: 100vh;
-   justify-content: flex-start;
-   position: sticky;
-   top: 0;
-   left: 0;
-
-   @media (max-width: 1200px) {
-      display: none;
-   }
+	@media (max-width: 1200px) {
+		display: none;
+	}
 `
+
+const Group = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	/* background-color: red; */
+	font-size: 1.33rem;
+`
+
 const HeaderText = styled.text`
-   font-size: 2rem;
-   font-weight: bold;   
-   border: none;
-   text-align: left;
-   color: ${props => props.theme.colors.darkestBlue};
+	font-weight: 500;
+	border: none;
+	text-align: left;
 `
-const Styledli = styled.li`
-   list-style-type: none;
-   font-size: 1.1rem;
-   font-weight: bold;   
-   border: none;
-   margin-left: 3.5rem;
-   margin-bottom: 0.8rem;
-   color: ${props => props.theme.colors.darkestBlue};
+const SubTopic = styled.li`
+	list-style-type: none;
+	font-weight: 300;
+	border: none;
 `
-const Icon = styled.div`
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-start;
-   align-items: center;
-   text-align: center;
-   gap: 8px;
+const Topic = styled.div`
+	display: flex;
+
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+	gap: 0.75rem;
 `
 
-const SStylefixing = styled.ul`
-   margin-top: 3px;
-   margin-bottom: 10px
+const SubTopics = styled.ul`
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
 `
-const AtagStyle = styled.a`
-   text-decoration: none;
-   color: ${props => props.theme.colors.darkestBlue};
 
+const Link = styled.a`
+	text-decoration: none;
+	color: ${(props) => props.theme.colors.text};
 `

@@ -12,7 +12,7 @@ FormInput.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function FormInput({ register, error, label, id, enabled=true, ...props }) {
+function FormInput({ register, error, label, id, enabled = true, ...props }) {
 	return (
 		<Wrapper error={error}>
 			<Label htmlFor={id}>{label}</Label>

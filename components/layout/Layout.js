@@ -36,16 +36,6 @@ function Layout({ children }) {
 	)
 }
 
-const Wrapper = styled.div`
-	.header {
-		background-color: ${({ theme }) => theme.colors.header};
-	}
-
-	.footer {
-		background-color: ${({ theme }) => theme.colors.footer};
-	}
-
-	background-color: ${({ theme }) => theme.colors.white};
-`
+const Wrapper = styled.div``
 
 export default Layout

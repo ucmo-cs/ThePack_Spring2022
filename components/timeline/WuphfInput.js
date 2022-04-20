@@ -50,12 +50,12 @@ function WuphfInput({ onSubmit, addWuphf }) {
 }
 
 const PostBorder = styled.form`
-	border: 1.5px ${(props) => props.theme.colors.darkBlue};
+	border: 1.5px ${(props) => props.theme.colors.border};
 	border-style: solid;
 	border-radius: 15px;
 	width: 100%;
 	padding: 1.5rem;
-	background-color: ${(props) => props.theme.colors.wuphfInputBackground};
+	/* background-color: ${(props) => props.theme.colors.wuphfInputBackground}; */
 `
 
 const PostTextArea = styled.textarea`
@@ -63,12 +63,15 @@ const PostTextArea = styled.textarea`
 	font-size: inherit;
 	border: none;
 	outline: none;
-	border-bottom: 1px solid #aaa;
+	border-bottom: 1px solid ${(props) => props.theme.colors.border};
 	resize: none;
 	width: 100%;
 	height: 4rem;
 	margin-bottom: 0.5rem;
 	background-color: transparent;
+	&::placeholder {
+		color: ${(props) => props.theme.colors.text};
+	}
 `
 const AvatarButtonDiv = styled.div`
 	display: flex;

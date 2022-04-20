@@ -20,6 +20,9 @@ const GlobalStyle = createGlobalStyle`
 	html {
 		font-family: "Open Sans", sans-serif;
 		font-size: 1rem;
+		transition: background-color 0.5s ease;
+		background-color: ${({ theme }) => theme.colors.body};
+		color: ${({ theme }) => theme.colors.text};
 	}
 `
 
@@ -31,12 +34,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 		<SessionProvider session={session}>
 			<WuphfUserContextProvider>
 				<AvatarContextProvider>
-				<GlobalStyle />
-				<ThemeProvider theme={theme}>
-					<Layout>
-						<Component {...pageProps} setTheme={setTheme} />
-					</Layout>
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<GlobalStyle />
+						<Layout>
+							<Component {...pageProps} setTheme={setTheme} />
+						</Layout>
+					</ThemeProvider>
 				</AvatarContextProvider>
 			</WuphfUserContextProvider>
 		</SessionProvider>
