@@ -45,13 +45,18 @@ function SidebarList(props) {
 const SSidebar = styled.div`
    padding: 20px;
    width: 100%;
-   max-width: 250px;
+   width: 250px;
+   margin-left: -250px;
    background: ${props => props.theme.colors.lightBlue};
    height: 100vh;
    justify-content: flex-start;
    position: sticky;
    top: 0;
    left: 0;
+
+   @media (max-width: 1200px) {
+      display: none;
+   }
 `
 const HeaderText = styled.text`
    font-size: 2rem;
