@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { dummySearchResults } from '../assets/dummySearchResults'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'

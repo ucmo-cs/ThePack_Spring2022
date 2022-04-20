@@ -68,7 +68,7 @@ function NavigationBar() {
 										key={`search-result-${entry.username}`}
 										passHref
 									>
-										<SearchResultLi>
+										<SearchResultLi onClick={() => hideSearch()}>
 											<Avatar
 												username={entry.username}
 												profileImageUrl={entry.avatar}
