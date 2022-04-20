@@ -63,13 +63,13 @@ function Timeline() {
 		getWuphfs()
 	}, [])
 
-	function handleClick() {
-		getWuphfs()
-	}
-
 	function addWuphf(wuphf) {
 		wuphf._count = { Comments: 0, Likes: 0 }
 		setWuphfs([...wuphfs, wuphf])
+	}
+
+	function handleDeleteWuphf(index) {
+		setWuphs(wuphfs.filter((wuphf, i) => i !== index))
 	}
 
 	// if (loading) return <Loading />
