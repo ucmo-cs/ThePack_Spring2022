@@ -72,7 +72,7 @@ function Wuphf(props) {
 	async function handleLike() {
 		if (!userLikePost) {
 			axios
-				.post(`/ api / wuphfs / ${props.id} /likes`, {
+				.post(`/api/wuphfs/${props.id}/likes`, {
 					userId: session.user.email,
 					wuphfId: props.id,
 				})
