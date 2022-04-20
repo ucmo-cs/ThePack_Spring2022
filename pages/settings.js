@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
@@ -19,6 +18,7 @@ import withAuth from '../components/layout/withAuth'
 import GoogleLogo from '../components/other/GoogleLogo'
 import Sidebar from '../components/settings/Sidebar'
 import Paragraph from '../components/styledComponents/Paragraph'
+import { useAvatars } from '../hooks/useAvatar'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 AccountSettings.propTypes = {
@@ -38,6 +38,8 @@ function AccountSettings(props) {
 		formState: { errors },
 		setValue,
 		getValues,
+		watch,
+		handleSubmit,
 	} = useForm({
 		mode: 'onTouched',
 	})
@@ -45,12 +47,12 @@ function AccountSettings(props) {
 	const [editEnabled, setEditEnabled] = useState(false)
 	const theme = useTheme()
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
-	const { wuphfUser, setWuphfUser } = useWuphfUser()
-	const router = useRouter()
+	const { wuphfUser } = useWuphfUser()
+	const { avatars } = useAvatars()
 
 	useEffect(() => {
 		// TODO: Set avatar to user's avatar, this is not in the database yet
-		setValue('avatar', 'option-1')
+		setValue('avatar', wuphfUser?.avatar?.url)
 		setValue('username', wuphfUser?.userName)
 		setValue('biography_textarea', wuphfUser?.bio)
 
@@ -61,7 +63,7 @@ function AccountSettings(props) {
 		} else if (theme === 'dark') {
 			setSelectedThemeValue('dark')
 		}
-	}, [])
+	}, [wuphfUser])
 
 	function handleThemeChange(e) {
 		e.preventDefault()
@@ -94,6 +96,11 @@ function AccountSettings(props) {
 		await axios.delete(`/api/users/${wuphfUser.userName}`).then(() => signOut())
 	}
 
+	function handleAvatarChange(e) {
+		e.preventDefault()
+		alert('hello')
+	}
+
 	return (
 		<AccSetLayout>
 			<Sidebar />
@@ -114,12 +121,21 @@ function AccountSettings(props) {
 							id='avatar'
 							label=''
 							enabled={editEnabled}
+							onChange={
+								handleSubmit(handleAvatarChange) /*onChange={alert('he')*/
+							}
 						>
-							<option value='option-1'>Option 1</option>
-							<option value='option-2'>Option 2</option>
-							<option value='option-3'>Option 3</option>
+							{avatars.map((avatar) => (
+								<option key={avatar.key} value={avatar.url}>
+									{avatar.name}
+								</option>
+							))}
 						</SelectInput>
-						<Avatar size='small' username='John' profileImageUrl='sample.jpg' />
+						<Avatar
+							size='small'
+							username={wuphfUser?.userName}
+							profileImageUrl={watch('avatar') || 'animal_svgs/dog_nau7in.svg'}
+						/>
 					</TextBtnSpace>
 					<Subheading id='username'>Username:</Subheading>
 					<FormInput

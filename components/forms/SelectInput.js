@@ -5,22 +5,26 @@ import styled from 'styled-components'
 
 import Label from './Label'
 
-SelectInput.propTypes = {
-	register: PropTypes.func.isRequired,
-	id: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
-}
+// error
+// SelectInput.propTypes = {
+// 	register: PropTypes.func.isRequired,
+// 	id: PropTypes.string.isRequired,
+// 	label: PropTypes.string.isRequired,
+// }
 
-function SelectInput({ register, id, label, children, enabled = true }) {
-	return (
+const SelectInput = React.forwardRef(
+	(
+		{ register, id, label, children, onChange, onBlur, name, enabled = true },
+		ref
+	) => (
 		<Wrapper>
 			<Label htmlFor={id}>{label}</Label>
-			<select {...register(id)} disabled={!enabled}>
+			<select onChange={onChange} {...register(id)} disabled={!enabled}>
 				{children}
 			</select>
 		</Wrapper>
 	)
-}
+)
 
 export const Wrapper = styled.div`
 	select {
