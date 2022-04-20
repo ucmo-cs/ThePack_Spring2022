@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 				data: {
 					postsId: Number(wid),
 					commentBody: req.body.commentBody,
-					userId: 'johndoe',
+					userId: req.body.userId,
 				},
 			})
 
