@@ -24,6 +24,7 @@ const SelectInput = React.forwardRef(
 		</Wrapper>
 	)
 )
+SelectInput.displayName = 'SelectInput'
 
 export const Wrapper = styled.div`
 	select {
