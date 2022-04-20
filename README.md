@@ -123,4 +123,4 @@ Get all comments of a specific post. | Create a new comment on a specific post. 
 ## /wuphfs/[wid]/comments/[cid]
 GET | POST | PATCH | DELETE
 --- | --- | --- | ---
-Get a specific comment on a specific post. | ERROR | (N/A) Update a specific comment on a specific post. | (N/A) Delete a specific comment on a specific post.
+Get a specific comment on a specific post. | ERROR |  Update a specific comment on a specific post. |  Delete a specific comment on a specific post.

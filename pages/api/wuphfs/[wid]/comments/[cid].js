@@ -28,5 +28,37 @@ export default async function handler(req, res) {
 		}
 	}
 
-	// need to add patch and delete here
+	else if (req.method === 'DELETE'){
+		try {
+			const comment = await prisma.Comments.delete({
+				where: {
+					id: Number(cid)
+				}
+			})
+
+			res.json(comment)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
+	}
+
+	else if (req.method === 'PATCH'){
+		try {
+			const comment = await prisma.Comments.update({
+				where: {
+					id: Number(cid),
+				},
+				data: {
+					commentBody: req.body.commentBody,
+				}
+			})
+			res.json(comment)
+		} catch (error) {
+			console.error(error)
+			res.status(500).json({ error })
+			throw error
+		}
+	}
 }
