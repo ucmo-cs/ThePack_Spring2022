@@ -16,68 +16,97 @@ import Container from '../../components/styledComponents/Container'
 import Wuphfs from '../../components/wuphfs/Wuphfs'
 
 function UserPage() {
-  const router = useRouter()
-  const { id } = router.query
-  const [user, setUser] = useState()
-  const [wuphfs, setWuphfs] = useState()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState()
+	const router = useRouter()
+	const { id } = router.query
+	const [user, setUser] = useState()
+	const [wuphfs, setWuphfs] = useState()
+	const [userLoading, setUserLoading] = useState(true)
+	const [wuphfsLoading, setWuphfsLoading] = useState(true)
+	const [userError, setUserError] = useState()
+	const [followingError, setFollowingError] = useState()
+	const [wuphfsError, setWuphfsError] = useState()
 
-  useEffect(() => {
-    async function getUser() {
-      const res = await axios.get(`/api/users/${id}`).catch((err) => {
-        setError({ data: err.response.data, status: err.response.status })
-      })
-      setUser(res?.data)
-      setLoading(false)
-    }
+	useEffect(() => {
+		async function getUser() {
+			const res = await axios.get(`/api/users/${id}`).catch((err) => {
+				setUserError({ data: err.response.data, status: err.response.status })
+			})
+			setUser(res?.data)
+			setUserLoading(false)
+		}
 
-    async function getWuphfs() {
-      const res = await axios.get(`/api/users/${id}/wuphfs`).catch((err) => {
-        setError({ data: err.response.data, status: err.response.status })
-      })
-      setWuphfs(res?.data)
-      setLoading(false)
-    }
+		async function getWuphfs() {
+			const res = await axios.get(`/api/users/${id}/wuphfs`).catch((err) => {
+				setWuphfsError({ data: err.response.data, status: err.response.status })
+			})
+			setWuphfs(res?.data)
+			setWuphfsLoading(false)
+		}
 
-    if (id) {
-      getUser()
-      getWuphfs()
-    }
-  }, [id])
+		if (id) {
+			getUser()
+			getWuphfs()
+		}
+	}, [id])
 
-  if (loading) return <Loading />
-  if (error) return <Error error={error} />
+	async function handleFollow() {
+		const res = await axios.post(`/api/users/${id}/following`).catch((err) => {
+			setFollowingError({
+				data: err.response.data,
+				status: err.response.status,
+			})
+		})
 
-  return (
-    <Container>
-      <TopContainer>
-        <Banner />
-        <Header>
-          <Text>
-            <Username as="h1">{user?.userName}</Username>
-            <Joined as="h3">Joined {moment(user?.createdAt).fromNow()}</Joined>
-          </Text>
-          <AvatarWrapper>
-            <Avatar
-              username="John Doe"
-              profileImageUrl={'animal_svgs/dog_nau7in.svg'}
-              size="large"
-              border="shown"
-            />
-          </AvatarWrapper>
-          <Buttons>
-            <RoundButton variant="primary">
-              <FontAwesomeIcon icon={faBell} />
-            </RoundButton>
-            <Button variant="primary">Follow</Button>
-          </Buttons>
-        </Header>
-        <Bio>{user?.bio}</Bio>
-      </TopContainer>
-      <Wuphfs wuphfs={wuphfs && wuphfs} />
-    </Container>
-  )
+		if (res) {
+			alert(`${id} followed`)
+		}
+	}
+
+	if (userError) return <Error error={userError} />
+
+	return (
+		<Container>
+			{userLoading ? (
+				<Loading />
+			) : (
+				<TopContainer>
+					<Banner />
+
+					<Header>
+						<Text>
+							<Username as='h1'>{user?.userName}</Username>
+							<Joined as='h3'>
+								Joined {moment(user?.createdAt).fromNow()}
+							</Joined>
+						</Text>
+
+						<AvatarWrapper>
+							<Avatar
+								username='John Doe'
+								profileImageUrl={'animal_svgs/dog_nau7in.svg'}
+								size='large'
+								border='shown'
+							/>
+						</AvatarWrapper>
+
+						<Buttons>
+							{/* <Button variant='primary'>...</Button> */}
+							<RoundButton variant='primary'>
+								<FontAwesomeIcon icon={faBell} />
+							</RoundButton>
+							<Button onClick={handleFollow} variant='primary'>
+								Follow
+							</Button>
+						</Buttons>
+					</Header>
+
+					<Bio>{user?.bio}</Bio>
+				</TopContainer>
+			)}
+
+			{wuphfsLoading ? <Loading /> : <Wuphfs wuphfs={wuphfs && wuphfs} />}
+		</Container>
+	)
 }
 
 const TopContainer = styled.div`

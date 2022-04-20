@@ -1,7 +1,16 @@
+import { getSession } from 'next-auth/react'
+
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
   const { wid } = req.query
+  const session = await getSession({ req })
+
+  const user = await prisma.WuphfUser.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  })
 
   // /wuphfs/[wid]/likes
   if (req.method === 'GET') {
@@ -26,7 +35,7 @@ export default async function handler(req, res) {
     try {
       const likes = await prisma.Likes.create({
         data: {
-          userId: 'johndoe',
+          userId: user.userName,
           wuphfId: Number(wid),
         },
       })
@@ -44,7 +53,7 @@ export default async function handler(req, res) {
       const like = await prisma.Likes.delete({
         where: {
           userId_wuphfId: {
-            userId: 'johndoe',
+            userId: user.userName,
             wuphfId: Number(wid),
           },
         },
