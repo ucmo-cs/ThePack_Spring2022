@@ -26,7 +26,7 @@ export default function Sidebar() {
 				</Topic>
 				<SubTopics>
 					{profileConfigurationItems.map((subtopic, index) => (
-						<SubTopic key={`profile-subtopic-${item}`}>
+						<SubTopic key={`profile-subtopic-${index}`}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
