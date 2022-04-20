@@ -25,8 +25,8 @@ export default function Sidebar() {
 					<HeaderText>Profile</HeaderText>
 				</Topic>
 				<SubTopics>
-					{profileConfigurationItems.map((subtopic) => (
-						<SubTopic>
+					{profileConfigurationItems.map((subtopic, index) => (
+						<SubTopic key={`profile-subtopic-${item}`}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
@@ -39,8 +39,8 @@ export default function Sidebar() {
 					<HeaderText>Account</HeaderText>
 				</Topic>
 				<SubTopics>
-					{accountConfigurationItems.map((subtopic) => (
-						<SubTopic>
+					{accountConfigurationItems.map((subtopic, index) => (
+						<SubTopic key={`account-subtopic-${index}`}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
@@ -53,8 +53,8 @@ export default function Sidebar() {
 					<HeaderText>Visuals</HeaderText>
 				</Topic>
 				<SubTopics>
-					{visualsConfigurationItems.map((subtopic) => (
-						<SubTopic>
+					{visualsConfigurationItems.map((subtopic, index) => (
+						<SubTopic key={`visuals-subtopic-${index}`}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}

@@ -27,3 +27,5 @@ function Comment(props){
         </div>
     )
 }
+
+const AvatarWrapper = styled.div``
