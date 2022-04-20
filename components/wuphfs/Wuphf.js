@@ -25,7 +25,7 @@ function Wuphf(props) {
 	const [editable, setEditable] = useState(false)
 	const [postContent, setPostContent] = useState(props.postBody)
 
-	const [userLikePost, setUserLikePost] = useState(true)
+	const [userLikePost, setUserLikePost] = useState(props.userLikePost)
 	const { data: session } = useSession()
 	function toggleEditMenuShown(e) {
 		e.preventDefault()
@@ -62,7 +62,7 @@ function Wuphf(props) {
 	}
 	async function handleLike() {
 		let res
-		if (userLikePost) {
+		if (!userLikePost) {
 			res = await axios.post(`/api/wuphfs/${props.id}/likes`, {
 				userId: session.user.email,
 				wuphfId: props.id
