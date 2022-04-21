@@ -1,6 +1,7 @@
-
+import styled from 'styled-components'
 
 import Avatar from '../general/Avatar'
+// import styledComponents from 'styled-components'
 /*
 Props Needed:
 Comment Body
@@ -9,23 +10,20 @@ Theme Colors
 WuphfId?
 
 */
-function Comment(props){
-
-    return(
-        <div>
-            <AvatarWrapper>
-                <Avatar
-                    username={props.userName}
-                    profileImageUrl='animal_svgs/cat_hizjv6.svg'
-                    size='small'
-                />   
-            </AvatarWrapper>
-            <h3>{props.userName}</h3>
-            <textarea readOnly> 
-                {props.commentBody}
-            </textarea>
-        </div>
-    )
+function Comment(props) {
+	return (
+		<div>
+			<AvatarWrapper>
+				<Avatar
+					username={props.userName}
+					profileImageUrl='animal_svgs/cat_hizjv6.svg'
+					size='small'
+				/>
+			</AvatarWrapper>
+			<h3>{props.userName}</h3>
+			<textarea readOnly>{props.commentBody}</textarea>
+		</div>
+	)
 }
 
 const AvatarWrapper = styled.div``

@@ -6,7 +6,7 @@ import {
 	faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 
 import {
 	accountConfigurationItems,
@@ -15,7 +15,7 @@ import {
 } from '../../assets/settingsPageConfigurations'
 
 export default function Sidebar() {
-	const theme = useTheme()
+	// const theme = useTheme()
 
 	return (
 		<Wrapper>
