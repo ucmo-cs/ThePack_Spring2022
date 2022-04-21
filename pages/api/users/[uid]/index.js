@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 				data: {
 					userName: req.body.userName || undefined,
 					bio: req.body.bio || undefined,
-					// theme: req.body.theme || undefined,
+					theme: req.body.theme || undefined,
 				},
 			})
 

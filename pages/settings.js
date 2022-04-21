@@ -88,9 +88,10 @@ function AccountSettings(props) {
 	async function handleEditVisualSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editVisualSettingsEnabled) {
-			await axios.patch(`/api/users/${wuphfUser.userName}`, {
+			const res = await axios.patch(`/api/users/${wuphfUser.userName}`, {
 				theme: selectedThemeValue,
 			})
+			console.log(res)
 		}
 		setEditVisualSettingsEnabled(!editVisualSettingsEnabled)
 	}
