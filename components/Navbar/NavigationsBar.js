@@ -92,7 +92,7 @@ function NavigationBar() {
 									user={wuphfUser}
 								/>
 								<ButtonWrapper>
-									<Button
+								<Button
 										style={{ width: '95px' }}
 										variant='secondary'
 										onClick={handleSignout}
@@ -207,7 +207,7 @@ const MobileSignOutButton = styled(Button)`
 		props.expanded ? 'fixed !important' : 'absolute !important'};
 	transition: opacity 0.5s ease-in;
 	@media (max-width: 768px) {
-		display: flex;
+		display: ${(props) => (props.expanded ? 'flex' : 'none')};
 		opacity: ${(props) => (props.expanded ? '1' : '0')};
 	}
 `
