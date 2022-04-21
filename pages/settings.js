@@ -110,14 +110,14 @@ function AccountSettings(props) {
 			<Sidebar />
 			<MainContent>
 				<div>
-					<ProfileSettingsWrapper>
+					<HeaderButtonWrapper>
 						<HeaderText>Profile Settings</HeaderText>
 						<EditBtnWrapper>
 							<Button variant='secondary' onClick={handleEditProfileSettingsButtonClick}>
 								{editProfileSettingsEnabled ? 'Save' : 'Edit'}
 							</Button>
 						</EditBtnWrapper>
-					</ProfileSettingsWrapper>
+					</HeaderButtonWrapper>
 					<Subheading id='avatar'>Avatar:</Subheading>
 					<TextBtnSpace>
 						<SelectInput
@@ -136,7 +136,7 @@ function AccountSettings(props) {
 							))}
 						</SelectInput>
 						<Avatar
-							size='small'
+							size='large'
 							username={wuphfUser?.userName}
 							profileImageUrl={watch('avatar') || 'animal_svgs/dog_nau7in.svg'}
 						/>
@@ -173,21 +173,21 @@ function AccountSettings(props) {
 					</DABtnWrapper>
 				</div>
 				<div>
-					<ProfileSettingsWrapper>
+					<HeaderButtonWrapper>
 						<HeaderText>Visual Settings</HeaderText>
 						<EditBtnWrapper>
 							<Button variant='secondary' onClick={handleEditVisualSettingsButtonClick}>
 								{editVisualSettingsEnabled ? 'Save' : 'Edit'}
 							</Button>
 						</EditBtnWrapper>
-					</ProfileSettingsWrapper>
+					</HeaderButtonWrapper>
 					<Subheading id='site_theme'>Site Theme:</Subheading>
 					<Wrapper>
 						<select
 							id='site_theme'
 							onChange={handleThemeChange}
 							value={selectedThemeValue}
-							enabled={editVisualSettingsEnabled}
+							disabled={!editVisualSettingsEnabled}
 						>
 							<option value='light'>Light</option>
 							<option value='lava'>Lava</option>
@@ -195,7 +195,11 @@ function AccountSettings(props) {
 						</select>
 					</Wrapper>
 					<Subheading id='text_size'>Text Size:</Subheading>
-					<SelectInput register={register} id='font_size' label=''>
+					<SelectInput
+						register={register}
+						id='font_size' label=''
+						enabled={editVisualSettingsEnabled}
+					>
 						<option value='small'>Small</option>
 						<option value='medium'>Medium</option>
 						<option value='large'>Large</option>
@@ -237,7 +241,7 @@ const HeaderText = styled.div`
 	text-align: left;
 	width: 100%;
 `
-const ProfileSettingsWrapper = styled.div`
+const HeaderButtonWrapper = styled.div`
 	margin-left: 0em;
 	display: flex;
 	flex-direction: row;
