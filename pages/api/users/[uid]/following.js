@@ -93,6 +93,11 @@ export default async function handler(req, res) {
 
 		// try to find the user we're following
 		try {
+			if(uid === userName) {
+				return res.status(400).json({
+					msg: 'You cannot follow yourself',
+				})
+			}
 			const userToFollow = await prisma.WuphfUser.findUnique({
 				where: {
 					userName: uid,
