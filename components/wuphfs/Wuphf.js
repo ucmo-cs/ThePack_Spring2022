@@ -142,7 +142,7 @@ function Wuphf(props) {
 							{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
 							<Time>{formatTime(props?.createdAt)}</Time>
 						</UsernameAndTime>
-						{wuphfUser.userName === props.userId && (
+						{wuphfUser?.userName === props.userId && (
 							<EditCorner>
 								<StyledEditButton
 									icon={faEllipsis}
