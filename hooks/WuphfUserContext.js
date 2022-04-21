@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 const WuphfUserContext = React.createContext()
+import { darkTheme } from '../assets/themes/darkTheme'
+import { lightTheme } from '../assets/themes/lightTheme'
+import { lavaTheme } from '../assets/themes/lavaTheme'
 
-const WuphfUserContextProvider = ({ children }) => {
+const WuphfUserContextProvider = ({ setTheme, children }) => {
 	const [wuphfUser, setWuphfUser] = useState()
 	const [wuphfUserLoading, setWuphfUserLoading] = useState(true)
 	const [wuphfUserError, setWuphfUserError] = useState()
@@ -24,6 +27,7 @@ const WuphfUserContextProvider = ({ children }) => {
 			setWuphfUser(newWuphfUser)
 			setWuphfUserLoading(false)
 			setWuphfUserError(undefined)
+			setTheme(lookupTheme(newWuphfUser.theme))
 		}
 	}
 
@@ -57,6 +61,16 @@ const useWuphfUser = () => {
 	const wuphfUserData = useContext(WuphfUserContext)
 
 	return wuphfUserData
+}
+
+function lookupTheme(theme) {
+	if (theme === 'light') {
+		return lightTheme
+	} else if (theme === 'lava') {
+		return lavaTheme
+	} else if (theme === 'dark') {
+		return darkTheme
+	}
 }
 
 export { WuphfUserContextProvider, useWuphfUser }

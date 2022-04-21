@@ -44,7 +44,8 @@ function AccountSettings(props) {
 		mode: 'onTouched',
 	})
 
-	const [editEnabled, setEditEnabled] = useState(false)
+	const [editProfileSettingsEnabled, setEditProfileSettingsEnabled] = useState(false)
+	const [editVisualSettingsEnabled, setEditVisualSettingsEnabled] = useState(false)
 	const theme = useTheme()
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
 	const { wuphfUser } = useWuphfUser()
@@ -55,14 +56,7 @@ function AccountSettings(props) {
 		setValue('avatar', wuphfUser?.avatar?.url)
 		setValue('username', wuphfUser?.userName)
 		setValue('biography_textarea', wuphfUser?.bio)
-
-		if (theme === lightTheme) {
-			setSelectedThemeValue('light')
-		} else if (theme === lavaTheme) {
-			setSelectedThemeValue('lava')
-		} else if (theme === 'dark') {
-			setSelectedThemeValue('dark')
-		}
+		setSelectedThemeValue(wuphfUser?.theme)
 	}, [wuphfUser])
 
 	function handleThemeChange(e) {
@@ -80,15 +74,25 @@ function AccountSettings(props) {
 		}
 	}
 
-	async function handleEditButtonClick(e) {
+	async function handleEditProfileSettingsButtonClick(e) {
 		e.preventDefault()
-		if (editEnabled) {
+		if (editProfileSettingsEnabled) {
 			await axios.patch(`/api/users/${wuphfUser.userName}`, {
 				userName: getValues('username'),
-				bio: getValues('biography_textarea'),
+				bio: getValues('biography_textarea')
 			})
 		}
-		setEditEnabled(!editEnabled)
+		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
+	}
+
+	async function handleEditVisualSettingsButtonClick(e) {
+		e.preventDefault()
+		if (editVisualSettingsEnabled) {
+			await axios.patch(`/api/users/${wuphfUser.userName}`, {
+				theme: selectedThemeValue,
+			})
+		}
+		setEditVisualSettingsEnabled(!editVisualSettingsEnabled)
 	}
 
 	async function handleDeleteButtonClick(e) {
@@ -106,23 +110,23 @@ function AccountSettings(props) {
 			<Sidebar />
 			<MainContent>
 				<div>
-					<ProfileSettingsWrapper>
+					<HeaderButtonWrapper>
 						<HeaderText>Profile Settings</HeaderText>
 						<EditBtnWrapper>
-							<Button variant='secondary' onClick={handleEditButtonClick}>
-								{editEnabled ? 'Save' : 'Edit'}
+							<Button variant='secondary' onClick={handleEditProfileSettingsButtonClick}>
+								{editProfileSettingsEnabled ? 'Save' : 'Edit'}
 							</Button>
 						</EditBtnWrapper>
-					</ProfileSettingsWrapper>
+					</HeaderButtonWrapper>
 					<Subheading id='avatar'>Avatar:</Subheading>
 					<TextBtnSpace>
 						<SelectInput
 							register={register}
 							id='avatar'
 							label=''
-							enabled={editEnabled}
+							enabled={editProfileSettingsEnabled}
 							onChange={
-								handleSubmit(handleAvatarChange) /*onChange={alert('he')*/
+								handleSubmit(handleAvatarChange)
 							}
 						>
 							{avatars.map((avatar) => (
@@ -132,7 +136,7 @@ function AccountSettings(props) {
 							))}
 						</SelectInput>
 						<Avatar
-							size='small'
+							size='large'
 							username={wuphfUser?.userName}
 							profileImageUrl={watch('avatar') || 'animal_svgs/dog_nau7in.svg'}
 						/>
@@ -143,14 +147,14 @@ function AccountSettings(props) {
 						label=''
 						register={register}
 						error={errors.username}
-						enabled={editEnabled}
+						enabled={editProfileSettingsEnabled}
 					/>
 					<Subheading id='biography'>Biography:</Subheading>
 					<TextArea
 						register={register}
 						id='biography_textarea'
 						label=''
-						enabled={editEnabled}
+						enabled={editProfileSettingsEnabled}
 					/>
 				</div>
 				<div>
@@ -169,13 +173,21 @@ function AccountSettings(props) {
 					</DABtnWrapper>
 				</div>
 				<div>
-					<HeaderText>Visual Settings</HeaderText>
+					<HeaderButtonWrapper>
+						<HeaderText>Visual Settings</HeaderText>
+						<EditBtnWrapper>
+							<Button variant='secondary' onClick={handleEditVisualSettingsButtonClick}>
+								{editVisualSettingsEnabled ? 'Save' : 'Edit'}
+							</Button>
+						</EditBtnWrapper>
+					</HeaderButtonWrapper>
 					<Subheading id='site_theme'>Site Theme:</Subheading>
 					<Wrapper>
 						<select
 							id='site_theme'
 							onChange={handleThemeChange}
 							value={selectedThemeValue}
+							disabled={!editVisualSettingsEnabled}
 						>
 							<option value='light'>Light</option>
 							<option value='lava'>Lava</option>
@@ -183,7 +195,11 @@ function AccountSettings(props) {
 						</select>
 					</Wrapper>
 					<Subheading id='text_size'>Text Size:</Subheading>
-					<SelectInput register={register} id='font_size' label=''>
+					<SelectInput
+						register={register}
+						id='font_size' label=''
+						enabled={editVisualSettingsEnabled}
+					>
 						<option value='small'>Small</option>
 						<option value='medium'>Medium</option>
 						<option value='large'>Large</option>
@@ -225,7 +241,7 @@ const HeaderText = styled.div`
 	text-align: left;
 	width: 100%;
 `
-const ProfileSettingsWrapper = styled.div`
+const HeaderButtonWrapper = styled.div`
 	margin-left: 0em;
 	display: flex;
 	flex-direction: row;
