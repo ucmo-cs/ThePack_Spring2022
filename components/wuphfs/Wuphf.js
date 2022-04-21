@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 import {
 	faBan,
@@ -137,7 +138,9 @@ function Wuphf(props) {
 				<PostWrapper>
 					<TweetHeader>
 						<UsernameAndTime>
-							<Username as='h3'>{props.userId}</Username>
+							<Link href={`/user/${props.userId}`}>
+								<Username as='h3'>{props.userId}</Username>
+							</Link>
 							<Dot>·</Dot>
 							{/* <Time>{moment(props?.createdAt).format('MMM Do')}</Time> */}
 							<Time>{formatTime(props?.createdAt)}</Time>
