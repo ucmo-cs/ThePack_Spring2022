@@ -13,6 +13,16 @@ export default async function handler(req, res) {
             email: session.user.email,
             // email: 'cpg55850@ucmo.edu',
           },
+          include: {
+            Followers: true,
+            Following: true,
+            _count: {
+              select: {
+                Followers: true,
+                Following: true,
+              },
+            },
+          }
         })
 
         if (!user) {

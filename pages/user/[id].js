@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
-import { faBell } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import moment from 'moment'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import Avatar from '../../components/general/Avatar'
-import Button from '../../components/general/Button'
-import RoundButton from '../../components/general/RoundButton'
 import Error from '../../components/layout/Error'
 import Loading from '../../components/layout/Loading'
 import Container from '../../components/styledComponents/Container'
 import WuphfsFeed from '../../components/wuphfs/WuphfsFeed'
+import FollowInformation from './FollowInformation'
 
 function UserPage() {
 	const router = useRouter()
@@ -42,11 +39,11 @@ function UserPage() {
 			// }
 			// setCursor(res.data.cursor)
 			// console.log('res?.data.cursor', res.data.cursor)
-			console.log('res.daata', res.data)
+			// console.log('res.daata', res.data)
 			const newWuphfs = wuphfs !== null ? [...wuphfs, ...res.data] : res.data
 			setWuphfs(newWuphfs)
 			setWuphfsLoading(false)
-			console.log(newWuphfs)
+			// console.log(newWuphfs)
 		}
 	}
 
@@ -104,16 +101,7 @@ function UserPage() {
 								border='shown'
 							/>
 						</AvatarWrapper>
-
-						<Buttons>
-							{/* <Button variant='primary'>...</Button> */}
-							<RoundButton variant='primary'>
-								<FontAwesomeIcon icon={faBell} />
-							</RoundButton>
-							<Button onClick={handleFollow} variant='primary'>
-								Follow
-							</Button>
-						</Buttons>
+						<FollowInformation onClick={handleFollow} />
 					</Header>
 
 					<Bio>{user?.bio}</Bio>
@@ -164,12 +152,6 @@ const Username = styled.h1`
 
 const Joined = styled.h3`
 	font-size: 0.75rem;
-`
-
-const Buttons = styled.div`
-	/* padding-top: 5px; */
-	display: flex;
-	gap: 0.5rem;
 `
 
 const Bio = styled.div`
