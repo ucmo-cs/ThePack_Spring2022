@@ -63,7 +63,7 @@ model WuphfUser {
   userName   String     @unique @db.VarChar(255)
   createdAt  DateTime   @default(now())
   bio        String     @db.Text
-  theme      String?     @db.Text
+  theme      String?    @db.VarChar(255)
   wuphfs     Wuphf[]
   Likes      Likes[]
   Followers  Follower[] @relation("follower")
