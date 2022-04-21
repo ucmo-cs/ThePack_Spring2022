@@ -18,7 +18,6 @@ import styled from 'styled-components'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
-import { lighten } from 'polished'
 
 function Wuphf(props) {
 	const { lastWuphfElementRef } = props

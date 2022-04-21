@@ -6,7 +6,7 @@ import {
 	faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 
 import {
 	accountConfigurationItems,
@@ -15,7 +15,7 @@ import {
 } from '../../assets/settingsPageConfigurations'
 
 export default function Sidebar() {
-	const theme = useTheme()
+	// const theme = useTheme()
 
 	return (
 		<Wrapper>
@@ -26,7 +26,7 @@ export default function Sidebar() {
 				</Topic>
 				<SubTopics>
 					{profileConfigurationItems.map((subtopic) => (
-						<SubTopic>
+						<SubTopic key={subtopic.target}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
@@ -40,7 +40,7 @@ export default function Sidebar() {
 				</Topic>
 				<SubTopics>
 					{accountConfigurationItems.map((subtopic) => (
-						<SubTopic>
+						<SubTopic key={subtopic.target}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
@@ -54,7 +54,7 @@ export default function Sidebar() {
 				</Topic>
 				<SubTopics>
 					{visualsConfigurationItems.map((subtopic) => (
-						<SubTopic>
+						<SubTopic key={subtopic.target}>
 							<Link href={`#${subtopic.target}`}>{subtopic.displayName}</Link>
 						</SubTopic>
 					))}
