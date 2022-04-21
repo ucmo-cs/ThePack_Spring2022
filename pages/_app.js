@@ -27,21 +27,20 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-	// TODO: Eventually this data will be fetched from the server
 	const [theme, setTheme] = useState(lightTheme)
 
 	return (
 		<SessionProvider session={session}>
-			<WuphfUserContextProvider>
-				<AvatarContextProvider>
-					<ThemeProvider theme={theme}>
+			<AvatarContextProvider>
+				<ThemeProvider theme={theme}>
+					<WuphfUserContextProvider setTheme={setTheme}>
 						<GlobalStyle />
 						<Layout>
 							<Component {...pageProps} setTheme={setTheme} />
 						</Layout>
-					</ThemeProvider>
-				</AvatarContextProvider>
-			</WuphfUserContextProvider>
+					</WuphfUserContextProvider>
+				</ThemeProvider>
+			</AvatarContextProvider>
 		</SessionProvider>
 	)
 }

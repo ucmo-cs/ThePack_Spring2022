@@ -28,7 +28,7 @@ function SettingsForm(props) {
 			.post('/api/users', {
 				email: session.user.email,
 				userName: props.watch('username'),
-				bio: props.watch('bio'),
+				bio: props.watch('bio')
 			})
 			.then((res) => {
 				setLoading(false)
