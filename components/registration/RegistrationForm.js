@@ -37,12 +37,13 @@ function RegistrationForm({ setWuphfUser }) {
 		const subscription = watch((value) => {
 			let newAnimal = value
 			for (let i = 0; i < avatars.length; i++) {
-				if (avatars[i].key.toUpperCase() === watch('animal').toUpperCase()) {
+				if (avatars[i].url.toUpperCase() === watch('animal').toUpperCase()) {
 					newAnimal = avatars[i]
 					break
 				}
 			}
 			setSelectedAvatar(newAnimal)
+			console.log(avatars)
 		})
 		return () => subscription.unsubscribe()
 	}, [watch])
@@ -53,7 +54,7 @@ function RegistrationForm({ setWuphfUser }) {
 				<div className='avatarContainer'>
 					<Avatar
 						username='Joe Smith'
-						profileImageUrl={selectedAvatar.url}
+						profileImageUrl={selectedAvatar?.url || 'temp'}
 						size='large'
 					/>
 				</div>

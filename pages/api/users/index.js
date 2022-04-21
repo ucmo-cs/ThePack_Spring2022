@@ -23,6 +23,7 @@ export default async function handler(req, res) {
 					email: req.body.email,
 					userName: req.body.userName,
 					bio: req.body.bio || undefined,
+					avatarId: Number(req.body.avatarId) || undefined,
 					// theme: 'light'
 				},
 			})

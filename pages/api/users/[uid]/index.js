@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 				},
 				include: {
 					wuphfs: true,
+					avatar: true
 				},
 			})
 
@@ -37,6 +38,7 @@ export default async function handler(req, res) {
 					userName: req.body.userName || undefined,
 					bio: req.body.bio || undefined,
 					theme: req.body.theme || undefined,
+					avatarId: req.body.avatarId || undefined,
 				},
 			})
 

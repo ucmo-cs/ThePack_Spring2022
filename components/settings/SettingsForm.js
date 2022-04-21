@@ -28,7 +28,8 @@ function SettingsForm(props) {
 			.post('/api/users', {
 				email: session.user.email,
 				userName: props.watch('username'),
-				bio: props.watch('bio')
+				bio: props.watch('bio'),
+				avatarId: props.watch('animal')
 			})
 			.then((res) => {
 				setLoading(false)
@@ -60,7 +61,7 @@ function SettingsForm(props) {
 				/>
 				<SelectInput register={props.register} id='animal' label='Your Animal'>
 					{props.animals.map((animal) => (
-						<option value={animal.key} key={`select-option-${animal.key}`}>
+						<option value={animal.avatarId} key={`select-option-${animal.avatarId}`}>
 							{animal.name}
 						</option>
 					))}

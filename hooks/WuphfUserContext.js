@@ -19,15 +19,12 @@ const WuphfUserContextProvider = ({ setTheme, children }) => {
 		})
 
 		if (res) {
-			const newWuphfUser = {
-				...res.data,
-				// TODO: Remove once this is in the database
-				avatar: { url: 'animal_svgs/dog_nau7in.svg' },
-			}
+			const newWuphfUser = res.data
 			setWuphfUser(newWuphfUser)
 			setWuphfUserLoading(false)
 			setWuphfUserError(undefined)
 			setTheme(lookupTheme(newWuphfUser.theme))
+			console.log(newWuphfUser)
 		}
 	}
 

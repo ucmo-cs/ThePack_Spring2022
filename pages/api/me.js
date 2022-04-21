@@ -16,6 +16,7 @@ export default async function handler(req, res) {
           include: {
             Followers: true,
             Following: true,
+            avatar: true,
             _count: {
               select: {
                 Followers: true,

@@ -95,8 +95,8 @@ function UserPage() {
 
 						<AvatarWrapper>
 							<Avatar
-								username='John Doe'
-								profileImageUrl={'animal_svgs/dog_nau7in.svg'}
+								username= {user.userName}
+								profileImageUrl={user.avatar.url}
 								size='large'
 								border='shown'
 							/>
