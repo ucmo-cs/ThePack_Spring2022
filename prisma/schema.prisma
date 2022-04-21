@@ -69,8 +69,8 @@ model WuphfUser {
   Followers Follower[] @relation("follower")
   Following Follower[] @relation("followee")
   Comments  Comments[]
-  avatar    Avatar?    @relation(fields: [avatarId], references: [avatarId])
-  avatarId  Int?
+  avatar    Avatar    @relation(fields: [avatarId], references: [avatarId])
+  avatarId  Int       @default(1)
 
 }
 
