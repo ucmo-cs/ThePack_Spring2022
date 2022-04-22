@@ -72,26 +72,27 @@ function UserPage() {
 				<TopContainer>
 					<Banner />
 
-					<Header>
-						<Text>
-							<Username as='h1'>{user?.userName}</Username>
-							<Joined as='h3'>
-								Joined {moment(user?.createdAt).fromNow()}
-							</Joined>
-						</Text>
+					<HeaderAndBio>
+						<Header>
+							<Text>
+								<Username as='h1'>{user?.userName}</Username>
+							</Text>
 
-						<AvatarWrapper>
-							<Avatar
-								username= {user.userName}
-								profileImageUrl={user.avatar.url}
-								size='large'
-								border='shown'
-							/>
-						</AvatarWrapper>
-						<FollowInformation user={user} />
-					</Header>
+							<AvatarWrapper>
+								<Avatar
+									username={user.userName}
+									profileImageUrl={user.avatar.url}
+									size='large'
+									border='shown'
+								/>
+							</AvatarWrapper>
+							<FollowInformation user={user} />
+						</Header>
 
-					<Bio>{user?.bio}</Bio>
+						<Joined as='h3'>Joined {moment(user?.createdAt).fromNow()}</Joined>
+
+						<Bio>{user?.bio}</Bio>
+					</HeaderAndBio>
 				</TopContainer>
 			)}
 
@@ -124,8 +125,14 @@ const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 60px;
-	padding: 10px;
+	margin-bottom: 0.3rem;
+`
+
+const HeaderAndBio = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 0.65rem;
+	margin-bottom: 1rem;
 `
 
 const Text = styled.div``
@@ -133,18 +140,14 @@ const Text = styled.div``
 const Username = styled.h1`
 	font-weight: bold;
 	font-size: 1.5rem;
-	padding-bottom: 15px;
-	padding-top: 15px;
 `
 
 const Joined = styled.h3`
 	font-size: 0.75rem;
+	margin-bottom: 1.5rem;
 `
 
 const Bio = styled.div`
-	padding: 10px;
-	padding-top: 30px;
-	padding-bottom: 30px;
 	line-height: 1.25em;
 `
 
