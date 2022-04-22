@@ -137,7 +137,7 @@ export default async function handler(req, res) {
 		try {
 			currentUser = await prisma.WuphfUser.findUnique({
 				where: {
-					email: req.body.email, // our email
+					email: session.user.email,
 				},
 			})
 		} catch (error) {

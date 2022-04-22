@@ -1,26 +1,41 @@
+import { getSession } from 'next-auth/react'
+
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
 	const { uid } = req.query
+	const session = await getSession({ req })
 
 	// /users/[uid]
 	if (req.method === 'GET') {
 		try {
+			
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
 					userName: uid,
 				},
 				include: {
 					wuphfs: true,
-					avatar: true
+					avatar: true,
+					Followers: true,
 				},
 			})
-
+			
 			if (!user) {
 				return res
-					.status(404)
-					.json({ msg: `No WuphfUser found with the username ${uid}` })
+				.status(404)
+				.json({ msg: `No WuphfUser found with the username ${uid}` })
 			}
+
+			if(session) {
+				const sender = await prisma.WuphfUser.findUnique({
+					where: {
+						email: session.user.email,
+					}
+				})
+				user.isFollowed = user.Followers.some(f => f.followerId === sender.userName)
+			}
+			delete user.Followers
 
 			res.json(user)
 		} catch (error) {

@@ -62,19 +62,6 @@ function UserPage() {
 		}
 	}, [id])
 
-	async function handleFollow() {
-		const res = await axios.post(`/api/users/${id}/following`).catch((err) => {
-			setFollowingError({
-				data: err.response.data,
-				status: err.response.status,
-			})
-		})
-
-		if (res) {
-			alert(`${id} followed`)
-		}
-	}
-
 	if (userError) return <Error error={userError} />
 
 	return (
@@ -101,7 +88,7 @@ function UserPage() {
 								border='shown'
 							/>
 						</AvatarWrapper>
-						<FollowInformation onClick={handleFollow} />
+						<FollowInformation user={user} />
 					</Header>
 
 					<Bio>{user?.bio}</Bio>

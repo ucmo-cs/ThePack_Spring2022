@@ -1,27 +1,47 @@
+import { useState } from 'react'
+
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRouter } from 'next/router'
+import axios from 'axios'
 import styled from 'styled-components'
+
 
 import Button from '../../components/general/Button'
 import RoundButton from '../../components/general/RoundButton'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 
 export default function FollowInformation(props) {
-    const router = useRouter()
-	const { id } = router.query
-    
     const { wuphfUser } = useWuphfUser()
-    const { onClick } = props
+    
+    const { user } = props
+    const [following, setFollowing] = useState(user?.isFollowed)
 
-    if (id === wuphfUser?.userName) {
+    async function handleFollow() {
+        const res = await axios.post(`/api/users/${user.userName}/following`)
+
+		if (res) {
+			alert(`${user.userName} followed`)
+            setFollowing(true)
+		}
+    }
+
+    async function handleUnfollow() {
+        const res = await axios.delete(`/api/users/${user.userName}/following`)
+
+		if (res) {
+			alert(`${user.userName} unfollowed`)
+            setFollowing(false)
+		}
+    }
+
+    if (wuphfUser?.userName === user?.userName) {
         return (
             <Buttons>
                 <Button variant='primary'>
-                    {wuphfUser?._count?.Following || '0'} Following
+                    {user?._count?.Following || '0'} Following
                 </Button>
                 <Button variant='primary'>
-                    {wuphfUser?._count?.Followers || '0'} Followers
+                    {user?._count?.Followers || '0'} Followers
                 </Button>
             </Buttons>
         )
@@ -31,9 +51,8 @@ export default function FollowInformation(props) {
                 <RoundButton variant='primary'>
                     <FontAwesomeIcon icon={faBell} />
                 </RoundButton>
-                <Button onClick={onClick} variant='primary'>
-                    Follow
-                </Button>
+                {following ? <Button onClick={handleUnfollow} variant='secondary'>Unfollow</Button> :
+                    <Button onClick={handleFollow} variant='primary'>Follow</Button>}
             </Buttons>
         )
     }
