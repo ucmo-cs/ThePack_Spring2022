@@ -20,6 +20,7 @@ function WuphfInput({ onSubmit, addWuphf }) {
 		axios
 			.post('/api/wuphfs', {
 				userName: wuphfUser.userName,
+				// pictureUrl: wuphfUser.avatar.url,
 				pictureUrl:
 					'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png',
 				postBody: post,
@@ -40,7 +41,12 @@ function WuphfInput({ onSubmit, addWuphf }) {
 				placeholder="What's happening?"
 			/>
 			<AvatarButtonDiv>
-				<Avatar size='medium' username='John' profileImageUrl='sample.jpg' />
+				<Avatar 
+					size='medium' 
+					username={wuphfUser.userName} 
+					profileImageUrl={wuphfUser.avatar.url}
+				/>
+				{/* <Avatar size='medium' username='John' profileImageUrl='sample.jpg' /> */}
 				<Button type='submit' variant='primary'>
 					WUPHF!
 				</Button>
