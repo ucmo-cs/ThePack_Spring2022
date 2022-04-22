@@ -27,7 +27,7 @@ function UserPage() {
 
 	const getWuphfs = async () => {
 		setWuphfsLoading(true)
-		const res = await axios.get(`/api/users/${id}/wuphfs`).catch((err) => {
+		const res = await axios.get(`/api/users/${String(id)}/wuphfs`).catch((err) => {
 			setWuphfsError({ data: err.response.data, status: err.response.status })
 			setWuphfsLoading(false)
 		})
@@ -82,7 +82,6 @@ function UserPage() {
 							<Text>
 								<Username as='h1'>{user?.userName}</Username>
 							</Text>
-
 							<AvatarWrapper>
 								<Avatar
 									username={user.userName}
@@ -93,9 +92,7 @@ function UserPage() {
 							</AvatarWrapper>
 							<FollowInformation user={user} />
 						</Header>
-
 						<Joined as='h3'>Joined {moment(user?.createdAt).fromNow()}</Joined>
-
 						<Bio>{user?.bio}</Bio>
 					</HeaderAndBio>
 				</TopContainer>
