@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 
 import { useSearch } from '../../hooks/useSearch'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
@@ -12,6 +12,7 @@ import Button from '../general/Button'
 import NavigationLink from './DesktopLink'
 import Links from './Links'
 import MobileLink from './MobileLink'
+import WuphfLogo from './WuphfLogo'
 
 function NavigationBar() {
 	const {
@@ -24,6 +25,7 @@ function NavigationBar() {
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
 	const { wuphfUser } = useWuphfUser()
+	const theme = useTheme()
 
 	function toggleExpanded() {
 		if (!expanded) {
@@ -47,11 +49,13 @@ function NavigationBar() {
 				<StyledNav expanded={expanded} ref={myRef}>
 					<LogoAndSearch>
 						<Link href='/' passHref>
-							<StyledImg
+							{/* <StyledImg
 								src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dogThick_rieymv.svg'
 								width={40}
 								height={40}
-							/>
+							/> */}
+							{/* <Logo src='/wuphf_logo.svg' alt='Wuphf' /> */}
+							<WuphfLogo />
 						</Link>
 						<Search>
 							<StyledFormInput
@@ -92,7 +96,7 @@ function NavigationBar() {
 									user={wuphfUser}
 								/>
 								<ButtonWrapper>
-								<Button
+									<Button
 										style={{ width: '95px' }}
 										variant='secondary'
 										onClick={handleSignout}

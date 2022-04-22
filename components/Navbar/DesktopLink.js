@@ -37,6 +37,10 @@ const StyledLi = styled.li`
 		background-color: ${({ theme }) => theme.colors.highlight};
 		cursor: pointer;
 	}
+
+	&:active {
+		background-color: ${({ theme }) => theme.colors.highlightPressed};
+	}
 `
 
 const StyledA = styled.a`
