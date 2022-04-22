@@ -16,7 +16,6 @@ export default function FollowInformation(props) {
     const [showFollowingModal, setShowFollowingModal] = useState(false)
     const [showFollowerModal, setShowFollowerModal] = useState(false)
 
-
     const { wuphfUser } = useWuphfUser()
 
     const { user } = props
@@ -25,13 +24,13 @@ export default function FollowInformation(props) {
     const [followingList, setFollowingList] = useState([])
 
     useEffect(() => {
-        const newFollowersList = user?.Followers.map(follower => {
+        const newFollowersList = user?.Followers?.map(follower => {
             return {
                 userName: follower.followerId,
                 avatar: follower.user.avatar.url
             }
         })
-        const newFollowingList = user?.Following.map(following => {
+        const newFollowingList = user?.Following?.map(following => {
             return {
                 userName: following.userId,
                 avatar: following.user.avatar.url

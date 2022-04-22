@@ -9,7 +9,6 @@ export default async function handler(req, res) {
 	// /users/[uid]
 	if (req.method === 'GET') {
 		try {
-
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
 					userName: uid,
@@ -70,15 +69,13 @@ export default async function handler(req, res) {
 				})
 				user.isFollowed = user.Followers.some(f => f.followerId === sender.userName)
 
-				// if (sender.userName !== user.userName) {
-					// delete user.Followers
-					// delete user.Following
-				// }
+				if (sender.userName !== user.userName) {
+					delete user.Followers
+					delete user.Following
+				}
 			}
 
-			if (session)
-
-				res.json(user)
+			res.json(user)
 		} catch (error) {
 			console.error(error)
 			res.status(500).json({ error })
