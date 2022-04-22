@@ -6,9 +6,9 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 
-import Button from '../../components/general/Button'
-import RoundButton from '../../components/general/RoundButton'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
+import Button from '../general/Button'
+import RoundButton from '../general/RoundButton'
 
 export default function FollowInformation(props) {
     const { wuphfUser } = useWuphfUser()

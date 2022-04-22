@@ -9,8 +9,8 @@ import Avatar from '../../components/general/Avatar'
 import Error from '../../components/layout/Error'
 import Loading from '../../components/layout/Loading'
 import Container from '../../components/styledComponents/Container'
+import FollowInformation from '../../components/user/FollowInformation'
 import WuphfsFeed from '../../components/wuphfs/WuphfsFeed'
-import FollowInformation from './FollowInformation'
 
 function UserPage() {
 	const router = useRouter()
