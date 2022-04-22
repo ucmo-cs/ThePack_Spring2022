@@ -95,11 +95,7 @@ function NavigationBar() {
 									user={wuphfUser}
 								/>
 								<ButtonWrapper>
-									<Button
-										style={{ width: '95px' }}
-										variant='secondary'
-										onClick={handleSignout}
-									>
+									<Button variant='secondary' onClick={handleSignout}>
 										Sign Out
 									</Button>
 								</ButtonWrapper>
@@ -171,6 +167,7 @@ const LogoAndSearch = styled.div`
 
 const MobileLinks = styled.ul`
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -191,11 +188,11 @@ const MobileLinks = styled.ul`
 
 const DesktopLinks = styled.ul`
 	display: flex;
+	height: inherit;
 	list-style: none;
 	background-color: inherit;
 	transition: 0.5s ease-in-out;
 	z-index: 1;
-	height: inherit;
 	@media (max-width: 768px) {
 		display: none;
 	}
@@ -312,8 +309,7 @@ const SearchResultLi = styled.li`
 `
 
 const ButtonWrapper = styled.div`
-	max-height: 100%;
 	display: flex;
 	justify-items: center;
-	padding: 10px 0;
+	align-items: center;
 `

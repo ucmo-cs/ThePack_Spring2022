@@ -14,7 +14,11 @@ export default Button
 
 const StyledButton = styled.button`
 	font-size: inherit;
+	font-weight: 600;
+	white-space: nowrap;
+	flex-shrink: 0;
 	padding: 0.5rem 1rem;
+	overflow: hidden;
 	background-color: ${({ variant, theme }) => handleBGType(variant, theme)};
 	color: ${({ variant, theme }) => handleColorType(variant, theme)};
 	border: none;

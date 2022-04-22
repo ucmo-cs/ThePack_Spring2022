@@ -30,7 +30,6 @@ const StyledLi = styled.li`
 	display: flex;
 
 	background-color: ${({ theme }) => theme.colors.body};
-	padding: 0 0.5rem;
 	width: 100%;
 
 	&:hover {
@@ -47,6 +46,7 @@ const StyledA = styled.a`
 	color: ${({ theme }) => theme.colors.text};
 	text-decoration: none;
 	display: flex;
+	padding: 0 0.5rem;
 	height: 100%;
 	width: 100%;
 	justify-content: center;
