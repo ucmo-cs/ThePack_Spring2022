@@ -9,6 +9,8 @@ export default async function handler(req, res) {
 	// /users/[uid]
 	if (req.method === 'GET') {
 		try {
+			console.log('GET /api/users/[uid]')
+			console.log('uid:', uid)
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
 					userName: uid,
@@ -54,7 +56,7 @@ export default async function handler(req, res) {
 					},
 				},
 			})
-
+			console.log('user:', user)
 			if (!user) {
 				return res
 					.status(404)
@@ -74,7 +76,7 @@ export default async function handler(req, res) {
 					delete user.Following
 				}
 			}
-
+			console.log('user:', user)
 			res.json(user)
 		} catch (error) {
 			console.error(error)
