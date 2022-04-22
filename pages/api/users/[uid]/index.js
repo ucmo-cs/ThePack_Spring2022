@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react'
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
-	const { uid } = req.query
+	const uid = String(req.query.uid)
 	const session = await getSession({ req })
 
 	// /users/[uid]
