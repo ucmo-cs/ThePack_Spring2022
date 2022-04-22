@@ -2,30 +2,32 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 import Avatar from '../general/Avatar'
+import Button from '../general/Button'
 
 
-export default function FollowerModal({ rows }) {
+export default function FollowerModal({ title, rows, onClose }) {
     return (
         <Modal>
             <ModalContent>
                 <ModalHeader>
                     <ModalTitle>
                         <ModalTitleText>
-                            Followers
+                            {title}
                         </ModalTitleText>
+                        <Button variant='secondary' onClick={onClose}>Close</Button>
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                     {
                         rows.map(entry => (
-                            <Link href={`/user/${entry.userId}`} key={entry.userId}>
+                            <Link href={`/user/${entry.userName}`} key={entry.userName}>
                                 <Entry>
                                     <Avatar
-                                        username={entry.userId}
-                                        profileImageUrl={entry.user.avatar.url}
+                                        username={entry.userName}
+                                        profileImageUrl={entry.avatar}
                                         size='medium'
                                     />
-                                    {entry.userId}
+                                    {entry.userName}
                                 </Entry>
                             </Link>
                         ))
@@ -69,11 +71,15 @@ const ModalHeader = styled.div`
 `
 
 const ModalTitle = styled.div`
+    padding: 20px 20px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    font-size: 1.5rem;
 `
 
 const ModalTitleText = styled.div`
+
     font-size: 1.5em;
     font-weight: bold;
 `

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,21 +11,51 @@ import Button from '../general/Button'
 import RoundButton from '../general/RoundButton'
 import FollowerModal from './FollowerModal'
 
+
 export default function FollowInformation(props) {
-    const [ showFollowingModal, setShowFollowingModal ] = useState(false)
-    const [ showFollowerModal, setShowFollowerModal ] = useState(false)
+    const [showFollowingModal, setShowFollowingModal] = useState(false)
+    const [showFollowerModal, setShowFollowerModal] = useState(false)
+
 
     const { wuphfUser } = useWuphfUser()
 
     const { user } = props
     const [following, setFollowing] = useState(user?.isFollowed)
+    const [followersList, setFollowersList] = useState([])
+    const [followingList, setFollowingList] = useState([])
+
+    useEffect(() => {
+        const newFollowersList = user?.Followers.map(follower => {
+            return {
+                userName: follower.followerId,
+                avatar: follower.user.avatar.url
+            }
+        })
+        const newFollowingList = user?.Following.map(following => {
+            return {
+                userName: following.userId,
+                avatar: following.user.avatar.url
+            }
+        })
+
+        setFollowersList(newFollowersList)
+        setFollowingList(newFollowingList)
+    }, [])
 
     function handleFollowersClick() {
-        setShowFollowerModal(true)
+        if (showFollowerModal) {
+            setShowFollowerModal(false)
+        } else {
+            setShowFollowerModal(true)
+        }
     }
 
     function handleFollowingClick() {
-        setShowFollowingModal(true)
+        if (showFollowingModal) {
+            setShowFollowingModal(false)
+        } else {
+            setShowFollowingModal(true)
+        }
     }
 
     async function handleFollow() {
@@ -57,8 +87,8 @@ export default function FollowInformation(props) {
                         {user?._count?.Followers || '0'} Followers
                     </Button>
                 </Buttons>
-                { showFollowerModal && <FollowerModal rows={user.Followers} /> }
-                { showFollowingModal && <FollowerModal rows={user.Following} /> }
+                {showFollowerModal && <FollowerModal title='Followers' rows={followersList} onClose={handleFollowersClick} />}
+                {showFollowingModal && <FollowerModal title='Following' rows={followingList} onClose={handleFollowingClick} />}
             </>
         )
     } else {
