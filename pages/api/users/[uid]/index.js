@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 			console.log('uid:', uid)
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
-					userName: 'thepackwuphf++',
+					userName: String(uid),
 				},
 				include: {
 					wuphfs: true,
