@@ -18,6 +18,7 @@ export const darkTheme = {
 		body: bodyColor,
 		border: lighten(0.2, desaturate(0.1, bodyColor)),
 		highlight: lighten(0.05, desaturate(0.1, bodyColor)),
+		highlightPressed: lighten(0.1, bodyColor),
 		text: '#fff',
 		subtext: lighten(0.5, desaturate(0.5, bodyColor)),
 		like: '#03B97C',
