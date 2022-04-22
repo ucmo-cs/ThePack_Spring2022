@@ -3,17 +3,15 @@ import { getSession } from 'next-auth/react'
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
-	const uid = String(req.query.uid)
+	const uid = decodeURIComponent(req.query.uid)
 	const session = await getSession({ req })
 
 	// /users/[uid]
 	if (req.method === 'GET') {
 		try {
-			console.log('GET /api/users/[uid]')
-			console.log('uid:', uid)
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
-					userName: String(uid),
+					userName:uid,
 				},
 				include: {
 					wuphfs: true,
@@ -56,9 +54,7 @@ export default async function handler(req, res) {
 					},
 				},
 			})
-			console.log('user:', user)
 			if (!user) {
-				console.log('Returning 404')
 				return res
 					.status(404)
 					.json({ msg: `No WuphfUser found with the username ${uid}` })
@@ -77,7 +73,6 @@ export default async function handler(req, res) {
 					delete user.Following
 				}
 			}
-			console.log('user:', user)
 			res.json(user)
 		} catch (error) {
 			console.error(error)
