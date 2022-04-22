@@ -50,7 +50,7 @@ function UserPage() {
 	async function getUser() {
 		console.log('id', id)
 		console.log(`/api/users/${id}`)
-		const res = await axios.get(`/api/users/${id}`).catch((err) => {
+		const res = await axios.get(`/api/users/${String(id)}`).catch((err) => {
 			console.log('err', err)
 			setUserError({ data: err.response.data, status: err.response.status })
 		})
