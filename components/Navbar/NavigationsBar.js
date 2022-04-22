@@ -48,15 +48,14 @@ function NavigationBar() {
 			<NavWrapper>
 				<StyledNav expanded={expanded} ref={myRef}>
 					<LogoAndSearch>
-						<Link href='/' passHref>
-							{/* <StyledImg
+						{/* <StyledImg
 								src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dogThick_rieymv.svg'
 								width={40}
 								height={40}
 							/> */}
-							{/* <Logo src='/wuphf_logo.svg' alt='Wuphf' /> */}
-							<WuphfLogo />
-						</Link>
+						{/* <Logo src='/wuphf_logo.svg' alt='Wuphf' /> */}
+						<WuphfLogo />
+
 						<Search>
 							<StyledFormInput
 								id='search'
