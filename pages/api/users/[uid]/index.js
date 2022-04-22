@@ -17,7 +17,36 @@ export default async function handler(req, res) {
 				include: {
 					wuphfs: true,
 					avatar: true,
-					Followers: true,
+					Followers: {
+						select: {
+							followerId: true,
+							userId: true,
+							user: {
+								select: {
+									avatar: {
+										select: {
+											url: true,
+										}
+									},
+								}
+							}
+						}
+					},
+					Following: {
+						select: {
+							followerId: true,
+							userId: true,
+							user: {
+								select: {
+									avatar: {
+										select: {
+											url: true,
+										}
+									},
+								}
+							}
+						}
+					},
 					_count: {
 						select: {
 							Followers: true,
@@ -40,10 +69,16 @@ export default async function handler(req, res) {
 					}
 				})
 				user.isFollowed = user.Followers.some(f => f.followerId === sender.userName)
-			}
-			delete user.Followers
 
-			res.json(user)
+				// if (sender.userName !== user.userName) {
+					// delete user.Followers
+					// delete user.Following
+				// }
+			}
+
+			if (session)
+
+				res.json(user)
 		} catch (error) {
 			console.error(error)
 			res.status(500).json({ error })
