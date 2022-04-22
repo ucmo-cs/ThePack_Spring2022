@@ -10,15 +10,37 @@ import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Button from '../general/Button'
 import RoundButton from '../general/RoundButton'
 import FollowerModal from './FollowerModal'
+import { useEffect } from 'react'
 
 export default function FollowInformation(props) {
-    const [ showFollowingModal, setShowFollowingModal ] = useState(false)
-    const [ showFollowerModal, setShowFollowerModal ] = useState(false)
+    const [showFollowingModal, setShowFollowingModal] = useState(false)
+    const [showFollowerModal, setShowFollowerModal] = useState(false)
+
 
     const { wuphfUser } = useWuphfUser()
 
     const { user } = props
     const [following, setFollowing] = useState(user?.isFollowed)
+    const [followersList, setFollowersList] = useState([])
+    const [followingList, setFollowingList] = useState([])
+
+    useEffect(() => {
+        const newFollowersList = user?.Followers.map(follower => {
+            return {
+                userName: follower.followerId,
+                avatar: follower.user.avatar.url
+            }
+        })
+        const newFollowingList = user?.Following.map(following => {
+            return {
+                userName: following.userId,
+                avatar: following.user.avatar.url
+            }
+        })
+
+        setFollowersList(newFollowersList)
+        setFollowingList(newFollowingList)
+    }, [])
 
     function handleFollowersClick() {
         setShowFollowerModal(true)
@@ -57,8 +79,8 @@ export default function FollowInformation(props) {
                         {user?._count?.Followers || '0'} Followers
                     </Button>
                 </Buttons>
-                { showFollowerModal && <FollowerModal rows={user.Followers} /> }
-                { showFollowingModal && <FollowerModal rows={user.Following} /> }
+                {showFollowerModal && <FollowerModal title='Followers' rows={followersList} />}
+                {showFollowingModal && <FollowerModal title='Following' rows={followingList} />}
             </>
         )
     } else {

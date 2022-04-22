@@ -4,28 +4,28 @@ import styled from 'styled-components'
 import Avatar from '../general/Avatar'
 
 
-export default function FollowerModal({ rows }) {
+export default function FollowerModal({ title, rows }) {
     return (
         <Modal>
             <ModalContent>
                 <ModalHeader>
                     <ModalTitle>
                         <ModalTitleText>
-                            Followers
+                            {title}
                         </ModalTitleText>
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
                     {
                         rows.map(entry => (
-                            <Link href={`/user/${entry.userId}`} key={entry.userId}>
+                            <Link href={`/user/${entry.userName}`} key={entry.userName}>
                                 <Entry>
                                     <Avatar
-                                        username={entry.userId}
-                                        profileImageUrl={entry.user.avatar.url}
+                                        username={entry.userName}
+                                        profileImageUrl={entry.avatar}
                                         size='medium'
                                     />
-                                    {entry.userId}
+                                    {entry.userName}
                                 </Entry>
                             </Link>
                         ))
