@@ -71,6 +71,15 @@ export default async function handler(req, res) {
         },
         include: {
           Likes: true,
+          user: {
+            select: {
+              avatar: {
+                select: {
+                  url: true,
+                },
+              }
+            },
+          },
           _count: {
             select: {
               Likes: true,

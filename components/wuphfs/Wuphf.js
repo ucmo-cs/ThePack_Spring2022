@@ -70,7 +70,7 @@ function Wuphf(props) {
 		// prevent a click on textbox from triggering link on parent
 		e.stopPropagation()
 	}
-	async function handleLike() {
+	async function handleLikeToggle() {
 		if (!userLikePost) {
 			axios
 				.post(`/api/wuphfs/${props.id}/likes`, {
@@ -131,7 +131,7 @@ function Wuphf(props) {
 				<AvatarWrapper>
 					<Avatar
 						username={props.userId}
-						profileImageUrl='animal_svgs/cat_hizjv6.svg'
+						profileImageUrl={props.user.avatar.url}
 						size='large'
 					/>
 				</AvatarWrapper>
@@ -192,7 +192,7 @@ function Wuphf(props) {
 					<div>
 						<FontAwesomeIcon
 							icon={faThumbsUp}
-							onClick={handleLike}
+							onClick={handleLikeToggle}
 							color={userLikePost ? 'green' : 'gray'}
 						/>
 						<LikeCount>{likeCount}</LikeCount>

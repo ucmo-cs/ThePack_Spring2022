@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     if (session) {
         if (req.method === 'GET') {
             try {
-                const users = (await prisma.WuphfUser.findMany({
+                const users = await prisma.WuphfUser.findMany({
                     where: {
                         OR: [
                                 { userName: { startsWith: req.query.userName}},
@@ -17,12 +17,11 @@ export default async function handler(req, res) {
                     },
                     select: {
                         userName: true,
-                    }
-                })).map(user => {
-                    return {
-                        userName: user.userName,
-                        // TODO: Remove once avatars are set in the User table
-                        avatar: 'animal_svgs/bunny_tgvcdh.svg'
+                        avatar: {
+                            select: {
+                                url: true,
+                            }
+                        }
                     }
                 })
 

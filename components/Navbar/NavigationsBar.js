@@ -73,8 +73,8 @@ function NavigationBar() {
 									>
 										<SearchResultLi onClick={() => hideSearch()}>
 											<Avatar
-												username={entry.username}
-												profileImageUrl={entry.avatar}
+												username={entry.userName}
+												profileImageUrl={entry.avatar.url}
 												size='small'
 											/>
 											<div>{entry.username}</div>
