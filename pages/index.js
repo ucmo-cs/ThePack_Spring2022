@@ -35,7 +35,7 @@ function Home({ session }) {
 				wuphfs !== null ? [...wuphfs, ...res.data.timeline] : res.data.timeline
 			setWuphfs(newWuphfs)
 			setLoading(false)
-			console.log(newWuphfs)
+			// console.log(newWuphfs)
 		}
 	}
 

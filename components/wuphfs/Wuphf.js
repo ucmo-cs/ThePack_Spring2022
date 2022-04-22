@@ -54,7 +54,7 @@ function Wuphf(props) {
 		e.preventDefault()
 		setEditMenuShown(false)
 		axios.delete(`/api/wuphfs/${props.id}`).then(() => {
-			console.log(props)
+			// console.log(props)
 			// props.onDelete()?.onDelete()
 		})
 	}

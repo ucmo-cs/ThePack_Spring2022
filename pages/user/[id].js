@@ -53,6 +53,7 @@ function UserPage() {
 		const res = await axios.get(`/api/users/${id}`).catch((err) => {
 			setUserError({ data: err.response.data, status: err.response.status })
 		})
+		console.log('res', res)
 		console.log('data', res?.data)
 		setUser(res?.data)
 		setUserLoading(false)

@@ -58,6 +58,7 @@ export default async function handler(req, res) {
 			})
 			console.log('user:', user)
 			if (!user) {
+				console.log('Returning 404')
 				return res
 					.status(404)
 					.json({ msg: `No WuphfUser found with the username ${uid}` })

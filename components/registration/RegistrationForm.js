@@ -43,7 +43,7 @@ function RegistrationForm({ setWuphfUser }) {
 				}
 			}
 			setSelectedAvatar(newAnimal)
-			console.log(avatars)
+			// console.log(avatars)
 		})
 		return () => subscription.unsubscribe()
 	}, [watch])

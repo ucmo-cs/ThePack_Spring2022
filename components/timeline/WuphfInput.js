@@ -26,7 +26,7 @@ function WuphfInput({ onSubmit, addWuphf }) {
 				postBody: post,
 			})
 			.then((res) => {
-				console.log(res.data)
+				// console.log(res.data)
 				addWuphf(res.data)
 				// onSubmit(res.data)
 				setPost('')

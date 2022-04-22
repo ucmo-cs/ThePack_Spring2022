@@ -18,7 +18,7 @@ function Layout({ children }) {
 		})
 
 		if (res) {
-			console.log(res.data)
+			// console.log(res.data)
 			setWuphfUser(res.data)
 			setWuphfUserError(false)
 		}
