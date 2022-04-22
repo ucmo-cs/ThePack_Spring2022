@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 
 import { useSearch } from '../../hooks/useSearch'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
@@ -12,6 +12,7 @@ import Button from '../general/Button'
 import NavigationLink from './DesktopLink'
 import Links from './Links'
 import MobileLink from './MobileLink'
+import WuphfLogo from './WuphfLogo'
 
 function NavigationBar() {
 	const {
@@ -24,6 +25,7 @@ function NavigationBar() {
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
 	const { wuphfUser } = useWuphfUser()
+	const theme = useTheme()
 
 	function toggleExpanded() {
 		if (!expanded) {
@@ -46,13 +48,14 @@ function NavigationBar() {
 			<NavWrapper>
 				<StyledNav expanded={expanded} ref={myRef}>
 					<LogoAndSearch>
-						<Link href='/' passHref>
-							<StyledImg
+						{/* <StyledImg
 								src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dogThick_rieymv.svg'
 								width={40}
 								height={40}
-							/>
-						</Link>
+							/> */}
+						{/* <Logo src='/wuphf_logo.svg' alt='Wuphf' /> */}
+						<WuphfLogo />
+
 						<Search>
 							<StyledFormInput
 								id='search'
@@ -92,7 +95,7 @@ function NavigationBar() {
 									user={wuphfUser}
 								/>
 								<ButtonWrapper>
-								<Button
+									<Button
 										style={{ width: '95px' }}
 										variant='secondary'
 										onClick={handleSignout}
@@ -220,7 +223,7 @@ const Hamburger = styled.div`
 		props.expanded ? 'fixed !important' : 'absolute !important'};
 	top: 9px;
 	right: 1rem;
-	background-color: #e5e5e5;
+	background-color: ${({ theme }) => theme.colors.hamburger};
 	border-radius: 5px;
 	flex-direction: column;
 	width: 40px;
@@ -234,13 +237,13 @@ const Hamburger = styled.div`
 	}
 
 	&:hover {
-		color: ${(props) => props.theme.colors.darkestBlue};
+		/* color: ${(props) => props.theme.colors.darkestBlue}; */
 		justify-content: center;
 	}
 `
 
 const HamburgerLine = styled.div`
-	background-color: #828282;
+	background-color: ${({ theme }) => theme.colors.hamburgerLine};
 	position: absolute;
 	width: 60%;
 	border-radius: 5px;

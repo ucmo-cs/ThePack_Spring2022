@@ -61,6 +61,7 @@ const PostBorder = styled.form`
 const PostTextArea = styled.textarea`
 	font-family: inherit;
 	font-size: inherit;
+	color: inherit;
 	border: none;
 	outline: none;
 	border-bottom: 1px solid ${(props) => props.theme.colors.border};

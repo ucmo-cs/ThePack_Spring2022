@@ -7,7 +7,7 @@ export const darkTheme = {
 		header: '#2b2b0a',
 		footer: 'cyan',
 		white: '#202020',
-		lightBlue: '#202020',
+		lightBlue: lighten(0.05, desaturate(0.1, bodyColor)),
 		grey: '#FFD228',
 		darkBlue: '#F83A0C',
 		darkestBlue: '#Adad1c',
@@ -18,9 +18,12 @@ export const darkTheme = {
 		body: bodyColor,
 		border: lighten(0.2, desaturate(0.1, bodyColor)),
 		highlight: lighten(0.05, desaturate(0.1, bodyColor)),
+		highlightPressed: lighten(0.1, bodyColor),
 		text: '#fff',
 		subtext: lighten(0.5, desaturate(0.5, bodyColor)),
 		like: '#03B97C',
+		hamburger: lighten(0.11, desaturate(0.1, bodyColor)),
+		hamburgerLine: lighten(0.51, desaturate(0.1, bodyColor)),
 	},
 	button: {
 		primary: {

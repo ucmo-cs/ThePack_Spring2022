@@ -40,6 +40,10 @@ const StyledLi = styled.li`
 		cursor: pointer;
 	}
 
+	&:active {
+		background-color: ${({ theme }) => theme.colors.highlightPressed};
+	}
+
 	height: ${(props) => (props.expanded ? '33.33vh;' : '0px;')};
 	transition: 0.5s ease-in-out;
 	text-align: center;
@@ -48,7 +52,7 @@ const StyledLi = styled.li`
 `
 
 const StyledA = styled.a`
-	color: ${(props) => props.theme.colors.darkestBlue};
+	color: ${(props) => props.theme.colors.text};
 	display: flex;
 	justify-content: center;
 	align-items: center;

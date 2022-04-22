@@ -44,8 +44,10 @@ function AccountSettings(props) {
 		mode: 'onTouched',
 	})
 
-	const [editProfileSettingsEnabled, setEditProfileSettingsEnabled] = useState(false)
-	const [editVisualSettingsEnabled, setEditVisualSettingsEnabled] = useState(false)
+	const [editProfileSettingsEnabled, setEditProfileSettingsEnabled] =
+		useState(false)
+	const [editVisualSettingsEnabled, setEditVisualSettingsEnabled] =
+		useState(false)
 	const theme = useTheme()
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
 	const { wuphfUser } = useWuphfUser()
@@ -79,7 +81,7 @@ function AccountSettings(props) {
 		if (editProfileSettingsEnabled) {
 			await axios.patch(`/api/users/${wuphfUser.userName}`, {
 				userName: getValues('username'),
-				bio: getValues('biography_textarea')
+				bio: getValues('biography_textarea'),
 			})
 		}
 		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
@@ -114,7 +116,10 @@ function AccountSettings(props) {
 					<HeaderButtonWrapper>
 						<HeaderText>Profile Settings</HeaderText>
 						<EditBtnWrapper>
-							<Button variant='secondary' onClick={handleEditProfileSettingsButtonClick}>
+							<Button
+								variant='secondary'
+								onClick={handleEditProfileSettingsButtonClick}
+							>
 								{editProfileSettingsEnabled ? 'Save' : 'Edit'}
 							</Button>
 						</EditBtnWrapper>
@@ -126,9 +131,7 @@ function AccountSettings(props) {
 							id='avatar'
 							label=''
 							enabled={editProfileSettingsEnabled}
-							onChange={
-								handleSubmit(handleAvatarChange)
-							}
+							onChange={handleSubmit(handleAvatarChange)}
 						>
 							{avatars.map((avatar) => (
 								<option key={avatar.key} value={avatar.url}>
@@ -177,7 +180,10 @@ function AccountSettings(props) {
 					<HeaderButtonWrapper>
 						<HeaderText>Visual Settings</HeaderText>
 						<EditBtnWrapper>
-							<Button variant='secondary' onClick={handleEditVisualSettingsButtonClick}>
+							<Button
+								variant='secondary'
+								onClick={handleEditVisualSettingsButtonClick}
+							>
 								{editVisualSettingsEnabled ? 'Save' : 'Edit'}
 							</Button>
 						</EditBtnWrapper>
@@ -198,7 +204,8 @@ function AccountSettings(props) {
 					<Subheading id='text_size'>Text Size:</Subheading>
 					<SelectInput
 						register={register}
-						id='font_size' label=''
+						id='font_size'
+						label=''
 						enabled={editVisualSettingsEnabled}
 					>
 						<option value='small'>Small</option>
@@ -228,6 +235,7 @@ const AccSetLayout = styled.div`
 	grid-gap: 30px;
 	max-width: 686px;
 	margin: 0 auto;
+	padding: 0 1rem;
 `
 const Subheading = styled.div`
 	margin-top: 2rem;
