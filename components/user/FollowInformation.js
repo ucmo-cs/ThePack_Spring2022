@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,7 @@ import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Button from '../general/Button'
 import RoundButton from '../general/RoundButton'
 import FollowerModal from './FollowerModal'
-import { useEffect } from 'react'
+
 
 export default function FollowInformation(props) {
     const [showFollowingModal, setShowFollowingModal] = useState(false)
