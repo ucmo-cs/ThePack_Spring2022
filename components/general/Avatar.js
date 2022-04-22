@@ -51,7 +51,7 @@ function Avatar(props) {
 				<MyImage
 					width={width}
 					height={height}
-					src={profileImageUrl}
+					src={profileImageUrl || '/animal_svgs/dog_nau7in.svg'}
 					alt={username}
 					title={username}
 				/>

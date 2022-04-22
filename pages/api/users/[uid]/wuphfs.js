@@ -1,16 +1,30 @@
+import { getSession } from 'next-auth/react'
+
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
 	const uid = decodeURIComponent(req.query.uid)
+	const session = await getSession({ req })
 
 	// /users/[uid]/wuphfs
 	if (req.method === 'GET') {
+		let wuphfUser = null
+
 		try {
-			const wuphfs = await prisma.Wuphf.findMany({
+			if (session) {
+				wuphfUser = await prisma.WuphfUser.findUnique({
+					where: {
+						email: session.user.email,
+					},
+				})
+			}
+
+			const wuphfs = (await prisma.Wuphf.findMany({
 				where: {
 					userId: uid,
 				},
 				include: {
+					Likes: true,
 					user: {
 						select: {
 							avatar: {
@@ -30,6 +44,13 @@ export default async function handler(req, res) {
 				orderBy: {
 					createdAt: 'desc',
 				},
+			})).map(wuphf => {
+				const userLikePost = wuphf.Likes.some(like => like.userId === wuphfUser.userName)
+				// delete wuphf.Likes
+				return {
+					...wuphf,
+					userLikePost: userLikePost
+				}
 			})
 
 			if (wuphfs.length === 0) {
