@@ -25,13 +25,16 @@ function FormInput({ register, error, label, id, enabled = true, ...props }) {
 const Wrapper = styled.div`
 	input {
 		font-size: inherit;
+		background-color: inherit;
+		color: inherit;
 		display: block;
 		outline: none;
 		margin-top: 0.5rem;
 		padding: 0.5rem;
 		border-radius: 4px;
 		width: 100%;
-		border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
+		border: ${(props) =>
+			props.error ? '1px solid red' : `1px solid ${props.theme.colors.border}`};
 		&:focus {
 			outline: none;
 		}

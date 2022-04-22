@@ -223,7 +223,7 @@ const Hamburger = styled.div`
 		props.expanded ? 'fixed !important' : 'absolute !important'};
 	top: 9px;
 	right: 1rem;
-	background-color: #e5e5e5;
+	background-color: ${({ theme }) => theme.colors.hamburger};
 	border-radius: 5px;
 	flex-direction: column;
 	width: 40px;
@@ -237,13 +237,13 @@ const Hamburger = styled.div`
 	}
 
 	&:hover {
-		color: ${(props) => props.theme.colors.darkestBlue};
+		/* color: ${(props) => props.theme.colors.darkestBlue}; */
 		justify-content: center;
 	}
 `
 
 const HamburgerLine = styled.div`
-	background-color: #828282;
+	background-color: ${({ theme }) => theme.colors.hamburgerLine};
 	position: absolute;
 	width: 60%;
 	border-radius: 5px;

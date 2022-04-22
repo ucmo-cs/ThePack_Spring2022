@@ -12,7 +12,7 @@ TextArea.propTypes = {
 	label: PropTypes.string.isRequired,
 }
 
-function TextArea({ register, error, label, id, enabled=true, ...props }) {
+function TextArea({ register, error, label, id, enabled = true, ...props }) {
 	return (
 		<Wrapper error={error}>
 			<Label htmlFor={id}>{label}</Label>
@@ -26,6 +26,8 @@ const Wrapper = styled.div`
 	textarea {
 		font-size: inherit;
 		font-family: inherit;
+		background-color: inherit;
+		color: inherit;
 		resize: none;
 		display: block;
 		outline: none;
@@ -33,7 +35,8 @@ const Wrapper = styled.div`
 		padding: 0.5rem;
 		border-radius: 4px;
 		width: 100%;
-		border: ${(props) => (props.error ? '1px solid red' : '1px solid #aaa')};
+		border: ${(props) =>
+			props.error ? '1px solid red' : `1px solid ${props.theme.colors.border}`};
 		&:focus {
 			outline: none;
 		}

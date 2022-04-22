@@ -21,6 +21,8 @@ export const darkTheme = {
 		text: '#fff',
 		subtext: lighten(0.5, desaturate(0.5, bodyColor)),
 		like: '#03B97C',
+		hamburger: lighten(0.11, desaturate(0.1, bodyColor)),
+		hamburgerLine: lighten(0.51, desaturate(0.1, bodyColor)),
 	},
 	button: {
 		primary: {
