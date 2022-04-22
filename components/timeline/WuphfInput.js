@@ -42,11 +42,11 @@ function WuphfInput({ onSubmit, addWuphf }) {
 			/>
 			<AvatarButtonDiv>
 				<Avatar 
-					size='medium' 
-					username={wuphfUser.userName} 
-					profileImageUrl={wuphfUser.avatar.url}
+					// size='medium' 
+					// username={wuphfUser.userName} 
+					// profileImageUrl={wuphfUser.avatar.url}
 				/>
-				{/* <Avatar size='medium' username='John' profileImageUrl='sample.jpg' /> */}
+				<Avatar size='medium' username='John' profileImageUrl='sample.jpg' />
 				<Button type='submit' variant='primary'>
 					WUPHF!
 				</Button>
