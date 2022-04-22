@@ -85,3 +85,4 @@ const CommentTextArea = styled.textarea`
 	background-color: ${(props) => props.theme.colors.white}
     wrap = off;
 `
+export default CommentInput
