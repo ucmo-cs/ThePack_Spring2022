@@ -27,7 +27,7 @@ function UserPage() {
 
 	const getWuphfs = async () => {
 		setWuphfsLoading(true)
-		const res = await axios.get(`/api/users/${String(id)}/wuphfs`).catch((err) => {
+		const res = await axios.get(`/api/users/${encodeURIComponent(id)}/wuphfs`).catch((err) => {
 			setWuphfsError({ data: err.response.data, status: err.response.status })
 			setWuphfsLoading(false)
 		})
@@ -48,7 +48,7 @@ function UserPage() {
 	}
 
 	async function getUser() {
-		const res = await axios.get(`/api/users/${String(encodeURIComponent(id))}`).catch((err) => {
+		const res = await axios.get(`/api/users/${encodeURIComponent(id)}`).catch((err) => {
 			setUserError({ data: err.response.data, status: err.response.status })
 		})
 		setUser(res?.data)

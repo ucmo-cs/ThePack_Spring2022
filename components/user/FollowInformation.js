@@ -58,7 +58,7 @@ export default function FollowInformation(props) {
     }
 
     async function handleFollow() {
-        const res = await axios.post(`/api/users/${user.userName}/following`)
+        const res = await axios.post(`/api/users/${encodeURIComponent(user.userName)}/following`)
 
         if (res) {
             alert(`${user.userName} followed`)

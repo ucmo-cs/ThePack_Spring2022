@@ -78,7 +78,7 @@ function AccountSettings(props) {
 	async function handleEditProfileSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editProfileSettingsEnabled) {
-			await axios.patch(`/api/users/${wuphfUser.userName}`, {
+			await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
 				userName: getValues('username'),
 				bio: getValues('biography_textarea'),
 				avatarId: lookupAvatarIdByUrl(getValues('avatar')),
@@ -90,7 +90,7 @@ function AccountSettings(props) {
 	async function handleEditVisualSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editVisualSettingsEnabled) {
-			const res = await axios.patch(`/api/users/${wuphfUser.userName}`, {
+			const res = await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
 				theme: selectedThemeValue,
 			})
 			console.log(res)
@@ -100,7 +100,7 @@ function AccountSettings(props) {
 
 	async function handleDeleteButtonClick(e) {
 		e.preventDefault()
-		await axios.delete(`/api/users/${wuphfUser.userName}`).then(() => signOut())
+		await axios.delete(`/api/users/${encodeURIComponent(wuphfUser.userName)}`).then(() => signOut())
 	}
 
 	function handleAvatarChange(e) {

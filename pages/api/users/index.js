@@ -24,7 +24,6 @@ export default async function handler(req, res) {
 					userName: req.body.userName,
 					bio: req.body.bio || undefined,
 					avatarId: Number(req.body.avatarId) || undefined,
-					// theme: 'light'
 				},
 			})
 

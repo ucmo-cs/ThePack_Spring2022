@@ -1,7 +1,7 @@
 import { prisma } from '../../../../lib/prisma'
 
 export default async function handler(req, res) {
-	const { uid } = req.query
+	const uid = decodeURIComponent(req.query.uid)
 
 	// /users/[uid]/wuphfs
 	if (req.method === 'GET') {
