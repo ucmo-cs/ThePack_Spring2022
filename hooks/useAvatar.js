@@ -10,13 +10,15 @@ const AvatarContextProvider = ({ children }) => {
         setAvatars(res.data)
     }
 
+    function lookupAvatarIdByUrl(url) {
+        return avatars.find(avatar => avatar.url === url).avatarId
+    }
+
     useEffect(() => {
-        // TODO: Fetch avatars from server instead of hard-coded values
         getAvatar()
-        
     }, [])
 
-    return <AvatarContext.Provider value = {{ avatars } } > { children } </AvatarContext.Provider>
+    return <AvatarContext.Provider value = {{ avatars, lookupAvatarIdByUrl } } > { children } </AvatarContext.Provider>
 }
 
 const useAvatars = () => {

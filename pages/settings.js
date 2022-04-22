@@ -51,10 +51,9 @@ function AccountSettings(props) {
 	const theme = useTheme()
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
 	const { wuphfUser } = useWuphfUser()
-	const { avatars } = useAvatars()
+	const { avatars, lookupAvatarIdByUrl } = useAvatars()
 
 	useEffect(() => {
-		// TODO: Set avatar to user's avatar, this is not in the database yet
 		setValue('avatar', wuphfUser?.avatar?.url)
 		setValue('username', wuphfUser?.userName)
 		setValue('biography_textarea', wuphfUser?.bio)
@@ -82,6 +81,7 @@ function AccountSettings(props) {
 			await axios.patch(`/api/users/${wuphfUser.userName}`, {
 				userName: getValues('username'),
 				bio: getValues('biography_textarea'),
+				avatarId: lookupAvatarIdByUrl(getValues('avatar')),
 			})
 		}
 		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
