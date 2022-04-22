@@ -18,10 +18,10 @@ export default function FollowInformation(props) {
         return (
             <Buttons>
                 <Button variant='primary'>
-                    {wuphfUser?._count?.Following} Following
+                    {wuphfUser?._count?.Following || '0'} Following
                 </Button>
                 <Button variant='primary'>
-                    {wuphfUser?._count?.Followee || '0'} Followers
+                    {wuphfUser?._count?.Followers || '0'} Followers
                 </Button>
             </Buttons>
         )
