@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	// /users/[uid]
 	if (req.method === 'GET') {
 		try {
-			
+
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
 					userName: uid,
@@ -18,16 +18,22 @@ export default async function handler(req, res) {
 					wuphfs: true,
 					avatar: true,
 					Followers: true,
+					_count: {
+						select: {
+							Followers: true,
+							Following: true,
+						},
+					},
 				},
 			})
-			
+
 			if (!user) {
 				return res
-				.status(404)
-				.json({ msg: `No WuphfUser found with the username ${uid}` })
+					.status(404)
+					.json({ msg: `No WuphfUser found with the username ${uid}` })
 			}
 
-			if(session) {
+			if (session) {
 				const sender = await prisma.WuphfUser.findUnique({
 					where: {
 						email: session.user.email,
