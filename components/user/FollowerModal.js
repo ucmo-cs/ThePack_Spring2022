@@ -2,9 +2,10 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 import Avatar from '../general/Avatar'
+import Button from '../general/Button'
 
 
-export default function FollowerModal({ title, rows }) {
+export default function FollowerModal({ title, rows, onClose }) {
     return (
         <Modal>
             <ModalContent>
@@ -13,6 +14,7 @@ export default function FollowerModal({ title, rows }) {
                         <ModalTitleText>
                             {title}
                         </ModalTitleText>
+                        <Button variant='secondary' onClick={onClose}>Close</Button>
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
@@ -69,11 +71,15 @@ const ModalHeader = styled.div`
 `
 
 const ModalTitle = styled.div`
+    padding: 20px 20px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    font-size: 1.5rem;
 `
 
 const ModalTitleText = styled.div`
+
     font-size: 1.5em;
     font-weight: bold;
 `

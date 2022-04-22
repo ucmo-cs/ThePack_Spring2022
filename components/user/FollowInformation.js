@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -43,11 +43,19 @@ export default function FollowInformation(props) {
     }, [])
 
     function handleFollowersClick() {
-        setShowFollowerModal(true)
+        if (showFollowerModal) {
+            setShowFollowerModal(false)
+        } else {
+            setShowFollowerModal(true)
+        }
     }
 
     function handleFollowingClick() {
-        setShowFollowingModal(true)
+        if (showFollowingModal) {
+            setShowFollowingModal(false)
+        } else {
+            setShowFollowingModal(true)
+        }
     }
 
     async function handleFollow() {
@@ -79,8 +87,8 @@ export default function FollowInformation(props) {
                         {user?._count?.Followers || '0'} Followers
                     </Button>
                 </Buttons>
-                {showFollowerModal && <FollowerModal title='Followers' rows={followersList} />}
-                {showFollowingModal && <FollowerModal title='Following' rows={followingList} />}
+                {showFollowerModal && <FollowerModal title='Followers' rows={followersList} onClose={handleFollowersClick} />}
+                {showFollowingModal && <FollowerModal title='Following' rows={followingList} onClose={handleFollowingClick} />}
             </>
         )
     } else {
