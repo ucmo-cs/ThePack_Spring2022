@@ -25,6 +25,7 @@ export default async function handler(req, res) {
 			// 	return res.status(404).json({ msg: 'No Wuphfs found' })
 			// }
 
+<<<<<<< HEAD
 			res.json(wuphfs)
 		} catch (error) {
 			// console.error(error)
@@ -76,4 +77,60 @@ export default async function handler(req, res) {
 
 		// #validation - invalid input
 	}
+=======
+      res.json(wuphfs)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error })
+      throw error
+    }
+  } else if (req.method === 'POST') {
+    try {
+      if(req.body.postBody.trim().length === 0){
+        res.status(400).json({msg:'Post cannot contain only white space.'})
+      }
+      else{
+        const wuphf = await prisma.Wuphf.create({
+          data: {
+            userId: req.body.userName,
+            pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+            postBody: req.body.postBody,
+          },
+          select: {
+            id: true,
+            userId: true,
+            pictureUrl: true,
+            postBody: true,
+            createdAt: true,
+            user: {
+              select: {
+                userName: true,
+                avatar: {
+                  select: {
+                    url: true,
+                  },
+                }
+              },
+            },
+            _count: {
+              select: {
+                Likes: true,
+                Comments: true,
+              },
+            },
+          }
+        })
+        res.json(wuphf)
+      }
+
+      
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error })
+      throw error
+    }
+
+    // #validation - invalid input
+  }
+>>>>>>> c6037602f071b6744b8031ec665d5170c659cc0a
 }
