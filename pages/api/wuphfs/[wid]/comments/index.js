@@ -21,22 +21,15 @@ export default async function handler(req, res) {
 
 			res.json(comments)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
 	} else if (req.method === 'POST') {
 		let userId
-<<<<<<< HEAD
 		if (req.body.commentBody.trim().length === 0) {
 			res.status(400).json({ msg: 'Comment cannot contain only white space.' })
 		} else {
-=======
-		if(req.body.commentBody.trim().length === 0){
-			res.status(400).json({msg:'Comment cannot contain only white space.'})
-		}
-		else{
->>>>>>> c6037602f071b6744b8031ec665d5170c659cc0a
 			if (session) {
 				const wuphfUser = await prisma.WuphfUser.findUnique({
 					where: {
@@ -60,7 +53,7 @@ export default async function handler(req, res) {
 
 				res.json(comment)
 			} catch (error) {
-				console.error(error)
+				// console.error(error)
 				res.status(500).json({ error })
 				throw error
 			}
