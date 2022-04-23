@@ -195,6 +195,7 @@ function Wuphf(props) {
 							icon={faThumbsUp}
 							onClick={handleLikeToggle}
 							color={userLikePost ? 'green' : 'gray'}
+							style={{ cursor: 'pointer' }}
 						/>
 						<LikeCount>{likeCount}</LikeCount>
 						<Link href={`/wuphf/${props.id}`}>
@@ -209,11 +210,13 @@ function Wuphf(props) {
 
 const LikeCount = styled.span`
 	padding-left: 10px;
+	cursor: pointer;
 `
 
 const CommentCount = styled.span`
 	padding-left: 10px;
 	color: magenta;
+	cursor: pointer;
 `
 
 const Container = styled.div`
@@ -349,7 +352,7 @@ const PostBorder = styled.div`
 		background-color: ${(props) => props.theme.colors.highlight};
 	}
 
-	cursor: pointer;
+	/* cursor: pointer; */
 `
 
 const SaveButton = styled(Button)`

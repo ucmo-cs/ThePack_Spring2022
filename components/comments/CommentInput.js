@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
@@ -12,27 +13,34 @@ wuphfID
 theme colors
 */
 function CommentInput(props) {
+	const { addComment } = props
 	const [comment, setComment] = useState('')
 	const { wuphfUser } = useWuphfUser()
+	const router = useRouter()
+	const { id } = router.query
 
 	function handleChange(event) {
 		setComment(event.target.value)
 	}
 
+	async function commentRequest() {
+		const res = await axios
+			.post(`/api/wuphfs/${id}/comments`, {
+				commentBody: comment,
+			})
+			.catch((err) => alert(err))
+
+		if (res) {
+			console.log(res.data)
+			addComment(res.data)
+			// onSubmit(res.data)
+			setComment('')
+		}
+	}
+
 	async function handleSubmit(event) {
 		event.preventDefault()
-		axios
-			.post(`/api/${props.wuphfId}/comment`, {
-				postId: props.wuphfId,
-				commentBody: comment,
-				userId: wuphfUser.userName,
-			})
-			.then((res) => {
-				console.log(res.data)
-				addWuphf(res.data)
-				// onSubmit(res.data)
-				setPost('')
-			})
+		commentRequest()
 	}
 
 	return (
@@ -45,7 +53,7 @@ function CommentInput(props) {
 				/>
 			</AvatarWrapper>
 			<CommentTextArea
-				// value={post}
+				value={comment}
 				onChange={handleChange}
 				placeHolder='What do you want to say?'
 				rows='1'
@@ -57,7 +65,7 @@ function CommentInput(props) {
 	)
 }
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.form`
 	display: flex;
 	align-items: center;
 	background-color: pink;
@@ -75,7 +83,6 @@ const AvatarWrapper = styled.div`
 		width: 50px;
 		height: 50px;
 	}
-	margin: 0 auto;
 `
 const CommentTextArea = styled.textarea`
 	font-size: inherit;

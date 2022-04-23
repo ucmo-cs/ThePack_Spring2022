@@ -40,6 +40,10 @@ function WuphfPage() {
 		}
 	}
 
+	function addComment(comment) {
+		setComments([comment, ...comments])
+	}
+
 	useEffect(() => {
 		if (id) {
 			getWuphf()
@@ -56,7 +60,7 @@ function WuphfPage() {
 					{...wuphf}
 				/>
 			)}
-			<CommentInput />
+			<CommentInput addComment={addComment} />
 			<Title>Comments...</Title>
 			{comments && JSON.stringify(comments, null, 2)}
 			{/* <Comment /> */}
