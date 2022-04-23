@@ -16,9 +16,9 @@ export default async function handler(req, res) {
 				},
 			})
 
-			// if (!comment) {
-			// 	return res.status(404).json({ msg: 'Comment not found' })
-			// }
+			if (!comment) {
+				return res.status(404).json({ message: 'Comment not found' })
+			}
 
 			res.json(comment)
 		} catch (error) {

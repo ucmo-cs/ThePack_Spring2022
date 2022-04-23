@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 			const users = await prisma.WuphfUser.findMany()
 
 			// if (users.length === 0) {
-			// 	return res.status(404).json({ msg: 'No WuphfUsers found' })
+			// 	return res.status(404).json({ message: 'No WuphfUsers found' })
 			// }
 
 			res.json(users)
@@ -33,11 +33,11 @@ export default async function handler(req, res) {
 				// The .code property can be accessed in a type-safe manner
 				if (error.code === 'P2002') {
 					return res.status(409).json({
-						msg: 'A user with that username or email already exists.',
+						message: 'A user with that username or email already exists.',
 					})
 				} else if (error.code === 'P2003') {
 					return res.status(409).json({
-						msg: 'A foreign key constraint failed.',
+						message: 'A foreign key constraint failed.',
 						error: error,
 					})
 				}

@@ -8,10 +8,10 @@ import Loading from './Loading'
 function withAuth(Component) {
 	function Auth(props) {
 		const { data: session, status } = useSession()
-		const { wuphfUser } = useWuphfUser()
+		const { wuphfUser, wuphfUserLoading } = useWuphfUser()
 		const { wuphfUserError } = useWuphfUser()
 
-		if (status == 'loading') return <Loading />
+		if (status == 'loading' || wuphfUserLoading) return <Loading />
 		if (status == 'unauthenticated') return <Welcome />
 		if (!wuphfUser) return <RegistrationForm />
 

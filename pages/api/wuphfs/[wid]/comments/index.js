@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 			})
 
 			// if (comments.length === 0) {
-			// 	return res.status(404).json({ msg: 'No comments found' })
+			// 	return res.status(404).json({ message: 'No comments found' })
 			// }
 
 			res.json(comments)
@@ -28,7 +28,9 @@ export default async function handler(req, res) {
 	} else if (req.method === 'POST') {
 		let userId
 		if (req.body.commentBody.trim().length === 0) {
-			res.status(400).json({ msg: 'Comment cannot contain only white space.' })
+			res
+				.status(400)
+				.json({ message: 'Comment cannot contain only white space.' })
 		} else {
 			if (session) {
 				const wuphfUser = await prisma.WuphfUser.findUnique({

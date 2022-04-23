@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 			}
 		}
 	} else {
-		res.status(401).json({ msg: 'User not authenticated' })
+		res.status(401).json({ message: 'User not authenticated' })
 	}
 	res.end()
 }

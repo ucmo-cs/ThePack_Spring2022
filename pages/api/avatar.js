@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 			// if (!avatars) {
 			// 	return res
 			// 		.status(404)
-			// 		.json({ msg: 'No avatars found with the user' })
+			// 		.json({ message: 'No avatars found with the user' })
 			// }
 			res.json(avatars)
 		} catch (error) {

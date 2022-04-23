@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 				//   return res
 				//     .status(404)
 				//     .json({
-				//       msg: `No WuphfUser found with the email ${session.user.email}`,
+				//       message: `No WuphfUser found with the email ${session.user.email}`,
 				//     })
 				// }
 				res.json(user)
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
 			}
 		}
 	} else {
-		res.status(401).json({ msg: 'User not authenticated' })
+		res.status(401).json({ message: 'User not authenticated' })
 	}
 	res.end()
 }

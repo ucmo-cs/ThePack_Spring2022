@@ -57,7 +57,7 @@ export default async function handler(req, res) {
 			// if (!user) {
 			// 	return res
 			// 		.status(404)
-			// 		.json({ msg: `No WuphfUser found with the username ${uid}` })
+			// 		.json({ message: `No WuphfUser found with the username ${uid}` })
 			// }
 
 			if (session) {
@@ -95,9 +95,9 @@ export default async function handler(req, res) {
 				},
 			})
 
-			// if (!user) {
-			// 	return res.status(404).json({ msg: 'No WuphfUser found' })
-			// }
+			if (!user) {
+				return res.status(404).json({ message: 'No WuphfUser found' })
+			}
 
 			res.json(user)
 		} catch (error) {
@@ -115,9 +115,9 @@ export default async function handler(req, res) {
 			},
 		})
 
-		// if (!wuphfUser) {
-		// 	return res.status(404).json({ msg: 'No WuphfUser found' })
-		// }
+		if (!wuphfUser) {
+			return res.status(404).json({ message: 'No WuphfUser found' })
+		}
 
 		const { email } = wuphfUser
 

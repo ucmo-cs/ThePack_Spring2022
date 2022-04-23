@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 			// console.log('All Wuphfs', JSON.stringify(wuphfs, null, 2))
 
 			// if (wuphfs.length === 0) {
-			// 	return res.status(404).json({ msg: 'No Wuphfs found' })
+			// 	return res.status(404).json({ message: 'No Wuphfs found' })
 			// }
 
 			res.json(wuphfs)
@@ -34,7 +34,9 @@ export default async function handler(req, res) {
 	} else if (req.method === 'POST') {
 		try {
 			if (req.body.postBody.trim().length === 0) {
-				res.status(400).json({ msg: 'Post cannot contain only white space.' })
+				res
+					.status(400)
+					.json({ message: 'Post cannot contain only white space.' })
 			} else {
 				const wuphf = await prisma.Wuphf.create({
 					data: {

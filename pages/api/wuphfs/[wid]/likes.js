@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 			})
 
 			// if (likes.length === 0) {
-			//   return res.status(404).json({ msg: 'No likes found' })
+			//   return res.status(404).json({ message: 'No likes found' })
 			// }
 
 			res.json(likes)

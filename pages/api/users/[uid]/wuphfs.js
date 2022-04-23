@@ -58,7 +58,7 @@ export default async function handler(req, res) {
 			})
 
 			// if (wuphfs.length === 0) {
-			// 	return res.status(404).json({ msg: `No Wuphfs by ${uid} found` })
+			// 	return res.status(404).json({ message: `No Wuphfs by ${uid} found` })
 			// }
 
 			res.json(wuphfs)
@@ -90,7 +90,7 @@ export default async function handler(req, res) {
 // 			const wuphfs = await getUserWuphfs(wuphfUser)
 
 // 			if (wuphfs.length === 0) {
-// 				return res.status(404).json({ msg: `No Wuphfs by ${uid} found` })
+// 				return res.status(404).json({ message: `No Wuphfs by ${uid} found` })
 // 			}
 
 // 			res.json(wuphfs)

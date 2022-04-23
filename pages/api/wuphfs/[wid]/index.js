@@ -27,9 +27,9 @@ export default async function handler(req, res) {
 				},
 			})
 
-			// if (!wuphf) {
-			// 	return res.status(404).json({ msg: 'Wuphf not found' })
-			// }
+			if (!wuphf) {
+				return res.status(404).json({ message: 'Wuphf not found' })
+			}
 
 			res.json(wuphf)
 		} catch (error) {
@@ -65,7 +65,7 @@ export default async function handler(req, res) {
 				if (error.code === 'P2025') {
 					return res
 						.status(404)
-						.json({ msg: 'The Wuphf to update was not found' })
+						.json({ message: 'The Wuphf to update was not found' })
 				}
 			}
 			// console.error(error)
@@ -91,7 +91,7 @@ export default async function handler(req, res) {
 				if (error.code === 'P2025') {
 					return res
 						.status(404)
-						.json({ msg: 'The Wuphf to delete was not found' })
+						.json({ message: 'The Wuphf to delete was not found' })
 				}
 			}
 			// console.error(error)
