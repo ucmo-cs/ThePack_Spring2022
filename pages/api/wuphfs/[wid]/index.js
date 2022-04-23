@@ -40,15 +40,14 @@ export default async function handler(req, res) {
 	} else if (req.method === 'PATCH') {
 		if (req.body.postBody.trim().length === 0) {
 			res.status(400).json({ msg: 'Post cannot contain only white space.' })
-		}
-		else{
+		} else {
 			const session = await getSession({ req })
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
 					email: session.user.email,
 				},
 			})
-		
+
 			try {
 				const wuphf = await prisma.Wuphf.updateMany({
 					where: {
@@ -65,19 +64,20 @@ export default async function handler(req, res) {
 			} catch (error) {
 				// P2025
 				if (error instanceof Prisma.PrismaClientKnownRequestError) {
-				// The .code property can be accessed in a type-safe manner
-				if (error.code === 'P2025') {
-					return res
-						.status(404)
-						.json({ message: 'The Wuphf to update was not found' })
+					// The .code property can be accessed in a type-safe manner
+					if (error.code === 'P2025') {
+						return res
+							.status(404)
+							.json({ message: 'The Wuphf to update was not found' })
+					}
+					// console.error(error)
+					res.status(500).json({ error })
+					throw error
 				}
-				// console.error(error)
-				res.status(500).json({ error })
-				throw error
 			}
 
-		// #authorization - who is allowed to do this?
-		// #validation - invalid input
+			// #authorization - who is allowed to do this?
+			// #validation - invalid input
 		}
 	} else if (req.method === 'DELETE') {
 		try {
