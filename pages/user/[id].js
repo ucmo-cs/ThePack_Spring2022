@@ -30,6 +30,7 @@ function UserPage() {
 		const res = await axios.get(`/api/users/${encodeURIComponent(id)}/wuphfs`).catch((err) => {
 			setWuphfsError({ data: err.response.data, status: err.response.status })
 			setWuphfsLoading(false)
+			setWuphfs([])
 		})
 
 		if (res) {
@@ -40,10 +41,9 @@ function UserPage() {
 			// setCursor(res.data.cursor)
 			// console.log('res?.data.cursor', res.data.cursor)
 			// console.log('res.daata', res.data)
-			const newWuphfs = wuphfs !== null ? [...wuphfs, ...res.data] : res.data
+			const newWuphfs = res.data
 			setWuphfs(newWuphfs)
 			setWuphfsLoading(false)
-			// console.log(newWuphfs)
 		}
 	}
 
@@ -52,13 +52,13 @@ function UserPage() {
 			setUserError({ data: err.response.data, status: err.response.status })
 		})
 		setUser(res?.data)
+		getWuphfs()
 		setUserLoading(false)
 	}
 
 	useEffect(() => {
 		if (id) {
 			getUser()
-			getWuphfs()
 		}
 	}, [id])
 
@@ -71,7 +71,6 @@ function UserPage() {
 			) : (
 				<TopContainer>
 					<Banner />
-
 					<HeaderAndBio>
 						<Header>
 							<Text>
