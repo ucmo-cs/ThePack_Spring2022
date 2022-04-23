@@ -17,39 +17,43 @@ export default async function handler(req, res) {
 						email: session.user.email,
 					},
 				})
+			} else {
+				wuphfUser = {
+					userName: req.body.userName,
+				}
 			}
 
-			const wuphfs = (await prisma.Wuphf.findMany({
-				where: {
-					userId: uid,
-				},
-				include: {
-					Likes: true,
-					user: {
-						select: {
-							avatar: {
-								select: {
-									url: true,
-								},
-							}
+			const wuphfs = (
+				await prisma.Wuphf.findMany({
+					where: {
+						userId: uid,
+					},
+					include: {
+						Likes: true,
+						user: {
+							select: {
+								avatar: true,
+							},
+						},
+						_count: {
+							select: {
+								Likes: true,
+								Comments: true,
+							},
 						},
 					},
-					_count: {
-						select: {
-							Likes: true,
-							Comments: true,
-						},
+					orderBy: {
+						createdAt: 'desc',
 					},
-				},
-				orderBy: {
-					createdAt: 'desc',
-				},
-			})).map(wuphf => {
-				const userLikePost = wuphf.Likes.some(like => like.userId === wuphfUser.userName)
+				})
+			).map((wuphf) => {
+				const userLikePost = wuphf.Likes.some(
+					(like) => like.userId === wuphfUser.userName
+				)
 				// delete wuphf.Likes
 				return {
 					...wuphf,
-					userLikePost: userLikePost
+					userLikePost: userLikePost,
 				}
 			})
 

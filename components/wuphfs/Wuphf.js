@@ -129,13 +129,13 @@ function Wuphf(props) {
 		<PostBorder ref={lastWuphfElementRef}>
 			<Container>
 				<AvatarWrapper>
-					<Avatar
-						username={props.userId}
-						// This was breaking the comments page so I had to comment this for now
-						// profileImageUrl={props.user.avatar.url}
-						profileImageUrl={props.user.avatarId}
-						size='large'
-					/>
+					{props.user && (
+						<Avatar
+							username={props.userId}
+							profileImageUrl={props.user.avatar.url}
+							size='large'
+						/>
+					)}
 				</AvatarWrapper>
 				<PostWrapper>
 					<TweetHeader>

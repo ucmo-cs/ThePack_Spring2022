@@ -30,33 +30,6 @@ const MyImage = React.forwardRef(({ width, height, src, alt, title, href }) => {
 })
 MyImage.displayName = 'MyImage'
 
-function getWuphfUrlFromID(id) {
-	switch (id) {
-		case 1:
-			return 'animal_svgs/dog_nau7in.svg'
-		case 2:
-			return 'animal_svgs/cat_hizjv6.svg'
-		case 3:
-			return 'animal_svgs/bird_wlfceb.svg'
-		case 4:
-			return 'animal_svgs/owl_xnejqi.svg'
-		case 5:
-			return 'animal_svgs/monkey_ywewbg.svg'
-		case 6:
-			return 'animal_svgs/panda_fb7grl.svg'
-		case 7:
-			return 'animal_svgs/bunny_tgvcdh.svg'
-	}
-	// monkey_ywewbg
-	// cat_hizjv6
-	// dog_nau7in
-	// panda_fb7grl
-	// bird_wlfceb
-	// owl_xnejqi
-	// bunny_tgvcdh
-	//
-}
-
 function Avatar(props) {
 	const { username, profileImageUrl, size } = props
 	let width = 0
@@ -75,9 +48,7 @@ function Avatar(props) {
 				<MyImage
 					width={width}
 					height={height}
-					src={
-						getWuphfUrlFromID(profileImageUrl) || '/animal_svgs/dog_nau7in.svg'
-					}
+					src={profileImageUrl || '/animal_svgs/dog_nau7in.svg'}
 					alt={username}
 					title={username}
 				/>

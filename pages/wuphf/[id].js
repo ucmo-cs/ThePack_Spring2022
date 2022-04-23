@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 
 import CommentInput from '../../components/comments/CommentInput'
+import Comments from '../../components/comments/Comments'
 import Container from '../../components/styledComponents/Container'
-import Title from '../../components/styledComponents/Title'
 import Wuphf from '../../components/wuphfs/Wuphf'
 
 function WuphfPage() {
@@ -61,8 +61,9 @@ function WuphfPage() {
 				/>
 			)}
 			<CommentInput addComment={addComment} />
-			<Title>Comments...</Title>
-			{comments && JSON.stringify(comments, null, 2)}
+			{/* <Title>Comments...</Title> */}
+			<Comments comments={comments} />
+			{/* {comments && JSON.stringify(comments, null, 2)} */}
 			{/* <Comment /> */}
 		</Container>
 	)

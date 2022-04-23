@@ -48,7 +48,7 @@ function CommentInput(props) {
 			<AvatarWrapper>
 				<Avatar
 					username={useWuphfUser()}
-					profileImageUrl='animal_svgs/cat_hizjv6.svg'
+					profileImageUrl={wuphfUser?.avatar.url}
 					size='small'
 				/>
 			</AvatarWrapper>
