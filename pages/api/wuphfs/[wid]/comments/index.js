@@ -12,9 +12,9 @@ export default async function handler(req, res) {
 				},
 			})
 
-			if (comments.length === 0) {
-				return res.status(404).json({ msg: 'No comments found' })
-			}
+			// if (comments.length === 0) {
+			// 	return res.status(404).json({ msg: 'No comments found' })
+			// }
 
 			res.json(comments)
 		} catch (error) {

@@ -197,6 +197,9 @@ function Wuphf(props) {
 							color={userLikePost ? 'green' : 'gray'}
 						/>
 						<LikeCount>{likeCount}</LikeCount>
+						<Link href={`/wuphf/${props.id}`}>
+							<CommentCount>Comments: {props._count.Comments}</CommentCount>
+						</Link>
 					</div>
 				</PostWrapper>
 			</Container>
@@ -206,6 +209,11 @@ function Wuphf(props) {
 
 const LikeCount = styled.span`
 	padding-left: 10px;
+`
+
+const CommentCount = styled.span`
+	padding-left: 10px;
+	color: magenta;
 `
 
 const Container = styled.div`

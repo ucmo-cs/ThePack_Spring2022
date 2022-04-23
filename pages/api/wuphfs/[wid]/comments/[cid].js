@@ -26,14 +26,12 @@ export default async function handler(req, res) {
 			res.status(500).json({ error })
 			throw error
 		}
-	}
-
-	else if (req.method === 'DELETE'){
+	} else if (req.method === 'DELETE') {
 		try {
 			const comment = await prisma.Comments.delete({
 				where: {
-					id: Number(cid)
-				}
+					id: Number(cid),
+				},
 			})
 
 			res.json(comment)
@@ -42,9 +40,7 @@ export default async function handler(req, res) {
 			res.status(500).json({ error })
 			throw error
 		}
-	}
-
-	else if (req.method === 'PATCH'){
+	} else if (req.method === 'PATCH') {
 		try {
 			const comment = await prisma.Comments.update({
 				where: {
@@ -52,7 +48,7 @@ export default async function handler(req, res) {
 				},
 				data: {
 					commentBody: req.body.commentBody,
-				}
+				},
 			})
 			res.json(comment)
 		} catch (error) {

@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
-import TextArea from '../forms/TextArea'
 /*
 What I need in Props:
 wuphfID
