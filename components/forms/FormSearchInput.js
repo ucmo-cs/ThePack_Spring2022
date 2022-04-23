@@ -43,6 +43,7 @@ const Wrapper = styled.div`
 
 	input {
 		font-size: inherit;
+		color: inherit;
 		display: block;
 		background-color: ${({ theme }) => theme.colors.body};
 		outline: none;

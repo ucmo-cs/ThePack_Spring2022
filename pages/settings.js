@@ -209,9 +209,9 @@ function AccountSettings(props) {
 							value={selectedThemeValue}
 							disabled={!editVisualSettingsEnabled}
 						>
-							<option value='light'>Light</option>
-							<option value='lava'>Lava</option>
-							<option value='dark'>Dark</option>
+							<Option value='light'>Light</Option>
+							<Option value='lava'>Lava</Option>
+							<Option value='dark'>Dark</Option>
 						</select>
 					</Wrapper>
 					<Subheading id='text_size'>Text Size:</Subheading>
@@ -221,9 +221,9 @@ function AccountSettings(props) {
 						label=''
 						enabled={editVisualSettingsEnabled}
 					>
-						<option value='small'>Small</option>
-						<option value='medium'>Medium</option>
-						<option value='large'>Large</option>
+						<Option value='small'>Small</Option>
+						<Option value='medium'>Medium</Option>
+						<Option value='large'>Large</Option>
 					</SelectInput>
 				</div>
 			</MainContent>
@@ -275,4 +275,7 @@ const EditBtnWrapper = styled.div`
 const DABtnWrapper = styled.div`
 	font-size: 1.3rem;
 	margin-top: 1rem;
+`
+const Option = styled.option`
+	color: black;
 `
