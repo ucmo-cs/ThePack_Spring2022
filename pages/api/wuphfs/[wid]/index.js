@@ -19,6 +19,11 @@ export default async function handler(req, res) {
 							Comments: true,
 						},
 					},
+					user: {
+						select: {
+							avatarId: true,
+						},
+					},
 				},
 			})
 
@@ -36,7 +41,7 @@ export default async function handler(req, res) {
 		const session = await getSession({ req })
 		const user = await prisma.WuphfUser.findUnique({
 			where: {
-				email: session.user.email
+				email: session.user.email,
 			},
 		})
 
@@ -44,7 +49,7 @@ export default async function handler(req, res) {
 			const wuphf = await prisma.Wuphf.updateMany({
 				where: {
 					id: Number(wid),
-					userId: user.userName
+					userId: user.userName,
 				},
 				data: {
 					postBody: req.body.postBody,

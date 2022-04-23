@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-
 import {
 	faBan,
 	faCheck,
@@ -131,7 +130,7 @@ function Wuphf(props) {
 				<AvatarWrapper>
 					<Avatar
 						username={props.userId}
-						profileImageUrl={props.user.avatar.url}
+						profileImageUrl={props.user.avatarId}
 						size='large'
 					/>
 				</AvatarWrapper>

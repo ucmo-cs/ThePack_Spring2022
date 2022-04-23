@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 
 import axios from 'axios'
 import styled from 'styled-components'
@@ -6,16 +6,17 @@ import styled from 'styled-components'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
+import TextArea from '../forms/TextArea'
 /*
 What I need in Props:
 wuphfID
 theme colors
 */
-function CommentInput(props){
-    const [comment, setComment] = useState('')
-    const { wuphfUser } = useWuphfUser()
-    
-    function handleChange(event) {
+function CommentInput(props) {
+	const [comment, setComment] = useState('')
+	const { wuphfUser } = useWuphfUser()
+
+	function handleChange(event) {
 		setComment(event.target.value)
 	}
 
@@ -25,7 +26,7 @@ function CommentInput(props){
 			.post(`/api/${props.wuphfId}/comment`, {
 				postId: props.wuphfId,
 				commentBody: comment,
-                userId: wuphfUser.userName
+				userId: wuphfUser.userName,
 			})
 			.then((res) => {
 				console.log(res.data)
@@ -35,37 +36,42 @@ function CommentInput(props){
 			})
 	}
 
-    return (
-
-        <inputWrapper onSubmit={handleSubmit}>
-            <AvatarWrapper>
-                <Avatar
-                    username={useWuphfUser()}
-                    profileImageUrl='animal_svgs/cat_hizjv6.svg'
-                    size='small'
-                />
-            </AvatarWrapper>
-            <CommentTextArea
-                value={post}
-                onChange={handleChange}
-                placeHolder="What do you want to say?"
-            />
-            <Button type='submit' variant='primary'>
-                Comment!
-            </Button>
-        </inputWrapper>
-         
-        )
+	return (
+		<InputWrapper onSubmit={handleSubmit}>
+			<AvatarWrapper>
+				<Avatar
+					username={useWuphfUser()}
+					profileImageUrl='animal_svgs/cat_hizjv6.svg'
+					size='small'
+				/>
+			</AvatarWrapper>
+			<CommentTextArea
+				// value={post}
+				onChange={handleChange}
+				placeHolder='What do you want to say?'
+				rows='1'
+			/>
+			<Button type='submit' variant='primary'>
+				Comment!
+			</Button>
+		</InputWrapper>
+	)
 }
 
-
-const inputWrapper = styled.div`
-        paddint-left: 10px
-        color: ${(props) => props.theme.color.lightGrey};
+const InputWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	background-color: pink;
+	padding-left: 10px;
+	gap: 1rem;
+	padding: 1rem;
+	color: ${(props) => props.theme.colors.text};
+	background-color: ${(props) => props.theme.colors.highlight};
 `
+
 const AvatarWrapper = styled.div`
 	position: relative;
-	padding: 1rem;
+	flex-shrink: 0;
 	span {
 		width: 50px;
 		height: 50px;
@@ -73,16 +79,20 @@ const AvatarWrapper = styled.div`
 	margin: 0 auto;
 `
 const CommentTextArea = styled.textarea`
-	font-family: inherit;
 	font-size: inherit;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid #aaa;
+	font-family: inherit;
+	background-color: ${(props) => props.theme.colors.body};
+	color: inherit;
 	resize: none;
+	display: block;
+	outline: none;
+	padding: 0.5rem;
+	border-radius: 4px;
 	width: 100%;
-	height: 4rem;
-	margin-bottom: 0.5rem;
-	background-color: ${(props) => props.theme.colors.white}
-    wrap = off;
+	border: ${(props) =>
+		props.error ? '1px solid red' : `1px solid ${props.theme.colors.border}`};
+	&:focus {
+		outline: none;
+	}
 `
 export default CommentInput

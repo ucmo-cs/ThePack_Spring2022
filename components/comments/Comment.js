@@ -27,15 +27,14 @@ function Comment(props) {
 				<Link href={`/user/${props.userId}`}>
 					<Username as='h3'>{props.userId}</Username>
 				</Link>
-				<CommentContent>
-					{props.commentBody}
-				</CommentContent>
+				<CommentContent>{props.commentBody}</CommentContent>
 			</CommentWrapper>
 		</Container>
 	)
 }
 
 const AvatarWrapper = styled.div`
+	background-color: yellow;
 	position: relative;
 	padding: 1rem;
 	span {
@@ -45,22 +44,29 @@ const AvatarWrapper = styled.div`
 	margin: 0 auto;
 `
 const CommentWrapper = styled.div`
+	background-color: magenta;
 	padding: 1rem;
 	padding-left: 0;
 `
 
 const CommentContent = styled.textarea`
-	font-family: inherit;
 	font-size: inherit;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid #aaa;
+	font-family: inherit;
+	background-color: inherit;
+	color: inherit;
 	resize: none;
+	display: block;
+	outline: none;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 4px;
 	width: 100%;
-	height: 4rem;
-	margin-bottom: 0.5rem;
-	background-color: ${(props) => props.theme.colors.white}
-	wrap = off;
+	border: ${(props) =>
+		props.error ? '1px solid red' : `1px solid ${props.theme.colors.border}`};
+	&:focus {
+		outline: none;
+	}
+	height: 100%;
 `
 const Username = styled.h3`
 	position: relative;
