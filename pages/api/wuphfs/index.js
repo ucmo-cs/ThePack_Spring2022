@@ -1,3 +1,4 @@
+import { string } from 'prop-types'
 import { prisma } from '../../../lib/prisma'
 
 export default async function handler(req, res) {
@@ -33,38 +34,44 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'POST') {
     try {
-      const wuphf = await prisma.Wuphf.create({
-        data: {
-          userId: req.body.userName,
-          pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
-          postBody: req.body.postBody,
-        },
-        select: {
-          id: true,
-          userId: true,
-          pictureUrl: true,
-          postBody: true,
-          createdAt: true,
-          user: {
-            select: {
-              userName: true,
-              avatar: {
-                select: {
-                  url: true,
-                },
-              }
-            },
+      if(req.body.postBody.trim().length === 0){
+        res.status(400).json({msg:"Post cannot contain only white space."})
+      }
+      else{
+        const wuphf = await prisma.Wuphf.create({
+          data: {
+            userId: req.body.userName,
+            pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+            postBody: req.body.postBody,
           },
-          _count: {
-            select: {
-              Likes: true,
-              Comments: true,
+          select: {
+            id: true,
+            userId: true,
+            pictureUrl: true,
+            postBody: true,
+            createdAt: true,
+            user: {
+              select: {
+                userName: true,
+                avatar: {
+                  select: {
+                    url: true,
+                  },
+                }
+              },
             },
-          },
-        }
-      })
+            _count: {
+              select: {
+                Likes: true,
+                Comments: true,
+              },
+            },
+          }
+        })
+        res.json(wuphf)
+      }
 
-      res.json(wuphf)
+      
     } catch (error) {
       console.error(error)
       res.status(500).json({ error })

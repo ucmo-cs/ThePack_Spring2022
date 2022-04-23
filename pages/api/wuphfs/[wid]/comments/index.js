@@ -27,35 +27,38 @@ export default async function handler(req, res) {
 		}
 	} else if (req.method === 'POST') {
 		let userId
-
-		if (session) {
-			const wuphfUser = await prisma.WuphfUser.findUnique({
-				where: {
-					email: session.user.email,
-				},
-			})
-
-			userId = wuphfUser.userName
-		} else {
-			userId = req.body.userId
+		if(req.body.commentBody.trim().length === 0){
+			res.status(400).json({msg:"Comment cannot contain only white space."})
 		}
+		else{
+			if (session) {
+				const wuphfUser = await prisma.WuphfUser.findUnique({
+					where: {
+						email: session.user.email,
+					},
+				})
 
-		try {
-			const comment = await prisma.Comments.create({
-				data: {
-					postsId: Number(wid),
-					commentBody: req.body.commentBody,
-					userId: userId,
-				},
-			})
+				userId = wuphfUser.userName
+			} else {
+				userId = req.body.userId
+			}
 
-			res.json(comment)
-		} catch (error) {
-			console.error(error)
-			res.status(500).json({ error })
-			throw error
+			try {
+				const comment = await prisma.Comments.create({
+					data: {
+						postsId: Number(wid),
+						commentBody: req.body.commentBody,
+						userId: userId,
+					},
+				})
+
+				res.json(comment)
+			} catch (error) {
+				console.error(error)
+				res.status(500).json({ error })
+				throw error
+			}
 		}
-
 		// #error - check to see if wuphf exists first
 		// #validation - invalid input
 	}
