@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
-import styled, { css, useTheme } from 'styled-components'
+import { useRouter } from 'next/router'
+import styled, { css } from 'styled-components'
 
 import { useSearch } from '../../hooks/useSearch'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
@@ -15,6 +16,7 @@ import MobileLink from './MobileLink'
 import WuphfLogo from './WuphfLogo'
 
 function NavigationBar() {
+	const router = useRouter()
 	const {
 		query,
 		register,
@@ -25,7 +27,6 @@ function NavigationBar() {
 	const [expanded, setExpanded] = useState(false)
 	const myRef = useRef(null)
 	const { wuphfUser } = useWuphfUser()
-	const theme = useTheme()
 
 	function toggleExpanded() {
 		if (!expanded) {
@@ -39,6 +40,10 @@ function NavigationBar() {
 		setExpanded(false)
 	}, [])
 
+	useEffect(() => {
+		hideSearch()
+	}, [router.pathname])
+
 	function handleSignout() {
 		signOut()
 	}
@@ -48,14 +53,7 @@ function NavigationBar() {
 			<NavWrapper>
 				<StyledNav expanded={expanded} ref={myRef}>
 					<LogoAndSearch>
-						{/* <StyledImg
-								src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dogThick_rieymv.svg'
-								width={40}
-								height={40}
-							/> */}
-						{/* <Logo src='/wuphf_logo.svg' alt='Wuphf' /> */}
 						<WuphfLogo />
-
 						<Search>
 							<StyledFormInput
 								id='search'
@@ -84,7 +82,6 @@ function NavigationBar() {
 							</SearchResultUl>
 						</Search>
 					</LogoAndSearch>
-
 					{wuphfUser && (
 						<>
 							<DesktopLinks as='ul' expanded={expanded}>
@@ -251,8 +248,8 @@ const HamburgerLine = styled.div`
 	:nth-child(1) {
 		top: 25%;
 		${(props) =>
-			props.expanded &&
-			css`
+		props.expanded &&
+		css`
 				transform: rotate(45deg);
 				top: 50%;
 			`};
@@ -264,8 +261,8 @@ const HamburgerLine = styled.div`
 	:nth-child(3) {
 		top: 75%;
 		${(props) =>
-			props.expanded &&
-			css`
+		props.expanded &&
+		css`
 				transform: rotate(-225deg);
 				top: 50%;
 			`};
