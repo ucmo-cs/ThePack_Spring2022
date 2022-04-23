@@ -5,8 +5,8 @@ import { useRouter } from 'next/router'
 
 import CommentInput from '../../components/comments/CommentInput'
 import Container from '../../components/styledComponents/Container'
-import Wuphf from '../../components/wuphfs/Wuphf'
 import Title from '../../components/styledComponents/Title'
+import Wuphf from '../../components/wuphfs/Wuphf'
 
 function WuphfPage() {
 	const router = useRouter()
