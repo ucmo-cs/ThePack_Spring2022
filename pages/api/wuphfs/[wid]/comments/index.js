@@ -1,7 +1,10 @@
+import { getSession } from 'next-auth/react'
+
 import { prisma } from '../../../../../lib/prisma'
 
 export default async function handler(req, res) {
 	const { wid } = req.query
+	const session = await getSession({ req })
 
 	// /wuphfs/[wid]/comments
 	if (req.method === 'GET') {
@@ -23,12 +26,26 @@ export default async function handler(req, res) {
 			throw error
 		}
 	} else if (req.method === 'POST') {
+		let userId
+
+		if (session) {
+			const wuphfUser = await prisma.WuphfUser.findUnique({
+				where: {
+					email: session.user.email,
+				},
+			})
+
+			userId = wuphfUser.userName
+		} else {
+			userId = req.body.userId
+		}
+
 		try {
 			const comment = await prisma.Comments.create({
 				data: {
 					postsId: Number(wid),
 					commentBody: req.body.commentBody,
-					userId: req.body.userId,
+					userId: userId,
 				},
 			})
 
