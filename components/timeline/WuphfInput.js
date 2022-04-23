@@ -7,7 +7,7 @@ import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
 
-function WuphfInput({ onSubmit, addWuphf }) {
+function WuphfInput({ addWuphf }) {
 	const [post, setPost] = useState('')
 	const { wuphfUser } = useWuphfUser()
 
@@ -20,15 +20,11 @@ function WuphfInput({ onSubmit, addWuphf }) {
 		axios
 			.post('/api/wuphfs', {
 				userName: wuphfUser.userName,
-				// pictureUrl: wuphfUser.avatar.url,
-				pictureUrl:
-					'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png',
+				pictureUrl: wuphfUser.avatar.url,
 				postBody: post,
 			})
 			.then((res) => {
-				// console.log(res.data)
 				addWuphf(res.data)
-				// onSubmit(res.data)
 				setPost('')
 			})
 	}

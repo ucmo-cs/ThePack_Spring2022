@@ -39,6 +39,29 @@ export default async function handler(req, res) {
           pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
           postBody: req.body.postBody,
         },
+        select: {
+          id: true,
+          userId: true,
+          pictureUrl: true,
+          postBody: true,
+          createdAt: true,
+          user: {
+            select: {
+              userName: true,
+              avatar: {
+                select: {
+                  url: true,
+                },
+              }
+            },
+          },
+          _count: {
+            select: {
+              Likes: true,
+              Comments: true,
+            },
+          },
+        }
       })
 
       res.json(wuphf)
