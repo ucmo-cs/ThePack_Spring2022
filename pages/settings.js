@@ -147,9 +147,9 @@ function AccountSettings(props) {
 							onChange={handleSubmit(handleAvatarChange)}
 						>
 							{avatars.map((avatar) => (
-								<option key={avatar.key} value={avatar.url}>
+								<Option key={avatar.key} value={avatar.url}>
 									{avatar.name}
-								</option>
+								</Option>
 							))}
 						</SelectInput>
 						<Avatar
