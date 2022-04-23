@@ -11,7 +11,7 @@ function withAuth(Component) {
 		const { wuphfUser, wuphfUserLoading } = useWuphfUser()
 		const { wuphfUserError } = useWuphfUser()
 
-		if (status == 'loading' || wuphfUserLoading) return <Loading />
+		if (status == 'loading') return <Loading />
 		if (status == 'unauthenticated') return <Welcome />
 		if (!wuphfUser) return <RegistrationForm />
 

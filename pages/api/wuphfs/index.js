@@ -1,3 +1,5 @@
+import { object, string } from 'yup'
+
 import { prisma } from '../../../lib/prisma'
 
 export default async function handler(req, res) {
@@ -32,44 +34,51 @@ export default async function handler(req, res) {
 			throw error
 		}
 	} else if (req.method === 'POST') {
+		let wuphfSchema = object({
+			userName: string().required(),
+			pictureUrl: string().required(),
+			postBody: string().trim().required(),
+		})
+
+		// validation
 		try {
-			if (req.body.postBody.trim().length === 0) {
-				res
-					.status(400)
-					.json({ message: 'Post cannot contain only white space.' })
-			} else {
-				const wuphf = await prisma.Wuphf.create({
-					data: {
-						userId: req.body.userName,
-						pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
-						postBody: req.body.postBody,
-					},
-					select: {
-						id: true,
-						userId: true,
-						pictureUrl: true,
-						postBody: true,
-						createdAt: true,
-						user: {
-							select: {
-								userName: true,
-								avatar: {
-									select: {
-										url: true,
-									},
+			await wuphfSchema.validate(req.body)
+		} catch (error) {
+			return res.status(400).json(error)
+		}
+
+		try {
+			const wuphf = await prisma.Wuphf.create({
+				data: {
+					userId: req.body.userName,
+					pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+					postBody: req.body.postBody.trim(),
+				},
+				select: {
+					id: true,
+					userId: true,
+					pictureUrl: true,
+					postBody: true,
+					createdAt: true,
+					user: {
+						select: {
+							userName: true,
+							avatar: {
+								select: {
+									url: true,
 								},
 							},
 						},
-						_count: {
-							select: {
-								Likes: true,
-								Comments: true,
-							},
+					},
+					_count: {
+						select: {
+							Likes: true,
+							Comments: true,
 						},
 					},
-				})
-				res.json(wuphf)
-			}
+				},
+			})
+			res.json(wuphf)
 		} catch (error) {
 			// console.error(error)
 			res.status(500).json({ error })

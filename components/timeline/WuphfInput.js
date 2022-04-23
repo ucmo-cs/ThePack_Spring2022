@@ -17,16 +17,18 @@ function WuphfInput({ addWuphf }) {
 
 	async function handleSubmit(event) {
 		event.preventDefault()
-		axios
+		const res = await axios
 			.post('/api/wuphfs', {
 				userName: wuphfUser.userName,
 				pictureUrl: wuphfUser.avatar.url,
 				postBody: post,
 			})
-			.then((res) => {
-				addWuphf(res.data)
-				setPost('')
-			})
+			.catch((err) => alert(err))
+
+		if (res) {
+			addWuphf(res.data)
+		}
+		setPost('')
 	}
 
 	return (
