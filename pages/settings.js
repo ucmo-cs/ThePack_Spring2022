@@ -19,6 +19,7 @@ import GoogleLogo from '../components/other/GoogleLogo'
 import Sidebar from '../components/settings/Sidebar'
 import Paragraph from '../components/styledComponents/Paragraph'
 import { useAvatars } from '../hooks/useAvatar'
+import { useCustomTheme } from '../hooks/useCustomTheme'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 AccountSettings.propTypes = {
@@ -52,6 +53,7 @@ function AccountSettings(props) {
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
 	const { wuphfUser } = useWuphfUser()
 	const { avatars, lookupAvatarIdByUrl } = useAvatars()
+	const { changeTheme } = useCustomTheme()
 
 	useEffect(() => {
 		setValue('avatar', wuphfUser?.avatar?.url)
@@ -65,24 +67,30 @@ function AccountSettings(props) {
 		const newTheme = e.target.value
 		if (newTheme === 'light') {
 			setSelectedThemeValue('light')
-			props.setTheme(lightTheme)
+			changeTheme(lightTheme)
+			// props.setTheme(lightTheme)
 		} else if (newTheme === 'lava') {
 			setSelectedThemeValue('lava')
-			props.setTheme(lavaTheme)
+			changeTheme(lavaTheme)
+			// props.setTheme(lavaTheme)
 		} else if (newTheme === 'dark') {
 			setSelectedThemeValue('dark')
-			props.setTheme(darkTheme)
+			changeTheme(darkTheme)
+			// props.setTheme(darkTheme)
 		}
 	}
 
 	async function handleEditProfileSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editProfileSettingsEnabled) {
-			await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
-				userName: getValues('username'),
-				bio: getValues('biography_textarea'),
-				avatarId: lookupAvatarIdByUrl(getValues('avatar')),
-			})
+			await axios.patch(
+				`/api/users/${encodeURIComponent(wuphfUser.userName)}`,
+				{
+					userName: getValues('username'),
+					bio: getValues('biography_textarea'),
+					avatarId: lookupAvatarIdByUrl(getValues('avatar')),
+				}
+			)
 		}
 		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
 	}
@@ -90,9 +98,12 @@ function AccountSettings(props) {
 	async function handleEditVisualSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editVisualSettingsEnabled) {
-			const res = await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
-				theme: selectedThemeValue,
-			})
+			const res = await axios.patch(
+				`/api/users/${encodeURIComponent(wuphfUser.userName)}`,
+				{
+					theme: selectedThemeValue,
+				}
+			)
 			console.log(res)
 		}
 		setEditVisualSettingsEnabled(!editVisualSettingsEnabled)
@@ -100,7 +111,9 @@ function AccountSettings(props) {
 
 	async function handleDeleteButtonClick(e) {
 		e.preventDefault()
-		await axios.delete(`/api/users/${encodeURIComponent(wuphfUser.userName)}`).then(() => signOut())
+		await axios
+			.delete(`/api/users/${encodeURIComponent(wuphfUser.userName)}`)
+			.then(() => signOut())
 	}
 
 	function handleAvatarChange(e) {

@@ -130,11 +130,13 @@ function Wuphf(props) {
 			<Container>
 				<AvatarWrapper>
 					{props.user && (
-						<Avatar
-							username={props.userId}
-							profileImageUrl={props.user.avatar.url}
-							size='large'
-						/>
+						<Link href={`/user/${props.userId}`}>
+							<Avatar
+								username={props.userId}
+								profileImageUrl={props.user.avatar.url}
+								size='large'
+							/>
+						</Link>
 					)}
 				</AvatarWrapper>
 				<PostWrapper>
@@ -330,6 +332,7 @@ const Username = styled.h3`
 
 	&:hover {
 		text-decoration: underline;
+		cursor: pointer;
 	}
 `
 
