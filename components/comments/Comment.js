@@ -38,9 +38,9 @@ function Comment(props) {
 
 const Wrapper = styled.div`
 	display: flex;
-	gap: 1rem;
 	/* background-color: orange; */
 	border-radius: 20px;
+	padding-bottom: 1rem;
 	&:not(:last-child) {
 		border-bottom: 1.5px solid ${(props) => props.theme.colors.border};
 	}
@@ -49,11 +49,15 @@ const Wrapper = styled.div`
 const AvatarWrapper = styled.div`
 	/* background-color: yellow; */
 	position: relative;
-	padding: 1rem;
-	span {
-		width: 50px;
-		height: 50px;
-	}
+	flex-shrink: 0;
+	padding: 0 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	/* span {
+		width: 70px;
+		height: 70px;
+	} */
 `
 const CommentWrapper = styled.div`
 	/* background-color: magenta; */
