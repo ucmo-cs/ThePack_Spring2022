@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 	} else if (req.method === 'POST') {
 		let userId
 		if(req.body.commentBody.trim().length === 0){
-			res.status(400).json({msg:"Comment cannot contain only white space."})
+			res.status(400).json({msg:'Comment cannot contain only white space.'})
 		}
 		else{
 			if (session) {

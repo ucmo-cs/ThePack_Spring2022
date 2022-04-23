@@ -1,4 +1,3 @@
-import { string } from 'prop-types'
 import { prisma } from '../../../lib/prisma'
 
 export default async function handler(req, res) {
@@ -35,7 +34,7 @@ export default async function handler(req, res) {
   } else if (req.method === 'POST') {
     try {
       if(req.body.postBody.trim().length === 0){
-        res.status(400).json({msg:"Post cannot contain only white space."})
+        res.status(400).json({msg:'Post cannot contain only white space.'})
       }
       else{
         const wuphf = await prisma.Wuphf.create({
