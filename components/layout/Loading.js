@@ -2,7 +2,6 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 
-
 function Loading() {
 	return (
 		<Container>
@@ -17,7 +16,7 @@ function Loading() {
 const Container = styled.div`
 	display: flex;
 	/* background-color: blue; */
-	height: 100vh;
+	height: 30vh;
 	justify-content: center;
 	align-items: center;
 `

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 			// console.log('All Wuphfs', JSON.stringify(wuphfs, null, 2))
 
 			// if (wuphfs.length === 0) {
-			//   return res.status(404).json({ msg: 'No Wuphfs found' })
+			// 	return res.status(404).json({ msg: 'No Wuphfs found' })
 			// }
 
 			res.json(wuphfs)
@@ -33,38 +33,41 @@ export default async function handler(req, res) {
 		}
 	} else if (req.method === 'POST') {
 		try {
-			const wuphf = await prisma.Wuphf.create({
-				data: {
-					userId: req.body.userName,
-					pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
-					postBody: req.body.postBody,
-				},
-				select: {
-					id: true,
-					userId: true,
-					pictureUrl: true,
-					postBody: true,
-					createdAt: true,
-					user: {
-						select: {
-							userName: true,
-							avatar: {
-								select: {
-									url: true,
+			if (req.body.postBody.trim().length === 0) {
+				res.status(400).json({ msg: 'Post cannot contain only white space.' })
+			} else {
+				const wuphf = await prisma.Wuphf.create({
+					data: {
+						userId: req.body.userName,
+						pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+						postBody: req.body.postBody,
+					},
+					select: {
+						id: true,
+						userId: true,
+						pictureUrl: true,
+						postBody: true,
+						createdAt: true,
+						user: {
+							select: {
+								userName: true,
+								avatar: {
+									select: {
+										url: true,
+									},
 								},
 							},
 						},
-					},
-					_count: {
-						select: {
-							Likes: true,
-							Comments: true,
+						_count: {
+							select: {
+								Likes: true,
+								Comments: true,
+							},
 						},
 					},
-				},
-			})
-
-			res.json(wuphf)
+				})
+				res.json(wuphf)
+			}
 		} catch (error) {
 			// console.error(error)
 			res.status(500).json({ error })
