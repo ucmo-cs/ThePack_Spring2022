@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 		try {
 			const user = await prisma.WuphfUser.findUnique({
 				where: {
-					userName:uid,
+					userName: uid,
 				},
 				include: {
 					wuphfs: true,
@@ -25,11 +25,11 @@ export default async function handler(req, res) {
 									avatar: {
 										select: {
 											url: true,
-										}
+										},
 									},
-								}
-							}
-						}
+								},
+							},
+						},
 					},
 					Following: {
 						select: {
@@ -40,11 +40,11 @@ export default async function handler(req, res) {
 									avatar: {
 										select: {
 											url: true,
-										}
+										},
 									},
-								}
-							}
-						}
+								},
+							},
+						},
 					},
 					_count: {
 						select: {
@@ -54,19 +54,21 @@ export default async function handler(req, res) {
 					},
 				},
 			})
-			if (!user) {
-				return res
-					.status(404)
-					.json({ msg: `No WuphfUser found with the username ${uid}` })
-			}
+			// if (!user) {
+			// 	return res
+			// 		.status(404)
+			// 		.json({ msg: `No WuphfUser found with the username ${uid}` })
+			// }
 
 			if (session) {
 				const sender = await prisma.WuphfUser.findUnique({
 					where: {
 						email: session.user.email,
-					}
+					},
 				})
-				user.isFollowed = user.Followers.some(f => f.followerId === sender.userName)
+				user.isFollowed = user.Followers.some(
+					(f) => f.followerId === sender.userName
+				)
 
 				if (sender.userName !== user.userName) {
 					delete user.Followers
@@ -75,7 +77,7 @@ export default async function handler(req, res) {
 			}
 			res.json(user)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -93,13 +95,13 @@ export default async function handler(req, res) {
 				},
 			})
 
-			if (!user) {
-				return res.status(404).json({ msg: 'No WuphfUser found' })
-			}
+			// if (!user) {
+			// 	return res.status(404).json({ msg: 'No WuphfUser found' })
+			// }
 
 			res.json(user)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -113,9 +115,9 @@ export default async function handler(req, res) {
 			},
 		})
 
-		if (!wuphfUser) {
-			return res.status(404).json({ msg: 'No WuphfUser found' })
-		}
+		// if (!wuphfUser) {
+		// 	return res.status(404).json({ msg: 'No WuphfUser found' })
+		// }
 
 		const { email } = wuphfUser
 
@@ -128,7 +130,7 @@ export default async function handler(req, res) {
 
 			res.json(user)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}

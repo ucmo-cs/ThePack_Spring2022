@@ -57,13 +57,13 @@ export default async function handler(req, res) {
 				}
 			})
 
-			if (wuphfs.length === 0) {
-				return res.status(404).json({ msg: `No Wuphfs by ${uid} found` })
-			}
+			// if (wuphfs.length === 0) {
+			// 	return res.status(404).json({ msg: `No Wuphfs by ${uid} found` })
+			// }
 
 			res.json(wuphfs)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}

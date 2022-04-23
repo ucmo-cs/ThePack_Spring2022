@@ -40,7 +40,7 @@ function WuphfInput({ addWuphf }) {
 				<Avatar
 					size='medium'
 					username={wuphfUser?.userName}
-					profileImageUrl={wuphfUser?.avatar.url}
+					profileImageUrl={wuphfUser?.avatar && wuphfUser.avatar.url}
 				/>
 				<Button type='submit' variant='primary'>
 					WUPHF!

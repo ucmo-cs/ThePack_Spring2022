@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
 			res.json(comments)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
 			res.json(comment)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}

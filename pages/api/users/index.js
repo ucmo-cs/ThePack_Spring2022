@@ -6,13 +6,13 @@ export default async function handler(req, res) {
 		try {
 			const users = await prisma.WuphfUser.findMany()
 
-			if (users.length === 0) {
-				return res.status(404).json({ msg: 'No WuphfUsers found' })
-			}
+			// if (users.length === 0) {
+			// 	return res.status(404).json({ msg: 'No WuphfUsers found' })
+			// }
 
 			res.json(users)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
 					})
 				}
 			}
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}

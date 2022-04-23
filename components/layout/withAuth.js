@@ -12,25 +12,17 @@ function withAuth(Component) {
 		const { wuphfUserError } = useWuphfUser()
 
 		if (status == 'loading') return <Loading />
-		switch (wuphfUserError?.status) {
-			case 401: // Google user not authenticated
-				return <Welcome />
-			case 404: // No WuphfUser with the Google user's email
-				return <RegistrationForm />
-		}
+		if (status == 'unauthenticated') return <Welcome />
+		if (!wuphfUser) return <RegistrationForm />
 
-		if (session) {
-			return (
-				<Component
-					{...props}
-					session={session}
-					wuphfUser={wuphfUser}
-					status={status}
-				/>
-			)
-		}
-
-		return <Welcome />
+		return (
+			<Component
+				{...props}
+				session={session}
+				wuphfUser={wuphfUser}
+				status={status}
+			/>
+		)
 	}
 
 	if (Component.getInitialProps) {

@@ -21,6 +21,7 @@ const WuphfUserContextProvider = ({ setTheme, children }) => {
 			setWuphfUser(newWuphfUser)
 			setWuphfUserLoading(false)
 			setWuphfUserError(undefined)
+			console.log(newWuphfUser)
 			// changeTheme(lookupTheme(newWuphfUser.theme))
 		}
 	}
