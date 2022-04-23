@@ -7,6 +7,7 @@ import {
 	faPenToSquare,
 	faThumbsUp,
 	faTrashCan,
+	faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
@@ -190,18 +191,26 @@ function Wuphf(props) {
 							<FontAwesomeIcon icon={faCheck} />
 						</SaveButton>
 					</SecondRow>
-					<div>
-						<FontAwesomeIcon
-							icon={faThumbsUp}
-							onClick={handleLikeToggle}
-							color={userLikePost ? 'green' : 'gray'}
-							style={{ cursor: 'pointer' }}
-						/>
-						<LikeCount>{likeCount}</LikeCount>
+					<Reactions>
+						<LikeWrapper>
+							<FontAwesomeIcon
+								icon={faThumbsUp}
+								onClick={handleLikeToggle}
+								color={userLikePost ? 'green' : 'gray'}
+								style={{ cursor: 'pointer' }}
+							/>
+							<LikeCount>{likeCount}</LikeCount>
+						</LikeWrapper>
 						<Link href={`/wuphf/${props.id}`}>
-							<CommentCount>Comments: {props._count.Comments}</CommentCount>
+							<CommentWrapper>
+								<FontAwesomeIcon
+									icon={faComment}
+									style={{ cursor: 'pointer' }}
+								/>
+								<CommentCount>{props._count.Comments}</CommentCount>
+							</CommentWrapper>
 						</Link>
-					</div>
+					</Reactions>
 				</PostWrapper>
 			</Container>
 		</PostBorder>
@@ -215,9 +224,18 @@ const LikeCount = styled.span`
 
 const CommentCount = styled.span`
 	padding-left: 10px;
-	color: magenta;
 	cursor: pointer;
 `
+
+const Reactions = styled.div`
+	display: flex;
+	gap: 1rem;
+`
+
+const CommentWrapper = styled.div`
+	color: magenta;
+`
+const LikeWrapper = styled.div``
 
 const Container = styled.div`
 	display: grid;
