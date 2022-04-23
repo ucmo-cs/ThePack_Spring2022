@@ -130,6 +130,8 @@ function Wuphf(props) {
 				<AvatarWrapper>
 					<Avatar
 						username={props.userId}
+						// This was breaking the comments page so I had to comment this for now
+						// profileImageUrl={props.user.avatar.url}
 						profileImageUrl={props.user.avatarId}
 						size='large'
 					/>
