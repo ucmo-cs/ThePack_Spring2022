@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
@@ -52,8 +53,19 @@ function WuphfPage() {
 		}
 	}, [id])
 
+	function wuphfTitle(wuphf) {
+		const startAndEnd = (`${wuphf.userId} on Wuphf: ` + ' ...').length
+		const maxChars = 59
+		const remainingCharsForPost = maxChars - startAndEnd
+		const abbrevPost = wuphf.postBody.substring(0, remainingCharsForPost)
+		return `${wuphf.userId} on Wuphf: ` + abbrevPost + ' ...'
+	}
+
 	return (
 		<Container>
+			<Head>
+				<title>{wuphf && wuphfTitle(wuphf)} | Wuphf</title>
+			</Head>
 			{wuphf && (
 				<StyledWuphf
 					key={wuphf.id}

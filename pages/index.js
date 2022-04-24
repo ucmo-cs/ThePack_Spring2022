@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import Head from 'next/head'
 import styled from 'styled-components'
 
 import withAuth from '../components/layout/withAuth'
@@ -49,6 +50,9 @@ function Home({ session }) {
 
 	return (
 		<Container>
+			<Head>
+				<title>Home | Wuphf</title>
+			</Head>
 			<FlexWrapper>
 				<WuphfInput addWuphf={addWuphf} />
 				<WuphfsFeed

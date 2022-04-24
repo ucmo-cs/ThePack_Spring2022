@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import moment from 'moment'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
@@ -27,11 +28,13 @@ function UserPage() {
 
 	const getWuphfs = async () => {
 		setWuphfsLoading(true)
-		const res = await axios.get(`/api/users/${encodeURIComponent(id)}/wuphfs`).catch((err) => {
-			setWuphfsError({ data: err.response.data, status: err.response.status })
-			setWuphfsLoading(false)
-			setWuphfs([])
-		})
+		const res = await axios
+			.get(`/api/users/${encodeURIComponent(id)}/wuphfs`)
+			.catch((err) => {
+				setWuphfsError({ data: err.response.data, status: err.response.status })
+				setWuphfsLoading(false)
+				setWuphfs([])
+			})
 
 		if (res) {
 			// TODO: Add pagination to /users/[id]/wuphfs endpoint
@@ -48,9 +51,11 @@ function UserPage() {
 	}
 
 	async function getUser() {
-		const res = await axios.get(`/api/users/${encodeURIComponent(id)}`).catch((err) => {
-			setUserError({ data: err.response.data, status: err.response.status })
-		})
+		const res = await axios
+			.get(`/api/users/${encodeURIComponent(id)}`)
+			.catch((err) => {
+				setUserError({ data: err.response.data, status: err.response.status })
+			})
 		setUser(res?.data)
 		getWuphfs()
 		setUserLoading(false)
@@ -66,6 +71,9 @@ function UserPage() {
 
 	return (
 		<Container>
+			<Head>
+				<title>{user && user?.userName} | Wuphf</title>
+			</Head>
 			{userLoading ? (
 				<Loading />
 			) : (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import { signOut } from 'next-auth/react'
+import Head from 'next/head'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
@@ -123,6 +124,9 @@ function AccountSettings(props) {
 
 	return (
 		<AccSetLayout>
+			<Head>
+				<title>Settings | Wuphf</title>
+			</Head>
 			<Sidebar />
 			<MainContent>
 				<div>
