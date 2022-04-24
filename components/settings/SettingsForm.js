@@ -15,7 +15,6 @@ import Title from '../styledComponents/Title'
 
 function SettingsForm(props) {
 	const { data: session } = useSession()
-	const { lookupAvatarIdByUrl } = useAvatars()
 
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
@@ -80,17 +79,6 @@ function SettingsForm(props) {
 		</SettingBorder>
 	)
 }
-
-const Watchs = styled.div`
-	margin-bottom: 1rem;
-`
-
-const Watch = styled.h3`
-	margin-bottom: 0.3em;
-	font-size: 1.18rem;
-	font-weight: 600;
-	line-height: 1.5em;
-`
 
 const SettingBorder = styled.div`
 	border: 1px solid #adadad;
