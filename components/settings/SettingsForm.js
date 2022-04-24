@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import styled from 'styled-components'
 
+import { useAvatars } from '../../hooks/useAvatar'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import FormInput from '../forms/FormInput'
 import SelectInput from '../forms/SelectInput'
@@ -14,6 +15,8 @@ import Title from '../styledComponents/Title'
 
 function SettingsForm(props) {
 	const { data: session } = useSession()
+	const { lookupAvatarIdByUrl } = useAvatars()
+
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
 	const { setWuphfUser } = useWuphfUser()
@@ -27,9 +30,9 @@ function SettingsForm(props) {
 		axios
 			.post('/api/users', {
 				email: session.user.email,
-				userName: props.watch('username'),
-				bio: props.watch('bio'),
-				avatarId: props.watch('animal')
+				userName: props.getValues('username'),
+				bio: props.getValues('biography_textarea'),
+				avatarId: props.lookupAvatarIdByUrl(getValues('animal')),
 			})
 			.then((res) => {
 				setLoading(false)
@@ -47,12 +50,6 @@ function SettingsForm(props) {
 		<SettingBorder>
 			<Title>WUPHF</Title>
 			<form onSubmit={props.handleSubmit(onSubmit)}>
-				<Watchs>
-					<Watch>username: {props.watch('username')}</Watch>
-					<Watch>animal: {props.watch('animal')}</Watch>
-					<Watch>message: {props.watch('message')}</Watch>
-				</Watchs>
-
 				<FormInput
 					id='username'
 					label='Username'
@@ -61,7 +58,7 @@ function SettingsForm(props) {
 				/>
 				<SelectInput register={props.register} id='animal' label='Your Animal'>
 					{props.animals.map((animal) => (
-						<option value={animal.avatarId} key={`select-option-${animal.avatarId}`}>
+						<option value={animal.url} key={`animal-option-${animal.name}`}>
 							{animal.name}
 						</option>
 					))}

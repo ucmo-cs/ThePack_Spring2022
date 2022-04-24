@@ -17,7 +17,7 @@ const schema = yup.object({
 	bio: yup.string().required('Required'),
 })
 
-function RegistrationForm({ setWuphfUser }) {
+function RegistrationForm() {
 	const { avatars } = useAvatars()
 	const [selectedAvatar, setSelectedAvatar] = useState(avatars[0])
 	const {
@@ -25,6 +25,7 @@ function RegistrationForm({ setWuphfUser }) {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		watch,
+		getValues
 	} = useForm({
 		mode: 'onTouched',
 		resolver: yupResolver(schema),
@@ -53,8 +54,8 @@ function RegistrationForm({ setWuphfUser }) {
 			<Wrapper>
 				<div className='avatarContainer'>
 					<Avatar
-						username='Joe Smith'
-						profileImageUrl={selectedAvatar?.url || 'temp'}
+						username={watch('username')}
+						profileImageUrl={watch('animal') || 'animal_svgs/dog_nau7in.svg'}
 						size='large'
 					/>
 				</div>
@@ -67,6 +68,7 @@ function RegistrationForm({ setWuphfUser }) {
 					watch={watch}
 					isSubmitting={isSubmitting}
 					register={register}
+					getValues={getValues}
 				/>
 			</Wrapper>
 		</Container>
