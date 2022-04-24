@@ -1,6 +1,7 @@
 import { signIn } from 'next-auth/react'
 import styled from 'styled-components'
 
+import WuphfSVG from '../../assets/WuphfSVG'
 import breakpoint from '../../styles/breakpoint'
 import Button from '../general/Button'
 import Paragraph from '../styledComponents/Paragraph'
@@ -11,10 +12,7 @@ function Welcome() {
 		<Wrapper>
 			<Content>
 				<LogoWrapper>
-					<StyledImg
-						src='https://res.cloudinary.com/wuphf/image/upload/v1647982586/animal_svgs/dogThick_rieymv.svg'
-						alt='wuphf logo'
-					/>
+					<WuphfSVG height='350px' />
 				</LogoWrapper>
 				<MessageWrapper>
 					<Message>
@@ -77,7 +75,6 @@ const MessageWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
-	width: 25vw;
 	max-width: 400px;
 	@media ${breakpoint.down.sm} {
 		width: 100%;
@@ -86,6 +83,10 @@ const MessageWrapper = styled.div`
 	/* flex-grow: 1; */
 `
 
-const Message = styled.div``
+const Message = styled.div`
+	border: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+	border-radius: 20px;
+	padding: 1.5rem;
+`
 
 export default Welcome
