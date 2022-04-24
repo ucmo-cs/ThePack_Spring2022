@@ -47,11 +47,11 @@ function SettingsForm(props) {
 		<SettingBorder>
 			<Title>WUPHF</Title>
 			<form onSubmit={props.handleSubmit(onSubmit)}>
-				<Watchs>
+				{/* <Watchs>
 					<Watch>username: {props.watch('username')}</Watch>
 					<Watch>animal: {props.watch('animal')}</Watch>
 					<Watch>message: {props.watch('message')}</Watch>
-				</Watchs>
+				</Watchs> */}
 
 				<FormInput
 					id='username'
@@ -61,9 +61,9 @@ function SettingsForm(props) {
 				/>
 				<SelectInput register={props.register} id='animal' label='Your Animal'>
 					{props.animals.map((animal) => (
-						<option value={animal.avatarId} key={`select-option-${animal.avatarId}`}>
+						<Option value={animal.avatarId} key={`select-option-${animal.avatarId}`}>
 							{animal.name}
-						</option>
+						</Option>
 					))}
 				</SelectInput>
 
@@ -100,6 +100,9 @@ const SettingBorder = styled.div`
 	border-radius: 15px;
 	padding: 1.5rem;
 	/* margin: 10px; */
+`
+const Option = styled.option`
+	color: black;
 `
 
 export default SettingsForm
