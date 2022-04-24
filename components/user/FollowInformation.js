@@ -68,7 +68,7 @@ export default function FollowInformation(props) {
     }
 
     async function handleUnfollow() {
-        const res = await axios.delete(`/api/users/${user.userName}/following`)
+        const res = await axios.delete(`/api/users/${encodeURIComponent(user.userName)}/following`)
 
         if (res) {
             alert(`${user.userName} unfollowed`)

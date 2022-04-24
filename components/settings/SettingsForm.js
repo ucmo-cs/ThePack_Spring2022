@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import styled from 'styled-components'
 
-import { useAvatars } from '../../hooks/useAvatar'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import FormInput from '../forms/FormInput'
 import SelectInput from '../forms/SelectInput'
