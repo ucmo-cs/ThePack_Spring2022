@@ -84,16 +84,16 @@ function SettingsForm(props) {
 	)
 }
 
-const Watchs = styled.div`
-	margin-bottom: 1rem;
-`
+// const Watchs = styled.div`
+// 	margin-bottom: 1rem;
+// `
 
-const Watch = styled.h3`
-	margin-bottom: 0.3em;
-	font-size: 1.18rem;
-	font-weight: 600;
-	line-height: 1.5em;
-`
+// const Watch = styled.h3`
+// 	margin-bottom: 0.3em;
+// 	font-size: 1.18rem;
+// 	font-weight: 600;
+// 	line-height: 1.5em;
+// `
 
 const SettingBorder = styled.div`
 	border: 1px solid #adadad;
