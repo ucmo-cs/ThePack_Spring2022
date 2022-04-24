@@ -2,9 +2,8 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-import Comment from './Comment'
 import Loading from '../layout/Loading'
-import Title from '../styledComponents/Title'
+import Comment from './Comment'
 
 function Comments({ comments, commentsLoading }) {
 	if (commentsLoading) {
