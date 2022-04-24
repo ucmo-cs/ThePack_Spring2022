@@ -59,7 +59,7 @@ const Content = styled.div`
 	padding: 1rem;
 	@media ${breakpoint.down.sm} {
 		flex-direction: column-reverse;
-		/* height: auto; */
+		height: auto;
 		svg {
 			width: 300px;
 			height: 150px;
