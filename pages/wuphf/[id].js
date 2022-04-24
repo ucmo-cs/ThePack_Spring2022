@@ -37,7 +37,7 @@ function WuphfPage() {
 		if (res) {
 			console.log('wuphf', res.data)
 			setComments(res.data)
-			setCommentsError(false)
+			setCommentsLoading(false)
 		}
 	}
 
@@ -63,7 +63,7 @@ function WuphfPage() {
 			)}
 			<CommentInput addComment={addComment} />
 			{/* <Title>Comments...</Title> */}
-			<Comments comments={comments} />
+			<Comments comments={comments} commentsLoading={commentsLoading} />
 			{/* {comments && JSON.stringify(comments, null, 2)} */}
 			{/* <Comment /> */}
 		</Container>

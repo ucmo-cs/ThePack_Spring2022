@@ -76,7 +76,6 @@ const InputWrapper = styled.form`
 	background-color: ${(props) => props.theme.colors.highlight};
 	border: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
 	border-top: none;
-	border-bottom: none;
 `
 
 const AvatarWrapper = styled.div`
