@@ -12,7 +12,7 @@ function Home({ session }) {
 	const [wuphfs, setWuphfs] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [cursor, setCursor] = useState(null)
-	const [maxResults] = useState(5)
+	const [maxResults] = useState(20)
 	const [error, setError] = useState(false)
 	const [hasMore, setHasMore] = useState(true)
 

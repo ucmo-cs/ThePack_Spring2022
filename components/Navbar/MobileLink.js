@@ -35,13 +35,14 @@ const StyledLi = styled.li`
 	width: 100%;
 
 	&:hover {
-		background-color: ${(props) => props.theme.colors.lightBlue};
-		color: ${(props) => props.theme.colors.darkestBlue};
+		/* background-color: ${(props) => props.theme.colors.lightBlue}; */
+		background-color: ${({ theme }) => theme.colors.primary};
 		cursor: pointer;
 	}
 
 	&:active {
-		background-color: ${({ theme }) => theme.colors.highlightPressed};
+		/* background-color: ${({ theme }) => theme.colors.highlightPressed}; */
+		background-color: ${({ theme }) => theme.colors.primary};
 	}
 
 	height: ${(props) => (props.expanded ? '33.33vh;' : '0px;')};

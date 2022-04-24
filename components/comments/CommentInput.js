@@ -74,6 +74,9 @@ const InputWrapper = styled.form`
 	padding: 1rem;
 	color: ${(props) => props.theme.colors.text};
 	background-color: ${(props) => props.theme.colors.highlight};
+	border: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+	border-top: none;
+	border-bottom: none;
 `
 
 const AvatarWrapper = styled.div`
@@ -96,7 +99,9 @@ const CommentTextArea = styled.textarea`
 	border-radius: 4px;
 	width: 100%;
 	border: ${(props) =>
-		props.error ? '1px solid red' : `1px solid ${props.theme.colors.border}`};
+		props.error
+			? '1.5px solid red'
+			: `1.5px solid ${props.theme.colors.border}`};
 	&:focus {
 		outline: none;
 	}

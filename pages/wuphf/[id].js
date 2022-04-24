@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
 import CommentInput from '../../components/comments/CommentInput'
 import Comments from '../../components/comments/Comments'
@@ -54,7 +55,7 @@ function WuphfPage() {
 	return (
 		<Container>
 			{wuphf && (
-				<Wuphf
+				<StyledWuphf
 					key={wuphf.id}
 					// onDelete={() => handleDeleteWuphf(index)}
 					{...wuphf}
@@ -68,5 +69,10 @@ function WuphfPage() {
 		</Container>
 	)
 }
+
+// not working?
+const StyledWuphf = styled(Wuphf)`
+	border: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+`
 
 export default WuphfPage

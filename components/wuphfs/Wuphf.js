@@ -255,6 +255,7 @@ const EditCorner = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: end;
+	cursor: pointer;
 `
 
 const StyledEditButton = styled(FontAwesomeIcon)`
@@ -262,15 +263,15 @@ const StyledEditButton = styled(FontAwesomeIcon)`
 	border-radius: 50%;
 	color: ${(props) => props.theme.colors.lightGrey};
 	background-color: ${(props) =>
-		props.$shown ? props.theme.colors.lightBlue : 'auto'};
+		props.$shown ? props.theme.colors.primary : 'auto'};
 	&:hover {
-		background-color: ${(props) => props.theme.colors.lightBlue};
-		color: ${(props) => props.theme.colors.darkestBlue};
+		background-color: ${(props) => props.theme.colors.primary};
+		color: ${(props) => props.theme.colors.text};
 	}
 `
 
 const EditMenu = styled.ul`
-	background-color: ${(props) => props.theme.colors.lightBlue};
+	background-color: ${(props) => props.theme.colors.highlight};
 	position: absolute;
 	margin-top: 25px;
 	border-radius: 10px;
@@ -293,8 +294,8 @@ const EditMenuItem = styled.li`
 	}
 
 	&:hover {
-		color: ${(props) => props.theme.colors.white};
-		background-color: ${(props) => props.theme.colors.darkBlue};
+		color: ${(props) => props.theme.colors.text};
+		background-color: ${(props) => props.theme.colors.primary};
 	}
 `
 
