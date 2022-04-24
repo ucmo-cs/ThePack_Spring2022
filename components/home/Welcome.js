@@ -52,10 +52,19 @@ const Content = styled.div`
 	display: flex;
 	/* background-color: pink; */
 	justify-content: center;
-	height: 100vh;
+	align-items: center;
+	height: 90vh;
 	width: 100vw;
 	gap: 1rem;
 	padding: 1rem;
+	@media ${breakpoint.down.sm} {
+		flex-direction: column-reverse;
+		/* height: auto; */
+		svg {
+			width: 300px;
+			height: 150px;
+		}
+	}
 `
 
 const LogoWrapper = styled.div`
@@ -65,9 +74,6 @@ const LogoWrapper = styled.div`
 	padding: 1rem;
 	/* background-color: red; */
 	/* flex-grow: 1; */
-	@media ${breakpoint.down.sm} {
-		display: none;
-	}
 `
 
 const MessageWrapper = styled.div`
