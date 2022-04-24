@@ -105,6 +105,7 @@ const PostBorder = styled.form`
 `
 
 const ErrorMsg = styled.span`
+	display: block;
 	color: red;
 	padding-bottom: 1rem;
 `
