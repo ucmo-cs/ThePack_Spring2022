@@ -36,7 +36,7 @@ const LoadingDots = styled.div`
 		border-radius: 50%;
 		background-color: ${({ theme }) => theme.colors.primary};
 		opacity: 1;
-		animation: bouncing-loader 0.6s infinite alternate;
+		animation: bouncing-loader 0.4s infinite alternate;
 	}
 
 	& > div:nth-child(2) {

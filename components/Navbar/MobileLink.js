@@ -36,7 +36,7 @@ const StyledLi = styled.li`
 
 	&:hover {
 		/* background-color: ${(props) => props.theme.colors.lightBlue}; */
-		background-color: ${({ theme }) => theme.colors.primary};
+		background-color: ${({ theme }) => theme.button.primary.bg};
 		cursor: pointer;
 	}
 
@@ -53,7 +53,11 @@ const StyledLi = styled.li`
 `
 
 const StyledA = styled.a`
-	color: ${(props) => props.theme.colors.text};
+	color: inherit;
+	transition: 0.5s ease-in-out;
+	&:hover {
+		color: ${(props) => props.theme.button.primary.text};
+	}
 	display: flex;
 	justify-content: center;
 	align-items: center;

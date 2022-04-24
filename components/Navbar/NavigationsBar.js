@@ -302,6 +302,9 @@ const SearchResultLi = styled.li`
 	gap: 10px;
 	padding: 10px;
 	border-bottom: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+	&:hover {
+		color: ${(props) => props.theme.button.primary.text};
+	}
 
 	&:last-child {
 		border-bottom-left-radius: 15px;
