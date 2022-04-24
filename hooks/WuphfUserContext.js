@@ -14,6 +14,7 @@ const WuphfUserContextProvider = ({ setTheme, children }) => {
 				data: err.response.data,
 				status: err.response.status,
 			})
+			setWuphfUserLoading(false)
 		})
 
 		if (res) {
