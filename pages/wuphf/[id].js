@@ -53,18 +53,12 @@ function WuphfPage() {
 		}
 	}, [id])
 
-	function wuphfTitle(wuphf) {
-		const startAndEnd = (`${wuphf.userId} on Wuphf: ` + ' ...').length
-		const maxChars = 59
-		const remainingCharsForPost = maxChars - startAndEnd
-		const abbrevPost = wuphf.postBody.substring(0, remainingCharsForPost)
-		return `${wuphf.userId} on Wuphf: ` + abbrevPost + ' ...'
-	}
-
 	return (
 		<Container>
 			<Head>
-				<title>{wuphf && wuphfTitle(wuphf)} | Wuphf</title>
+				<title>
+					{wuphf && `${wuphf.userId} on Wuphf: "${wuphf.postBody}"`} | Wuphf
+				</title>
 			</Head>
 			{wuphf && (
 				<StyledWuphf
