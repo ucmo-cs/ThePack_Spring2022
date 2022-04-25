@@ -194,17 +194,16 @@ function Wuphf(props) {
 						</SaveButton>
 					</SecondRow>
 					<Reactions>
-						<LikeWrapper>
+						<LikeWrapper userLikePost={userLikePost}>
 							<FontAwesomeIcon
 								icon={faThumbsUp}
 								onClick={handleLikeToggle}
-								color={userLikePost ? 'green' : 'gray'}
 								style={{ cursor: 'pointer' }}
 							/>
 							<LikeCount>{likeCount}</LikeCount>
 						</LikeWrapper>
 						<Link href={`/wuphf/${props.id}`}>
-							<CommentWrapper>
+							<CommentWrapper hasComments={props._count.Comments > 0}>
 								<FontAwesomeIcon
 									icon={faComment}
 									style={{ cursor: 'pointer' }}
@@ -220,12 +219,10 @@ function Wuphf(props) {
 }
 
 const LikeCount = styled.span`
-	padding-left: 10px;
 	cursor: pointer;
 `
 
 const CommentCount = styled.span`
-	padding-left: 10px;
 	cursor: pointer;
 `
 
@@ -235,9 +232,45 @@ const Reactions = styled.div`
 `
 
 const CommentWrapper = styled.div`
-	color: magenta;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.4rem;
+	color: ${({ hasComments, theme }) =>
+		hasComments ? theme.colors.comment : 'grey'};
+	svg {
+		padding: 0.4rem;
+		border-radius: 50%;
+		transition: 0.15s ease-in-out;
+		&:hover {
+			background-color: ${({ theme }) => theme.colors.commentHover};
+			color: ${({ theme }) => theme.colors.comment};
+		}
+		&:active {
+			background-color: ${({ theme }) => theme.colors.commentActive};
+		}
+	}
 `
-const LikeWrapper = styled.div``
+const LikeWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.4rem;
+	color: ${({ userLikePost, theme }) =>
+		userLikePost ? theme.colors.like : 'grey'};
+	svg {
+		padding: 0.4rem;
+		border-radius: 50%;
+		transition: 0.15s ease-in-out;
+		&:hover {
+			background-color: ${({ theme }) => theme.colors.likeHover};
+			color: ${({ theme }) => theme.colors.like};
+		}
+		&:active {
+			background-color: ${({ theme }) => theme.colors.likeActive};
+		}
+	}
+`
 
 const Container = styled.div`
 	display: grid;

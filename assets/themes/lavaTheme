@@ -1,7 +1,9 @@
-import { lighten, desaturate, darken } from 'polished'
+import { lighten, desaturate, mix } from 'polished'
 
 const bodyColor = '#000'
 const primaryColor = '#FE7900'
+const likeColor = '#03B97C'
+const commentColor = 'magenta'
 
 export const lavaTheme = {
 	colors: {
@@ -22,9 +24,14 @@ export const lavaTheme = {
 		highlightPressed: lighten(0.17, desaturate(0.1, bodyColor)),
 		text: '#fff',
 		subtext: lighten(0.5, desaturate(0.5, bodyColor)),
-		like: '#03B97C',
 		hamburger: lighten(0.11, desaturate(0.1, bodyColor)),
 		hamburgerLine: lighten(0.51, desaturate(0.1, bodyColor)),
+		like: likeColor,
+		likeHover: mix(0.8, bodyColor, likeColor),
+		likeActive: mix(0.5, bodyColor, likeColor),
+		comment: commentColor,
+		commentHover: mix(0.8, bodyColor, commentColor),
+		commentActive: mix(0.5, bodyColor, commentColor),
 	},
 	button: {
 		primary: {

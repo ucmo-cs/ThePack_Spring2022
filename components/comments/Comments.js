@@ -42,7 +42,7 @@ const NoCommentWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 15vh;
+	height: 150px;
 
 	p {
 		/* font-weight: 500; */
