@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Title from '../styledComponents/Title'
+import Loading from '../layout/Loading'
 import Wuphf from './Wuphf'
 
 Wuphfs.propTypes = {
@@ -19,7 +19,7 @@ function Wuphfs(props) {
 	}, [props])
 
 	if (!wuphfs || wuphfs.length === 0) {
-		return <Title>There are no Wuphfs to display.</Title>
+		return <Loading />
 	}
 
 	function deleteWuphf(wuphfId) {

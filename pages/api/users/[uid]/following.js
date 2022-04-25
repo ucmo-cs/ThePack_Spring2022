@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
 			if (!wuphfUser) {
 				return res.status(404).json({
-					msg: `No WuphfUser found with the email ${session.user.email}`,
+					message: `No WuphfUser found with the email ${session.user.email}`,
 				})
 			}
 
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
 				res.json(users)
 			} catch (error) {
-				console.error(error)
+				// console.error(error)
 				res.status(500).json({ error })
 				throw error
 			}
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
 				res.json(users)
 			} catch (error) {
-				console.error(error)
+				// console.error(error)
 				res.status(500).json({ error })
 				throw error
 			}
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 					},
 				})
 			} catch (error) {
-				console.error(error)
+				// console.error(error)
 				res.status(500).json({ error })
 				throw error
 			}
@@ -83,7 +83,7 @@ export default async function handler(req, res) {
 					},
 				})
 			} catch (error) {
-				console.error(error)
+				// console.error(error)
 				res.status(500).json({ error })
 				throw error
 			}
@@ -93,9 +93,9 @@ export default async function handler(req, res) {
 
 		// try to find the user we're following
 		try {
-			if(uid === userName) {
+			if (uid === userName) {
 				return res.status(400).json({
-					msg: 'You cannot follow yourself',
+					message: 'You cannot follow yourself',
 				})
 			}
 			const userToFollow = await prisma.WuphfUser.findUnique({
@@ -106,11 +106,11 @@ export default async function handler(req, res) {
 
 			if (!userToFollow) {
 				return res.status(404).json({
-					msg: 'The WuphfUser you are trying to follow does not exist',
+					message: 'The WuphfUser you are trying to follow does not exist',
 				})
 			}
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -124,7 +124,7 @@ export default async function handler(req, res) {
 			})
 			res.end(`Followed ${uid}`)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -141,7 +141,7 @@ export default async function handler(req, res) {
 				},
 			})
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -158,11 +158,11 @@ export default async function handler(req, res) {
 
 			if (!userToFollow) {
 				return res.status(404).json({
-					msg: 'The WuphfUser you are trying to unfollow does not exist',
+					message: 'The WuphfUser you are trying to unfollow does not exist',
 				})
 			}
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -178,7 +178,7 @@ export default async function handler(req, res) {
 			})
 			res.end(`Unfollowed ${uid}`)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}

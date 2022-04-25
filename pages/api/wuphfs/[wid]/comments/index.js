@@ -16,46 +16,50 @@ export default async function handler(req, res) {
 			})
 
 			// if (comments.length === 0) {
-			// 	return res.status(404).json({ msg: 'No comments found' })
+			// 	return res.status(404).json({ message: 'No comments found' })
 			// }
 
 			res.json(comments)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
 	} else if (req.method === 'POST') {
 		let userId
-
-		if (session) {
-			const wuphfUser = await prisma.WuphfUser.findUnique({
-				where: {
-					email: session.user.email,
-				},
-			})
-
-			userId = wuphfUser.userName
+		if (req.body.commentBody.trim().length === 0) {
+			res
+				.status(400)
+				.json({ message: 'Comment cannot contain only white space.' })
 		} else {
-			userId = req.body.userId
+			if (session) {
+				const wuphfUser = await prisma.WuphfUser.findUnique({
+					where: {
+						email: session.user.email,
+					},
+				})
+
+				userId = wuphfUser.userName
+			} else {
+				userId = req.body.userId
+			}
+
+			try {
+				const comment = await prisma.Comments.create({
+					data: {
+						postsId: Number(wid),
+						commentBody: req.body.commentBody,
+						userId: userId,
+					},
+				})
+
+				res.json(comment)
+			} catch (error) {
+				// console.error(error)
+				res.status(500).json({ error })
+				throw error
+			}
 		}
-
-		try {
-			const comment = await prisma.Comments.create({
-				data: {
-					postsId: Number(wid),
-					commentBody: req.body.commentBody,
-					userId: userId,
-				},
-			})
-
-			res.json(comment)
-		} catch (error) {
-			console.error(error)
-			res.status(500).json({ error })
-			throw error
-		}
-
 		// #error - check to see if wuphf exists first
 		// #validation - invalid input
 	}

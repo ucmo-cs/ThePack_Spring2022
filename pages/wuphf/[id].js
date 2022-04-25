@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
 import CommentInput from '../../components/comments/CommentInput'
 import Comments from '../../components/comments/Comments'
@@ -36,7 +38,7 @@ function WuphfPage() {
 		if (res) {
 			console.log('wuphf', res.data)
 			setComments(res.data)
-			setCommentsError(false)
+			setCommentsLoading(false)
 		}
 	}
 
@@ -53,8 +55,13 @@ function WuphfPage() {
 
 	return (
 		<Container>
+			<Head>
+				<title>
+					{wuphf && `${wuphf.userId} on Wuphf: "${wuphf.postBody}"`} | Wuphf
+				</title>
+			</Head>
 			{wuphf && (
-				<Wuphf
+				<StyledWuphf
 					key={wuphf.id}
 					// onDelete={() => handleDeleteWuphf(index)}
 					{...wuphf}
@@ -62,11 +69,16 @@ function WuphfPage() {
 			)}
 			<CommentInput addComment={addComment} />
 			{/* <Title>Comments...</Title> */}
-			<Comments comments={comments} />
+			<Comments comments={comments} commentsLoading={commentsLoading} />
 			{/* {comments && JSON.stringify(comments, null, 2)} */}
 			{/* <Comment /> */}
 		</Container>
 	)
 }
+
+// not working?
+const StyledWuphf = styled(Wuphf)`
+	border: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+`
 
 export default WuphfPage

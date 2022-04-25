@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import { signOut } from 'next-auth/react'
+import Head from 'next/head'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 import styled, { useTheme } from 'styled-components'
@@ -19,6 +20,7 @@ import GoogleLogo from '../components/other/GoogleLogo'
 import Sidebar from '../components/settings/Sidebar'
 import Paragraph from '../components/styledComponents/Paragraph'
 import { useAvatars } from '../hooks/useAvatar'
+import { useCustomTheme } from '../hooks/useCustomTheme'
 import { useWuphfUser } from '../hooks/WuphfUserContext'
 
 AccountSettings.propTypes = {
@@ -52,6 +54,7 @@ function AccountSettings(props) {
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
 	const { wuphfUser } = useWuphfUser()
 	const { avatars, lookupAvatarIdByUrl } = useAvatars()
+	const { changeTheme } = useCustomTheme()
 
 	useEffect(() => {
 		setValue('avatar', wuphfUser?.avatar?.url)
@@ -65,24 +68,30 @@ function AccountSettings(props) {
 		const newTheme = e.target.value
 		if (newTheme === 'light') {
 			setSelectedThemeValue('light')
-			props.setTheme(lightTheme)
+			changeTheme(lightTheme)
+			// props.setTheme(lightTheme)
 		} else if (newTheme === 'lava') {
 			setSelectedThemeValue('lava')
-			props.setTheme(lavaTheme)
+			changeTheme(lavaTheme)
+			// props.setTheme(lavaTheme)
 		} else if (newTheme === 'dark') {
 			setSelectedThemeValue('dark')
-			props.setTheme(darkTheme)
+			changeTheme(darkTheme)
+			// props.setTheme(darkTheme)
 		}
 	}
 
 	async function handleEditProfileSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editProfileSettingsEnabled) {
-			await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
-				userName: getValues('username'),
-				bio: getValues('biography_textarea'),
-				avatarId: lookupAvatarIdByUrl(getValues('avatar')),
-			})
+			await axios.patch(
+				`/api/users/${encodeURIComponent(wuphfUser.userName)}`,
+				{
+					userName: getValues('username'),
+					bio: getValues('biography_textarea'),
+					avatarId: lookupAvatarIdByUrl(getValues('avatar')),
+				}
+			)
 		}
 		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
 	}
@@ -90,9 +99,12 @@ function AccountSettings(props) {
 	async function handleEditVisualSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editVisualSettingsEnabled) {
-			const res = await axios.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
-				theme: selectedThemeValue,
-			})
+			const res = await axios.patch(
+				`/api/users/${encodeURIComponent(wuphfUser.userName)}`,
+				{
+					theme: selectedThemeValue,
+				}
+			)
 			console.log(res)
 		}
 		setEditVisualSettingsEnabled(!editVisualSettingsEnabled)
@@ -100,7 +112,9 @@ function AccountSettings(props) {
 
 	async function handleDeleteButtonClick(e) {
 		e.preventDefault()
-		await axios.delete(`/api/users/${encodeURIComponent(wuphfUser.userName)}`).then(() => signOut())
+		await axios
+			.delete(`/api/users/${encodeURIComponent(wuphfUser.userName)}`)
+			.then(() => signOut())
 	}
 
 	function handleAvatarChange(e) {
@@ -110,6 +124,9 @@ function AccountSettings(props) {
 
 	return (
 		<AccSetLayout>
+			<Head>
+				<title>Settings | Wuphf</title>
+			</Head>
 			<Sidebar />
 			<MainContent>
 				<div>
@@ -134,9 +151,9 @@ function AccountSettings(props) {
 							onChange={handleSubmit(handleAvatarChange)}
 						>
 							{avatars.map((avatar) => (
-								<option key={avatar.key} value={avatar.url}>
+								<Option key={avatar.key} value={avatar.url}>
 									{avatar.name}
-								</option>
+								</Option>
 							))}
 						</SelectInput>
 						<Avatar
@@ -196,9 +213,9 @@ function AccountSettings(props) {
 							value={selectedThemeValue}
 							disabled={!editVisualSettingsEnabled}
 						>
-							<option value='light'>Light</option>
-							<option value='lava'>Lava</option>
-							<option value='dark'>Dark</option>
+							<Option value='light'>Light</Option>
+							<Option value='lava'>Lava</Option>
+							<Option value='dark'>Dark</Option>
 						</select>
 					</Wrapper>
 					<Subheading id='text_size'>Text Size:</Subheading>
@@ -208,9 +225,9 @@ function AccountSettings(props) {
 						label=''
 						enabled={editVisualSettingsEnabled}
 					>
-						<option value='small'>Small</option>
-						<option value='medium'>Medium</option>
-						<option value='large'>Large</option>
+						<Option value='small'>Small</Option>
+						<Option value='medium'>Medium</Option>
+						<Option value='large'>Large</Option>
 					</SelectInput>
 				</div>
 			</MainContent>
@@ -262,4 +279,7 @@ const EditBtnWrapper = styled.div`
 const DABtnWrapper = styled.div`
 	font-size: 1.3rem;
 	margin-top: 1rem;
+`
+const Option = styled.option`
+	color: black;
 `

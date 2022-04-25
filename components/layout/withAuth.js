@@ -8,29 +8,21 @@ import Loading from './Loading'
 function withAuth(Component) {
 	function Auth(props) {
 		const { data: session, status } = useSession()
-		const { wuphfUser } = useWuphfUser()
+		const { wuphfUser, wuphfUserLoading } = useWuphfUser()
 		const { wuphfUserError } = useWuphfUser()
 
-		if (status == 'loading') return <Loading />
-		switch (wuphfUserError?.status) {
-			case 401: // Google user not authenticated
-				return <Welcome />
-			case 404: // No WuphfUser with the Google user's email
-				return <RegistrationForm />
-		}
+		if (status == 'loading' || wuphfUserLoading) return <Loading />
+		if (status == 'unauthenticated') return <Welcome />
+		if (!wuphfUser) return <RegistrationForm />
 
-		if (session) {
-			return (
-				<Component
-					{...props}
-					session={session}
-					wuphfUser={wuphfUser}
-					status={status}
-				/>
-			)
-		}
-
-		return <Welcome />
+		return (
+			<Component
+				{...props}
+				session={session}
+				wuphfUser={wuphfUser}
+				status={status}
+			/>
+		)
 	}
 
 	if (Component.getInitialProps) {

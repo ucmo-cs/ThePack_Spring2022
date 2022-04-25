@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import styled from 'styled-components'
 
+import { useAvatars } from '../../hooks/useAvatar'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import FormInput from '../forms/FormInput'
 import SelectInput from '../forms/SelectInput'
@@ -18,6 +19,7 @@ function SettingsForm(props) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
 	const { setWuphfUser } = useWuphfUser()
+	const { lookupAvatarIdByUrl } = useAvatars()
 
 	const onSubmit = () => {
 		registerUser()
@@ -29,8 +31,8 @@ function SettingsForm(props) {
 			.post('/api/users', {
 				email: session.user.email,
 				userName: props.getValues('username'),
-				bio: props.getValues('biography_textarea'),
-				avatarId: props.lookupAvatarIdByUrl(getValues('animal')),
+				bio: props.getValues('bio'),
+				avatarId: lookupAvatarIdByUrl(props.getValues('animal')),
 			})
 			.then((res) => {
 				setLoading(false)
@@ -84,6 +86,9 @@ const SettingBorder = styled.div`
 	border-radius: 15px;
 	padding: 1.5rem;
 	/* margin: 10px; */
+`
+const Option = styled.option`
+	color: black;
 `
 
 export default SettingsForm

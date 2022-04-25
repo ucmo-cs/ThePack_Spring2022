@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import Head from 'next/head'
 import styled from 'styled-components'
 
 import withAuth from '../components/layout/withAuth'
@@ -12,7 +13,7 @@ function Home({ session }) {
 	const [wuphfs, setWuphfs] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [cursor, setCursor] = useState(null)
-	const [maxResults] = useState(5)
+	const [maxResults] = useState(20)
 	const [error, setError] = useState(false)
 	const [hasMore, setHasMore] = useState(true)
 
@@ -49,6 +50,9 @@ function Home({ session }) {
 
 	return (
 		<Container>
+			<Head>
+				<title>Home | Wuphf</title>
+			</Head>
 			<FlexWrapper>
 				<WuphfInput addWuphf={addWuphf} />
 				<WuphfsFeed

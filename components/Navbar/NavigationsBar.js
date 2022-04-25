@@ -248,8 +248,8 @@ const HamburgerLine = styled.div`
 	:nth-child(1) {
 		top: 25%;
 		${(props) =>
-		props.expanded &&
-		css`
+			props.expanded &&
+			css`
 				transform: rotate(45deg);
 				top: 50%;
 			`};
@@ -261,8 +261,8 @@ const HamburgerLine = styled.div`
 	:nth-child(3) {
 		top: 75%;
 		${(props) =>
-		props.expanded &&
-		css`
+			props.expanded &&
+			css`
 				transform: rotate(-225deg);
 				top: 50%;
 			`};
@@ -285,10 +285,13 @@ const SearchResultUl = styled.ul`
 	top: 48px;
 	height: auto;
 	display: ${(props) => (props.isEmpty ? 'none;' : 'block;')};
-	background-color: ${(props) => props.theme.colors.white};
 	border-radius: 0 0 4px 4px;
 	border: 1px solid #aaa;
 	width: 250px;
+	background-color: ${(props) => props.theme.colors.body};
+	border: ${(props) => `1.5px solid ${props.theme.colors.border}`};
+
+	border-radius: 15px;
 `
 
 const SearchResultLi = styled.li`
@@ -298,10 +301,24 @@ const SearchResultLi = styled.li`
 	align-items: center;
 	gap: 10px;
 	padding: 10px;
+	border-bottom: ${({ theme }) => `1.5px solid ${theme.colors.border}`};
+	&:hover {
+		color: ${(props) => props.theme.button.primary.text};
+	}
+
+	&:last-child {
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+		border-bottom: none;
+	}
+
+	&:first-child {
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+	}
 
 	&:hover {
-		background-color: ${(props) => props.theme.colors.lightBlue};
-		color: ${(props) => props.theme.colors.darkestBlue};
+		background-color: ${(props) => props.theme.colors.primary};
 	}
 `
 

@@ -17,12 +17,12 @@ export default async function handler(req, res) {
 			})
 
 			if (!comment) {
-				return res.status(404).json({ msg: 'Comment not found' })
+				return res.status(404).json({ message: 'Comment not found' })
 			}
 
 			res.json(comment)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 
 			res.json(comment)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 			})
 			res.json(comment)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 			res.status(500).json({ error })
 			throw error
 		}
