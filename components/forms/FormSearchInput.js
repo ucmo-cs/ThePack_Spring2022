@@ -18,9 +18,9 @@ function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
 	const theme = useTheme()
 
 	return (
-		<Form error={error} isEmpty={isEmpty} autocomplete='off'>
+		<Form error={error} isEmpty={isEmpty} autoComplete='off'>
 			<Label htmlFor={id}>{label}</Label>
-			<input {...register(id)} {...props} autocomplete='off' />
+			<input {...register(id)} {...props} autoComplete='off' />
 			<FontAwesomeIcon
 				icon={faMagnifyingGlass}
 				color={theme.colors.lightGrey}
