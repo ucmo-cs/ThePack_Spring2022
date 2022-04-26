@@ -18,7 +18,13 @@ function WuphfsFeed({ wuphfs, loading, hasMore, getWuphfs }) {
 		[loading]
 	)
 
-	return <Wuphfs wuphfs={wuphfs} lastWuphfElementRef={lastWuphfElementRef} />
+	return (
+		<Wuphfs
+			wuphfs={wuphfs}
+			lastWuphfElementRef={lastWuphfElementRef}
+			wuphfsLoading={loading}
+		/>
+	)
 }
 
 export default WuphfsFeed

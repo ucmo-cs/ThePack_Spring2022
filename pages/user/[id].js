@@ -24,7 +24,7 @@ function UserPage() {
 	const [followingError, setFollowingError] = useState()
 	const [wuphfsError, setWuphfsError] = useState()
 	const [cursor, setCursor] = useState(null)
-	const [hasMore, setHasMore] = useState(true)
+	const [hasMore, setHasMore] = useState(false)
 
 	const getWuphfs = async () => {
 		setWuphfsLoading(true)
@@ -66,6 +66,10 @@ function UserPage() {
 			getUser()
 		}
 	}, [id])
+
+	// function deleteWuphf(wuphf) {
+	// 	setWuphfs(wuphfs.filter((wuphf) => wuphf.id !== wuphfId))
+	// }
 
 	if (userError) return <Error error={userError} />
 

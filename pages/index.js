@@ -44,6 +44,10 @@ function Home({ session }) {
 		setWuphfs([wuphf, ...wuphfs])
 	}
 
+	// function deleteWuphf(wuphf) {
+	// 	setWuphfs(wuphfs.filter((wuphf) => wuphf.id !== wuphfId))
+	// }
+
 	useEffect(() => {
 		getWuphfs()
 	}, [])

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Loading from '../layout/Loading'
+import { MessageBox } from '../styledComponents/MessageBox'
 import Wuphf from './Wuphf'
 
 Wuphfs.propTypes = {
@@ -11,15 +12,23 @@ Wuphfs.propTypes = {
 }
 
 function Wuphfs(props) {
-	const { lastWuphfElementRef } = props
+	const { lastWuphfElementRef, wuphfsLoading } = props
 	const [wuphfs, setWuphfs] = useState(props.wuphfs)
 
 	useEffect(() => {
 		setWuphfs(props.wuphfs)
 	}, [props])
 
-	if (!wuphfs || wuphfs.length === 0) {
+	if (wuphfsLoading && (!wuphfs || wuphfs.length == 0)) {
 		return <Loading />
+	}
+
+	if (!wuphfs || wuphfs.length === 0) {
+		return (
+			<MessageBox>
+				<p>No Wuphfs found... 😢</p>
+			</MessageBox>
+		)
 	}
 
 	function deleteWuphf(wuphfId) {
