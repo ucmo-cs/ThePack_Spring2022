@@ -54,11 +54,11 @@ export default async function handler(req, res) {
 					},
 				},
 			})
-			// if (!user) {
-			// 	return res
-			// 		.status(404)
-			// 		.json({ message: `No WuphfUser found with the username ${uid}` })
-			// }
+			if (!user) {
+				return res
+					.status(404)
+					.json({ message: `No WuphfUser found with the username ${uid}` })
+			}
 
 			if (session) {
 				const sender = await prisma.WuphfUser.findUnique({

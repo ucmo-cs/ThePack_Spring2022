@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 			const user = await prisma.WuphfUser.create({
 				data: {
 					email: req.body.email,
-					userName: req.body.userName,
+					userName: req.body.userName.trim(),
 					bio: req.body.bio || undefined,
 					avatarId: Number(req.body.avatarId) || undefined,
 				},

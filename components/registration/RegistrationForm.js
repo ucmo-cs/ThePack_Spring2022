@@ -12,7 +12,7 @@ import SettingsForm from '../settings/SettingsForm'
 import Container from '../styledComponents/Container'
 
 const schema = yup.object({
-	username: yup.string().min(4, 'Minimum length is 4').required('Required'),
+	username: yup.string().trim().required('Required'),
 	animal: yup.string().required('Required'),
 	bio: yup.string().required('Required'),
 })
@@ -25,7 +25,7 @@ function RegistrationForm() {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		watch,
-		getValues
+		getValues,
 	} = useForm({
 		mode: 'onTouched',
 		resolver: yupResolver(schema),
