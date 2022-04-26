@@ -18,19 +18,19 @@ function FormSearchInput({ register, error, label, id, isEmpty, ...props }) {
 	const theme = useTheme()
 
 	return (
-		<Wrapper error={error} isEmpty={isEmpty}>
+		<Form error={error} isEmpty={isEmpty} autocomplete='off'>
 			<Label htmlFor={id}>{label}</Label>
-			<input {...register(id)} {...props} />
+			<input {...register(id)} {...props} autocomplete='off' />
 			<FontAwesomeIcon
 				icon={faMagnifyingGlass}
 				color={theme.colors.lightGrey}
 			/>
 			<Error>{error?.message}</Error>
-		</Wrapper>
+		</Form>
 	)
 }
 
-const Wrapper = styled.div`
+const Form = styled.form`
 	display: flex;
 	align-items: center;
 	background-color: ${({ theme }) => theme.colors.body};
