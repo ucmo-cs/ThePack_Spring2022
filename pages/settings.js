@@ -58,7 +58,7 @@ function AccountSettings(props) {
 
 	useEffect(() => {
 		setValue('avatar', wuphfUser?.avatar?.url)
-		setValue('username', wuphfUser?.userName)
+		setValue('username', wuphfUser?.userName.trim())
 		setValue('biography_textarea', wuphfUser?.bio)
 		setSelectedThemeValue(wuphfUser?.theme)
 	}, [wuphfUser])
