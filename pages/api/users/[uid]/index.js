@@ -93,6 +93,13 @@ export default async function handler(req, res) {
 					theme: req.body.theme || undefined,
 					avatarId: req.body.avatarId || undefined,
 				},
+				include: {
+					avatar: {
+						select: {
+							url: true,
+						},
+					},
+				},
 			})
 
 			if (!user) {

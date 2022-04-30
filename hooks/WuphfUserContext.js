@@ -32,6 +32,7 @@ const WuphfUserContextProvider = ({ setTheme, children }) => {
 	}, [])
 
 	useEffect(() => {
+		console.log('WuphfUser Updated')
 		if (wuphfUser !== undefined) {
 			setWuphfUserError(undefined)
 		}
@@ -59,4 +60,4 @@ const useWuphfUser = () => {
 	return wuphfUserData
 }
 
-export { WuphfUserContextProvider, useWuphfUser }
+export { WuphfUserContextProvider, useWuphfUser, WuphfUserContext }

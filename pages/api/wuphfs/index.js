@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 	} else if (req.method === 'POST') {
 		let wuphfSchema = object({
 			userName: string().required(),
-			pictureUrl: string().required(),
+			pictureUrl: string(),
 			postBody: string().trim().required(),
 		})
 
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 			const wuphf = await prisma.Wuphf.create({
 				data: {
 					userId: req.body.userName,
-					pictureUrl: req.body.pictureUrl || undefined, // not allowing undefined - fix later
+					pictureUrl: req.body.pictureUrl, // not allowing undefined - fix later
 					postBody: req.body.postBody.trim(),
 				},
 				select: {

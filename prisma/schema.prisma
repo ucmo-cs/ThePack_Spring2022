@@ -78,7 +78,7 @@ model Wuphf {
   id         Int        @id @default(autoincrement())
   user       WuphfUser  @relation(fields: [userId], references: [userName], onDelete: Cascade)
   userId     String
-  pictureUrl String     @db.VarChar(255)
+  pictureUrl String?    @db.VarChar(255)
   postBody   String     @db.VarChar(255)
   createdAt  DateTime   @default(now())
   Likes      Likes[]

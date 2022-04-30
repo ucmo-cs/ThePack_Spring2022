@@ -9,6 +9,7 @@ import { object, string } from 'yup'
 import { useWuphfUser } from '../../hooks/WuphfUserContext'
 import Avatar from '../general/Avatar'
 import Button from '../general/Button'
+// import { WuphfUserContext } from '../../hooks/WuphfUserContext'
 
 let schema = object({
 	post: string().trim().required('Please enter a Wuphf.'),
@@ -16,6 +17,7 @@ let schema = object({
 
 function WuphfInput({ addWuphf }) {
 	const { wuphfUser } = useWuphfUser()
+	// const { wuphfUser } = useContext(WuphfUserContext)
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +30,6 @@ function WuphfInput({ addWuphf }) {
 		const res = await axios
 			.post('/api/wuphfs', {
 				userName: wuphfUser.userName,
-				pictureUrl: wuphfUser.avatar.url,
 				postBody: watch('post'),
 			})
 			.catch((err) => alert(err))
@@ -43,36 +44,6 @@ function WuphfInput({ addWuphf }) {
 		postWuphf()
 		reset()
 	}
-	// console.log('ERRORS!', errors)
-
-	// async function handleSubmit(event) {
-	// 	event.preventDefault()
-
-	// 	// validation
-	// 	try {
-	// 		await wuphfSchema.validate({
-	// 			username: wuphfUser.userName,
-	// 			pictureUrl: wuphfUser.pictureUrl,
-	// 			postBody: post,
-	// 		})
-	// 	} catch (error) {
-	// 		setPost('')
-	// 		return alert(error)
-	// 	}
-
-	// 	const res = await axios
-	// 		.post('/api/wuphfs', {
-	// 			userName: wuphfUser.userName,
-	// 			pictureUrl: wuphfUser.avatar.url,
-	// 			postBody: post,
-	// 		})
-	// 		.catch((err) => alert(err))
-
-	// 	if (res) {
-	// 		addWuphf(res.data)
-	// 	}
-	// 	setPost('')
-	// }
 
 	return (
 		<PostBorder onSubmit={handleSubmit(onSubmit)} error={errors.post}>

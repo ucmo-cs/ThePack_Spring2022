@@ -20,11 +20,13 @@ function Comment(props) {
 	return (
 		<Wrapper>
 			<AvatarWrapper>
-				<Avatar
-					username={comment.userId}
-					profileImageUrl={comment.user.avatar.url}
-					size='small'
-				/>
+				{comment.user && (
+					<Avatar
+						username={comment.userId}
+						profileImageUrl={comment.user.avatar.url}
+						size='small'
+					/>
+				)}
 			</AvatarWrapper>
 			<CommentWrapper>
 				<Link href={`/user/${comment.userId}`}>

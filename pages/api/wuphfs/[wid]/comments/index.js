@@ -62,6 +62,17 @@ export default async function handler(req, res) {
 						commentBody: req.body.commentBody,
 						userId: userId,
 					},
+					include: {
+						user: {
+							select: {
+								avatar: {
+									select: {
+										url: true,
+									},
+								},
+							},
+						},
+					},
 				})
 
 				res.json(comment)

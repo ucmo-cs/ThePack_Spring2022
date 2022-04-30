@@ -14,6 +14,17 @@ export default async function handler(req, res) {
 						postsId: Number(wid),
 					},
 				},
+				include: {
+					user: {
+						select: {
+							avatar: {
+								select: {
+									url: true,
+								},
+							},
+						},
+					},
+				},
 			})
 
 			if (!comment) {

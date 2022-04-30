@@ -52,7 +52,7 @@ function AccountSettings(props) {
 		useState(false)
 	const theme = useTheme()
 	const [selectedThemeValue, setSelectedThemeValue] = useState(theme)
-	const { wuphfUser } = useWuphfUser()
+	const { wuphfUser, setWuphfUser } = useWuphfUser()
 	const { avatars, lookupAvatarIdByUrl } = useAvatars()
 	const { changeTheme } = useCustomTheme()
 
@@ -84,14 +84,16 @@ function AccountSettings(props) {
 	async function handleEditProfileSettingsButtonClick(e) {
 		e.preventDefault()
 		if (editProfileSettingsEnabled) {
-			await axios.patch(
-				`/api/users/${encodeURIComponent(wuphfUser.userName)}`,
-				{
+			await axios
+				.patch(`/api/users/${encodeURIComponent(wuphfUser.userName)}`, {
 					userName: getValues('username'),
 					bio: getValues('biography_textarea'),
 					avatarId: lookupAvatarIdByUrl(getValues('avatar')),
-				}
-			)
+				})
+				.then((res) => {
+					console.log(res.data)
+					setWuphfUser(res.data)
+				})
 		}
 		setEditProfileSettingsEnabled(!editProfileSettingsEnabled)
 	}
