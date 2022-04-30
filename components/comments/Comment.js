@@ -22,7 +22,7 @@ function Comment(props) {
 			<AvatarWrapper>
 				<Avatar
 					username={comment.userId}
-					profileImageUrl={props.avatarUrl}
+					profileImageUrl={comment.user.avatar.url}
 					size='small'
 				/>
 			</AvatarWrapper>
@@ -87,6 +87,7 @@ const Username = styled.h3`
 
 	&:hover {
 		text-decoration: underline;
+		cursor: pointer;
 	}
 `
 export default Comment

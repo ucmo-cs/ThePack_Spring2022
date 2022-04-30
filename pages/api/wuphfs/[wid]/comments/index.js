@@ -13,6 +13,17 @@ export default async function handler(req, res) {
 				where: {
 					postsId: Number(wid),
 				},
+				include: {
+					user: {
+						select: {
+							avatar: {
+								select: {
+									url: true,
+								},
+							},
+						},
+					},
+				},
 			})
 
 			// if (comments.length === 0) {
